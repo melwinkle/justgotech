@@ -1,0 +1,2 @@
+Client folder that includes sign up/log in, subscription plan , access to all four main services.
+profile to keep track of all messages and transactions.
