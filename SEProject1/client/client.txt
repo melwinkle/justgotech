@@ -1,2 +1,13 @@
 Client folder that includes sign up/log in, subscription plan , access to all four main services.
 profile to keep track of all messages and transactions.
+
+User Login/Sign Up which includes subscription plans
+Online Pharmacy-[compare prices with other stores and user picks the one that best fits]
+Virtual Screening-[Apple covid as reference]- user picks the symptoms and determine the probability of having that sickness
+Consultation with Virtual Doctor
+Booking for consultation in partnered clinics
+Subscription plans for employees and their families
+Pay-as-you-go service for clients without partnership/insurance
+Tracker for Users.-[track service usage ]
+Payment system-Momo/Card
+Contact Form 
