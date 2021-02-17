@@ -1,0 +1,1 @@
+Administrator functions which include monitoring all users, tracking all transactions and monitoring traffic on the site
