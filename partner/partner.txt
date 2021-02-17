@@ -1,0 +1,6 @@
+Partner folder which includes functions for the employees of the partner companies.
+These functions are :
+sign up/log in and subscription plan. 
+Monitoring user activity for company
+verifying transactions / bookings
+authorizing users
