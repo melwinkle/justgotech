@@ -10,5 +10,5 @@
           input.attr("type", "password");
         }
       });
-
 })(jQuery);
+
