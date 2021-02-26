@@ -1,4 +1,21 @@
 <!-- Screening page for covid testing -->
+<?php 
+require_once("/Applications/XAMPP/xamppfiles/htdocs/justgotech/SEProject1/database/database.php");
+session_start();
+
+if(isset($_GET["self"])){
+  $person="Self";
+}
+else{
+  $person="Other";
+}
+
+
+
+
+
+
+?>
 <html>
 <head>
 <title>COVID-19</title>
@@ -39,19 +56,50 @@
   <div class="card-body">
 
     <h2 class="card-title">
-    COVID-19 SCREENING TOOL 
+    COVID-19 SCREENING TOOL-<?php echo $person;?>
     </h2><br>
-    <p> How old are you?</p>
-    
-    
+    <?php if($_SESSION["person"]=="Self"){
    
-   
-    
-    <a href="covidtest.php?a" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182);margin-bottom: 5px"> Less than 18</a><br>
-    <a href="covidtest.php?b" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182);margin-bottom: 5px">  Between 18-55</a><br>
-    <a href="covidtest.php?c" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182);margin-bottom: 5px">    Between 56-64</a><br>
+   echo " <p> How old are you?</p>";
+    }
+    else{
 
-    <a href="covidtest.php?d" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182);margin-bottom: 5px">   More than 64</a>
+     echo"  <p> How old is she/him?</p>";
+
+    }
+    ?>
+    <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
+ 
+    
+  
+    <?php 
+    $sql="SELECT COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'diseases' AND COLUMN_NAME = 'age_bracket' ";
+    $result=mysqli_query($conn,$sql);
+    while($row = mysqli_fetch_array($result)) {
+       $type=$row['COLUMN_TYPE'];
+
+       $output = str_replace("enum('", "", $type);
+
+// $output will now be: Equipment','Set','Show
+       $output = str_replace("')", "", $output);
+
+       // array $results contains the ENUM values
+       $results = explode("','", $output);
+
+       for($i = 0; $i < count($results); $i++) {
+           echo " <a href='covidtest.php?person=$person&ageb=$results[$i]'  class='btn btn-primary btn-lg' style='background: white; color:rgb(23, 79, 182);margin-bottom: 5px'><input type='checkbox' name='ageb' id='ageb' value='$results[$i]' >$results[$i]</a><br>";
+           
+       }
+        
+    }
+    ?>
+    
+
+    </form>
+    
+   
+    
+  
   </div>
 </div>
 <script>

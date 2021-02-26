@@ -44,8 +44,8 @@
     <p> This is a tool to evaluate your symptoms and predict a likely status.</p>
 <p>Your information will not be shared without your permission</p><br>
     <br>
-    <a href="covidver.php?self" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182);margin-bottom: 5px">Use for self</a><br>
-    <a href="covidver.php?other" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182)">Use for someone else</a>
+    <a href="covidver.php?person=self" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182);margin-bottom: 5px">Use for self</a><br>
+    <a href="covidver.php?person=other" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182)">Use for someone else</a>
   </div>
 </div>
     

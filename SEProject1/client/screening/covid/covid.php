@@ -11,6 +11,7 @@ $result1=mysqli_query($conn,$query1);
 
 
 
+
 ?>
 <html>
 <head>
@@ -37,7 +38,7 @@ $result1=mysqli_query($conn,$query1);
   <a href="accountinfo.php">Account Info</a>
   <a href="tracker.php">Tracker</a>
   <a href="covid.php">Virtual Screening</a>
-  <a href="consultation.php">Consultation</a>
+  <a href="/justgotech/SEProject1/client/booking/Userbooking.html">Consultation</a>
 
  
   <a href="logout.php">Log Out</a>
@@ -63,7 +64,7 @@ $result1=mysqli_query($conn,$query1);
     <p> This tool is designed to help evaluate your symptoms and determine if you need further assistance. <br>
     Do not forget to mask up and social distance.</p>
 <br>
-    <a href="covidinfo.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182)">Start Screening</a>
+    <a href="covid_start.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182)">Start Screening</a>
   </div>
 </div>
 

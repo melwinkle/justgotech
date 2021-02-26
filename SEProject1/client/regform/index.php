@@ -67,7 +67,7 @@
 		
 	</body>
 
-	<?php require '../../dbconnection/connection.php';
+	<?php require_once("/Applications/XAMPP/xamppfiles/htdocs/justgotech/SEProject1/database/database.php");
 
 		if(isset($_POST['submit'])){
 			$firstname = $_POST['firstname'];
@@ -83,8 +83,8 @@
 				</script>
 			html;
 								
-			$query = "INSERT INTO `customer`(`firstname`, `lastname`, `username`, `email`, `gender`, `userpassword`) VALUES ('$firstname', '$lastname', '$username', '$email', '$gender', '$password')";
-			$sql = mysqli_query($conn, $query);
+			$query = "INSERT INTO customer(firstname,lastname,username,email,gender, userpassword) VALUES ('$firstname', '$lastname', '$username', '$email', '$gender', '$password')";
+			$sql = mysqli_query($conn,$query);
 
 			if(!$sql){
 				die('Error: Could not create user account');

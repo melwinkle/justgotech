@@ -1,4 +1,26 @@
 <!-- Screening page for covid testing -->
+<?php 
+require_once("/Applications/XAMPP/xamppfiles/htdocs/justgotech/SEProject1/database/database.php");
+session_start(); 
+
+
+if(isset($_GET["person"])){
+  $person=$_GET["person"];
+}
+if(isset($_GET["ageb"])){
+  $age=$_GET["ageb"];
+}
+  if(isset($_GET["test"])){
+    $test=$_GET["test"];
+}
+
+
+if(isset($_POST['badd'])){
+  $sym=$_POST['sym'];
+
+  header("Location: covidsym.php?person=$person&ageb=$age&test=$test&sym=$sym");
+}
+?>
 <html>
 <head>
 <title>COVID-19</title>
@@ -33,26 +55,50 @@
     <div class="covidinfoo">
    
   <h5 class="card-header">
-  <a href="covidtest.php" style="color:white">BACK</a>
+  <?php
+   echo "<a href='covidtest.php?person=$person&ageb=$age&test=$test' style='color:white'>BACK</a>"?>
   </h5>
   <div class="card-body" >
 
     <h2 class="card-title">
     COVID-19 SCREENING TOOL 
     </h2><br>
-    <p> Have you experienced any of the symptoms below? Select all that apply</p>
+  
+    <?php if($_SESSION["person"]=="Self"){
+   
+   echo " <p> Have you experienced any of the symptoms below? Select all that apply</p>";
+    }
+    else{
+
+     echo"  <p> Have they experienced any of the symptoms below? Select all that apply</p>";
+
+    }
+    ?>
+    <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
+    <?php 
+    $sql="SELECT Sname FROM symptoms ";
+    $result=mysqli_query($conn,$sql);
+    while($row = mysqli_fetch_array($result)) {
+       $type=$row['Sname'];
+
+       $output = str_replace("enum('", "", $type);
+
+// $output will now be: Equipment','Set','Show
+       $output = str_replace("')", "", $output);
+
+       // array $results contains the ENUM values
+       $results = explode("','", $output);
+
+       for($i = 0; $i < count($results); $i++) {
+           echo "  <a  class='btn btn-primary btn-lg' style='background: white; color:rgb(23, 79, 182);margin-bottom: 5px'><input type='checkbox' name='sym' id='sym' value='$results[$i]'>$results[$i]</a><br>";
+       } 
+    }
+    ?>
+    <button  name="badd" type='submit' class='btn btn-primary btn-lg' style='background: white; color:rgb(23, 79, 182);margin-bottom: 5px'>NEXT</button>
+    </form>
     
     
-    <a href="covidpre.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182);margin-bottom: 5px"> Fever or Chills</a><br>
-    
-    <a href="covidpre.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182);margin-bottom: 5px">    Sore throat</a><br>
-    <a href="covidpre.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182);margin-bottom: 5px">  Loss of smell</a><br>
-    <a href="covidpre.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182);margin-bottom: 5px"> Vomiting</a><br>
-    <a href="covidpre.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182);margin-bottom: 5px">  Diarrhoea</a><br>
-    <a href="covidpre.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182);margin-bottom: 5px">    New or worsening cough</a><br>
-    <a href="covidpre.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182);margin-bottom: 5px">  Fatigue</a><br>
-    <a href="covidpre.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182);margin-bottom: 5px">  None of the above</a> <br>
-    <a href="covidpre.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182);margin-bottom: 5px">  Mild or moderate difficulty in breathing</a><br>
+ 
   </div>
 </div>
 <script>
