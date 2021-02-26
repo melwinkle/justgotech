@@ -1,4 +1,30 @@
 <!-- Screening page for covid testing -->
+<?php 
+require_once("/Applications/XAMPP/xamppfiles/htdocs/justgotech/SEProject1/database/database.php");
+session_start(); 
+
+
+if(isset($_GET["person"])){
+  $person=$_GET["person"];
+}
+if(isset($_GET["ageb"])){
+  $age=$_GET["ageb"];
+}
+  if(isset($_GET["test"])){
+    $test=$_GET["test"];
+}
+if(isset($_GET["sym"])){
+  $sym=$_GET["sym"];
+}
+if(isset($_GET["pre"])){
+  $pre=$_GET["pre"];
+}
+if(isset($_POST['badd'])){
+  $con=$_POST['con'];
+
+  header("Location: covidsym.php?person=$person&ageb=$age&test=$test&sym=$sym&con=$con");
+}
+?>
 <html>
 <head>
 <title>COVID-19</title>
@@ -33,22 +59,51 @@
     <div class="covidinfoo">
    
   <h5 class="card-header">
-  <a href="covidpre.php" style="color:white">BACK</a>
+  <?php
+   echo "<a href='covidpre.php?person=$person&ageb=$age&test=$test&sym=$sym&pre=$pre' style='color:white'>BACK</a>"?>
   </h5>
   <div class="card-body" >
 
     <h2 class="card-title">
     COVID-19 SCREENING TOOL 
     </h2><br>
-    <p> In the last 14 days, do any of these apply to you? Select all that apply</p>
+
+    <?php if($_SESSION["person"]=="Self"){
+   
+   echo " <p> In the last 14 days, do any of these apply to you? Select all that apply</p>";
+    }
+    else{
+
+     echo"  <p> In the last 14 days, do any of these apply to them? Select all that apply</p>";
+
+    }
+    ?>
+    <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
+    <?php 
+    $sql="SELECT Contact FROM contact ";
+    $result=mysqli_query($conn,$sql);
+    while($row = mysqli_fetch_array($result)) {
+       $type=$row['Contact'];
+
+       $output = str_replace("enum('", "", $type);
+
+// $output will now be: Equipment','Set','Show
+       $output = str_replace("')", "", $output);
+
+       // array $results contains the ENUM values
+       $results = explode("','", $output);
+
+       for($i = 0; $i < count($results); $i++) {
+           echo " <a  class='btn btn-primary btn-lg' style='background: white; color:rgb(23, 79, 182);margin-bottom: 5px'><input type='checkbox' name='con' id='con' value='$results[$i]'>$results[$i]</a><br>";
+       } 
+    }
+    ?>
+    
+    <button  name="badd" type='submit' class='btn btn-primary btn-lg' style='background: white; color:rgb(23, 79, 182);margin-bottom: 5px'>NEXT</button>
+    </form>
     
     
-    <a href="covidarea.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182);margin-bottom: 5px"> I lived with someone with Covid-19</a><br>
     
-    <a href="covidarea.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182);margin-bottom: 5px">    I cared for someone with Covid-19</a><br>
-    <a href="covidarea.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182);margin-bottom: 5px">  I was within 6 feet of someone with Covid-19 for about 15 minutes</a><br>
-    <a href="covidarea.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182);margin-bottom: 5px"> I might have been exposed to Covid-19</a><br>
-    <a href="covidarea.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182);margin-bottom: 5px">  I have no exposure of Covid-19</a><br>
  
   </div>
 </div>

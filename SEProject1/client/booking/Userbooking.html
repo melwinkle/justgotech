@@ -13,9 +13,31 @@ Author: Hephzibah Emereole
         <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
         <!-- Main css -->
         <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/covid.css">
     </head>
 
     <body>
+
+  <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <img style="width:50%;margin-left: 20%;background:rgb(23, 79, 182);" src="/justgotech/SEProject1/images/justgotech.png" alt="justgotech">
+    <a href="accountinfo.php">Account Info</a>
+    <a href="tracker.php">Tracker</a>
+    <a href="covid.php">Virtual Screening</a>
+    <a href="/justgotech/SEProject1/client/booking/Userbooking.html">Consultation</a>
+  
+   
+    <a href="logout.php">Log Out</a>
+  </div>
+  
+  
+  <div class="navb"id="main">
+    <span style="font-size:30px;cursor:pointer" onclick="openNav()"><img style="width:10%" src="/justgotech/SEProject1/images/justgo.png" alt="justgotech"> </span>
+    
+    <span style="font-size:20px;cursor:pointer; float:right; margin-right: -32%" onclick="openP()">User Name<img style="width:10%" src="/justgotech/SEProject1/images/stethoscope.png" alt="profile"> </span>
+  
+  </div>
+  
         <div class="main">
             <section class="signup">
 
@@ -152,7 +174,27 @@ Author: Hephzibah Emereole
                 </div>
             </section>
         </div>
-
+        <script>
+            function openTab(tabName) {
+              var i, x;
+              x = document.getElementsByClassName("containerTab");
+              for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+              }
+              document.getElementById(tabName).style.display = "block";
+            }
+            </script>
+            <script>
+            function openNav() {
+              document.getElementById("mySidenav").style.width = "250px";
+              document.getElementById("main").style.marginLeft = "75px";
+            }
+            
+            function closeNav() {
+              document.getElementById("mySidenav").style.width = "0";
+              document.getElementById("main").style.marginLeft= "0";
+            }
+            </script>
         <footer class="copyright">© Software Engineering team. All Rights Reserved | Edited by Hephzibah Emereole</footer>
     </body>
 </html>

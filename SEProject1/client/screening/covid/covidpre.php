@@ -1,4 +1,29 @@
 <!-- Screening page for covid testing -->
+<?php 
+require_once("/Applications/XAMPP/xamppfiles/htdocs/justgotech/SEProject1/database/database.php");
+session_start(); 
+
+
+if(isset($_GET["person"])){
+  $person=$_GET["person"];
+}
+if(isset($_GET["ageb"])){
+  $age=$_GET["ageb"];
+}
+  if(isset($_GET["test"])){
+    $test=$_GET["test"];
+}
+if(isset($_GET["sym"])){
+  $sym=$_GET["sym"];
+}
+
+
+if(isset($_POST['badd'])){
+  $pre=$_POST['pre'];
+
+  header("Location: covidsym.php?person=$person&ageb=$age&test=$test&sym=$sym&pre=$pre");
+}
+?>
 <html>
 <head>
 <title>COVID-19</title>
@@ -33,27 +58,51 @@
     <div class="covidinfoo">
    
   <h5 class="card-header">
-  <a href="covidsym.php" style="color:white">BACK</a>
+  <?php
+   echo "<a href='covidsym.php?person=$person&ageb=$age&test=$test&sym=$sym' style='color:white'>BACK</a>"?>
   </h5>
   <div class="card-body" >
 
     <h2 class="card-title">
     COVID-19 SCREENING TOOL 
     </h2><br>
-    <p> Do you have any of the following? Select all that apply</p>
+   
     
     
-    <a href="covidcon.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182);margin-bottom: 5px"> Diabetes,High Blood pressure,</a><br>
+    <?php if($_SESSION["person"]=="Self"){
+   
+   echo " <p> Do you have any of the following? Select all that apply</p>";
+    }
+    else{
+
+     echo"  <p> Do they have any of the following? Select all that apply</p>";
+
+    }
+    ?>
+    <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
+    <?php 
+    $sql="SELECT PName FROM preconditions ";
+    $result=mysqli_query($conn,$sql);
+    while($row = mysqli_fetch_array($result)) {
+       $type=$row['PName'];
+
+       $output = str_replace("enum('", "", $type);
+
+// $output will now be: Equipment','Set','Show
+       $output = str_replace("')", "", $output);
+
+       // array $results contains the ENUM values
+       $results = explode("','", $output);
+
+       for($i = 0; $i < count($results); $i++) {
+           echo " <a  class='btn btn-primary btn-lg' style='background: white; color:rgb(23, 79, 182);margin-bottom: 5px'><input type='checkbox' name='pre' id='pre' value='$results[$i]'>$results[$i]</a><br>";
+       } 
+    }
+    ?>
     
-    <a href="covidcon.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182);margin-bottom: 5px">    Asthma</a><br>
-    <a href="covidcon.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182);margin-bottom: 5px">  Anaemia</a><br>
-    <a href="covidcon.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182);margin-bottom: 5px"> Obesity</a><br>
-    <a href="covidcon.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182);margin-bottom: 5px">  Smoking</a><br>
-    <a href="covidcon.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182);margin-bottom: 5px">   Heart condition</a><br>
-    <a href="covidcon.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182);margin-bottom: 5px">  Sickle cell disease</a><br>
-    <a href="covidcon.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182);margin-bottom: 5px">  Neurological condition such as stroke</a> <br>
-    <a href="covidcon.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182);margin-bottom: 5px">  Weakened immune system</a><br>
-    <a href="covidcon.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182);margin-bottom: 5px">  None of the Above</a><br>
+    <button  name="badd" type='submit' class='btn btn-primary btn-lg' style='background: white; color:rgb(23, 79, 182);margin-bottom: 5px'>NEXT</button>
+    </form>
+    
   </div>
 </div>
 <script>

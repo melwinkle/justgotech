@@ -1,4 +1,26 @@
 <!-- Screening page for covid testing -->
+<?php 
+require_once("/Applications/XAMPP/xamppfiles/htdocs/justgotech/SEProject1/database/database.php");
+session_start(); 
+
+
+if(isset($_GET["person"])){
+  $person=$_GET["person"];
+}
+if(isset($_GET["ageb"])){
+  $age=$_GET["ageb"];
+}
+
+
+
+
+if(isset($_POST['badd'])){
+  $test=$_POST['test'];
+
+  header("Location: covidsym.php?person=$person&ageb=$age&test=$test");
+}
+
+?>
 <html>
 <head>
 <title>COVID-19</title>
@@ -33,25 +55,50 @@
     <div class="covidinfo">
    
   <h5 class="card-header">
-  <a href="covidver.php" style="color:white">BACK</a>
+  <a href="covidver.php?person=<?php echo $person?>&ageb=<?php echo $age?>" style="color:white">BACK</a>
   <img src="/justgotech/SEProject1/images/patient.png" alt="patient">
   </h5>
   <div class="card-body">
 
     <h2 class="card-title">
-    COVID-19 SCREENING TOOL 
+    COVID-19 SCREENING TOOL
     </h2><br>
-    <p> Have you tested for COVID-19 in the last 10 days</p>
-    
-    
+    <?php if($_SESSION["person"]=="Self"){
    
+   echo " <p> Have you tested for COVID-19 in the last 10 days?</p>";
+    }
+    else{
+
+     echo"  <p> Have they tested for COVID-19 in the last 10 days?</p>";
+
+    }
+    ?>
+    <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
+    <?php 
+    $sql="SELECT COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'diseases' AND COLUMN_NAME = 'testing' ";
+    $result=mysqli_query($conn,$sql);
+    while($row = mysqli_fetch_array($result)) {
+       $type=$row['COLUMN_TYPE'];
+
+       $output = str_replace("enum('", "", $type);
+
+// $output will now be: Equipment','Set','Show
+       $output = str_replace("')", "", $output);
+
+       // array $results contains the ENUM values
+       $results = explode("','", $output);
+
+       for($i = 0; $i < count($results); $i++) {
+           echo " <a  class='btn btn-primary btn-lg' style='background: white; color:rgb(23, 79, 182);margin-bottom: 5px'><input type='radio' name='test' id='test' value='$results[$i]'>$results[$i]</a><br>";
+       } 
+    }
+    ?>
+    
+    <button  name="badd" type='submit' class='btn btn-primary btn-lg' style='background: white; color:rgb(23, 79, 182);margin-bottom: 5px'>NEXT</button>
+    </form>
    
  
-    <a href="covidsym.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182);margin-bottom: 5px"> Tested and positive</a><br>
-    <a href="covidsym.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182);margin-bottom: 5px">  Tested but negative</a><br>
-    <a href="covidsym.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182);margin-bottom: 5px">    Tested but yet to receive</a><br>
-
-    <a href="covidsym.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182);margin-bottom: 5px">   Not tested</a>
+    
   </div>
 </div>
 <script>

@@ -1,4 +1,34 @@
 <!-- Screening page for covid testing -->
+<?php 
+require_once("/Applications/XAMPP/xamppfiles/htdocs/justgotech/SEProject1/database/database.php");
+session_start(); 
+
+
+if(isset($_GET["person"])){
+  $person=$_GET["person"];
+}
+if(isset($_GET["ageb"])){
+  $age=$_GET["ageb"];
+}
+  if(isset($_GET["test"])){
+    $test=$_GET["test"];
+}
+if(isset($_GET["sym"])){
+  $sym=$_GET["sym"];
+}
+if(isset($_GET["pre"])){
+  $pre=$_GET["pre"];
+}
+if(isset($_GET["con"])){
+  $con=$_GET["con"];
+}
+
+if(isset($_POST['badd'])){
+  $reg=$_POST['reg'];
+
+  header("Location: covidsym.php?person=$person&ageb=$age&test=$test&sym=$sym&con=$con&reg=$reg");
+}
+?>
 <html>
 <head>
 <title>COVID-19</title>
@@ -33,28 +63,53 @@
     <div class="covidinfoo">
    
   <h5 class="card-header">
-  <a href="covidcon.php" style="color:white">BACK</a>
+  <?php
+   echo "<a href='covidcon.php?person=$person&ageb=$age&test=$test&sym=$sym&pre=$pre&con=$con' style='color:white'>BACK</a>"?>
   </h5>
   <div class="card-body" >
 
     <h2 class="card-title">
     COVID-19 SCREENING TOOL 
     </h2><br>
-    <p> What region are you in?</p>
+ 
+    <?php if($_SESSION["person"]=="Self"){
+   
+   echo " <p>  What region are you in?</p>";
+    }
+    else{
+
+     echo"  <p>  What region are you in?</p>";
+
+    }
+    ?>
+    
+    <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
+ 
     
   
-    <a href="covidresult.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182);margin-bottom: 5px"> Greater Accra Region</a><br>
+    <?php 
+    $sql="SELECT COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'diseases' AND COLUMN_NAME = 'Region' ";
+    $result=mysqli_query($conn,$sql);
+    while($row = mysqli_fetch_array($result)) {
+       $type=$row['COLUMN_TYPE'];
+
+       $output = str_replace("enum('", "", $type);
+
+// $output will now be: Equipment','Set','Show
+       $output = str_replace("')", "", $output);
+
+       // array $results contains the ENUM values
+       $results = explode("','", $output);
+
+       for($i = 0; $i < count($results); $i++) {
+           echo " <a class='btn btn-primary btn-lg' style='background: white; color:rgb(23, 79, 182);margin-bottom: 5px'><input type='radio' name='reg' id='reg' value='$results[$i]'>$results[$i]</a><br>";
+       }
+        
+    }
+    ?>
     
-    <a href="covidresult.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182);margin-bottom: 5px">   Eastern Region</a><br>
-    <a href="covidresult.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182);margin-bottom: 5px">  Central Region</a><br>
-    <a href="covidresult.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182);margin-bottom: 5px"> Western Region</a><br>
-    <a href="covidresult.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182);margin-bottom: 5px">  Northern Region</a><br>
-    <a href="covidresult.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182);margin-bottom: 5px">   Volta Region</a><br>
-    <a href="covidresult.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182);margin-bottom: 5px"> Oti Region</a><br>
-    <a href="covidresult.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182);margin-bottom: 5px">  Western North Region</a> <br>
-    <a href="covidresult.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182);margin-bottom: 5px">  Savannah Region</a><br>
-    <a href="covidresult.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182);margin-bottom: 5px">  Upper West Region</a><br>
-    <a href="covidresult.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182);margin-bottom: 5px">  Upper East Region</a><br>
+    <button  name="badd" type='submit' class='btn btn-primary btn-lg' style='background: white; color:rgb(23, 79, 182);margin-bottom: 5px'>NEXT</button>
+    </form>
   </div>
 </div>
 <script>
