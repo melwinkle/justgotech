@@ -18,6 +18,10 @@ $row=mysqli_fetch_assoc($result);
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>JustGo Tech Appointment Form </title>
+        <link
+  href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.2.0/mdb.min.css"
+  rel="stylesheet"
+/>
         <!-- Font Icon -->
         <link rel="stylesheet" href="./fonts/material-icon/css/material-design-iconic-font.min.css">
         <!-- Main css -->
@@ -39,7 +43,7 @@ $row=mysqli_fetch_assoc($result);
     <a href="/justgotech/SEProject1/client/booking/Userbooking.php">Consultation</a>
   
    
-    <a href="logout.php">Log Out</a>
+    <a href="/justgotech/SEProject1/client/account/logout.php">Log Out</a>
   </div>
   
   
@@ -50,59 +54,41 @@ $row=mysqli_fetch_assoc($result);
   
   </div>
   
-        <div class="main">
+        <div class="appform">
             <section class="signup">
 
                 <div class="container">
                     <div class="signup-content">
-                        <form method="POST" id="signup-form" class="signup-form">
+                        <form method="POST" action="book.php"id="signup-form" class="signup-form">
                             <h2 class="form-title">Appointment Form</h2>
                             <h4 class="error">Fields with * are required </h4>
 
-                            <div class="form-group">
-                                <label class="header">First Name <span class ="error">*</span></label>
-                                <input type="text" class="form-input" pattern="[a-zA-Z]+" name="fname" id="name" placeholder="First Name" required >
-                            </div>
 
                             <div class="form-group">
-                                <label class="header">Last Name <span class ="error">*</span></label>
-                                <input type="text" class="form-input" name="lname"  pattern="[a-zA-Z]+" id="lname" placeholder="Last Name" required>
-                                
-                            </div>
+                                <label class="header">Patient <span class ="error">*</span></label>		
+                                <select class="form-input" id ="person" name = "person">
+                                    <option>Select</option>
+                                    <?php 
+    $sql="SELECT COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'booking' AND COLUMN_NAME = 'Person' ";
+    $result=mysqli_query($conn,$sql);
+    while($row = mysqli_fetch_array($result)) {
+       $type=$row['COLUMN_TYPE'];
 
-                            <div class="form-group">
-                                <label class="header">Email <span class ="error">*</span></label>
-                                <input type="email" class="form-input" name="email" id="email"  pattern= "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" placeholder="Your Email" required >
-                            </div>
-                            
-                            <div class="form-group">
-                                <label class="header">Gender <span class ="error">*</span></label>
-                                <input type="radio" id="Male" name="gender" value="Male" required>
+       $output = str_replace("enum('", "", $type);
 
-                                <label for="Male">Male</label>
-                                    <input type="radio" id="Female" name="gender" value="Female">
-                                <label for="female">Female</label><br>
-                            </div>
+// $output will now be: Equipment','Set','Show
+       $output = str_replace("')", "", $output);
 
-                            <div class="form-group">
-                                <label class="header">Date of birth <span class ="error">*</span></label>
-                                <input type="date" class="form-input" name="dob" id="dob"  placeholder="dd/mm/yyyy" required >
-                            </div>
+       // array $results contains the ENUM values
+       $results = explode("','", $output);
 
-                            
-                            <div class="form-group">	
-                                <label class="header">Phone Number <span class ="error">*</span></label>
-                                <input type="number" class="form-input" name="phonenumber"  id="phoneno" placeholder="Phone Number" required >
-                            </div>
-                            
-                            <div class="form-group">  <!-- country Api for international students in Ghana-->
-                                <label class="header">Nationality <span class ="error">*</span></label>
-                                <!-- <input type="text" class="form-input" name="Nationality" id="Nationality"  placeholder="Nationality" required > -->
-                                <select name="nationality" class="form-input" id="Nationality">
-                                    <option value="">Select Nationality</option>
+       for($i = 0; $i < count($results); $i++) {
+           echo "  <option name='person'value='$results[$i]'>$results[$i]</option><br>";
+       } 
+    }
+    ?>
                                 </select>
                             </div>
-                            
     
                             <div class="form-group">
                                 <label class="header">Appointment Date <span class ="error">*</span></label>
@@ -114,18 +100,25 @@ $row=mysqli_fetch_assoc($result);
                                 <label class="header">Department <span class ="error">*</span></label>		
                                 <select class="form-input" id ="dept" name = "dept">
                                     <option>Select</option>
-                                    <option>Counselling</option>
-                                    <option>Gyneacology(Females)</option>
-                                    <option>Optics(Eyes)</option>
-                                    <option>Dentistry</option>
-                                    <option>Pediatrics</option>
-                                    <option>Covid-19</option>
-                                    <option>Surgery</option>
-                                    <option>Specialist</option>
-                                    <option>Nutrition/Diet</option>
-                                    <option>Dermatology(Skin)</option>
-                                    <option>Blood</option>
-                                    <option>Emergency care unit</option>
+                                    <?php 
+    $sql="SELECT COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'booking' AND COLUMN_NAME = 'Department' ";
+    $result=mysqli_query($conn,$sql);
+    while($row = mysqli_fetch_array($result)) {
+       $type=$row['COLUMN_TYPE'];
+
+       $output = str_replace("enum('", "", $type);
+
+// $output will now be: Equipment','Set','Show
+       $output = str_replace("')", "", $output);
+
+       // array $results contains the ENUM values
+       $results = explode("','", $output);
+
+       for($i = 0; $i < count($results); $i++) {
+           echo "  <option name='dept'value='$results[$i]'>$results[$i]</option><br>";
+       } 
+    }
+    ?>
                                 </select>
                             </div>
 
@@ -135,12 +128,30 @@ $row=mysqli_fetch_assoc($result);
                             </div>
 
                             <div class="form-group">
-                                <label class="header">Health insurance <span class ="error">*</span></label>		
-                                    <input class="healthinsurance" type="radio" id="Yes" name="healthinsurance" value="Yes" required>
-                                    <label for="Yes">Yes</label>
-                                    <input class="healthinsurance" type="radio" id="No" name="healthinsurance" value="No">
-                                    <label for="No">No</label><br>
-                            </div>
+                                <label class="header">Health insurance <span class ="error">*</span></label>	<br>
+                                <?php 
+    $sql="SELECT COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'booking' AND COLUMN_NAME = 'Insurance' ";
+    $result=mysqli_query($conn,$sql);
+    while($row = mysqli_fetch_array($result)) {
+       $type=$row['COLUMN_TYPE'];
+
+       $output = str_replace("enum('", "", $type);
+
+// $output will now be: Equipment','Set','Show
+       $output = str_replace("')", "", $output);
+
+       // array $results contains the ENUM values
+       $results = explode("','", $output);
+
+       for($i = 0; $i < count($results); $i++) {
+           echo "  
+           <input class='healthinsurance' type='radio' id='$results[$i]' name='healthinsurance' value='$results[$i]' required>
+           <label for='$results[$i]'>$results[$i]</label>
+           <br>";
+       } 
+    }
+    ?>	
+                                                    </div>
 
                         <!--if the user clicks yes, input the name of the insurance and the ID -->
 
@@ -168,24 +179,63 @@ $row=mysqli_fetch_assoc($result);
                         <!--Doctor info, reads the list of doctors from the database and display the available of the doctor-->
                         <div class="form-group">
                             <label class="header">Doctor <span class ="error">*</span></label>
-                            <select class="form-input" name="Gender" id="Gender"  value ="Gender" placeholder="Gender"  required>
+                            <select class="form-input" name="doctor" id="doctor"   placeholder="Doctor"  required>
                                 <option>Select</option>
-                                <option>Doc 1</option>
-                                <option>Doc 2</option>
+                                <?php 
+                                $sql="SELECT * FROM Doctor ";
+                                 $result=mysqli_query($conn,$sql);
+                                while($row = mysqli_fetch_array($result)) {
+                                    $type=$row['DocFname'];
+
+                                     $output = str_replace("enum('", "", $type);
+
+                                     $output = str_replace("')", "", $output);
+
+
+                                     $results = explode("','", $output);
+
+                                          for($i = 0; $i < count($results); $i++) {
+                                        echo "  <option name='doctor'value='$results[$i]'>Dr.$results[$i]</option><br>";
+                                             } 
+                                              }
+                                            ?>
                             </select>
                         </div>
                         
 
                         <!--Based on the doctors available schedule -->
                         <div class="form-group">
-                            <label class="header">Appointment Time <span class ="error">*</span></label>	
-                            <input type="time" id="time" name="time" id = "time"  placeholder="hh-mm" required>	
-                        </div>
+                            <label class="header">Appointment Time <span class ="error">*</span></label>
+                            <select class="form-input" name="time" id="time"   placeholder="Time available"  required>
+                            <option >Select</option>
+
+                            <?php 
+
+                                $sql="SELECT Time_Available FROM Doctor_Time ";
+                                 $result=mysqli_query($conn,$sql);
+                                while($row = mysqli_fetch_array($result)) {
+                                    $type=$row['Time_Available'];
+
+                                     $output = str_replace("enum('", "", $type);
+
+                                     $output = str_replace("')", "", $output);
+
+
+                                     $results = explode("','", $output);
+
+                                          for($i = 0; $i < count($results); $i++) {
+                                        echo "  <option name='time' value='$results[$i]'>$results[$i]</option>";
+                                             } 
+                                              }
+                                            ?>	
                             
-                        <div class="form-group">
-                            <button name="submit" type="submit" class="form-submit">Book Now</button>
-                            <!-- <input type="submit" name="submit" id="submit" class="form-submit" value="Book Now"/> -->
                         </div>
+                                            </select>
+
+                        <div class="form-group">
+                            <button class='form-submit btn btn-primary btn-lg' style='background: rgb(23, 79, 182); color:white;margin-top: 10px;margin-left:25%;width:50%' name="submit" type="submit" >Book Now</button>
+                      </div>
+                   
                     </form>
                     </div>
                 </div>
@@ -212,7 +262,7 @@ $row=mysqli_fetch_assoc($result);
               document.getElementById("main").style.marginLeft= "0";
             }
             </script>
-        <footer class="copyright">© Software Engineering team. All Rights Reserved | Edited by Hephzibah Emereole</footer>
+        <footer class="copyright">© Software Engineering team. All Rights Reserved | Edited by Group 7</footer>
     </body>
 </html>
 

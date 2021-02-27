@@ -2,7 +2,7 @@
 require_once("/Applications/XAMPP/xamppfiles/htdocs/justgotech/SEProject1/database/database.php");
 session_start(); 
 
-
+$username=$_SESSION['username'];
 if(isset($_GET["person"])){
   $person=$_GET["person"];
 }
@@ -39,7 +39,7 @@ $resut=mysqli_query($conn,$quer);
 $row=mysqli_fetch_assoc($resut);
 
 
-$PatientID=$row['PatientID'];;
+$PatientID=$row['PatientID'];
 $conquery="SELECT ConID from contact where Contact='$con'";
 $conresult=mysqli_query($conn,$conquery);
 $conrow=mysqli_fetch_assoc($conresult);

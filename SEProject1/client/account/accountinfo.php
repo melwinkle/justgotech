@@ -54,7 +54,51 @@ $row=mysqli_fetch_assoc($result);
 
 </div>
 
+<form action="" method="post">
+<div class="form-group">
+                                <label class="header">First Name <span class ="error">*</span></label>
+                                <input type="text" class="form-input" pattern="[a-zA-Z]+" name="fname" id="name" placeholder="First Name" required >
+                            </div>
 
+                            <div class="form-group">
+                                <label class="header">Last Name <span class ="error">*</span></label>
+                                <input type="text" class="form-input" name="lname"  pattern="[a-zA-Z]+" id="lname" placeholder="Last Name" required>
+                                
+                            </div>
+
+                            <div class="form-group">
+                                <label class="header">Email <span class ="error">*</span></label>
+                                <input type="email" class="form-input" name="email" id="email"  pattern= "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" placeholder="Your Email" required >
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="header">Gender <span class ="error">*</span></label>
+                                <input type="radio" id="Male" name="gender" value="Male" required>
+
+                                <label for="Male">Male</label>
+                                    <input type="radio" id="Female" name="gender" value="Female">
+                                <label for="female">Female</label><br>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="header">Date of birth <span class ="error">*</span></label>
+                                <input type="date" class="form-input" name="dob" id="dob"  placeholder="dd/mm/yyyy" required >
+                            </div>
+
+                            
+                            <div class="form-group">	
+                                <label class="header">Phone Number <span class ="error">*</span></label>
+                                <input type="number" class="form-input" name="phonenumber"  id="phoneno" placeholder="Phone Number" required >
+                            </div>
+                            
+                            <div class="form-group">  <!-- country Api for international students in Ghana-->
+                                <label class="header">Nationality <span class ="error">*</span></label>
+                                <!-- <input type="text" class="form-input" name="Nationality" id="Nationality"  placeholder="Nationality" required > -->
+                                <select name="nationality" class="form-input" id="Nationality">
+                                    <option value="">Select Nationality</option>
+                                </select>
+                            </div>
+</form>
    
   
 <script>

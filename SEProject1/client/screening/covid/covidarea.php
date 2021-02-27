@@ -125,4 +125,5 @@ function closeNav() {
 </script>
 
 </body>
+<footer class="copyright">© Software Engineering team. All Rights Reserved | Edited by Group 7</footer>
 </html>

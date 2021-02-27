@@ -77,15 +77,15 @@ $date=date('Y-m-d H:i:s');
 
 <body >
 <div id="mySidenav" class="sidenav">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <img style="width:50%;margin-left: 20%;background:rgb(23, 79, 182);" src="/justgotech/SEProject1/images/justgotech.png" alt="justgotech">
-  <a href="#">Account Info</a>
-  <a href="#">Tracker</a>
-  <a href="covid.php">Virtual Screening</a>
-  <a href="consultation.php">Consultation</a>
+  <a href="/justgotech/SEProject1/client/account/accountinfo.php">Account Info</a>
+  <a href="/justgotech/SEProject1/client/tracker/tracker.php">Tracker</a>
+  <a href="/justgotech/SEProject1/client/screening/covid/covid.php">Virtual Screening</a>
+  <a href="/justgotech/SEProject1/client/booking/Userbooking.php">Consultation</a>
 
-
-  <a href="logout.php">Log Out</a>
+ 
+  <a href="/justgotech/SEProject1/client/account/logout.php">Log Out</a>
 </div>
 
 
@@ -130,7 +130,7 @@ $date=date('Y-m-d H:i:s');
    
      <?php 
      if($probability>=0 & $probability <=10){
-      echo "<div class='covidin' style='float:left;background:green'>
+      echo "<div class='covidin' style='float:left;background:rgb(128, 255, 0)>
    
       <h5 class='card-header'>
       
@@ -146,7 +146,7 @@ $date=date('Y-m-d H:i:s');
       $status="Not exposed";
      }
      else if ($probability>=11 & $probability <=40){
-      echo "<div class='covidin' style='float:left;background:yellow'>
+      echo "<div class='covidin' style='float:left;background:rgb(255, 255, 0)'>
    
       <h5 class='card-header'>
       
@@ -184,7 +184,7 @@ $date=date('Y-m-d H:i:s');
      }
      else {
       echo "
-      <div class='covidin' style='float:left;background:red'>
+      <div class='covidin' style='float:left;background:tomato'>
    
    <h5 class='card-header'>
    
