@@ -14,11 +14,6 @@ if(isset($_GET["ageb"])){
 
 
 
-if(isset($_POST['badd'])){
-  $test=$_POST['test'];
-
-  header("Location: covidsym.php?person=$person&ageb=$age&test=$test");
-}
 
 ?>
 <html>
@@ -63,7 +58,7 @@ if(isset($_POST['badd'])){
     <h2 class="card-title">
     COVID-19 SCREENING TOOL
     </h2><br>
-    <?php if($_SESSION["person"]=="Self"){
+    <?php if($person=="self"){
    
    echo " <p> Have you tested for COVID-19 in the last 10 days?</p>";
     }
@@ -89,12 +84,12 @@ if(isset($_POST['badd'])){
        $results = explode("','", $output);
 
        for($i = 0; $i < count($results); $i++) {
-           echo " <a  class='btn btn-primary btn-lg' style='background: white; color:rgb(23, 79, 182);margin-bottom: 5px'><input type='radio' name='test' id='test' value='$results[$i]'>$results[$i]</a><br>";
+           echo " <a href='covidsym.php?person=$person&ageb=$age&test=$results[$i]'class='btn btn-primary btn-lg' style='background: white; color:rgb(23, 79, 182);margin-bottom: 5px'><input type='radio' name='test' id='test' value='$results[$i]'>$results[$i]</a><br>";
        } 
     }
     ?>
     
-    <button  name="badd" type='submit' class='btn btn-primary btn-lg' style='background: white; color:rgb(23, 79, 182);margin-bottom: 5px'>NEXT</button>
+    
     </form>
    
  

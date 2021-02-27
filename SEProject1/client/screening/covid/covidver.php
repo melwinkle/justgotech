@@ -3,12 +3,10 @@
 require_once("/Applications/XAMPP/xamppfiles/htdocs/justgotech/SEProject1/database/database.php");
 session_start();
 
-if(isset($_GET["self"])){
-  $person="Self";
+if(isset($_GET["person"])){
+  $person=$_GET["person"];
 }
-else{
-  $person="Other";
-}
+
 
 
 
@@ -58,7 +56,7 @@ else{
     <h2 class="card-title">
     COVID-19 SCREENING TOOL-<?php echo $person;?>
     </h2><br>
-    <?php if($_SESSION["person"]=="Self"){
+    <?php if($person=="self"){
    
    echo " <p> How old are you?</p>";
     }
@@ -87,9 +85,10 @@ else{
        $results = explode("','", $output);
 
        for($i = 0; $i < count($results); $i++) {
-           echo " <a href='covidtest.php?person=$person&ageb=$results[$i]'  class='btn btn-primary btn-lg' style='background: white; color:rgb(23, 79, 182);margin-bottom: 5px'><input type='checkbox' name='ageb' id='ageb' value='$results[$i]' >$results[$i]</a><br>";
+           echo " <a href='covidtest.php?person=$person&ageb=$results[$i]'  class='btn btn-primary btn-lg' style='background: white; color:rgb(23, 79, 182);margin-bottom: 5px'>$results[$i]</a><br>";
            
        }
+
         
     }
     ?>

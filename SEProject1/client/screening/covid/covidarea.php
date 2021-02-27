@@ -23,11 +23,7 @@ if(isset($_GET["con"])){
   $con=$_GET["con"];
 }
 
-if(isset($_POST['badd'])){
-  $reg=$_POST['reg'];
 
-  header("Location: covidsym.php?person=$person&ageb=$age&test=$test&sym=$sym&con=$con&reg=$reg");
-}
 ?>
 <html>
 <head>
@@ -72,7 +68,7 @@ if(isset($_POST['badd'])){
     COVID-19 SCREENING TOOL 
     </h2><br>
  
-    <?php if($_SESSION["person"]=="Self"){
+    <?php if($person=="Self"){
    
    echo " <p>  What region are you in?</p>";
     }
@@ -102,13 +98,13 @@ if(isset($_POST['badd'])){
        $results = explode("','", $output);
 
        for($i = 0; $i < count($results); $i++) {
-           echo " <a class='btn btn-primary btn-lg' style='background: white; color:rgb(23, 79, 182);margin-bottom: 5px'><input type='radio' name='reg' id='reg' value='$results[$i]'>$results[$i]</a><br>";
+           echo " <a href='covidresult.php?person=$person&ageb=$age&test=$test&sym=$sym&pre=$pre&con=$con&reg=$results[$i]' class='btn btn-primary btn-lg' style='background: white; color:rgb(23, 79, 182);margin-bottom: 5px'>$results[$i]</a><br>";
        }
         
     }
     ?>
     
-    <button  name="badd" type='submit' class='btn btn-primary btn-lg' style='background: white; color:rgb(23, 79, 182);margin-bottom: 5px'>NEXT</button>
+    
     </form>
   </div>
 </div>

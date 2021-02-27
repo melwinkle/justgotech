@@ -95,6 +95,7 @@ body{
     margin-left: 20%;
     margin-right: 20%;
     margin-top: 5%;
+    margin-bottom: 5%;
     width: 30%;
     background: rgb(24, 87, 170);
     color:white;
@@ -123,9 +124,8 @@ body{
   .covidin{
     margin-left: 60%;
     margin-right: 20%;
-    margin-top: -29%;
+    margin-top: -49%;
     width: 30%;
-    background: rgb(42, 56, 83);
     color:white;
    
 }

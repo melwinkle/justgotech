@@ -18,11 +18,7 @@ if(isset($_GET["sym"])){
 }
 
 
-if(isset($_POST['badd'])){
-  $pre=$_POST['pre'];
 
-  header("Location: covidsym.php?person=$person&ageb=$age&test=$test&sym=$sym&pre=$pre");
-}
 ?>
 <html>
 <head>
@@ -69,7 +65,7 @@ if(isset($_POST['badd'])){
    
     
     
-    <?php if($_SESSION["person"]=="Self"){
+    <?php if($person=="self"){
    
    echo " <p> Do you have any of the following? Select all that apply</p>";
     }
@@ -95,12 +91,12 @@ if(isset($_POST['badd'])){
        $results = explode("','", $output);
 
        for($i = 0; $i < count($results); $i++) {
-           echo " <a  class='btn btn-primary btn-lg' style='background: white; color:rgb(23, 79, 182);margin-bottom: 5px'><input type='checkbox' name='pre' id='pre' value='$results[$i]'>$results[$i]</a><br>";
+           echo " <a href='covidcon.php?person=$person&ageb=$age&test=$test&sym=$sym&pre=$results[$i]' class='btn btn-primary btn-lg' style='background: white; color:rgb(23, 79, 182);margin-bottom: 5px'><input type='checkbox' name='pre' id='pre' value='$results[$i]'>$results[$i]</a><br>";
        } 
     }
     ?>
     
-    <button  name="badd" type='submit' class='btn btn-primary btn-lg' style='background: white; color:rgb(23, 79, 182);margin-bottom: 5px'>NEXT</button>
+  
     </form>
     
   </div>
