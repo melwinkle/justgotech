@@ -24,7 +24,7 @@
 					
 				</div>
 				
-				<form method="post" action="./login_auth.php">
+				<form method="post" action="login_auth.php">
 					<h3>Sign In</h3>	
 					<div class="form-wrapper">
 						<input name="username" type="text" placeholder="Username" class="form-control">

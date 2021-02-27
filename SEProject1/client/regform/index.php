@@ -1,3 +1,42 @@
+<?php 
+require_once("/Applications/XAMPP/xamppfiles/htdocs/justgotech/SEProject1/database/database.php");
+
+		if(isset($_POST['submit'])){
+			$firstname = $_POST['firstname'];
+			$lastname = $_POST['lastname'];
+			$username = $_POST['username'];
+			$email = $_POST['email'];
+			$gender = $_POST['gender'];
+			$password = md5(sha1($_POST['password']));
+			$success = <<<html
+				<script>
+					alert('Account Created Successfully');
+					location.href = 'index_0.php';
+				</script>
+			html;
+								
+			$query = "INSERT INTO customer(firstname,lastname,username,email,gender,userpassword) VALUES ('$firstname', '$lastname', '$username', '$email', '$gender', '$password')";
+			$sql = mysqli_query($conn,$query);
+
+			if(!$sql){
+				echo $firstname;
+				echo " ";
+				echo $lastname;
+				echo " ";
+				echo $username;
+				echo " ";
+				echo $email;
+				echo " ";
+				echo $gender;
+				echo " ";
+				echo $password;
+				echo " ";
+				die('Error: Could not create user account');
+				
+			}
+			echo $success; 
+		}
+	?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -42,9 +81,26 @@
 					<div class="form-wrapper">
 						<select name="gender" id="" class="form-control">
 							<option disabled selected>Gender</option>
-							<option value="male">Male</option>
-							<option value="femal">Female</option>
-							<option value="other">Other</option>
+							<?php 
+    $sql="SELECT COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'customer' AND COLUMN_NAME = 'gender' ";
+    $result=mysqli_query($conn,$sql);
+    while($row = mysqli_fetch_array($result)) {
+       $type=$row['COLUMN_TYPE'];
+
+       $output = str_replace("enum('", "", $type);
+
+// $output will now be: Equipment','Set','Show
+       $output = str_replace("')", "", $output);
+
+       // array $results contains the ENUM values
+       $results = explode("','", $output);
+
+       for($i = 0; $i < count($results); $i++) {
+           echo " <option value='$results[$i]'>$results[$i]</option>";
+       }
+        
+    }
+    ?>
 						</select>
 						<i class="zmdi zmdi-caret-down" style="font-size: 17px"></i>
 					</div>
@@ -53,7 +109,7 @@
 						<i class="zmdi zmdi-lock"></i>
 					</div>
 					<div class="form-wrapper">
-						<input name="password" type="password" placeholder="Confirm Password" class="form-control">
+						<input name="repassword" type="password" placeholder="Confirm Password" class="form-control">
 						<i class="zmdi zmdi-lock"></i>
 					</div>
 					<button name="submit" type="submit">Register
@@ -67,29 +123,5 @@
 		
 	</body>
 
-	<?php require_once("/Applications/XAMPP/xamppfiles/htdocs/justgotech/SEProject1/database/database.php");
-
-		if(isset($_POST['submit'])){
-			$firstname = $_POST['firstname'];
-			$lastname = $_POST['lastname'];
-			$username = $_POST['username'];
-			$email = $_POST['email'];
-			$gender = $_POST['gender'];
-			$password = md5(sha1($_POST['password']));
-			$success = <<<html
-				<script>
-					alert('Account Created Successfully');
-					location.href = './index_0.php';
-				</script>
-			html;
-								
-			$query = "INSERT INTO customer(firstname,lastname,username,email,gender, userpassword) VALUES ('$firstname', '$lastname', '$username', '$email', '$gender', '$password')";
-			$sql = mysqli_query($conn,$query);
-
-			if(!$sql){
-				die('Error: Could not create user account');
-			}
-			echo $success; 
-		}
-	?>
+	
 </html>

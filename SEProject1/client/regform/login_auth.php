@@ -15,10 +15,10 @@
             $results = mysqli_num_rows($sql);
 
             if($results == 0){
-                die("<script>alert('Login failed'); location.href = './index_0.php';</script>");
+                die("<script>alert('Login failed'); location.href = 'index_0.php';</script>");
             }
             success($username);
-            header("Location: justgotech/SEProject1/client/tracker/tracker.php");
+            header("Location: /justgotech/SEProject1/client/tracker/tracker.php");
         }
     }
 ?>
