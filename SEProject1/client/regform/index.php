@@ -1,3 +1,5 @@
+<!-- sign up page -->
+
 <?php 
 require_once("/Applications/XAMPP/xamppfiles/htdocs/justgotech/SEProject1/database/database.php");
 
@@ -7,6 +9,9 @@ require_once("/Applications/XAMPP/xamppfiles/htdocs/justgotech/SEProject1/databa
 			$username = $_POST['username'];
 			$email = $_POST['email'];
 			$gender = $_POST['gender'];
+			$dob=$_POST['dob'];
+			$nat=$_POST['nation'];
+			$phone=$_POST['number'];
 			$password = md5(sha1($_POST['password']));
 			$success = <<<html
 				<script>
@@ -15,7 +20,7 @@ require_once("/Applications/XAMPP/xamppfiles/htdocs/justgotech/SEProject1/databa
 				</script>
 			html;
 								
-			$query = "INSERT INTO customer(firstname,lastname,username,email,gender,userpassword) VALUES ('$firstname', '$lastname', '$username', '$email', '$gender', '$password')";
+			$query = "INSERT INTO customer(firstname,lastname,username,email,gender,userpassword,DOB,Nationality,PhoneNumber) VALUES ('$firstname', '$lastname', '$username', '$email', '$gender', '$password','$dob','$nat','$phone')";
 			$sql = mysqli_query($conn,$query);
 
 			if(!$sql){
@@ -30,6 +35,12 @@ require_once("/Applications/XAMPP/xamppfiles/htdocs/justgotech/SEProject1/databa
 				echo $gender;
 				echo " ";
 				echo $password;
+				echo " ";
+				echo $dob;
+				echo " ";
+				echo $nat;
+				echo " ";
+				echo $phone;
 				echo " ";
 				die('Error: Could not create user account');
 				
@@ -55,14 +66,16 @@ require_once("/Applications/XAMPP/xamppfiles/htdocs/justgotech/SEProject1/databa
 	<body>
 		
 		<div class="wrapper" style="background-image: url('images/bg-registration-form-1.jpg');">
-			
+		
 			<div class="inner">
 				<div class="image-holder">
 					<h3>       </h3>
 					<img src="images/registration-form-1.jpg" alt="">
 					
 				</div>
-				
+				<div >
+			<a href="/justgotech/SEProject1/client/landingpage/index.html">HOME</a>
+		</div>
 				<form method="post" action="<?=$_SERVER['PHP_SELF'];?>">
 					<h3>Registration Form</h3>
 					<div class="form-group">
@@ -102,8 +115,44 @@ require_once("/Applications/XAMPP/xamppfiles/htdocs/justgotech/SEProject1/databa
     }
     ?>
 						</select>
-						<i class="zmdi zmdi-caret-down" style="font-size: 17px"></i>
+</div>
+						<div class="form-wrapper">
+						<input name="dob" type="date" placeholder="Date of Birth" class="form-control">
+						<i class="zmdi zmdi-date"></i>
 					</div>
+					
+					<div class="form-wrapper">
+						<select name="nation" id="" class="form-control">
+							<option disabled selected>Nationality</option>
+							<?php 
+    $sql="SELECT COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'customer' AND COLUMN_NAME = 'Nationality' ";
+    $result=mysqli_query($conn,$sql);
+    while($row = mysqli_fetch_array($result)) {
+       $type=$row['COLUMN_TYPE'];
+
+       $output = str_replace("enum('", "", $type);
+
+// $output will now be: Equipment','Set','Show
+       $output = str_replace("')", "", $output);
+
+       // array $results contains the ENUM values
+       $results = explode("','", $output);
+
+       for($i = 0; $i < count($results); $i++) {
+           echo " <option value='$results[$i]'>$results[$i]</option>";
+       }
+        
+    }
+    ?>
+						</select>
+</div>
+					
+
+					<div class="form-wrapper">
+						<input name="number" type="text" placeholder="Phone Number" class="form-control" maxlength=10>
+						<i class="zmdi zmdi-phone"></i>
+					</div>
+
 					<div class="form-wrapper">
 						<input name="password" type="password" placeholder="Password" class="form-control">
 						<i class="zmdi zmdi-lock"></i>

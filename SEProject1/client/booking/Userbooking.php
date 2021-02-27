@@ -10,6 +10,40 @@ $username=$_SESSION['username'];
 $query="SELECT * from customer where username='$username'";
 $result=mysqli_query($conn,$query);
 $row=mysqli_fetch_assoc($result);
+
+
+
+
+
+$PatientID=$row['PatientID'];
+
+if($_POST['submit']){
+    $person=$_POST['person'];
+    $apdate=$_POST['appointmentdate'];
+    $dept=$_POST['dept'];
+    $reason=$_POST['visit'];
+    $insure=$_POST['healthinsurance'];
+    $inname=$_POST['insurance_name'];
+    $inid=$_POST['insurance_id'];
+    $doct=$_POST['doctor'];
+    $time=$_POST['time'];
+}
+
+$quer="SELECT DocID from Doctor where DocFname='$doct'";
+$resu=mysqli_query($conn,$quer);
+$raw=mysqli_fetch_assoc($resu);
+
+$doctor=$raw['DocID'];
+$query="INSERT INTO `booking`(`Appointment`, `Department`, `Reason`, `Insurance`, `Insurance_Name`, `Insurance_ID`, `Doctor`, `ApTime`, `Person`, `PatientID`) VALUES ('$apdate','$dept','$reason','$insure','$inname','$inid','$doctor','$time','$person','$PatientID')";
+$result=mysqli_query($conn,$query);
+
+
+if($result){
+    header("Location: viewbooking.php?success");
+}
+else{
+    header("Location: Userbooking.php?nosuccess");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,7 +93,7 @@ $row=mysqli_fetch_assoc($result);
 
                 <div class="container">
                     <div class="signup-content">
-                        <form method="POST" action="book.php"id="signup-form" class="signup-form">
+                        <form method="POST" action="<?=$_SERVER['PHP_SELF'];?>" id="signup-form" class="signup-form">
                             <h2 class="form-title">Appointment Form</h2>
                             <h4 class="error">Fields with * are required </h4>
 
@@ -233,7 +267,7 @@ $row=mysqli_fetch_assoc($result);
                                             </select>
 
                       
-                            <button class='btn btn-primary btn-lg' style='background: rgb(23, 79, 182); color:white;margin-top: 10px;margin-left:25%;width:50%' name="submit" type="submit" >Book Now</button>
+                            <button  style='background: rgb(23, 79, 182); color:white;margin-top: 10px;margin-left:25%;width:50%' name="submit" type="submit" >Book Now</button>
                   
                    
                     </form>

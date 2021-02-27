@@ -23,6 +23,9 @@
 					<img src="images/registration-form-1.jpg" alt="">
 					
 				</div>
+				<div >
+			<a href="/justgotech/SEProject1/client/landingpage/index.html">HOME</a>
+		</div>
 				
 				<form method="post" action="login_auth.php">
 					<h3>Sign In</h3>	
