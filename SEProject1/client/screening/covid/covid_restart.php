@@ -34,7 +34,12 @@ if(isset($_GET["date"])){
   }
   
 $disease="SARS-COV2";
-$PatientID=1;
+$quer="SELECT * from customer where username='$username'";
+$resut=mysqli_query($conn,$quer);
+$row=mysqli_fetch_assoc($resut);
+
+
+$PatientID=$row['PatientID'];;
 $conquery="SELECT ConID from contact where Contact='$con'";
 $conresult=mysqli_query($conn,$conquery);
 $conrow=mysqli_fetch_assoc($conresult);

@@ -2,6 +2,15 @@
 <!-- This file contains the appointment form a user can use to book a time with the Doctor on JustGo Tech website.
 Author: Hephzibah Emereole
 -->
+<?php
+session_start();
+require_once("/Applications/XAMPP/xamppfiles/htdocs/justgotech/SEProject1/database/database.php");
+$username=$_SESSION['username'];
+
+$query="SELECT * from customer where username='$username'";
+$result=mysqli_query($conn,$query);
+$row=mysqli_fetch_assoc($result);
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -24,10 +33,10 @@ Author: Hephzibah Emereole
   <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <img style="width:50%;margin-left: 20%;background:rgb(23, 79, 182);" src="/justgotech/SEProject1/images/justgotech.png" alt="justgotech">
-    <a href="accountinfo.php">Account Info</a>
-    <a href="tracker.php">Tracker</a>
-    <a href="covid.php">Virtual Screening</a>
-    <a href="/justgotech/SEProject1/client/booking/Userbooking.html">Consultation</a>
+    <a href="/justgotech/SEProject1/client/account/accountinfo.php">Account Info</a>
+    <a href="/justgotech/SEProject1/client/tracker/tracker.php">Tracker</a>
+    <a href="/justgotech/SEProject1/client/screening/covid/covid.php">Virtual Screening</a>
+    <a href="/justgotech/SEProject1/client/booking/Userbooking.php">Consultation</a>
   
    
     <a href="logout.php">Log Out</a>
@@ -37,7 +46,7 @@ Author: Hephzibah Emereole
   <div class="navb"id="main">
     <span style="font-size:30px;cursor:pointer" onclick="openNav()"><img style="width:10%" src="/justgotech/SEProject1/images/justgo.png" alt="justgotech"> </span>
     
-    <span style="font-size:20px;cursor:pointer; float:right; margin-right: -32%" onclick="openP()">User Name<img style="width:10%" src="/justgotech/SEProject1/images/stethoscope.png" alt="profile"> </span>
+    <span style="font-size:20px;cursor:pointer; float:right; margin-right: -32%" onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:10%" src="/justgotech/SEProject1/images/stethoscope.png" alt="profile"> </span>
   
   </div>
   

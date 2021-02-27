@@ -1,4 +1,13 @@
 <!-- Screening page for covid testing -->
+<?php
+session_start();
+require_once("/Applications/XAMPP/xamppfiles/htdocs/justgotech/SEProject1/database/database.php");
+$username=$_SESSION['username'];
+
+$query="SELECT * from customer where username='$username'";
+$result=mysqli_query($conn,$query);
+$row=mysqli_fetch_assoc($result);
+?>
 <html>
 <head>
 <title>COVID-19</title>
@@ -26,7 +35,7 @@
 <div class="navb"id="main">
   <span style="font-size:30px;cursor:pointer" onclick="openNav()"><img style="width:10%" src="/justgotech/SEProject1/images/justgo.png" alt="justgotech"> </span>
   
-  <span style="font-size:20px;cursor:pointer; float:right; margin-right: -32%" onclick="openP()">User Name<img style="width:10%" src="/justgotech/SEProject1/images/stethoscope.png" alt="profile"> </span>
+  <span style="font-size:20px;cursor:pointer; float:right; margin-right: -32%" onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:10%" src="/justgotech/SEProject1/images/stethoscope.png" alt="profile"> </span>
 
 </div>
 

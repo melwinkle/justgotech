@@ -1,4 +1,5 @@
-<?php require_once("/Applications/XAMPP/xamppfiles/htdocs/justgotech/SEProject1/database/database.php");
+<?php 
+require_once("/Applications/XAMPP/xamppfiles/htdocs/justgotech/SEProject1/database/database.php");
 
     if(!isset($_SESSION['username'])){
         if(isset($_POST['submit'])){
@@ -6,6 +7,7 @@
             $email = $_POST['email'];
             $password = md5(sha1($_POST['password']));
             function success($username){
+                session_start();
                 $_SESSION['username'] = $username;
                 echo "<script>location.href = 'https://www.google.com/'</script>";
             }

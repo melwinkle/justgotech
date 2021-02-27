@@ -1,15 +1,22 @@
 <!-- Home page for covid testing -->
 <?php
+session_start();
 require_once("/Applications/XAMPP/xamppfiles/htdocs/justgotech/SEProject1/database/database.php");
 
-$query='SELECT * from testing_centre';
+$username=$_SESSION['username'];
+
+$query="SELECT * from customer where username='$username'";
 $result=mysqli_query($conn,$query);
+$row=mysqli_fetch_assoc($result);
 
 
-$query1='SELECT * from covid';
-$result1=mysqli_query($conn,$query1);
+
+$query1="SELECT * from covid ";
+$results=mysqli_query($conn,$query1);
 
 
+$query2="SELECT * from testing_centre";
+$resultss=mysqli_query($conn,$query2);
 
 
 ?>
@@ -35,10 +42,10 @@ $result1=mysqli_query($conn,$query1);
   <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <img style="width:50%;margin-left: 20%;background:rgb(23, 79, 182);" src="/justgotech/SEProject1/images/justgotech.png" alt="justgotech">
-  <a href="accountinfo.php">Account Info</a>
-  <a href="tracker.php">Tracker</a>
-  <a href="covid.php">Virtual Screening</a>
-  <a href="/justgotech/SEProject1/client/booking/Userbooking.html">Consultation</a>
+  <a href="/justgotech/SEProject1/client/account/accountinfo.php">Account Info</a>
+  <a href="/justgotech/SEProject1/client/tracker/tracker.php">Tracker</a>
+  <a href="/justgotech/SEProject1/client/screening/covid/covid.php">Virtual Screening</a>
+  <a href="/justgotech/SEProject1/client/booking/Userbooking.php">Consultation</a>
 
  
   <a href="logout.php">Log Out</a>
@@ -48,7 +55,7 @@ $result1=mysqli_query($conn,$query1);
 <div class="navb"id="main">
   <span style="font-size:30px;cursor:pointer" onclick="openNav()"><img style="width:10%" src="/justgotech/SEProject1/images/justgo.png" alt="justgotech"> </span>
   
-  <span style="font-size:20px;cursor:pointer; float:right; margin-right: -32%" onclick="openP()">User Name<img style="width:10%" src="/justgotech/SEProject1/images/stethoscope.png" alt="profile"> </span>
+  <span style="font-size:20px;cursor:pointer; float:right; margin-right: -32%" onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:10%" src="/justgotech/SEProject1/images/stethoscope.png" alt="profile"> </span>
 
 </div>
 
@@ -104,7 +111,7 @@ $result1=mysqli_query($conn,$query1);
   About Covid-19
 </h2>
   <p> <?php
-      while($row1=mysqli_fetch_assoc($result1)){
+      while($row1=mysqli_fetch_assoc($results)){
         echo "{$row1['disease_desc']}";
       }
       ?></p>
@@ -118,8 +125,8 @@ $result1=mysqli_query($conn,$query1);
   <p>
     <ul>
       <?php
-      while($row=mysqli_fetch_assoc($result)){
-        echo "<li>{$row['CName']}</li>";
+      while($row2=mysqli_fetch_assoc($resultss)){
+        echo "<li>{$row2['CName']}</li>";
       }
       ?>
     
