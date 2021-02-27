@@ -13,7 +13,7 @@ $patient=$row['PatientID'];
 
 $num="SELECT *,count(*) as c from diseases where PatientID=$patient";
 $resnum=mysqli_query($conn,$num);
-$rownum=mysqli_fetch_assoc($resnum);
+
 
 $book="SELECT *,count(*) as b from booking where PatientID=$patient";
 $resbook=mysqli_query($conn,$book);
@@ -70,44 +70,51 @@ $countp=0;
    
 <div class="test" >
   <h5 class="card-header"></h5>
-  <div class="card-body" style="background:orange;height:90%">
+  <div class="card-body" style="background:#ff9900;height:90%">
   
     <h2 class="card-title">
     VIRTUAL SCREENING TESTS
     </h2><br>
     <ul>
-        
+    <?php 
+        while($rownum=mysqli_fetch_assoc($resnum)){
+
+          ?>
         <h4>TOTAL NUMBER OF TESTS: <?php echo $rownum['c']?></h4>
   
-        <li>
+       
         <h4> NO EXPOSURE:<?php 
-        if(($rownum['Status']=="Not Exposed")||($rownum['Status']=="Not Likely Exposed")){
-            $count=$count +1;
-            $c=($count/$rownum['c'])*100;
+        
+          if($rownum['Status']=="Not exposed"||$rownum['Status']=="Not Likely Exposed"){
+            $countp=$countp +1;
+            $c=($countp/$rownum['c'])*100;
             echo $c."%";
-            }
-            else{
-                echo "0%";
-
-            }
+              }
+              else{
+                  echo "0%";
+  
+              }
+        
+        
            
             
            
             ?> </h4>
-        </li>
-        <li>
+      
+  
         <h4>EXPOSURE:<?php 
+
         if($rownum['Status']=="Exposed"||$rownum['Status']=="Likely Exposed"){
             $countp=$countp +1;
-            $c=($countp/$rownum['c'])*100;
+            $c=($countp/$rownum['c'])*200;
             echo $c."%";
             }
             else{
                 echo "0%";
             }
-           
+          }
             ?> </h4>
-        </li>
+    
     </ul>
    <br>
 

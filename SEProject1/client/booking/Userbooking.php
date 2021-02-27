@@ -232,9 +232,9 @@ $row=mysqli_fetch_assoc($result);
                         </div>
                                             </select>
 
-                        <div class="form-group">
-                            <button class='form-submit btn btn-primary btn-lg' style='background: rgb(23, 79, 182); color:white;margin-top: 10px;margin-left:25%;width:50%' name="submit" type="submit" >Book Now</button>
-                      </div>
+                      
+                            <button class='btn btn-primary btn-lg' style='background: rgb(23, 79, 182); color:white;margin-top: 10px;margin-left:25%;width:50%' name="submit" type="submit" >Book Now</button>
+                  
                    
                     </form>
                     </div>

@@ -86,6 +86,10 @@ body{
     cursor: pointer;
   }
 
+  .card-body{
+    width:60%;
+    background: #b0cefc;
+  }
 
 footer{
     text-align: center;

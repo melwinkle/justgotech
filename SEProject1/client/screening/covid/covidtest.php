@@ -32,15 +32,15 @@ if(isset($_GET["ageb"])){
 
 <body >
 <div id="mySidenav" class="sidenav">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <img style="width:50%;margin-left: 20%;background:rgb(23, 79, 182);" src="/justgotech/SEProject1/images/justgotech.png" alt="justgotech">
-  <a href="#">Account Info</a>
-  <a href="#">Tracker</a>
-  <a href="covid.php">Virtual Screening</a>
-  <a href="consultation.php">Consultation</a>
+  <a href="/justgotech/SEProject1/client/account/accountinfo.php">Account Info</a>
+  <a href="/justgotech/SEProject1/client/tracker/tracker.php">Tracker</a>
+  <a href="/justgotech/SEProject1/client/screening/covid/covid.php">Virtual Screening</a>
+  <a href="/justgotech/SEProject1/client/booking/Userbooking.php">Consultation</a>
 
-
-  <a href="logout.php">Log Out</a>
+ 
+  <a href="/justgotech/SEProject1/client/account/logout.php">Log Out</a>
 </div>
 
 
@@ -88,6 +88,7 @@ if(isset($_GET["ageb"])){
        $results = explode("','", $output);
 
        for($i = 0; $i < count($results); $i++) {
+         
            echo " <a href='covidsym.php?person=$person&ageb=$age&test=$results[$i]'class='btn btn-primary btn-lg' style='background: white; color:rgb(23, 79, 182);margin-bottom: 5px'><input type='radio' name='test' id='test' value='$results[$i]'>$results[$i]</a><br>";
        } 
     }

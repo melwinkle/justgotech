@@ -15,8 +15,8 @@ if(isset($_GET["person"])){
 }
 if(isset($_GET["ageb"])){
   $age=$_GET["ageb"];
-  if(($age!='Between 56-64')|| $age!=('More than 64')){
-    $score=$score+0.5;
+  if(($age=='Between 56-64')|| $age==('More than 64')){
+    $score=$score+2;
   }else{
     $score=$score+1;
   }
@@ -25,33 +25,37 @@ if(isset($_GET["ageb"])){
     $test=$_GET["test"];
     if( $test==('Tested but result was positive')){
       $score=$score+2;
-    }else{
+    }
+    else if( $test==('Tested but result was negative')||$test==('Tested and awaiting results')){
+      $score=$score+1;
+    }
+    else{
       $score=$score+0;
     }
 
 }
 if(isset($_GET["sym"])){
   $sym=$_GET["sym"];
-  if($sym!='None of the above'){
-    $score=$score+2;
-  }else{
+  if($sym=='None of the above'){
     $score=$score+0;
+  }else{
+    $score=$score+2;
   }
 }
 if(isset($_GET["pre"])){
   $pre=$_GET["pre"];
-  if($pre!='None of the above'){
-    $score=$score+2;
-  }else{
+  if($pre=='None of the above'){
     $score=$score+0;
+  }else{
+    $score=$score+2;
   }
 }
 if(isset($_GET["con"])){
   $con=$_GET["con"];
-  if($con!='I have no exposure of COVID-19'){
-    $score=$score+2;
-  }else{
+  if($con=='I have no exposure of Covid-19'){
     $score=$score+0;
+  }else{
+    $score=$score+2;
   }
 }
 if(isset($_GET["reg"])){
@@ -59,7 +63,7 @@ if(isset($_GET["reg"])){
 }
 
 
-$probability=($score/9)*100;
+$probability=($score/10)*100;
 
 
 $date=date('Y-m-d H:i:s'); 
@@ -129,8 +133,8 @@ $date=date('Y-m-d H:i:s');
 
    
      <?php 
-     if($probability>=0 & $probability <=10){
-      echo "<div class='covidin' style='float:left;background:rgb(128, 255, 0)>
+     if($probability<11){
+      echo "<div class='covidin' style='float:left;background:green;>
    
       <h5 class='card-header'>
       
@@ -146,7 +150,7 @@ $date=date('Y-m-d H:i:s');
       $status="Not exposed";
      }
      else if ($probability>=11 & $probability <=40){
-      echo "<div class='covidin' style='float:left;background:rgb(255, 255, 0)'>
+      echo "<div class='covidin' style='float:left;background:#ffcc00'>
    
       <h5 class='card-header'>
       
@@ -158,7 +162,7 @@ $date=date('Y-m-d H:i:s');
         </h2><br>
       <p> You may have been exposed to COVID-19. However no emergency COVID-19 Testing Required!
       Please go and get checked for a flu. If however, the symptoms continue to persist, here is a link to all testing centres.
-      <a href='testingcentres.php'>testing centres</a>
+      <a href='covid.php'>testing centres</a>
       However do not forget to mask up and follow all the protocols.</p>";
 
       $status="Not likely exposed";
