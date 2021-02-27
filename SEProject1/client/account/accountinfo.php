@@ -54,51 +54,66 @@ $row=mysqli_fetch_assoc($result);
 
 </div>
 
+<div class="test" style="margin-left:20%;width:60%">
+  <h5 class="card-header"></h5>
+  <div class="card-body" style="background:skyblue">
+  
+    <h2 class="card-title">
+    Account Information
+    </h2><br>
 
-
-<div class="card-body">
-<form class="accountinfo" >
+    <form class="accountinfo" >
 <div class="form-group">
                                 <label class="header">First Name </label><br>
-                                <input type="text" value="<?php echo $row['firstname']?>" >
+                                <input style="width:90%" type="text" value="<?php echo $row['firstname']?>" >
                             </div>
 
                             <div class="form-group">
                                 <label class="header">Last Name </label><br>
-                                <input type="text" value="<?php echo $row['lastname']?>">
+                                <input style="width:90%" type="text" value="<?php echo $row['lastname']?>">
                                 
                             </div>
 
                             <div class="form-group">
                                 <label class="header">Email </label><br>
-                                <input type="text"value="<?php echo $row['email']?>" >
+                                <input style="width:90%" type="text"value="<?php echo $row['email']?>" >
                             </div>
                             
                             <div class="form-group">
                                 <label class="header">Gender </label><br>
-                                <input type="text"  value="<?php echo $row['gender']?>" >
+                                <input style="width:90%" type="text"  value="<?php echo $row['gender']?>" >
 
                              
                             </div>
 
                             <div class="form-group">
                                 <label class="header">Date of birth </label><br>
-                                <input type="text" value="<?php echo $row['DOB']?>" >
+                                <input  style="width:90%" type="text" value="<?php echo $row['DOB']?>" >
                             </div>
 
                             
                             <div class="form-group">	
                                 <label class="header">Phone Number </label><br>
-                                <input type="text"  value="<?php echo $row['PhoneNumber']?>"  >
+                                <input style="width:90%" type="text"  value="<?php echo $row['PhoneNumber']?>"  >
                             </div>
                             
                             <div class="form-group">  
                                 <label class="header">Nationality </label><br>
                                
-                               <input type="text" value="<?php echo $row['Nationality']?>">
+                               <input style="width:90%" type="text" value="<?php echo $row['Nationality']?>">
                             </div>
+
+                            <a href="" class="btn btn-primary btn-lg" style="background: rgb(23, 79, 182); width: 50%;color:white; margin-left:15%">Edit</a>
+
 </form>
+    
+
+    
+<br>
+  </div>
 </div>
+
+
   
 <script>
 function openTab(tabName) {
@@ -124,6 +139,5 @@ function closeNav() {
 </body>
 <footer>
   Copyright (c) JustGoTech 2021
-   <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> 
 </footer>
 </html>
