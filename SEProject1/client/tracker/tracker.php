@@ -92,9 +92,9 @@ $countp=0;
         <h4> NO EXPOSURE:<?php 
         
           if($rownum['Status']=="Not exposed"||$rownum['Status']=="Not Likely Exposed"){
-            $countp=$countp +1;
-            $c=($countp/$rownum['c'])*100;
-            echo $c."%";
+            $count=$count +1;
+            $e=($count/$rownum['c'])*100;
+            echo $e."%";
               }
               else{
                   echo "0%";

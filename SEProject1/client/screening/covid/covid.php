@@ -144,14 +144,13 @@ $resultss=mysqli_query($conn,$query2);
 <div id="b3" class="containerTab" style="display:none;background:skyblue">
   <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
   <p>World Statistics</p>
-  Total Cases: <br>
-  Active Cases: <br>
-  Total Deaths: <br>
+  Total Cases:113,982,329 <br>
+  Total Deaths: 2,528,948<br>
 <p></p>
   <p>Ghana Statistics</p> 
-  Total Cases: <br>
-  Active Cases: <br>
-  Total Deaths: <br>
+  Total Cases: 84,023<br>
+  Active Cases: 5,444<br>
+  Total Deaths: 607<br>
 </div>
 
 
