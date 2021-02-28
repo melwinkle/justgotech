@@ -126,7 +126,7 @@ $countp=0;
 
 
 <br>
-    <a href="/justgotech/SEProject1/client/screening/results.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182)">View all</a>
+    <a href="../screening/results.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182)">View all</a>
   </div>
 </div>
 
@@ -147,7 +147,7 @@ $countp=0;
 
     
 <br>
-    <a href="/justgotech/SEProject1/client/screening/covid/covid_view.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182)">View all</a>
+    <a href="../screening/covid/" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182)">View all</a>
   </div>
 </div>
 
@@ -162,7 +162,7 @@ $countp=0;
     
     <h4>UPDATE SOON</h4>
 <br>
-    <a href="/justgotech/SEProject1/client/screening/covid/covid_view.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182)">View all</a>
+    <a href="../screening/covid/" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182)">View all</a>
   </div>
 </div>
 <script>

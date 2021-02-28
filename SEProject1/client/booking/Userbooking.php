@@ -82,7 +82,7 @@ else{
     <a href="/justgotech/SEProject1/client/booking/Userbooking.php">Consultation</a>
   
    
-    <a href="/justgotech/SEProject1/client/account/logout.php">Log Out</a>
+    <a href="../account/logout.php">Log Out</a>
   </div>
   
   
