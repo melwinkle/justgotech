@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 24, 2021 at 11:33 PM
+-- Generation Time: Feb 28, 2021 at 04:07 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `justgotech`
 --
-CREATE DATABASE IF NOT EXISTS `justgotech` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `justgotech`;
 
 -- --------------------------------------------------------
 
@@ -29,31 +27,25 @@ USE `justgotech`;
 -- Table structure for table `customer`
 --
 
-CREATE TABLE `customer` (
+CREATE TABLE IF NOT EXISTS `customer` (
   `firstname` varchar(500) NOT NULL,
   `lastname` varchar(500) NOT NULL,
   `username` varchar(500) NOT NULL,
   `email` varchar(500) NOT NULL,
   `gender` enum('Male','Female','Other') NOT NULL,
-  `userpassword` varchar(500) NOT NULL
+  `dob` date NOT NULL,
+  `nationality` varchar(500) NOT NULL,
+  `phonenumber` varchar(500) NOT NULL,
+  `userpassword` varchar(500) NOT NULL,
+  PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `customer`
 --
 
-INSERT INTO `customer` (`firstname`, `lastname`, `username`, `email`, `gender`, `userpassword`) VALUES
-('Mark', 'Zoiku', 'markz', 'zoiku@gmail.com', 'Male', 'a7f57ac5f16536d452fc407ee22dee1c');
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `customer`
---
-ALTER TABLE `customer`
-  ADD UNIQUE KEY `username` (`username`);
+INSERT INTO `customer` (`firstname`, `lastname`, `username`, `email`, `gender`, `dob`, `nationality`, `phonenumber`, `userpassword`) VALUES
+('Mark', 'Zoiku', 'mzoiku', 'jzoiku@gmail.com', 'Male', '2021-02-28', 'Ghana', '0555777803', 'a7f57ac5f16536d452fc407ee22dee1c');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

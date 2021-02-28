@@ -1,12 +1,12 @@
 <?php 
 
-session_start();
+    session_start();
  
-// Unset all of the session variables
-$_SESSION = array();
- 
-// Destroy the session.
-session_destroy();
- 
-header("Location: /justgotech/SEProject1/client/regform/index_0.php");
+    // Destroy the session.
+    if(isset($_SESSION['username'])){
+        session_destroy();
+        echo "<script>location.href='../landingpage/index.html'</script>";
+    }
+
+    echo "<script>location.href='../regform/login.php'</script>";
 ?>

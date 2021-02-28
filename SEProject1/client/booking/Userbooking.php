@@ -3,16 +3,21 @@
 Author: Hephzibah Emereole
 -->
 <?php
+
+error_reporting(0);
+require_once("../../database/connection.php");
+
 session_start();
-require_once("/Applications/XAMPP/xamppfiles/htdocs/justgotech/SEProject1/database/database.php");
+
+if(!isset($_SESSION['username'])){
+  echo "<script>location.href = './logout.php'</script>";
+}
+
 $username=$_SESSION['username'];
 
 $query="SELECT * from customer where username='$username'";
 $result=mysqli_query($conn,$query);
 $row=mysqli_fetch_assoc($result);
-
-
-
 
 
 $PatientID=$row['PatientID'];

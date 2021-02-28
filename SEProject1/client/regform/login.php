@@ -1,3 +1,12 @@
+<?php 
+	session_start();
+
+	if(isset($_SESSION['username'])){
+		echo "<script>location.href = '../tracker/tracker.php'</script>";
+	}
+
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -24,7 +33,7 @@
 					
 				</div>
 				<div >
-			<a href="/justgotech/SEProject1/client/landingpage/index.html">HOME</a>
+			<a href="../landingpage/index.html">HOME</a>
 		</div>
 				
 				<form method="post" action="login_auth.php">
@@ -45,7 +54,7 @@
 					<button name="submit" type="submit"> Sign In
 						<i class="zmdi zmdi-arrow-right"></i>
 					</button>
-                    <div class="register">Don't have an account? <a href="index.php" class="in_">Register!</a></div>
+                    <div class="register">Don't have an account? <a href="./signup.php" class="in_">Register!</a></div>
 				</form>
                 
 			</div>

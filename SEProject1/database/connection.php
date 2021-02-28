@@ -1,8 +1,13 @@
 <?php 
+    $host = 'localhost';
+    $username = 'root';
+    $password = '';
+    $databasename = 'justgotech';
 
-define('DB_HOST', '127.0.0.1');
-define('DB_NAME','justgotech');
-define('DB_USER','root');
-define('DB_PASS','');
+    $conn = mysqli_connect($host, $username, $password, $databasename);
+
+    if(!$conn){
+        die("<script>alert('Connection To Database Failed')</script>");
+    }
 
 ?>
