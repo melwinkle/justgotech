@@ -1,7 +1,14 @@
 <!-- Screening page for covid testing -->
 <?php 
-require_once("/Applications/XAMPP/xamppfiles/htdocs/justgotech/SEProject1/database/database.php");
-session_start(); 
+
+require_once("../../../database/connection.php");
+
+session_start();
+
+if(!isset($_SESSION['username'])){
+  echo "<script>location.href = '../account/logout.php'</script>";
+}
+
 
 $username=$_SESSION['username'];
 
