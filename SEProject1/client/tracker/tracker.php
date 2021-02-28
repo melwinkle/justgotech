@@ -112,7 +112,7 @@ $countp=0;
 
         if($rownum['Status']=="Exposed"||$rownum['Status']=="Likely Exposed"){
             $countp=$countp +1;
-            $c=($countp/$rownum['c'])*200;
+            $c=($countp/$rownum['c'])*100;
             echo $c."%";
             }
             else{
