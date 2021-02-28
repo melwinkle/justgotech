@@ -22,16 +22,19 @@ if($_POST['submit']){
     $doctor=$_POST['doctor'];
     $time=$_POST['time'];
 }
+$quer="SELECT DocID from Doctor where DocFname='$doct'";
+$resu=mysqli_query($conn,$quer);
+$raw=mysqli_fetch_assoc($resu);
 
-$query="INSERT INTO `booking`(`Appointment`, `Department`, `Reason`, `Insurance`, `Insurance_Name`, `Insurance_ID`, `Doctor`, `ApTime`, `Person`, `PatientID`) VALUES ('$apdate','$dept','$reason','$insure','$inname','$inid','$doctor','$time','$person','$PatientID')";
-$result=mysqli_query($conn,$query);
+
+$doctor=$raw['DocID'];
+$quey="INSERT INTO booking(Appointment,Department,Reason,Insurance,Insurance_Name,Insurance_ID,Doctor,ApTime,Person,PatientID) VALUES ('$apdate','$dept','$reason','$insure','$inname','$inid','$doctor','$time','$person','$PatientID')";
+$resut=mysqli_query($conn,$quey);
 
 
-if($result){
-    header("Location: viewbooking.php?success");
+if($resut){
+    header("Location: viewbooking.php");
 }
-else{
-    header("Location: Userbooking.php?nosuccess");
-}
+
 
 ?>

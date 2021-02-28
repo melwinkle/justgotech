@@ -38,17 +38,17 @@ $quer="SELECT DocID from Doctor where DocFname='$doct'";
 $resu=mysqli_query($conn,$quer);
 $raw=mysqli_fetch_assoc($resu);
 
+
 $doctor=$raw['DocID'];
-$query="INSERT INTO `booking`(`Appointment`, `Department`, `Reason`, `Insurance`, `Insurance_Name`, `Insurance_ID`, `Doctor`, `ApTime`, `Person`, `PatientID`) VALUES ('$apdate','$dept','$reason','$insure','$inname','$inid','$doctor','$time','$person','$PatientID')";
-$result=mysqli_query($conn,$query);
+$quey="INSERT INTO booking(Appointment,Department,Reason,Insurance,Insurance_Name,Insurance_ID,Doctor,ApTime,Person,PatientID) VALUES ('$apdate','$dept','$reason','$insure','$inname','$inid','$doctor','$time','$person','$PatientID')";
+$resut=mysqli_query($conn,$quey);
 
 
-if($result){
-    header("Location: viewbooking.php?success");
+if($resut){
+    header("Location: viewbooking.php");
 }
-else{
-    header("Location: Userbooking.php?nosuccess");
-}
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -98,7 +98,7 @@ else{
 
                 <div class="container">
                     <div class="signup-content">
-                        <form method="POST" action="<?=$_SERVER['PHP_SELF'];?>" id="signup-form" class="signup-form">
+                        <form method="POST" action="book.php" id="signup-form" class="signup-form">
                             <h2 class="form-title">Appointment Form</h2>
                             <h4 class="error">Fields with * are required </h4>
 
@@ -169,18 +169,18 @@ else{
                             <div class="form-group">
                                 <label class="header">Health insurance <span class ="error">*</span></label>	<br>
                                 <?php 
-    $sql="SELECT COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'booking' AND COLUMN_NAME = 'Insurance' ";
-    $result=mysqli_query($conn,$sql);
-    while($row = mysqli_fetch_array($result)) {
-       $type=$row['COLUMN_TYPE'];
+                                      $sql="SELECT COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'booking' AND COLUMN_NAME = 'Insurance' ";
+                                     $result=mysqli_query($conn,$sql);
+                                      while($row = mysqli_fetch_array($result)) {
+                                        $type=$row['COLUMN_TYPE'];
 
-       $output = str_replace("enum('", "", $type);
+                                              $output = str_replace("enum('", "", $type);
 
-// $output will now be: Equipment','Set','Show
-       $output = str_replace("')", "", $output);
 
-       // array $results contains the ENUM values
-       $results = explode("','", $output);
+                                            $output = str_replace("')", "", $output);
+
+
+                                          $results = explode("','", $output);
 
        for($i = 0; $i < count($results); $i++) {
            echo "  
@@ -231,10 +231,11 @@ else{
                                      $output = str_replace("')", "", $output);
 
 
-                                     $results = explode("','", $output);
+                                     $result = explode("','", $output);
 
-                                          for($i = 0; $i < count($results); $i++) {
-                                        echo "  <option name='doctor'value='$results[$i]'>Dr.$results[$i]</option><br>";
+                                          for($i = 0; $i < count($result); $i++) {
+                                        echo "  <option name='doctor'value='$result[$i]'>Dr.$result[$i]</option><br>";
+                                    
                                              } 
                                               }
                                             ?>
@@ -264,16 +265,18 @@ else{
 
                                           for($i = 0; $i < count($results); $i++) {
                                         echo "  <option name='time' value='$results[$i]'>$results[$i]</option>";
+                            
                                              } 
                                               }
                                             ?>	
+                                              </select>
                             
                         </div>
-                                            </select>
+                                          
 
-                      
-                            <button  style='background: rgb(23, 79, 182); color:white;margin-top: 10px;margin-left:25%;width:50%' name="submit" type="submit" >Book Now</button>
-                  
+                                            <div>
+                            <button  class="btn btn-primary btn-lg"style='background: rgb(23, 79, 182); color:white;margin-top: 10px;margin-left:25%;width:50%' name="submit" type="submit" >Book Now</buttom>
+                  </div>
                    
                     </form>
                     </div>
