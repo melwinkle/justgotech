@@ -60,26 +60,8 @@
 					<option value="Male">Male</option>
 					<option value="Female">Female</option>
 					<option value="Other">Other</option>
-					<?php 
-					// 	$sql="SELECT COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'customer' AND COLUMN_NAME = 'gender' ";
-					// 	$result=mysqli_query($conn,$sql);
-					// 	while($row = mysqli_fetch_array($result)) {
-					// 	$type=$row['COLUMN_TYPE'];
-
-					// 	$output = str_replace("enum('", "", $type);
-
-					// // $output will now be: Equipment','Set','Show
-					// 	$output = str_replace("')", "", $output);
-
-					// 	// array $results contains the ENUM values
-					// 	$results = explode("','", $output);
-
-					// 	for($i = 0; $i < count($results); $i++) {
-					// 		echo " <option value='$results[$i]'>$results[$i]</option>";
-					// 	}
-							
-					// 	}
-					?>
+					
+					
 				</select>
 			</div>
 
@@ -92,24 +74,24 @@
 				<select name="nationality" id="Nationality" class="form-control">
 					<option disabled selected>Nationality</option>
 					<?php 
-					// 	$sql="SELECT COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'customer' AND COLUMN_NAME = 'Nationality' ";
-					// 	$result=mysqli_query($conn,$sql);
-					// 	while($row = mysqli_fetch_array($result)) {
-					// 	$type=$row['COLUMN_TYPE'];
+						$sql="SELECT COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'customer' AND COLUMN_NAME = 'Nationality' ";
+						$result=mysqli_query($conn,$sql);
+						while($row = mysqli_fetch_array($result)) {
+						$type=$row['COLUMN_TYPE'];
 
-					// 	$output = str_replace("enum('", "", $type);
+						$output = str_replace("enum('", "", $type);
 
-					// // $output will now be: Equipment','Set','Show
-					// 	$output = str_replace("')", "", $output);
+					// $output will now be: Equipment','Set','Show
+						$output = str_replace("')", "", $output);
 
-					// 	// array $results contains the ENUM values
-					// 	$results = explode("','", $output);
+						// array $results contains the ENUM values
+						$results = explode("','", $output);
 
-					// 	for($i = 0; $i < count($results); $i++) {
-					// 		echo " <option value='$results[$i]'>$results[$i]</option>";
-					// 	}
+						for($i = 0; $i < count($results); $i++) {
+							echo " <option value='$results[$i]'>$results[$i]</option>";
+						}
 							
-					// 	}
+						}
 					?>
 				</select>
 			</div>
@@ -146,6 +128,7 @@
 	<?php 
 		require_once("../../database/connection.php");
 
+
 		if(isset($_POST['submit'])){
 			$firstname = $_POST['firstname'];
 			$lastname = $_POST['lastname'];
@@ -163,7 +146,7 @@
 				</script>
 			html;
 						
-			$query = "INSERT INTO `customer`(`firstname`, `lastname`, `username`, `email`, `gender`, `dob`, `nationality`, `phonenumber`, `userpassword`) VALUES ('$firstname', '$lastname', '$username', '$email', '$gender', '$dob', '$nationality', '$phonenumber', '$password')";
+			$query = "INSERT INTO customer(firstname,lastname,username,email,gender,dob,nationality,phonenumber,userpassword) VALUES ('$firstname', '$lastname', '$username', '$email', '$gender', '$dob', '$nationality', '$phonenumber', '$password')";
 			$sql = mysqli_query($conn,$query);
 
 			if(!$sql){

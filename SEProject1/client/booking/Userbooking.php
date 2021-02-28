@@ -45,7 +45,11 @@ $resut=mysqli_query($conn,$quey);
 
 
 if($resut){
-    header("Location: viewbooking.php");
+
+    header("Location: tracker.php");
+}
+else{
+  mysqli_error($conn);
 }
 
 
@@ -98,7 +102,7 @@ if($resut){
 
                 <div class="container">
                     <div class="signup-content">
-                        <form method="POST" action="book.php" id="signup-form" class="signup-form">
+                        <form method="POST" action="<?php echo $_SERVER['PHP_SELF'] ?>" id="signup-form" class="signup-form">
                             <h2 class="form-title">Appointment Form</h2>
                             <h4 class="error">Fields with * are required </h4>
 
