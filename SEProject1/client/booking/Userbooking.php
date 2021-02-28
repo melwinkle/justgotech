@@ -1,6 +1,6 @@
 
 <!-- This file contains the appointment form a user can use to book a time with the Doctor on JustGo Tech website.
-Author: Hephzibah Emereole
+Author: Hephzibah Emereole & Aileen Akpalu
 -->
 <?php
 session_start();
