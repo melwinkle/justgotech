@@ -57,7 +57,7 @@ $countp=0;
   <img style="width:50%;margin-left: 20%;background:rgb(23, 79, 182);" src="../../images/justgotech.png" alt="justgotech">
   <a href="../account/accountinfo.php">Account Info</a>
   <a href="../tracker/tracker.php">Tracker</a>
-  <a href="../tracker/chatbox.php">Chatbox</a>
+  <a href="/justgotech/vendor/botman/botman/src/chatbox.php">Chatbox</a>
   <a href="../screening/covid/covid.php">Virtual Screening</a>
   <a href="../booking/Userbooking.php">Consultation</a>
 
