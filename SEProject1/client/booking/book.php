@@ -22,6 +22,7 @@ if($_POST['submit']){
     $doctor=$_POST['doctor'];
     $time=$_POST['time'];
 }
+
 $quer="SELECT DocID from Doctor where DocFname='$doct'";
 $resu=mysqli_query($conn,$quer);
 $raw=mysqli_fetch_assoc($resu);
@@ -31,10 +32,8 @@ $doctor=$raw['DocID'];
 $quey="INSERT INTO booking(Appointment,Department,Reason,Insurance,Insurance_Name,Insurance_ID,Doctor,ApTime,Person,PatientID) VALUES ('$apdate','$dept','$reason','$insure','$inname','$inid','$doctor','$time','$person','$PatientID')";
 $resut=mysqli_query($conn,$quey);
 
-
 if($resut){
     header("Location: viewbooking.php");
 }
-
 
 ?>

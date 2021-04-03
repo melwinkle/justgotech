@@ -9,9 +9,7 @@ if(!isset($_SESSION['username'])){
   echo "<script>location.href = '../account/logout.php'</script>";
 }
 
-
 $username=$_SESSION['username'];
-
 $query="SELECT * from customer where username='$username'";
 $result=mysqli_query($conn,$query);
 $row=mysqli_fetch_assoc($result);
@@ -27,7 +25,6 @@ if(isset($_GET["ageb"])){
 if(isset($_GET["sym"])){
   $sym=$_GET["sym"];
 }
-
 
 
 ?>
@@ -51,9 +48,8 @@ if(isset($_GET["sym"])){
   <a href="/justgotech/SEProject1/client/booking/Userbooking.php">Consultation</a>
 
  
-  <a href="/justgotech/SEProject1/client/account/logout.php">Log Out</a>
+<a href="/justgotech/SEProject1/client/account/logout.php">Log Out</a>
 </div>
-
 
 <div class="navb"id="main">
   <span style="font-size:30px;cursor:pointer" onclick="openNav()"><img style="width:10%" src="/justgotech/SEProject1/images/justgo.png" alt="justgotech"> </span>
@@ -64,7 +60,7 @@ if(isset($_GET["sym"])){
 
     <div class="covidinfoo">
    
-  <h5 class="card-header">
+   <h5 class="card-header">
   <?php
    echo "<a href='covidsym.php?person=$person&ageb=$age&test=$test&sym=$sym' style='color:white'>BACK</a>"?>
   </h5>
@@ -74,17 +70,15 @@ if(isset($_GET["sym"])){
     COVID-19 SCREENING TOOL 
     </h2><br>
    
-    
-    
+        
     <?php if($person=="self"){
    
    echo " <p> Do you have any of the following? Select all that apply</p>";
     }
     else{
-
      echo"  <p> Do they have any of the following? Select all that apply</p>";
-
     }
+
     ?>
     <form action="<?php echo $_SERVER['PHP_SELF']; echo '?person='.$person.'&ageb='.$age.'&test='.$test.'&sym='.$sym.'';?>" method="post">
     <select name="pre" id="pre" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" multiple>
@@ -93,7 +87,6 @@ if(isset($_GET["sym"])){
     $result=mysqli_query($conn,$sql);
     while($row = mysqli_fetch_array($result)) {
        $type=$row['PName'];
-
        $output = str_replace("enum('", "", $type);
 
 // $output will now be: Equipment','Set','Show
@@ -111,11 +104,10 @@ if(isset($_GET["sym"])){
   </select>
   <button class='btn btn-primary btn-lg' style='background: white; color:rgb(23, 79, 182);margin-bottom: 5px' name='submit' type='submit' value='submit'>NEXT</button>
 
-    </form>
+  </form>
     
   </div>
 </div>
-
 
 <?php
     if(isset($_POST['submit'])){
@@ -125,6 +117,7 @@ if(isset($_GET["sym"])){
     }
 
     ?>
+    
 <script>
 function openNav() {
   document.getElementById("mySidenav").style.width = "250px";

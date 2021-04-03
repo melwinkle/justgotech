@@ -1,7 +1,6 @@
 <!-- Screening page for covid testing -->
 <?php 
 
-
 require_once("../../../database/connection.php");
 
 session_start();
@@ -15,7 +14,6 @@ $username=$_SESSION['username'];
 $query="SELECT * from customer where username='$username'";
 $result=mysqli_query($conn,$query);
 $row=mysqli_fetch_assoc($result);
-
 
 if(isset($_GET["person"])){
   $person=$_GET["person"];

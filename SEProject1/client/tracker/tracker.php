@@ -20,7 +20,6 @@ $patient=$row['PatientID'];
 $num="SELECT *,count(*) as c from diseases where PatientID=$patient";
 $resnum=mysqli_query($conn,$num);
 
-
 $book="SELECT *,count(*) as b from booking where PatientID=$patient";
 $resbook=mysqli_query($conn,$book);
 $rowbook=mysqli_fetch_assoc($resbook);
