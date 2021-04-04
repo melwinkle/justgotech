@@ -100,9 +100,7 @@ if(isset($_GET["person"])){
     
 
     </form>
-    
-   
-    
+       
   
   </div>
 </div>

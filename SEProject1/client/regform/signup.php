@@ -1,11 +1,9 @@
 <!-- sign up page -->
 <?php 
 	session_start();
-
 	if(isset($_SESSION['username'])){
 	  echo "<script>location.href = '../tracker/tracker.php'</script>";
 	}
-
 ?>
 
 <!DOCTYPE html>
@@ -152,7 +150,6 @@
 			if(!$sql){
 				die('Error: Could not create user account');
 			}
-
 			echo $success; 
 		}
 	?>

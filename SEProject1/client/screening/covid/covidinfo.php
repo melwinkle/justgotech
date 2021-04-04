@@ -35,7 +35,6 @@ $row=mysqli_fetch_assoc($result);
   <a href="../../screening/covid/covid.php">Virtual Screening</a>
   <a href="../../booking/Userbooking.php">Consultation</a>
 
- 
   <a href="../../account/logout.php">Log Out</a>
 </div>
 

@@ -14,8 +14,6 @@ $query="SELECT * from customer where username='$username'";
 $result=mysqli_query($conn,$query);
 $row=mysqli_fetch_assoc($result);
 
-
-
 $query1="SELECT * from covid ";
 $results=mysqli_query($conn,$query1);
 
@@ -56,17 +54,14 @@ $resultss=mysqli_query($conn,$query2);
   <a href="../../account/logout.php">Log Out</a>
 </div>
 
-
 <div class="navb"id="main">
   <span style="font-size:30px;cursor:pointer" onclick="openNav()"><img style="width:10%" src="../../../images/justgo.png" alt="justgotech"> </span>
   
   <span style="font-size:20px;cursor:pointer; float:right; margin-right: -32%" onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:10%" src="/justgotech/SEProject1/images/stethoscope.png" alt="profile"> </span>
 
 </div>
-
-
    
-    <div class="covid">
+  <div class="covid">
   <h5 class="card-header"></h5>
   <div class="card-body">
   <img src="../../../images/doctor.png" alt="doctor">
@@ -79,7 +74,6 @@ $resultss=mysqli_query($conn,$query2);
     <a href="covid_start.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182)">Start Screening</a>
   </div>
 </div>
-
 
 
 <div class="container">
@@ -108,7 +102,6 @@ $resultss=mysqli_query($conn,$query2);
 </div>
 
 
- 
 
 <div id="b1" class="containerTab" style="display:none;background:skyblue">
   <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
@@ -135,8 +128,7 @@ $resultss=mysqli_query($conn,$query2);
         echo "<li>{$row2['CName']}</li>";
       }
       ?>
-    
-      
+          
     </ul>
   </p>
 </div>

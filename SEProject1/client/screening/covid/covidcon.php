@@ -9,9 +9,7 @@ if(!isset($_SESSION['username'])){
   echo "<script>location.href = '../account/logout.php'</script>";
 }
 
-
 $username=$_SESSION['username'];
-
 $query="SELECT * from customer where username='$username'";
 $result=mysqli_query($conn,$query);
 $row=mysqli_fetch_assoc($result);
@@ -114,9 +112,6 @@ if(isset($_GET["pre"])){
 
     </form>
     
-    
-    
- 
   </div>
 </div>
 

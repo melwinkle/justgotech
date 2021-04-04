@@ -1,7 +1,6 @@
 <!-- Screening page for covid testing -->
 <?php
 
-
 require_once("../../../database/connection.php");
 
 session_start();
@@ -40,8 +39,8 @@ if(isset($_GET["ageb"])){
     else{
       $score=$score+0;
     }
-
 }
+
 if(isset($_GET["sym"])){
   $sym=$_GET["sym"];
   if($sym=='None of the above'){
@@ -50,6 +49,7 @@ if(isset($_GET["sym"])){
     $score=$score+2;
   }
 }
+
 if(isset($_GET["pre"])){
   $pre=$_GET["pre"];
   if($pre=='None of the above'){
@@ -58,6 +58,7 @@ if(isset($_GET["pre"])){
     $score=$score+2;
   }
 }
+
 if(isset($_GET["con"])){
   $con=$_GET["con"];
   if($con=='I have no exposure of Covid-19'){
@@ -66,13 +67,12 @@ if(isset($_GET["con"])){
     $score=$score+2;
   }
 }
+
 if(isset($_GET["reg"])){
   $reg=$_GET["reg"];
 }
 
-
 $probability=($score/10)*100;
-
 
 $date=date('Y-m-d H:i:s'); 
 ?>
@@ -191,9 +191,9 @@ $date=date('Y-m-d H:i:s');
       please go and get tested. Here is a link to all <a href='testingcentres.php'>testing centres</a>
       However do not forget to mask up and follow all the protocols. STAY SAFE!!</p>";
 
-
       $status="Likely exposed";
      }
+
      else {
       echo "
       <div class='covidin' style='float:left;background:tomato'>
@@ -210,7 +210,6 @@ $date=date('Y-m-d H:i:s');
       Here is a link to all <a href='testingcentres.php'>testing centres</a>
       Do not forget to mask up and follow all the protocols. STAY SAFE!!</p>";
 
-
       $status="Exposed";
      }
        ?>
@@ -222,18 +221,13 @@ $date=date('Y-m-d H:i:s');
      echo "<a href='covid_restart.php?person=$person&ageb=$age&test=$test&sym=$sym&pre=$pre&con=$con&reg=$reg&date=$date&status=$status' style='color:white'>Done</a>";?>
      </div>
     
-     
-  
-   </div>
+  </div>
 </div>
 <div class="com" style="margin-top:-25%;margin-left: 67%">
   <h5>Completed <?php  echo $date; ?></h5>
 </div>
 
 </div>
-
-
-
 
    
 <script>

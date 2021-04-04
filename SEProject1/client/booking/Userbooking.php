@@ -1,6 +1,6 @@
 
 <!-- This file contains the appointment form a user can use to book a time with the Doctor on JustGo Tech website.
-Author: Hephzibah Emereole & Aileen Akpalu
+Authors: Hephzibah Emereole & Aileen Akpalu
 -->
 <?php
 
@@ -18,7 +18,6 @@ $username=$_SESSION['username'];
 $query="SELECT * from customer where username='$username'";
 $result=mysqli_query($conn,$query);
 $row=mysqli_fetch_assoc($result);
-
 
 $PatientID=$row['PatientID'];
 
@@ -130,7 +129,7 @@ else{
        } 
     }
     ?>
-                                </select>
+                            </select>
                             </div>
     
                             <div class="form-group">
@@ -162,7 +161,7 @@ else{
        } 
     }
     ?>
-                                </select>
+                            </select>
                             </div>
 
                             <div class="form-group"> 
@@ -191,10 +190,10 @@ else{
            <input class='healthinsurance' type='radio' id='$results[$i]' name='healthinsurance' value='$results[$i]' required>
            <label for='$results[$i]'>$results[$i]</label>
            <br>";
-       } 
+      } 
     }
-    ?>	
-                                                    </div>
+  ?>	
+                        </div>
 
                         <!--if the user clicks yes, input the name of the insurance and the ID -->
 
@@ -234,15 +233,13 @@ else{
 
                                      $output = str_replace("')", "", $output);
 
-
                                      $result = explode("','", $output);
 
-                                          for($i = 0; $i < count($result); $i++) {
-                                        echo "  <option name='doctor'value='$result[$i]'>Dr.$result[$i]</option><br>";
-                                    
-                                             } 
-                                              }
-                                            ?>
+                                        for($i = 0; $i < count($result); $i++) {
+                                        echo "<option name='doctor'value='$result[$i]'>Dr.$result[$i]</option><br>";
+                                        } 
+                                        }
+                                ?>
                             </select>
                         </div>
                         
@@ -264,23 +261,21 @@ else{
 
                                      $output = str_replace("')", "", $output);
 
-
                                      $results = explode("','", $output);
 
-                                          for($i = 0; $i < count($results); $i++) {
+                                        for($i = 0; $i < count($results); $i++) {
                                         echo "  <option name='time' value='$results[$i]'>$results[$i]</option>";
-                            
-                                             } 
-                                              }
-                                            ?>	
-                                              </select>
+                                        } 
+                                }
+                                ?>	
+                           </select>
                             
                         </div>
-                                          
+                            
 
-                                            <div>
-                            <button  class="btn btn-primary btn-lg"style='background: rgb(23, 79, 182); color:white;margin-top: 10px;margin-left:25%;width:50%' name="submit" type="submit" >Book Now</buttom>
-                  </div>
+                          <div>
+                          <button  class="btn btn-primary btn-lg"style='background: rgb(23, 79, 182); color:white;margin-top: 10px;margin-left:25%;width:50%' name="submit" type="submit" >Book Now</buttom>
+                        </div>
                    
                     </form>
                     </div>
@@ -312,22 +307,3 @@ else{
     </body>
 </html>
 
-
-
-<!-- <script>
-<script type="text/javascript" src ="./js/bookvalidator.js">  </script>
-// javascript code to dispay other details when a user clicks on 'yes' in the health insurance question. //still under development 
-$("#seeAnotherField").change(function() {
-  if ($(this).val() == "yes") {
-    $('#otherFieldDiv').show();
-    $('#otherField').attr('required', '');
-    $('#otherField').attr('data-error', 'This field is required.');
-  } else {
-    $('#otherFieldDiv').hide();
-    $('#otherField').removeAttr('required');
-    $('#otherField').removeAttr('data-error');
-  }
-});
-$("#seeAnotherField").trigger("change");
-
-</script> -->
