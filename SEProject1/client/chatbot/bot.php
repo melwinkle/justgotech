@@ -10,7 +10,11 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <body>
+<div style="font-size:70px;margin-left:-1200px;color:black">
+    <a href="../tracker/tracker.php">X</a>
+    </div>
     <div class="wrapper">
+    
         <div class="title">Simple Online Chatbot</div>
         <div class="form">
             <div class="bot-inbox inbox">
