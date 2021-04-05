@@ -36,7 +36,7 @@
 						<div class="form-header">
 							<h1>Book an appointment</h1>
 						</div>
-						<form method="POST" id="signup-form" class="signup-form" action="<?=$_SERVER['PHP_SELF'];?>">
+						<form method="POST" id="signup-form" class="signup-form" action= bookingverify.php>
 							<div class="row">
 								<div class="col-sm-6">
 									<div class="form-group">
@@ -81,7 +81,7 @@
 
 							<div class="form-group">
 								<span class="form-label">Insurance ID</span>
-								<input class="form-control" type="tel" name="InsurId" id="InsurId" placeholder="Enter your Insurance ID number" required>
+								<input class="form-control" type="number" name="InsurId" id="InsurId" placeholder="Enter your Insurance ID number" required>
 							</div>
 
 							<div class="form-group">
