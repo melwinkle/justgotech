@@ -14,7 +14,6 @@ if(!isset($_SESSION['username'])){
 }
 
 $username=$_SESSION['username'];
-
 $query="SELECT * from customer where username='$username'";
 $result=mysqli_query($conn,$query);
 $row=mysqli_fetch_assoc($result);
@@ -42,7 +41,6 @@ $doctor=$raw['DocID'];
 $quey="INSERT INTO booking(Appointment,Department,Reason,Insurance,Insurance_Name,Insurance_ID,Doctor,ApTime,Person,PatientID) VALUES ('$apdate','$dept','$reason','$insure','$inname','$inid','$doctor','$time','$person','$PatientID')";
 $resut=mysqli_query($conn,$quey);
 
-
 if($resut){
 
     header("Location: tracker.php");
@@ -50,7 +48,6 @@ if($resut){
 else{
   mysqli_error($conn);
 }
-
 
 ?>
 <!DOCTYPE html>
@@ -87,16 +84,14 @@ else{
    
     <a href="../account/logout.php">Log Out</a>
   </div>
-  
-  
+   
   <div class="navb"id="main">
     <span style="font-size:30px;cursor:pointer" onclick="openNav()"><img style="width:10%" src="/justgotech/SEProject1/images/justgo.png" alt="justgotech"> </span>
     
     <span style="font-size:20px;cursor:pointer; float:right; margin-right: -32%" onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:10%" src="/justgotech/SEProject1/images/stethoscope.png" alt="profile"> </span>
   
   </div>
-  
-        <div class="appform">
+      <div class="appform">
             <section class="signup">
 
                 <div class="container">
@@ -104,7 +99,6 @@ else{
                         <form method="POST" action="<?php echo $_SERVER['PHP_SELF'] ?>" id="signup-form" class="signup-form">
                             <h2 class="form-title">Appointment Form</h2>
                             <h4 class="error">Fields with * are required </h4>
-
 
                             <div class="form-group">
                                 <label class="header">Patient <span class ="error">*</span></label>		
@@ -193,7 +187,7 @@ else{
       } 
     }
   ?>	
-                        </div>
+                      </div>
 
                         <!--if the user clicks yes, input the name of the insurance and the ID -->
 
@@ -208,7 +202,7 @@ else{
                         </div>
                         
                         
-                        <!--Optional if the user has a file to upload-->
+                      <!--Optional if the user has a file to upload-->
                        <div class="insurance">
                             <form class="form-group">
                                 <label for="myfile">Select image of insurance</label>
@@ -272,7 +266,6 @@ else{
                             
                         </div>
                             
-
                           <div>
                           <button  class="btn btn-primary btn-lg"style='background: rgb(23, 79, 182); color:white;margin-top: 10px;margin-left:25%;width:50%' name="submit" type="submit" >Book Now</buttom>
                         </div>
