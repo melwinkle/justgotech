@@ -1,4 +1,4 @@
-<!-- Created By CodingNepal -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,8 +10,8 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <body>
-<div style="font-size:70px;margin-left:-1200px;color:black">
-    <a href="../tracker/tracker.php">X</a>
+<div style="margin-left:-800px;">
+    <a href="../tracker/tracker.php"><img style="width:15%"src="../images/close.png" alt=""></a>
     </div>
     <div class="wrapper">
     
@@ -23,6 +23,7 @@
                 </div>
                 <div class="msg-header">
                     <p>Hello there, how can I help you?</p>
+                  
                 </div>
             </div>
         </div>
@@ -42,15 +43,20 @@
                 $(".form").append($msg);
                 $("#data").val('');
                 
-                // start ajax code
+        
                 $.ajax({
                     url: 'message.php',
                     type: 'POST',
                     data: 'text='+$value,
                     success: function(result){
                         $replay = '<div class="bot-inbox inbox"><div class="icon"><i class="fas fa-user"></i></div><div class="msg-header"><p>'+ result +'</p></div></div>';
+                        if($value=="TT"){
+                            $replay = '<div class="bot-inbox inbox"><div class="icon"><i class="fas fa-user"></i></div><div class="msg-header"><p>'+ result +'</p></div></div></br><div><a href="../screening/covid/covid.php"><button style="color:#007bff;background:white;width:170px;height:40px;font-size:15px">TAKE TEST</button></a></div>';
+                }
+                        if($value=="VR"){
+                            $replay = '<div class="bot-inbox inbox"><div class="icon"><i class="fas fa-user"></i></div><div class="msg-header"><p>'+ result +'</p></div></div></br><div><a href="../screening/results.php"><button style="color:#007bff;background:white;width:170px;height:40px;font-size:15px">VIEW MORE</button></a></div>';
+                }
                         $(".form").append($replay);
-                        // when chat goes down the scroll bar automatically comes to the bottom
                         $(".form").scrollTop($(".form")[0].scrollHeight);
                     }
                 });
