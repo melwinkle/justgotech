@@ -57,7 +57,7 @@ $countp=0;
   <a href="../account/accountinfo.php">Account Info</a>
   <a href="../tracker/tracker.php">Tracker</a>
   <a href="../screening/covid/covid.php">Virtual Screening</a>
-  <a href="../booking/Userbooking.php">Consultation</a>
+  <a href="../booking2/booking.php">Consultation</a>
 
  
   <a href="../account/logout.php">Log Out</a>

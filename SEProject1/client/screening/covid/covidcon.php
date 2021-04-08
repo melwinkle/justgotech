@@ -47,7 +47,7 @@ if(isset($_GET["pre"])){
   <a href="/justgotech/SEProject1/client/account/accountinfo.php">Account Info</a>
   <a href="/justgotech/SEProject1/client/tracker/tracker.php">Tracker</a>
   <a href="/justgotech/SEProject1/client/screening/covid/covid.php">Virtual Screening</a>
-  <a href="/justgotech/SEProject1/client/booking/Userbooking.php">Consultation</a>
+  <a href="../booking2/booking.php">Consultation</a>
 
  
   <a href="/justgotech/SEProject1/client/account/logout.php">Log Out</a>
