@@ -42,7 +42,7 @@
   <a href="../account/accountinfo.php">Account Info</a>
   <a href="../tracker/tracker.php">Tracker</a>
   <a href="../screening/covid/covid.php">Virtual Screening</a>
-  <a href="../booking/Userbooking.php">Consultation</a>
+  <a href="../booking2/booking.php">Consultation</a>
  
   <a href="../account/logout.php">Log Out</a>
 </div>
@@ -63,48 +63,48 @@
     Account Information
     </h2><br>
 
-    <form class="accountinfo" >
+    <form class="accountinfo" action="edit.php" method="post">
 <div class="form-group">
                                 <label class="header">First Name </label><br>
-                                <input style="width:90%" type="text" value="<?php echo $row['firstname']?>" >
+                                <input style="width:90%" type="text" name="fname" value="<?php echo $row['firstname']?>" >
                             </div>
 
                             <div class="form-group">
                                 <label class="header">Last Name </label><br>
-                                <input style="width:90%" type="text" value="<?php echo $row['lastname']?>">
+                                <input style="width:90%" type="text"  name="lname" value="<?php echo $row['lastname']?>">
                                 
                             </div>
 
                             <div class="form-group">
                                 <label class="header">Email </label><br>
-                                <input style="width:90%" type="text"value="<?php echo $row['email']?>" >
+                                <input style="width:90%" type="text" name="email" value="<?php echo $row['email']?>" readonly>
                             </div>
                             
                             <div class="form-group">
                                 <label class="header">Gender </label><br>
-                                <input style="width:90%" type="text"  value="<?php echo $row['gender']?>" >
+                                <input style="width:90%" type="text" name="gender" value="<?php echo $row['gender']?>" >
 
                              
                             </div>
 
                             <div class="form-group">
                                 <label class="header">Date of birth </label><br>
-                                <input  style="width:90%" type="text" value="<?php echo $row['dob']?>" >
+                                <input  style="width:90%" type="text"  name="dob" value="<?php echo $row['dob']?>" >
                             </div>
 
                             
                             <div class="form-group">	
                                 <label class="header">Phone Number </label><br>
-                                <input style="width:90%" type="text"  value="<?php echo $row['phonenumber']?>"  >
+                                <input style="width:90%" type="text"   name="phone" value="<?php echo $row['phonenumber']?>"  >
                             </div>
                             
                             <div class="form-group">  
                                 <label class="header">Nationality </label><br>
                                
-                               <input style="width:90%" type="text" value="<?php echo $row['nationality']?>">
+                               <input style="width:90%" type="text" name="nationality" value="<?php echo $row['nationality']?>">
                             </div>
 
-                            <a href="" class="btn btn-primary btn-lg" style="background: rgb(23, 79, 182); width: 50%;color:white; margin-left:15%">Edit</a>
+                            <button  type="submit" class="btn btn-primary btn-lg" style="background: rgb(23, 79, 182); width: 50%;color:white; margin-left:15%" name="edit">Edit</button>
 
 </form>
     
