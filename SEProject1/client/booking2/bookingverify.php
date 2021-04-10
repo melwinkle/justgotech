@@ -4,7 +4,7 @@
  * This file is used to verify the booking details  of the user. It includes the  database file and the form in booking.php 
  * If the user input is correctly filled in, it inserts it into the database.
  */
-session_start();
+// session_start();
 
 if(!isset($_SESSION['username'])){
   echo "<script>location.href = './logout.php'</script>";
@@ -27,7 +27,7 @@ if(!isset($_SESSION['username'])){
     //     die("<script>alert('Connection To Database Failed')</script>");
     // }
 
-    $username=$_SESSION['username'];
+$username=$_SESSION['username'];
 $query="SELECT * from customer where username='$username'";
 $result=mysqli_query($conn,$query);
 $row=mysqli_fetch_assoc($result);
@@ -45,24 +45,20 @@ $PatientID=$row['PatientID'];
         $time = $_POST['apptime'];
         $dept = $_POST['departm'];
 
-
-
         $quer="SELECT DocID from Doctor where DocFname='$doctor'";
         $resu=mysqli_query($conn,$quer);
         $raw=mysqli_fetch_assoc($resu);
 
-
         $doct=$raw['DocID'];
         $quey="INSERT INTO booking(Appointment,Department,Reason,Insurance,Insurance_Name,Insurance_ID,Doctor,ApTime,Person,PatientID) VALUES ('$apdate','$dept','$reason','$insure','$inname','$inid','$doct','$time','$person','$PatientID')";
         $resut=mysqli_query($conn,$quey);
-
         if($resut){
-
             header("Location: ../booking2/viewbooking.php");
         }
         else{
         mysqli_error($conn);
         }
+
 
         // $sql = "INSERT INTO `booking`(`Appointment`, `Department`, `Reason`, `Insurance`, `Insurance_Name`, `Insurance_ID`, `Doctor`, `ApTime`, `Person`, `PatientID`)
         //  VALUES ('2021-04-15' ,'Pediatrics' ,'sdfcc' ,'Yes' ,'ergcggccc' ,'445452' ,'Dr.Rita' ,'18:08' ,'Self', '1')";
