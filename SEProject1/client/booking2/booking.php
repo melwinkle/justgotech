@@ -152,7 +152,7 @@ $row=mysqli_fetch_assoc($result);
 
        for($i = 0; $i < count($results); $i++) {
            echo "  
-           <input class='healthinsurance' type='radio' id='$results[$i]' name='healthinsurance' value='$results[$i]' required>
+           <option id='$results[$i]' name='healthinsurance' value='$results[$i]' </option>
            <label for='$results[$i]'>$results[$i]</label>
            <br>";
       } 
@@ -168,12 +168,12 @@ $row=mysqli_fetch_assoc($result);
 							                                           
 							<div class="form-group">
 								<span class="form-label">Insurance Name</span>
-								<input class="form-control" type="text" name="Insurname" id="Insurname" placeholder="Enter your Insurance Name" required>
+								<input class="form-control" type="text" name="Insurname" id="Insurname" placeholder="Enter your Insurance Name" >
 							</div>
 
 							<div class="form-group">
 								<span class="form-label">Insurance ID</span>
-								<input class="form-control" type="number" name="InsurId" id="InsurId" placeholder="Enter your Insurance ID number" required>
+								<input class="form-control" type="number" name="InsurId" id="InsurId" placeholder="Enter your Insurance ID number" >
 							</div>
 
 							<div class="form-group">
