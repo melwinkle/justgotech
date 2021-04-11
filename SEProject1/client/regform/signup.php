@@ -53,6 +53,8 @@
 				<input id="email" name="email" type="text" placeholder="Email Address" class="form-control" required>
 				<i class="zmdi zmdi-email"></i>
 			</div>
+			<div id="email-error-msg" style="margin-bottom: 10px; color: red"></div>
+
 
 			<div class="form-wrapper">
 				<select name="gender" id="" class="form-control" required>
@@ -103,11 +105,15 @@
 				<input id='password' name="password" minlength="6" maxlength="15" type="password" placeholder="Password" class="form-control" required>
 				<i class="zmdi zmdi-lock"></i>
 			</div>
+			<div id="password-error-msg" style="margin-bottom: 10px; color: red></div">
+
 
 			<div class="form-wrapper">
 				<input id='repassword' name="repassword" type="password" placeholder="Confirm Password" class="form-control">
 				<i class="zmdi zmdi-lock"></i>
 			</div>
+			<div id="repassword-error-msg" style="margin-bottom: 10px; color: red; "></div>
+
 
 			<button name="submit" type="submit">Register
 				<i class="zmdi zmdi-arrow-right"></i>

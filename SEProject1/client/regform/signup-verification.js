@@ -9,7 +9,7 @@ let email_regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 /**
  * Password Regex
  * Password matching expression. 
- * Password must be at least 4 characters, no more than 8 characters.
+ * Password must be at least 4 characters, no more than 15 characters.
  * Must include at least one upper case letter, one lower case letter, and one numeric digit.
  */
 let password_regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/
@@ -27,11 +27,6 @@ const extractval = (id) => document.querySelector(`#${id}`).value;
 
 const form = document.querySelector("#form");
 
-// form.addEventListener("submit", (e) => {
-//   e.preventDefault();
-// });
-
-
 const validate = () => {
   const email = extractval("email");
   const password = extractval("password");
@@ -39,26 +34,32 @@ const validate = () => {
 
   if (email_regex.test(email) == true) {
     email_valid = true;
-    console.log("email good");
+    $('#email').css('border-bottom', '1px solid black');
+    $('#email-error-msg').html('');
   } else {
     email_valid = false;
-    console.log("email bad");
+    $('#email').css('border-bottom', '1px solid red');
+    $('#email-error-msg').html('Email must have its top level domain is between 2 and 4 characters');
   }
 
   if(password_regex.test(password) == true) {
     password_valid = true;
-    console.log("password good");
+    $('#password').css('border-bottom', '1px solid black');
+    $('#password-error-msg').html('');
   }else {
       password_valid = false;
-      console.log("password bad");
+      $('#password').css('border-bottom', '1px solid red');
+      $('#password-error-msg').html('Password must be between 4 and 15 characters with at least one capital letter, digit and small case character');
   }
 
   if (password === repassword) {
     repassword_valid = true;
-    console.log("repassword good");
+    $('#repassword').css('border-bottom', '1px solid black');
+    $('#repassword-error-msg').html('');
   } else {
     repassword_valid = false;
-    console.log("repassword bad");
+    $('#repassword').css('border-bottom', '1px solid red');
+    $('#repassword-error-msg').html('Password Mismatch');
   }
 
   if (password_valid && repassword_valid && email_valid) {
