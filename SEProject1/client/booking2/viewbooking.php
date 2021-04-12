@@ -12,9 +12,16 @@
 
             <?php
                 // Include database file
+                session_start();
                 require_once('../../database/connection.php'); 
+                $username=$_SESSION['username'];
+$query="SELECT * from customer where username='$username'";
+$result=mysqli_query($conn,$query);
+$row=mysqli_fetch_assoc($result);
+
+$PatientID=$row['PatientID'];
                     
-                    $sql = "SELECT * FROM booking";
+                    $sql = "SELECT * FROM booking where PatientID=$PatientID";
                     if($result = mysqli_query($conn, $sql)){
                         if(mysqli_num_rows($result) > 0){
                             //associative array
