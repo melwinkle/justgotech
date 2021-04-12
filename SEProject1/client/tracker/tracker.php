@@ -146,7 +146,7 @@ $countp=0;
 
     
 <br>
-    <a href="../screening/covid/" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182)">View all</a>
+    <a href="../booking2/viewbooking.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182)">View all</a>
   </div>
 </div>
 
