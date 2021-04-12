@@ -47,6 +47,7 @@ class Person extends Database{
     }
 
 
+    
     public function getsql($sql){
         $query = $this->connection->query($sql);
         if($query->num_rows > 0){
