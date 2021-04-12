@@ -10,7 +10,7 @@ if(!isset($_SESSION['username'])){
 }
 
 $username=$_SESSION['username'];
-$userID = $_SESSION['patientID'];
+
 
 $query="SELECT * from customer where username='$username'";
 $result=mysqli_query($conn,$query);
