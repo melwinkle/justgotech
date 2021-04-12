@@ -1,8 +1,6 @@
 <!-- This is the OOP class for the unit testing -->
 
-
 <?php
-
 
 include_once('Database.php');
 class User extends Database{
