@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 08, 2021 at 01:13 AM
+-- Generation Time: Apr 13, 2021 at 12:24 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -12,8 +12,6 @@ SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-
-create database justgotech;
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -38,12 +36,21 @@ CREATE TABLE `booking` (
   `Insurance` enum('Yes','No') NOT NULL,
   `Insurance_Name` varchar(255) DEFAULT NULL,
   `Insurance_ID` varchar(255) DEFAULT NULL,
-  `Image` varchar(255) DEFAULT NULL,
   `Doctor` int(11) NOT NULL,
   `ApTime` varchar(255) NOT NULL,
   `Person` enum('Self','Other') NOT NULL,
-  `PatientID` int(10) NOT NULL
+  `PatientID` int(10) NOT NULL,
+  `STATUS` enum('BOOKED','PENDING','COMPLETED','') NOT NULL DEFAULT 'PENDING'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `booking`
+--
+
+INSERT INTO `booking` (`BID`, `Appointment`, `Department`, `Reason`, `Insurance`, `Insurance_Name`, `Insurance_ID`, `Doctor`, `ApTime`, `Person`, `PatientID`, `STATUS`) VALUES
+(1, '2021-04-10', 'Specialist', 'Sick', 'No', '', '', 1, '10:00', 'Self', 3, 'PENDING'),
+(2, '2021-04-10', 'Surgery', 'sick', 'No', '', '', 1, '10:00', 'Self', 3, 'PENDING'),
+(3, '2021-04-10', 'Dentistry', 'My teeth', 'Yes', 'Medifem', '1243', 1, '12:00', 'Self', 4, 'PENDING');
 
 -- --------------------------------------------------------
 
@@ -64,13 +71,15 @@ CREATE TABLE `chatbot` (
 INSERT INTO `chatbot` (`MID`, `Queries`, `Replies`) VALUES
 (1, 'Hello|Hi|Hy|Hey|hello|hi|hy|hey', 'Hi there,'),
 (2, 'What is your name|What is your name?|What\'s your name', 'My name is my JustGo bot!'),
-(3, 'help|services|MM', 'Here is the Main Menu:\r\n1. General Screening(GS)\r\n2. Pharmacy(P)\r\n3. Consultation(C)\r\n4. About JustGo Tech Healthcare(AJ)\r\n\r\nPlease reply with the abbreviations in bracket'),
-(4, 'GS|gs|General Screening|general screening', 'General Screening Menu\r\n1.View Reports(VR)\r\n2.Submit Report(SR)\r\n3.Take a test(TT)\r\n0.Main Menu(MM)'),
-(5, 'P|p|pharmacy|Pharmacy|PHARMACY', 'Pharmacy Menu\r\n1.Search for drug(SD)\r\n2.View Page(VP)\r\n0.Main Menu(MM)'),
-(6, 'C|c|consultation', 'Consulation Menu:\r\n1.Book Appointment\r\n2.Manaage Bookings\r\n0.Main Menu'),
+(3, 'help|services|MM|mm|menu|main', 'Here is the Main Menu:\r\n1. General Screening(GS)\r\n2. Pharmacy(PT)\r\n3. Consultation(C)\r\n4. About JustGo Tech Healthcare(AJ)\r\n\r\nPlease reply with the abbreviations in bracket'),
+(4, 'GS|gs|General Screening|general screening', 'General Screening Menu\r\n1.View Reports(VR)\r\n2.Take a test(TT)                              3.About General Screening(AGS)\r\n0.Main Menu(MM)'),
+(5, 'PT|pt|pharmacy|Pharmacy|PHARMACY', 'Pharmacy Menu\r\n1.Search for drug(SD)\r\n2.View Page(VP)\r\n3.About Pharmacy(AP)\r\n0.Main Menu(MM)'),
+(6, 'C|c|consultation', 'Consulation Menu:\r\n1.Book Appointment\r\n2.Manage Bookings\r\n0.Main Menu'),
 (7, 'AJ|aj|About|about', 'JustGo Tech Digital Healthcare is tailored to provide healthcare to all social groups. '),
 (8, 'TT|Test|test|tt', 'Use the link below to access the test. All the best!!'),
-(9, 'VR|vr|view reports|View reports|', 'Find your statistics and analysis for your tests. To view more, click the link below.');
+(9, 'VR|vr|view reports|View reports|', 'Find your statistics and analysis for your tests. To view more, click the link below.'),
+(10, 'AGS', 'The general screening is tailored to help you to analyze your symptoms for a particular disease and give an on-the spot diagnosis. The model will soon be powered by AI model.'),
+(11, 'AP', 'The pharmacy service is tailored to help you find the nearest partner pharmacy with the best price for a drug you are searching for.The component is currently under review.');
 
 -- --------------------------------------------------------
 
@@ -152,7 +161,8 @@ CREATE TABLE `customer` (
 INSERT INTO `customer` (`PatientID`, `firstname`, `lastname`, `username`, `email`, `gender`, `dob`, `nationality`, `phonenumber`, `userpassword`) VALUES
 (1, 'Mark', 'Zoiku', 'mzoiku', 'jzoiku@gmail.com', 'Male', '2021-02-28', 'Ghana', '0555777803', 'a7f57ac5f16536d452fc407ee22dee1c'),
 (2, 'Aileen', 'Akpalu', 'aileenlisa', 'adzo.lisa@gmail.com', 'Female', '2000-03-20', 'Ghana', '0245673212', 'a452d4423a20c686a13ce3131a7ae7ef'),
-(3, 'Mel', 'Zay', 'melzy', 'melzay@gmail.com', 'Female', '1985-04-09', 'Ghana', '0245673212', 'de06a11cbec10d19a26d21bf64cfcf8e');
+(3, 'Mel', 'Zayn', 'melzy', 'melzay@gmail.com', 'Female', '1985-04-09', 'Ghana', '0245673212', 'de06a11cbec10d19a26d21bf64cfcf8e'),
+(4, 'Pete', 'Rug', 'prug', 'peterug@gmail.com', 'Male', '1996-04-10', 'Ghana', '0245673234', '4da30385ca2ecc83cb90262860ba62fc');
 
 -- --------------------------------------------------------
 
@@ -180,7 +190,9 @@ CREATE TABLE `diseases` (
 
 INSERT INTO `diseases` (`ResponseID`, `age_bracket`, `symptom`, `testing`, `disease_id`, `PatientID`, `Region`, `precon`, `ConID`, `Time`, `Status`) VALUES
 (7, 'Between 18-55', 'Sore Throat', 'Tested but result was negative', 'SARS-COV2', 2, 'Greater Accra Region', 'Anaemia', 3, '2021-02-28 22:35:54', 'Exposed'),
-(8, 'Between 18-55', 'None of the above', 'Not tested', 'SARS-COV2', 2, 'Greater Accra Region', 'None of the above', 5, '2021-02-28 22:45:53', 'Not exposed');
+(8, 'Between 18-55', 'None of the above', 'Not tested', 'SARS-COV2', 2, 'Greater Accra Region', 'None of the above', 5, '2021-02-28 22:45:53', 'Not exposed'),
+(9, 'Between 18-55', 'Fatigue', 'Tested but result was negative', 'SARS-COV2', 3, 'Central Region', 'None of the above', 5, '2021-04-08 23:33:34', 'Not Likely Exposed'),
+(10, 'Between 18-55', 'None of the above', 'Tested and awaiting results', 'SARS-COV2', 4, 'Ashanti Region', 'None of the above', 4, '2021-04-10 11:14:50', 'Not Likely Exposed');
 
 -- --------------------------------------------------------
 
@@ -402,13 +414,13 @@ ALTER TABLE `testing_centre`
 -- AUTO_INCREMENT for table `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `BID` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `BID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `chatbot`
 --
 ALTER TABLE `chatbot`
-  MODIFY `MID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `MID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `contact`
@@ -426,13 +438,13 @@ ALTER TABLE `contactus`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `PatientID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `PatientID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `diseases`
 --
 ALTER TABLE `diseases`
-  MODIFY `ResponseID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `ResponseID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `Doctor`
