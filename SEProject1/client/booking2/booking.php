@@ -5,15 +5,16 @@ require_once("../../database/connection.php");
 session_start();
 
 if(!isset($_SESSION['username'])){
-  echo "<script>location.href = '../account/logout.php'</script>";
+	echo "<script>location.href = 'viewbooking.php'</script>";
+  //echo "<script>location.href = '../account/logout.php'</script>";
 }
 
 $username=$_SESSION['username'];
+$userID = $_SESSION['patientID'];
 
 $query="SELECT * from customer where username='$username'";
 $result=mysqli_query($conn,$query);
 $row=mysqli_fetch_assoc($result);
-
 ?>
 
 <!DOCTYPE html>
@@ -83,27 +84,28 @@ $row=mysqli_fetch_assoc($result);
 										<span class="form-label">Patient</span>
 											<select class="form-control"  name="patient" id="patient" required>
 												<option>Select</option>
+
 												<?php 
-    $sql="SELECT COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'booking' AND COLUMN_NAME = 'Person' ";
-    $result=mysqli_query($conn,$sql);
-    while($row = mysqli_fetch_array($result)) {
-       $type=$row['COLUMN_TYPE'];
+													$sql="SELECT COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'booking' AND COLUMN_NAME = 'Person' ";
+													$result=mysqli_query($conn,$sql);
+													while($row = mysqli_fetch_array($result)) {
+													$type=$row['COLUMN_TYPE'];
 
-       $output = str_replace("enum('", "", $type);
+													$output = str_replace("enum('", "", $type);
 
-// $output will now be: Equipment','Set','Show
-       $output = str_replace("')", "", $output);
+												// $output will now be: Equipment','Set','Show
+													$output = str_replace("')", "", $output);
 
-       // array $results contains the ENUM values
-       $results = explode("','", $output);
+													// array $results contains the ENUM values
+													$results = explode("','", $output);
 
-       for($i = 0; $i < count($results); $i++) {
-           echo "  <option name='person'value='$results[$i]'>$results[$i]</option><br>";
-       } 
-    }
-    ?>
-											</select>
-									</div>
+													for($i = 0; $i < count($results); $i++) {
+														echo "  <option name='person'value='$results[$i]'>$results[$i]</option><br>";
+													} 
+													}
+												?>
+								</select>
+								</div>
 								</div>
 						<div class="col-sm-6">
 							<div class="form-group">
@@ -135,29 +137,24 @@ $row=mysqli_fetch_assoc($result);
 							<div class="form-group">
 								<span class="form-label">Health Insurance</span>
 								<select class="form-control" name="healthIn" id="healthIn" required>
-									<option>Select</option>
-									<?php 
-                                      $sql="SELECT COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'booking' AND COLUMN_NAME = 'Insurance' ";
+					<?php 
+                                     $sql="SELECT COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'booking' AND COLUMN_NAME = 'Insurance' ";
                                      $result=mysqli_query($conn,$sql);
                                       while($row = mysqli_fetch_array($result)) {
                                         $type=$row['COLUMN_TYPE'];
 
                                               $output = str_replace("enum('", "", $type);
+                                              $output = str_replace("')", "", $output);
+                                              $results = explode("','", $output);
 
-
-                                            $output = str_replace("')", "", $output);
-
-
-                                          $results = explode("','", $output);
-
-       for($i = 0; $i < count($results); $i++) {
-           echo "  
-           <option id='$results[$i]' name='healthinsurance' value='$results[$i]' </option>
-           <label for='$results[$i]'>$results[$i]</label>
-           <br>";
-      } 
-    }
-  ?>	
+						for($i = 0; $i < count($results); $i++) {
+							echo "  
+							<option id='$results[$i]' name='healthinsurance' value='$results[$i]' </option>
+							<label for='$results[$i]'>$results[$i]</label>
+							<br>";
+						} 
+						}
+ 				?>	
 								</select>
 							</div>
 
@@ -226,13 +223,12 @@ $row=mysqli_fetch_assoc($result);
        } 
     }
     ?>
-										</select>
-									<span class="select-arrow"></span>
-								  </div>
-						    	</div>
+				</select>
+					<span class="select-arrow"></span>
+					  </div>
+						</div>
                         	</div>
-							
-
+					
 							<div class="form-btn">
 							<input type="submit" name="submit" id="submit" class="submit-btn" value="Book Now"/>
 								<!-- <button class="submit-btn"  name="submit" id="submit">Book Now</button> -->
