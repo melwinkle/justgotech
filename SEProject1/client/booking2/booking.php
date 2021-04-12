@@ -254,45 +254,6 @@ function closeNav() {
   document.getElementById("main").style.marginLeft= "0";
 }
 </script>
-</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
-
+</body>
 </html>
 
-<?php
-//KINDLY IGNORE THIS PART 
-
-// require_once('connection.php');
-
-// if(isset($_POST['submit'])){
-//         echo "fixing the buygs 3333333333";
-//         $patient = $_POST['patient'];
-//         $doctor = $_POST['doctor'];
-//         $healthInsu = $_POST['healthIn'];
-//         $InName = $_POST['Insurname'];
-//         $InID = $_POST['InsurId'];
-//         $BookingR = $_POST['bookreason'];
-//         $Appdate = $_POST['appDate'];
-//         $Apptime = $_POST['apptime'];
-//         $Departm = $_POST['departm'];
-//         echo "fixing the buygs 4444444444";
- 
-//         //the sql inserts into the database columns
-//         $sql = "INSERT INTO booking (Appointment,Department,Reason,Insurance,Insurance_Name,Insurance_ID,Doctor,ApTime, Person, PatientID) 
-//          VALUES('{$Appdate}', '{$Departm}', '{$BookingR}', '{$healthInsu}', '{$InName}', '{$InID}', '{$doctor}', '{$Apptime}', '{$patient}', '1')";
-//             echo "fixing the buygs 4.555555555555555";
-//             //$db = openConnection();
-//             echo "fixing the buygs 55555";
-//             $results = mysqli_query($conn, $sql); 
-//             if ($results) {
-//                 header("Location: ../client/tracker/tracker.php");
-//                 echo "record inserted";
-//             }
-            
-//             else {
-//                echo "fixing the buygs 777777";
-//                echo "connection failed";
-               
-//             }
-//         }
-//         mysqli_close($conn);
-    ?>
