@@ -8,11 +8,12 @@ final class Testing extends TestCase
     public function testSuccess(): void
     {
         $user = new Person();
-        $username='Byron';
-        $password='ddd1123';
+        $username='kweks';
+        $password='french1';
         $patientID =7;
+        $mess = "Hi";
 
-        // $sql = "SELECT * FROM customer WHERE username  = $username";
+        $sql = "SELECT * FROM customer WHERE username  = $username";
         // $sql1 = "SELECT Egit mployeeFname FROM Employee WHERE EmployeeID = '$username'";
         // $result="INSERT INTO Customer (CustomerFName, CustomerLName, CustomerGender, CustomerTelephone, CustomerAddress, Status, Diagnosis, LastCheckupDate) VALUES ('Rachel', 'Asamoah', 'female', '0246055185', 'Teshie', 'Healthy', 'Head','2020-11-24')";
         // $department="SELECT DepartmentName from department";
@@ -23,11 +24,16 @@ final class Testing extends TestCase
         //check if booking works
         $this->assertTrue($user->book_appoint($patientID));
         
-    //     //checks if the sql was implemented succesfuuly
-    //     $this->assertTrue($user->getsql($sql));
-    //     // returns the first name of the user
-    //     $this->assertIsString($user->getname($sqls));
-    //     // checks if the return statement contains the word successful
+        //checks if the sql was implemented succesfuuly
+        $this->assertTrue($user->getsql($sql));
+ 
+        //returns the first name of the user
+        $this->assertIsString($user->getname($sql));
+
+        //checks if the chatbot can respond to the user's messages
+        $this->assertIsString($user->check_chatbot($mess));
+
+    //    // checks if the return statement contains the word successful
     //     $this->assertStringContainsString('succesful',$user->addcustomer($result));
     //     // checks if department 4 is in the array
     //     $this->assertContains(4,[1,2,3,4]);
