@@ -19,13 +19,17 @@ if(isset($_POST['edit'])){
     $phonenumber=$_POST['phone'];
     
 
-    
+    $id="SELECT PatientID from customer where username='$username'";
+    $idl=mysqli_query($conn,$id);
+    $idt=mysqli_fetch_assoc($idl);
+    $pid=$idt['PatientID'];
                 
-    $query = "UPDATE set firstname='$firstname',lastname='$lastname',gender='$gender',dob='$dob',nationality='$nationality',phonenumber='$phonenumber' WHERE username='$username'";
+    $query = "UPDATE customer SET firstname='$firstname',lastname='$lastname',gender='$gender',dob='$dob',nationality='$nationality',phonenumber='$phonenumber' WHERE PatientID=$pid";
     $sql = mysqli_query($conn,$query);
 
     if(!$sql){
-        echo "Error eu"; 
+        mysqli_error($conn);
+        echo $pid; 
     }
     else{
 

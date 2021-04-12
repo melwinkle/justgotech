@@ -4,12 +4,12 @@
  * This file is used to verify the booking details  of the user. It includes the  database file and the form in booking.php 
  * If the user input is correctly filled in, it inserts it into the database.
  */
-// session_start();
+session_start();
 
 if(!isset($_SESSION['username'])){
   echo "<script>location.href = './logout.php'</script>";
 }
-    require_once('booking.php');
+   
     require_once('../../database/connection.php'); 
 
 $username=$_SESSION['username'];

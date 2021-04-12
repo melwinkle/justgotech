@@ -19,23 +19,21 @@
 
 		<!-- STYLE CSS -->
 		<link rel="stylesheet" href="css/style.css">
-		
+
+		<script src="./login.js"></script>
 	</head>
 
 	<body>
-		
 		<div class="wrapper" style="background-image: url('images/bg-registration-form-1.jpg');">
 			
 			<div class="inner">
 				<div class="image-holder">
 					<h3>       </h3>
 					<img src="images/registration-form-1.jpg" alt="">
-					
 				</div>
 				<div >
 			<a href="../landingpage/index.html">HOME</a>
 		</div>
-				
 				<form method="post" action="login_auth.php">
 					<h3>Sign In</h3>	
 					<div class="form-wrapper">

@@ -66,18 +66,18 @@
     <form class="accountinfo" action="edit.php" method="post">
 <div class="form-group">
                                 <label class="header">First Name </label><br>
-                                <input style="width:90%" type="text" name="fname" value="<?php echo $row['firstname']?>" >
+                                <input id="firstname" style="width:90%" type="text" name="fname" value="<?php echo $row['firstname']?>" >
                             </div>
 
                             <div class="form-group">
                                 <label class="header">Last Name </label><br>
-                                <input style="width:90%" type="text"  name="lname" value="<?php echo $row['lastname']?>">
+                                <input id="lastname" style="width:90%" type="text"  name="lname" value="<?php echo $row['lastname']?>">
                                 
                             </div>
 
                             <div class="form-group">
                                 <label class="header">Email </label><br>
-                                <input style="width:90%" type="text" name="email" value="<?php echo $row['email']?>" readonly>
+                                <input id="email" style="width:90%" type="text" name="email" value="<?php echo $row['email']?>" readonly>
                             </div>
                             
                             <div class="form-group">
@@ -95,7 +95,7 @@
                             
                             <div class="form-group">	
                                 <label class="header">Phone Number </label><br>
-                                <input style="width:90%" type="text"   name="phone" value="<?php echo $row['phonenumber']?>"  >
+                                <input id="telephone" style="width:90%" type="text"   name="phone" value="<?php echo $row['phonenumber']?>"  >
                             </div>
                             
                             <div class="form-group">  
