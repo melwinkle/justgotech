@@ -164,7 +164,7 @@ $countp=0;
     ONLINE PHARMACY
     </h2><br>
     
-    <h4>UPDATE SOON</h4>
+    <h4>UPDATED SOON</h4>
 <br>
     <a href="../screening/covid/" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182)">View all</a>
   </div>
