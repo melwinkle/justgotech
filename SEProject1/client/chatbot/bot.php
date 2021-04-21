@@ -53,14 +53,14 @@
                         if(($value=="TT")||($value=="tt")){
                             $replay = '<div class="bot-inbox inbox"><div class="icon"><i class="fas fa-user"></i></div><div class="msg-header"><p>'+ result +'</p></div></div></br><div><a href="../screening/covid/covid.php"><button style="color:#007bff;background:white;width:170px;height:40px;font-size:15px;margin-left:80px">TAKE TEST</button></a></div>';
                 }
-                        if(($value=="VR")||($value="tt")){
-                            $replay = '<div class="bot-inbox inbox"><div class="icon"><i class="fas fa-user"></i></div><div class="msg-header"><p>'+ result +'</p></div></div></br><div><a href="../screening/results.php"><button style="color:#007bff;background:white;width:170px;height:40px;font-size:15px;margin-left:80px">VIEW MORE</button></a></div>';
+                        if($value=="VR"){
+                            $replay = '<div class="bot-inbox inbox"><div class="icon"><i class="fas fa-user"></i></div><div class="msg-header"><p>'+ result +'</p></div></div></br><div><a href="../screening/results.php"><button style="color:#007bff;background:white;width:170px;height:40px;font-size:15px">VIEW MORE</button></a></div>';
                 }
-                        if(($value=="BA")||($value="ba")){
-                            $replay = '<div class="bot-inbox inbox"><div class="icon"><i class="fas fa-user"></i></div><div class="msg-header"><p>'+ result +'</p></div></div></br><div><a href="../booking2/booking.php"><button style="color:#007bff;background:white;width:170px;height:40px;font-size:15px;margin-left:80px">VIEW MORE</button></a></div>';
+                        if($value=="BA"){
+                            $replay = '<div class="bot-inbox inbox"><div class="icon"><i class="fas fa-user"></i></div><div class="msg-header"><p>'+ result +'</p></div></div></br><div><a href="../booking2/booking.php"><button style="color:#007bff;background:white;width:170px;height:40px;font-size:15px">VIEW MORE</button></a></div>';
                 }
-                        if(($value=="MB")||($value=="mb")){
-                            $replay = '<div class="bot-inbox inbox"><div class="icon"><i class="fas fa-user"></i></div><div class="msg-header"><p>'+ result +'</p></div></div></br><div><a href="../booking2/viewbooking.php"><button style="color:#007bff;background:white;width:170px;height:40px;font-size:15px;margin-left:80px">VIEW MORE</button></a></div>';
+                        if($value=="MB"){
+                            $replay = '<div class="bot-inbox inbox"><div class="icon"><i class="fas fa-user"></i></div><div class="msg-header"><p>'+ result +'</p></div></div></br><div><a href="../booking2/viewbooking.php"><button style="color:#007bff;background:white;width:170px;height:40px;font-size:15px">VIEW MORE</button></a></div>';
                 }
                         $(".form").append($replay);
                         $(".form").scrollTop($(".form")[0].scrollHeight);
