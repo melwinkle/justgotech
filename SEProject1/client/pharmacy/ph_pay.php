@@ -1,3 +1,24 @@
+<?php 
+if(isset($_GET['ph'])){
+  $ph=$_GET['ph'];
+
+   }
+
+   if(isset($_GET['pr'])){
+    $pr=$_GET['pr'];
+  
+     }
+     if(isset($_GET['med'])){
+      $med=$_GET['med'];
+    
+       }
+       if(isset($_GET['loc'])){
+        $loc=$_GET['loc'];
+      
+         }
+
+
+?>
 <!-- Home page for covid testing -->
 <?php
 error_reporting(0);
@@ -42,7 +63,7 @@ $countp=0;
   href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.2.0/mdb.min.css"
   rel="stylesheet"
 />
-<link rel="stylesheet" href="covid.css">
+<link rel="stylesheet" href="pharm.css">
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="sweetalert2.all.min.js"></script>
@@ -68,108 +89,112 @@ $countp=0;
 <div class="navb"id="main">
   <span style="font-size:30px;cursor:pointer" onclick="openNav()"><img style="width:10%" src="../../images/justgo.png" alt="justgotech"> </span>
   
-  <span style="font-size:20px;cursor:pointer; float:right; margin-right: -32%" onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:10%" src="../../images/stethoscope.png" alt="profile"> </span>
-
+  <div style="float:right">
+ 
+ <span style="font-size:20px;cursor:pointer;margin-left:65% " onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:10%" src="../../images/stethoscope.png" alt="profile"> </span>
+ <button style="background:none;border:none"><img   src="https://img.icons8.com/fluent/48/4a90e2/fast-cart.png"/></button>
+ </div>
 </div>
 
 
-   
-<div class="test" >
-  <h5 class="card-header"></h5>
-  <div class="card-body" style="background:#ff9900;height:90%">
-  
-    <h2 class="card-title">
-    VIRTUAL SCREENING TESTS
-    </h2><br>
-    <ul>
-    <?php 
-        while($rownum=mysqli_fetch_assoc($resnum)){
+<div class="bcart" style="margin-left:400px;margin-top: 10px">
+ <div style="background:blue;color:white; width:60%;border-radius:10px 10px 0 0; height: 50px">
+  <h5 style="float:left;margin-left: 8px;margin-top: 15px;">Order#A123 Confirmed </h5>
 
-          ?>
-        <h4>TOTAL NUMBER OF TESTS: <?php echo $rownum['c']?></h4>
-  
-       
-        <h4> NO EXPOSURE:<?php 
-        
-          if($rownum['Status']=="Not exposed"||$rownum['Status']=="Not Likely Exposed"){
-            $count=$count +1;
-            $e=($count/$rownum['c'])*100;
-            echo $e."%";
-              }
-              else{
-                  echo "0%";
-  
-              }
-        
-        
-           
-            
-           
-            ?> </h4>
+ </div>
+
+
+<div class="tcart" style="width: 60%; border: 2px solid blue;border-radius:0 0 10px 10px">
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Product</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Price</th>
       
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row"><?php echo "<div>
+       <h5>".$med."</h5>
+    <h6>".$ph."</h6>
+    <p>12 strips in a box</p>
+    <p>".$loc."</p>
+</div>
+"; ?></th>
+      <td > 1</td>
+      <td>
+        <div style="color:blue"><h5>Ghc 20</h5>
+      </div>
+        
+      </td>
+    </tr>
+
+    <tr>
+      <th scope="row"><?php echo "<div>
+       <h5>".$med."</h5>
+    <h6>".$ph."</h6>
+    <p>12 strips in a box</p>
+    <p>".$loc."</p>
+</div>
+"; ?></th>
+      <td > 1</td>
+      <td>
+        <div style="color:blue"><h5>Ghc 20</h5>
+      </div>
+        
+      </td>
+    </tr>
+    
+  </tbody>
+
+  <tr>
+
+  <td colspan="4">
+    <div style="float:right">
+      <p>SubTotal: Ghc 20 </p>
+      <p>Tax: Ghc 2 </p>
+      <p>Delivery: Ghc 5 </p>
+      <p>Total: Ghc 27 </p>
+
+
+
+
+    </div>
+   </td>
+</tr>
+</table>
+</div>
+
+
+<div style="background:blue;color:white;border-radius:10px 10px 0 0;width: 60%;margin-top:20px;height: 40px;">
+       <h5 style="float:left;margin-left: 8px;margin-top: 15px;">Order Progress</h5>
+   </div>
+<div style="border:1px solid blue;border-radius:0 0 10px 10px; width: 60%;margin-top:-10px">
+   
+
+   <div class="progress" style="border-radius:5px;margin-left: 40px;width:90%;height: 15px;margin-top:10px">
+  <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
   
-        <h4>EXPOSURE:<?php 
-
-        if($rownum['Status']=="Exposed"||$rownum['Status']=="Likely Exposed"){
-            $countp=$countp +1;
-            $c=($countp/$rownum['c'])*100;
-            echo $c."%";
-            }
-            else{
-                echo "0%";
-            }
-          }
-            ?> </h4>
-    
-    </ul>
-   <br>
-
-
-<br>
-    <a href="../screening/results.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182)">View all</a>
-  </div>
 </div>
-
-
-<div class="test">
-  <h5 class="card-header"></h5>
-  <div class="card-body" style="background:skyblue;height:90%">
+<div>
+      <p><img src="https://img.icons8.com/material-outlined/24/26e07f/checked-2--v1.png"/>Awaiting confirmation from vendor</p>
+      <p><img src="https://img.icons8.com/material-outlined/24/cccccc/checked-2--v1.png"/>Order has been processed</p>
+      <p><img src="https://img.icons8.com/material-outlined/24/cccccc/checked-2--v1.png"/>Rider has picked your order </p>
+      <p><img src="https://img.icons8.com/material-outlined/24/cccccc/checked-2--v1.png"/>Rider is on his way </p>
+     
+  </div>
   
-    <h2 class="card-title">
-    BOOKING INFORMATION
-    </h2><br>
-<h4>TOTAL NUMBER OF BOOKINGS: <?php
-    
-    echo $rowbook['b'];
-    ?></h4>
-
-    
-
-    
-<br>
-    <a href="../booking2/viewbooking.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182)">View all</a>
-  </div>
 </div>
 
 
-<div class="imgchat" style="margin-left:85%;position:fixed">
-<a href="../chatbot/bot.php?prev=../tracker/tracker.php"><img style="width:30%;margin-top:-150%;margin-left:40%" src="../images/chat.png" alt="chatbot"></a>
 
-</div>
 
-<div class="test">
-  <h5 class="card-header"></h5>
-  <div class="card-body" style="background:pink;height:90%">
-  
-    <h2 class="card-title">
-    ONLINE PHARMACY
-    </h2><br>
-    
-    <h4>UPDATED SOON</h4>
-<br>
-    <a href="../screening/covid/" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182)">View all</a>
-  </div>
-</div>
+        
+        
+
+
 <script>
 function openTab(tabName) {
   var i, x;
@@ -190,7 +215,12 @@ function closeNav() {
   document.getElementById("mySidenav").style.width = "0";
   document.getElementById("main").style.marginLeft= "0";
 }
+function shop(){
+    window.location.href="../pharmacy/ph_store.php";
+}
+
 </script>
+
 </body>
 <footer>
   Copyright (c) JustGoTech 2021

@@ -34,7 +34,7 @@ $countp=0;
 ?>
 <html>
 <head>
-<title>COVID-19</title>
+<title>Pharmacy</title>
 </head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
@@ -42,7 +42,7 @@ $countp=0;
   href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.2.0/mdb.min.css"
   rel="stylesheet"
 />
-<link rel="stylesheet" href="covid.css">
+<link rel="stylesheet" href="pharm.css">
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="sweetalert2.all.min.js"></script>
@@ -72,104 +72,155 @@ $countp=0;
 
 </div>
 
+<div class="row">
+  <div>
+<div class="bcart" style="margin-left:400px;margin-top: 10px">
+ <div style="background:blue;color:white; width:40%;border-radius:10px 10px 0 0; height: 50px">
+  <h5 style="float:left;margin-left: 8px;margin-top: 15px;">Order#A123  </h5>
+
+ </div>
+<div class="tcart" style="width: 40%; border: 2px solid blue;border-radius:0 0 10px 10px">
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Product</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Price</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row"><?php echo "<div>
+       <h5>".$med."</h5>
+    <h6>".$ph."</h6>
+    <p>12 strips in a box</p>
+    <p>".$loc."</p>
+</div>
+"; ?></th>
+      <td > 1</td>
+      <td>
+        <div style="color:blue"><h5>Ghc 20</h5>
+      </div>
+        
+      </td>
+    </tr>
+
+    <tr>
+      <th scope="row"><?php echo "<div>
+       <h5>".$med."</h5>
+    <h6>".$ph."</h6>
+    <p>12 strips in a box</p>
+    <p>".$loc."</p>
+</div>
+"; ?></th>
+      <td > 1</td>
+      <td>
+        <div style="color:blue"><h5>Ghc 20</h5>
+      </div>
+        
+      </td>
+    </tr>
+    
+  </tbody>
+
+  <tr>
+
+  <td colspan="4">
+    <div style="float:right">
+      <p>SubTotal: Ghc 20 </p>
+      <p>Tax: Ghc 2 </p>
+      <p>Delivery: Ghc 5 </p>
+      <p>Total: Ghc 27 </p>
+
+
+
+
+    </div>
+   </td>
+</tr>
+</table>
+</div>
+</div>
+
+<div>
+<div class="bcart" style="margin-left:400px;margin-top: 10px">
+ <div style="background:blue;color:white; width:40%;border-radius:10px 10px 0 0; height: 50px">
+  <h5 style="float:left;margin-left: 8px;margin-top: 15px;">Order#A123  </h5>
+
+ </div>
+<div class="tcart" style="width: 40%; border: 2px solid blue;border-radius:0 0 10px 10px">
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Product</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Price</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row"><?php echo "<div>
+       <h5>".$med."</h5>
+    <h6>".$ph."</h6>
+    <p>12 strips in a box</p>
+    <p>".$loc."</p>
+</div>
+"; ?></th>
+      <td > 1</td>
+      <td>
+        <div style="color:blue"><h5>Ghc 20</h5>
+      </div>
+        
+      </td>
+    </tr>
+
+    <tr>
+      <th scope="row"><?php echo "<div>
+       <h5>".$med."</h5>
+    <h6>".$ph."</h6>
+    <p>12 strips in a box</p>
+    <p>".$loc."</p>
+</div>
+"; ?></th>
+      <td > 1</td>
+      <td>
+        <div style="color:blue"><h5>Ghc 20</h5>
+      </div>
+        
+      </td>
+    </tr>
+    
+  </tbody>
+
+  <tr>
+
+  <td colspan="4">
+    <div style="float:right">
+      <p>SubTotal: Ghc 20 </p>
+      <p>Tax: Ghc 2 </p>
+      <p>Delivery: Ghc 5 </p>
+      <p>Total: Ghc 27 </p>
+
+
+
+
+    </div>
+   </td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+
 
    
-<div class="test" >
-  <h5 class="card-header"></h5>
-  <div class="card-body" style="background:#ff9900;height:90%">
-  
-    <h2 class="card-title">
-    VIRTUAL SCREENING TESTS
-    </h2><br>
-    <ul>
-    <?php 
-        while($rownum=mysqli_fetch_assoc($resnum)){
-
-          ?>
-        <h4>TOTAL NUMBER OF TESTS: <?php echo $rownum['c']?></h4>
-  
-       
-        <h4> NO EXPOSURE:<?php 
-        
-          if($rownum['Status']=="Not exposed"||$rownum['Status']=="Not Likely Exposed"){
-            $count=$count +1;
-            $e=($count/$rownum['c'])*100;
-            echo $e."%";
-              }
-              else{
-                  echo "0%";
-  
-              }
-        
-        
-           
-            
-           
-            ?> </h4>
-      
-  
-        <h4>EXPOSURE:<?php 
-
-        if($rownum['Status']=="Exposed"||$rownum['Status']=="Likely Exposed"){
-            $countp=$countp +1;
-            $c=($countp/$rownum['c'])*100;
-            echo $c."%";
-            }
-            else{
-                echo "0%";
-            }
-          }
-            ?> </h4>
-    
-    </ul>
-   <br>
-
-
-<br>
-    <a href="../screening/results.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182)">View all</a>
-  </div>
-</div>
-
-
-<div class="test">
-  <h5 class="card-header"></h5>
-  <div class="card-body" style="background:skyblue;height:90%">
-  
-    <h2 class="card-title">
-    BOOKING INFORMATION
-    </h2><br>
-<h4>TOTAL NUMBER OF BOOKINGS: <?php
-    
-    echo $rowbook['b'];
-    ?></h4>
-
-    
-
-    
-<br>
-    <a href="../booking2/viewbooking.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182)">View all</a>
-  </div>
-</div>
-
-
 <div class="imgchat" style="margin-left:85%;position:fixed">
-<a href="../chatbot/bot.php?prev=../tracker/tracker.php"><img style="width:30%;margin-top:-150%;margin-left:40%" src="../images/chat.png" alt="chatbot"></a>
+<a href="../chatbot/bot.php?prev=../pharmacy/pharmacy_main.php"><img style="width:30%;margin-top:60%;margin-left:40%" src="../images/chat.png" alt="chatbot"></a>
 
 </div>
 
-<div class="test">
-  <h5 class="card-header"></h5>
-  <div class="card-body" style="background:pink;height:90%">
-  
-    <h2 class="card-title">
-    ONLINE PHARMACY
-    </h2><br>
-    
-    <h4>UPDATED SOON</h4>
-<br>
-    <a href="../screening/covid/" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182)">View all</a>
-  </div>
-</div>
 <script>
 function openTab(tabName) {
   var i, x;
@@ -190,6 +241,8 @@ function closeNav() {
   document.getElementById("mySidenav").style.width = "0";
   document.getElementById("main").style.marginLeft= "0";
 }
+
+
 </script>
 </body>
 <footer>

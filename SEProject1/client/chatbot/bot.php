@@ -11,7 +11,10 @@
 </head>
 <body>
 <div style="margin-left:-800px;">
-    <a href="../tracker/tracker.php"><img style="width:15%"src="../images/close.png" alt=""></a>
+    <a href=<?php if(isset($_GET['prev'])){
+       $prev=$_GET['prev'];
+       echo $prev;
+        }?>><img style="width:15%"src="../images/close.png" alt=""></a>
     </div>
     <div class="wrapper">
     
