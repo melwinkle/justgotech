@@ -41,6 +41,10 @@ if(!isset($_SESSION['username'])){
    
 }
 
+$count="SELECT count(*) as total from temp_cart where PatientID=$patient and status='Basket'";
+$conph=mysqli_query($conn,$count);
+$cout=mysqli_fetch_assoc($conph);
+$cart=$cout['total'];
 
 ?>
 
@@ -67,6 +71,7 @@ if(!isset($_SESSION['username'])){
 <body >
 
   <div id="mySidenav" class="sidenav">
+  <a href="../pharmacy/pharmacy_main.php"><img src="https://img.icons8.com/material-sharp/24/000000/long-arrow-left.png"/>BACK</a>
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <img style="width:50%;margin-left: 20%;background:rgb(23, 79, 182);" src="../../images/justgotech.png" alt="justgotech">
   <a href="../account/accountinfo.php">Account Info</a>
@@ -84,15 +89,24 @@ if(!isset($_SESSION['username'])){
   <span style="font-size:30px;cursor:pointer" onclick="openNav()"><img style="width:10%" src="../../images/justgo.png" alt="justgotech"> </span>
   <div style="float:right">
  
-  <span style="font-size:20px;cursor:pointer;margin-left:65% " onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:10%" src="../../images/stethoscope.png" alt="profile"> </span>
-  <button onclick="cartP()"style="background:none;border:none"><img   src="https://img.icons8.com/fluent/48/4a90e2/fast-cart.png"/></button>
+  <span style="font-size:20px;cursor:pointer;margin-left:60% " onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:10%" src="../../images/stethoscope.png" alt="profile"> </span>
+  <button onclick="cartP()"style="background:none;border:none"><img   src="https://img.icons8.com/fluent/48/4a90e2/fast-cart.png"/><img style="width:25%"src="https://img.icons8.com/ios-filled/50/000000/<?php echo $cart;?>-circle.png"/></button>
+  
   </div>
   
 </div>
 
 <div class="hname" style="margin-left:45%;color:rgb(23, 79, 182)">
+
 <h1>PHARMACY</h1>
+
+
+
+
+
 </div>
+
+
 <div class="store">
     
     <div class="card-body" style="border:2px solid blue;width:80%;">
@@ -141,7 +155,7 @@ function closeNav() {
 }
 
 function cartP(){
-  window.location.href="../pharmacy/ph_cart.php";
+  window.location.href="../pharmacy/ph_cart.php?mprev=../pharmacy/ph_store.php";
 }
 
 

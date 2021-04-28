@@ -50,8 +50,10 @@ $redise=mysqli_query($conn,$dise);
 $rowdise=mysqli_fetch_assoc($redise);
 
 
-$count=0;
-$countp=0;
+$count="SELECT count(*) as total from temp_cart where PatientID=$patient and status='Basket'";
+$conph=mysqli_query($conn,$count);
+$cout=mysqli_fetch_assoc($conph);
+$cart=$cout['total'];
 ?>
 <html>
 <head>
@@ -73,6 +75,7 @@ $countp=0;
 <body >
 
   <div id="mySidenav" class="sidenav">
+  <a href="../pharmacy/ph_records.php"><img src="https://img.icons8.com/material-sharp/24/000000/long-arrow-left.png"/>BACK</a>
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <img style="width:50%;margin-left: 20%;background:rgb(23, 79, 182);" src="../../images/justgotech.png" alt="justgotech">
   <a href="../account/accountinfo.php">Account Info</a>
@@ -91,15 +94,22 @@ $countp=0;
   
   <div style="float:right">
  
- <span style="font-size:20px;cursor:pointer;margin-left:65% " onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:10%" src="../../images/stethoscope.png" alt="profile"> </span>
- <button style="background:none;border:none"><img   src="https://img.icons8.com/fluent/48/4a90e2/fast-cart.png"/></button>
+ <span style="font-size:20px;cursor:pointer;margin-left:60% " onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:10%" src="../../images/stethoscope.png" alt="profile"> </span>
+ <button onclick="cartP()"style="background:none;border:none"><img   src="https://img.icons8.com/fluent/48/4a90e2/fast-cart.png"/><img style="width:25%"src="https://img.icons8.com/ios-filled/50/000000/<?php echo $cart;?>-circle.png"/></button>
  </div>
 </div>
 
 
+<div class="hname" style="margin-left:35%;color:rgb(23, 79, 182)">
+<h1>PHARMACY TRACKER</h1>
+</div>
+
 <div class="bcart" style="margin-left:400px;margin-top: 10px">
  <div style="background:blue;color:white; width:60%;border-radius:10px 10px 0 0; height: 50px">
-  <h5 style="float:left;margin-left: 8px;margin-top: 15px;">Order#A123 Confirmed </h5>
+  <h5 style="float:left;margin-left: 8px;margin-top: 15px;">Order#JT<?php
+  if(isset($_GET['id'])){
+  $id=$_GET['id'];
+} echo $id?> Confirmed </h5>
 
  </div>
 
@@ -111,41 +121,51 @@ $countp=0;
       <th scope="col">Product</th>
       <th scope="col">Quantity</th>
       <th scope="col">Price</th>
-      
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row"><?php echo "<div>
-       <h5>".$med."</h5>
-    <h6>".$ph."</h6>
-    <p>12 strips in a box</p>
-    <p>".$loc."</p>
-</div>
-"; ?></th>
-      <td > 1</td>
-      <td>
-        <div style="color:blue"><h5>Ghc 20</h5>
-      </div>
-        
-      </td>
-    </tr>
+  <?php
 
+if(isset($_GET['id'])){
+  $id=$_GET['id'];
+}
+  $swl="SELECT * FROM perm_cart 
+  inner join temp_cart on perm_cart.TC=temp_cart.TC 
+  inner join pharm_orders on perm_cart.POID=pharm_orders.POID 
+  inner join pharm_drugs on temp_cart.PHD=pharm_drugs.PHD 
+  inner join pharmacists on pharm_drugs.PharmID=pharmacists.PharmID 
+  inner join drugs  on pharm_drugs.DID = drugs.DID 
+  where temp_cart.PatientID=$patient and pharm_orders.POID=$id
+  ORDER BY perm_cart.TC DESC ";
+  $sw=mysqli_query($conn,$swl);
+
+  if(mysqli_num_rows($sw)>0){
+  while($sl=mysqli_fetch_assoc($sw)){
+
+  echo "
     <tr>
-      <th scope="row"><?php echo "<div>
-       <h5>".$med."</h5>
-    <h6>".$ph."</h6>
-    <p>12 strips in a box</p>
-    <p>".$loc."</p>
+      <th scope='row'>
+      <div>
+       <h5>".$sl['DName']."</h5>
+    <h6>".$sl['Pharm_Name']."</h6>
+    <p>".$sl['Description']."</p>
+    <p>".$sl['Special_notes']."</p>
+    <p>".$sl['Pickup_Mode']."</p>
 </div>
-"; ?></th>
-      <td > 1</td>
+</th>"; ?>
+<!-- <input style="width:50%" class="quantity" min="0" name="quantity" value="1" type="number"> -->
+      <td > <h4><?php echo $sl['Item_quantity']?></h4></td>
       <td>
-        <div style="color:blue"><h5>Ghc 20</h5>
+        <div style="color:blue"><h4>Ghc <?php $bill=$sl['Price']; echo "$bill" ;?></h4>
       </div>
         
       </td>
+     
     </tr>
+    <?php
+ }
+}
+    ?>
     
   </tbody>
 
@@ -153,10 +173,16 @@ $countp=0;
 
   <td colspan="4">
     <div style="float:right">
-      <p>SubTotal: Ghc 20 </p>
-      <p>Tax: Ghc 2 </p>
-      <p>Delivery: Ghc 5 </p>
-      <p>Total: Ghc 27 </p>
+      <p>TOTAL BILL:Ghc <?php 
+      $bils="SELECT P_Bill from pharm_orders where POID=$id";
+      $bis=mysqli_query($conn,$bils);
+      
+      $bisl=mysqli_fetch_assoc($bis);
+      $bil=$bisl['P_Bill'];
+      echo $bil;
+      ?> </p>
+
+      <button class="btn btn-primary"onclick="paym()">MAKE PAYMENT</button>
 
 
 
@@ -173,21 +199,107 @@ $countp=0;
    </div>
 <div style="border:1px solid blue;border-radius:0 0 10px 10px; width: 60%;margin-top:-10px">
    
+<!-- track order table -->
+<?php
 
+$track="SELECT * from track_order where POID=$id";
+$tr=mysqli_query($conn,$track);
+$sm=mysqli_fetch_assoc($tr);
+if($sm['Progress']=="Pending"){
+
+
+?>
    <div class="progress" style="border-radius:5px;margin-left: 40px;width:90%;height: 15px;margin-top:10px">
-  <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+  <div class="progress-bar bg-warning" role="progressbar" style="width: 25%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
   
 </div>
 <div>
       <p><img src="https://img.icons8.com/material-outlined/24/26e07f/checked-2--v1.png"/>Awaiting confirmation from vendor</p>
-      <p><img src="https://img.icons8.com/material-outlined/24/cccccc/checked-2--v1.png"/>Order has been processed</p>
-      <p><img src="https://img.icons8.com/material-outlined/24/cccccc/checked-2--v1.png"/>Rider has picked your order </p>
-      <p><img src="https://img.icons8.com/material-outlined/24/cccccc/checked-2--v1.png"/>Rider is on his way </p>
+   
      
   </div>
   
 </div>
 
+<?php 
+}
+if($sm['Progress']=="Processed"){
+  ?>
+   <div class="progress" style="border-radius:5px;margin-left: 40px;width:90%;height: 15px;margin-top:10px">
+  <div class="progress-bar bg-success" role="progressbar" style="width: 50%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+  
+</div>
+<div>
+      <p><img src="https://img.icons8.com/material-outlined/24/26e07f/checked-2--v1.png"/>Awaiting confirmation from vendor</p>
+      <p><img src="https://img.icons8.com/material-outlined/24/26e07f/checked-2--v1.png"/>Order has been processed</p>
+ 
+     
+  </div>
+  
+</div>
+
+<?php 
+}
+
+
+if($sm['Progress']=="Picked"){
+
+?>
+<div class="progress" style="border-radius:5px;margin-left: 40px;width:90%;height: 15px;margin-top:10px">
+  <div class="progress-bar bg-success" role="progressbar" style="width: 75%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+  
+</div>
+<div>
+      <p><img src="https://img.icons8.com/material-outlined/24/26e07f/checked-2--v1.png"/>Awaiting confirmation from vendor</p>
+      <p><img src="https://img.icons8.com/material-outlined/24/26e07f/checked-2--v1.png"/>Order has been processed</p>
+      <p><img src="https://img.icons8.com/material-outlined/24/26e07f/checked-2--v1.png"/>Rider has picked your order </p>
+   
+     
+  </div>
+  
+</div>
+
+<?php 
+}
+if($sm['Progress']=="Route"){
+  ?>
+  <div class="progress" style="border-radius:5px;margin-left: 40px;width:90%;height: 15px;margin-top:10px">
+    <div class="progress-bar bg-success" role="progressbar" style="width: 85%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+    
+  </div>
+  <div>
+        <p><img src="https://img.icons8.com/material-outlined/24/26e07f/checked-2--v1.png"/>Awaiting confirmation from vendor</p>
+        <p><img src="https://img.icons8.com/material-outlined/24/26e07f/checked-2--v1.png"/>Order has been processed</p>
+        <p><img src="https://img.icons8.com/material-outlined/24/26e07f/checked-2--v1.png"/>Rider has picked your order </p>
+        <p><img src="https://img.icons8.com/material-outlined/24/26e07f/checked-2--v1.png"/>Rider is on his way </p>
+       
+    </div>
+    
+  </div>
+  
+  <?php 
+  
+}
+
+if($sm['Progress']=="Delivered"){
+  ?>
+  <div class="progress" style="border-radius:5px;margin-left: 40px;width:90%;height: 15px;margin-top:10px">
+    <div class="progress-bar bg-succes" role="progressbar" style="width: 100%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+    
+  </div>
+  <div>
+        <p><img src="https://img.icons8.com/material-outlined/24/26e07f/checked-2--v1.png"/>Awaiting confirmation from vendor</p>
+        <p><img src="https://img.icons8.com/material-outlined/24/26e07f/checked-2--v1.png"/>Order has been processed</p>
+        <p><img src="https://img.icons8.com/material-outlined/24/26e07f/checked-2--v1.png"/>Rider has picked your order </p>
+        <p><img src="https://img.icons8.com/material-outlined/24/26e07f/checked-2--v1.png"/>Rider is on his way </p>
+        <p><img src="https://img.icons8.com/material-outlined/24/26e07f/checked-2--v1.png"/>Rider has arrived </p>
+    </div>
+    
+  </div>
+  
+  <?php 
+  }
+?>
 
 
 
@@ -219,12 +331,20 @@ function shop(){
     window.location.href="../pharmacy/ph_store.php";
 }
 
+function cartP(){
+  window.location.href="../pharmacy/ph_cart.php?mprev=../pharmacy/ph_pay.php";
+}
+
+function paym(){
+  window.location.href="https://flutterwave.com/pay/paymenttwo";
+}
+
 </script>
 <script>
     <?php 
     if(isset($_GET["success"])){
         ?>
-        swal("Payment successful!", "Continue Shopping for more experience!", "success");
+        swal("Order Confirmed!", "Continue Shopping for more experience!", "success");
         <?php
     }
     ?>

@@ -167,7 +167,7 @@ $countp=0;
     
     <h4>UPDATED SOON</h4>
 <br>
-    <a href="../screening/covid/" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182)">View all</a>
+    <a href="../pharmacy/pharmacy_main.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182)">View all</a>
   </div>
 </div>
 <script>

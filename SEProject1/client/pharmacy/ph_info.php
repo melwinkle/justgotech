@@ -50,6 +50,21 @@ if(isset($_GET['success'])|| isset($_GET['failure'])){
  
 }
 
+if(isset($_GET['mprev'])){
+  $drug=$_GET['drug'];
+  $location=$_GET['location'];
+
+
+
+  $sql_ph="SELECT * FROM pharm_drugs inner join pharmacists on pharm_drugs.PharmID=pharmacists.PharmID inner join drugs  on pharm_drugs.DID = drugs.DID where drugs.Queries LIKE '%$drug%' and pharmacists.Location_queries LIKE '%$location%'";
+  $pharm=mysqli_query($conn,$sql_ph);
+ 
+}
+
+$count="SELECT count(*) as total from temp_cart where PatientID=$patient and status='Basket'";
+$conph=mysqli_query($conn,$count);
+$cout=mysqli_fetch_assoc($conph);
+$cart=$cout['total'];
 ?>
 
 
@@ -75,6 +90,7 @@ if(isset($_GET['success'])|| isset($_GET['failure'])){
 <body >
 
   <div id="mySidenav" class="sidenav">
+  <a href="../pharmacy/pharmacy_main.php"><img src="https://img.icons8.com/material-sharp/24/000000/long-arrow-left.png"/>BACK</a>
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <img style="width:50%;margin-left: 20%;background:rgb(23, 79, 182);" src="../../images/justgotech.png" alt="justgotech">
   <a href="../account/accountinfo.php">Account Info</a>
@@ -92,8 +108,8 @@ if(isset($_GET['success'])|| isset($_GET['failure'])){
   <span style="font-size:30px;cursor:pointer" onclick="openNav()"><img style="width:10%" src="../../images/justgo.png" alt="justgotech"> </span>
   <div style="float:right">
  
-  <span style="font-size:20px;cursor:pointer;margin-left:65% " onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:10%" src="../../images/stethoscope.png" alt="profile"> </span>
-  <button onclick="cartP()"style="background:none;border:none"><img   src="https://img.icons8.com/fluent/48/4a90e2/fast-cart.png"/></button>
+  <span style="font-size:20px;cursor:pointer;margin-left:60% " onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:10%" src="../../images/stethoscope.png" alt="profile"> </span>
+  <button onclick="cartP()"style="background:none;border:none"><img   src="https://img.icons8.com/fluent/48/4a90e2/fast-cart.png"/><img style="width:25%"src="https://img.icons8.com/ios-filled/50/000000/<?php echo $cart;?>-circle.png"/></button>
   </div>
   
 </div>
@@ -101,12 +117,13 @@ if(isset($_GET['success'])|| isset($_GET['failure'])){
 <div class="hname" style="margin-left:45%;color:rgb(23, 79, 182)">
 <h1>PHARMACY</h1>
 </div>
+
 <div class="store">
     
     <div class="card-body" style="border:2px solid blue;width:80%;">
     <form class="fsearch" action="<?php echo $_SERVER['PHP_SELF']?>" method="post" style="margin-left:20px">
-        <input type="text" name="drug" id="drug" placeholder="  Drug eg.Paracetamol" style="width:48%;height:6%;" value="<?php echo $drug?>">
-        <input type="text" name="location" id="location" placeholder="  Location eg.Osu" style="margin-left:40px;width:45%;height:6%;" value="<?php echo $location?>"><br>
+        <input type="text" name="drug" id="drug" placeholder="  Drug eg.Paracetamol" style="width:48%;height:6%;" value="<?php if($drug){echo $drug;}else{echo "";}?>">
+        <input type="text" name="location" id="location" placeholder="  Location eg.Osu" style="margin-left:40px;width:45%;height:6%;" value="<?php if($location){ echo $location;}else{echo "";}?>"><br>
 
 
         <button name="shop" type="submit" class="btn btn-primary btn-lg" style="color: white; background:rgb(23, 79, 182);margin-top:10px;margin-left:30%;width:40%">Search</button>
@@ -149,7 +166,7 @@ while($ph_row=mysqli_fetch_assoc($pharm)){
 
 
     <img style='align:left' src='https://img.icons8.com/ios-filled/50/0E561F/filled-circle.png'/>
-    <a href='../pharmacy/ph_temp.php?action=add&phd=$phd&drug=$drug&location=$location' style='background: none;border:none;margin-left:70%'><img src='https://img.icons8.com/android/24/ffffff/plus.png'/></a>
+    <a href='../pharmacy/ph_temp.php?action=add&phd=$phd&drug=$drug&location=$location&quant=1' style='background: none;border:none;margin-left:70%'><img src='https://img.icons8.com/android/24/ffffff/plus.png'/></a>
     
 </div>
 
@@ -224,7 +241,7 @@ function closeNav() {
 
 
 function cartP(){
-  window.location.href="../pharmacy/ph_cart.php";
+  window.location.href="../pharmacy/ph_cart.php?mprev=../pharmacy/ph_info.php&drug=<?php echo $drug; ?>&location=<?php echo $location;?>";
 }
 
 

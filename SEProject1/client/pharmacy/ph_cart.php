@@ -1,24 +1,4 @@
-<?php 
-if(isset($_GET['ph'])){
-  $ph=$_GET['ph'];
 
-   }
-
-   if(isset($_GET['pr'])){
-    $pr=$_GET['pr'];
-  
-     }
-     if(isset($_GET['med'])){
-      $med=$_GET['med'];
-    
-       }
-       if(isset($_GET['loc'])){
-        $loc=$_GET['loc'];
-      
-         }
-
-
-?>
 <!-- Home page for covid testing -->
 <?php
 error_reporting(0);
@@ -49,13 +29,31 @@ $dise="SELECT * from diseases where PatientID=$patient";
 $redise=mysqli_query($conn,$dise);
 $rowdise=mysqli_fetch_assoc($redise);
 
-
-
-
+$count="SELECT count(*) as total from temp_cart where PatientID=$patient and status='Basket'";
+$conph=mysqli_query($conn,$count);
+$cout=mysqli_fetch_assoc($conph);
+$cart=$cout['total'];
 ?>
+
+<?php  
+function  createConfirmationmbox() {  
+    echo '<script type="text/javascript"> ';  
+    echo ' function openulr(newurl) {';  
+    echo '  if (confirm("Are you sure you want to remove this item from your cart?")) {';  
+    echo '    document.location = newurl;';  
+    echo '  }';  
+    echo '}';  
+    echo '</script>';  
+} 
+
+
+?>  
 <html>
 <head>
 <title>COVID-19</title>
+<?php  
+createConfirmationmbox();  
+?> 
 </head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
@@ -68,6 +66,8 @@ $rowdise=mysqli_fetch_assoc($redise);
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="sweetalert2.all.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="sweetalert2.all.min.js"></script>
 
 
 <body >
@@ -91,8 +91,8 @@ $rowdise=mysqli_fetch_assoc($redise);
   
   <div style="float:right">
  
- <span style="font-size:20px;cursor:pointer;margin-left:65% " onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:10%" src="../../images/stethoscope.png" alt="profile"> </span>
- <button onclick="cartP()"style="background:none;border:none"><img   src="https://img.icons8.com/fluent/48/4a90e2/fast-cart.png"/></button>
+ <span style="font-size:20px;cursor:pointer;margin-left:60% " onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:10%" src="../../images/stethoscope.png" alt="profile"> </span>
+ <button onclick="cartP()"style="background:none;border:none"><img   src="https://img.icons8.com/fluent/48/4a90e2/fast-cart.png"/><img style="width:25%"src="https://img.icons8.com/ios-filled/50/000000/<?php echo $cart;?>-circle.png"/></button>
  </div>
 </div>
 
@@ -120,11 +120,12 @@ $rowdise=mysqli_fetch_assoc($redise);
 if(isset($_GET['phd'])){
   $phd=$_GET['phd'];
 }
-  $swl="SELECT * FROM temp_cart inner join pharm_drugs on temp_cart.PHD=pharm_drugs.PHD inner join pharmacists on pharm_drugs.PharmID=pharmacists.PharmID inner join drugs  on pharm_drugs.DID = drugs.DID where temp_cart.PatientID=$patient and DATE='2021-04-27' ";
+  $swl="SELECT * FROM temp_cart inner join pharm_drugs on temp_cart.PHD=pharm_drugs.PHD inner join pharmacists on pharm_drugs.PharmID=pharmacists.PharmID inner join drugs  on pharm_drugs.DID = drugs.DID where temp_cart.PatientID=$patient and status='Basket' ";
   $sw=mysqli_query($conn,$swl);
 
   if(mysqli_num_rows($sw)>0){
   while($sl=mysqli_fetch_assoc($sw)){
+    $tc=$sl['TC'];
 
   echo "
     <tr>
@@ -137,18 +138,28 @@ if(isset($_GET['phd'])){
 </div>
 </th>"; ?>
 
-      <td style="width: 25%"> <input style="width:50%" class="quantity" min="0" name="quantity" value="1" type="number"></td>
+      <td style="width: 25%"> 
+
+      
+      <input style="width:50%" class="quantity" min="0" id="quantity"name="quantity" value="<?php echo $sl['Item_quantity'];?>" type="number"></td>
       <td>
         <div style="color:blue"><h5>Ghc <?php echo $sl['Price'];?></h5>
       </div>
         
       </td>
       <td>
-        <button class="btn btn-danger">REMOVE</button>
+   
+     
+      
+    
+      <button onclick="upq()" class="btn btn-success">UPDATE</button>
+      <div class="confirm">
+        <a href="javascript:openulr('../pharmacy/ph_shop.php?tc=<?php echo $tc;?>&mprev=<?php echo $_GET['mprev'];?>');" class="btn btn-danger" style="margin-top:5px">REMOVE</a></div>
       </td>
     </tr>
     <?php
- }
+ 
+}
 }else{
   echo " <td colspan='4'>
   <div style='text-align:center'>
@@ -169,7 +180,7 @@ if(isset($_GET['phd'])){
   <td colspan="4">
     <div style="float:right">
       <p>SubTotal: Ghc <?php 
-      $su="SELECT sum(Price) as total FROM temp_cart inner join pharm_drugs on temp_cart.PHD=pharm_drugs.PHD inner join pharmacists on pharm_drugs.PharmID=pharmacists.PharmID inner join drugs  on pharm_drugs.DID = drugs.DID where temp_cart.PatientID=$patient and DATE='2021-04-27'";
+      $su="SELECT sum(Price*Item_quantity) as total FROM temp_cart inner join pharm_drugs on temp_cart.PHD=pharm_drugs.PHD inner join pharmacists on pharm_drugs.PharmID=pharmacists.PharmID inner join drugs  on pharm_drugs.DID = drugs.DID where temp_cart.PatientID=$patient and temp_cart.status='Basket'";
       $suml=mysqli_query($conn,$su);
       if($suml){
         $sums=mysqli_fetch_assoc($suml);
@@ -207,7 +218,7 @@ if(isset($_GET['phd'])){
     </div>
     <div class="container">
     
-      <form action="https://flutterwave.com/pay/justgotech"class="needs-validation" style="margin-left:-5px;"novalidate>
+      <form action="ph_suc.php?bill=<?php echo $bill;?>" method="post"class="needs-validation" style="margin-left:-5px;"novalidate>
       <div class="rw" style="border:2px solid blue;border-radius:0 0 10px 10px;">
   <div class="form-row" >
     <div style="margin-left:-150px;width: 250px;margin-top: 15px">
@@ -230,8 +241,8 @@ if(isset($_GET['phd'])){
       <label for="validationTooltip04">Pickup Mode</label><br>
       
       <select  name="pick" class="custom-select" required>
-      <option value="">Pickup</option>
-      <option value="1">Delivery</option>
+      <option value="Pickup">Pickup</option>
+      <option value="Delivery">Delivery</option>
     </select>
   
       <div class="invalid-tooltip">
@@ -246,9 +257,9 @@ if(isset($_GET['phd'])){
   <div style="width:250px;margin-left:50px;margin-top: 5px">
       <label for="validationTooltip05">Mobile Money Network</label><br>
       <select  name="net" class="custom-select" required>
-      <option value="">MTN</option>
-      <option value="1">Vodafone</option>
-      <option value="1">AirtelTigo</option>
+      <option value="MTN">MTN</option>
+      <option value="Vodafone">Vodafone</option>
+      <option value="AirtelTigo">AirtelTigo</option>
         </select>
       <div class="invalid-tooltip">
         Please select a provider.
@@ -276,7 +287,7 @@ if(isset($_GET['phd'])){
   
 </div>
         <div style="float:right;margin-top:10px;">
-        <button  style="width:350px;height:70px;font-size: 14pt"class="btn btn-primary" name="shop" type="submit">Continue to Checkout</button>
+        <button  style="width:350px;height:70px;font-size: 14pt" class="btn btn-primary" name="phshop" type="submit">Continue to Checkout</button>
         </div>
       
       </form>
@@ -312,12 +323,32 @@ function closeNav() {
   document.getElementById("main").style.marginLeft= "0";
 }
 function prevP(){
-  window.location.href="../pharmacy/ph_info.php?mprev=panadol"
+  window.location.href="<?php echo $_GET['mprev']; ?>?mprev=t&drug=<?php echo $_GET['drug']; ?>&location=<?php echo $_GET['location']; ?>"
 }
 function pays(){
   window.location.href="../pharmacy/ph_suc.php?success=true";
 }
+function upq(){
+     let quant=document.getElementById("quantity").value;
+      window.location.href = "../pharmacy/ph_shop.php?drug=<?php echo $_GET['drug']; ?>&location=<?php echo $_GET['location']; ?>&mprev=<?php echo $_GET['mprev']; ?>&update=true&tcc=<?php echo $tc; ?>&quant=" + quant; 
+}
 </script>
+<script>
+
+
+
+<?php
+if(isset($_GET['item'])){
+  echo '<script>swal("Item Removed")</script>';
+  
+}
+if(isset($_GET['items'])){
+  echo '<script>swal("Item Not Removed")</script>';
+  
+}
+?>
+</script>
+
 </body>
 <footer>
   Copyright (c) JustGoTech 2021
