@@ -29,8 +29,11 @@ $redise=mysqli_query($conn,$dise);
 $rowdise=mysqli_fetch_assoc($redise);
 
 
-$count=0;
-$countp=0;
+$count="SELECT count(*) as total from temp_cart where PatientID=$patient and status='Basket'";
+$conph=mysqli_query($conn,$count);
+$cout=mysqli_fetch_assoc($conph);
+$cart=$cout['total'];
+
 ?>
 <html>
 <head>
@@ -70,8 +73,8 @@ $countp=0;
   <span style="font-size:30px;cursor:pointer" onclick="openNav()"><img style="width:10%" src="../../images/justgo.png" alt="justgotech"> </span>
   <div style="float:right">
  
-  <span style="font-size:20px;cursor:pointer;margin-left:65% " onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:10%" src="../../images/stethoscope.png" alt="profile"> </span>
-  <button onclick="cartP()"style="background:none;border:none"><img   src="https://img.icons8.com/fluent/48/4a90e2/fast-cart.png"/></button>
+  <span style="font-size:20px;cursor:pointer;margin-left:60% " onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:10%" src="../../images/stethoscope.png" alt="profile"> </span>
+  <button onclick="cartP()"style="background:none;border:none"><img   src="https://img.icons8.com/fluent/48/4a90e2/fast-cart.png"/><img style="width:25%"src="https://img.icons8.com/ios-filled/50/000000/<?php echo $cart;?>-circle.png"/></button>
   </div>
   
 </div>
@@ -84,16 +87,16 @@ $countp=0;
 <div class="row">
 <?php  $puc="SELECT * from pharm_orders where PatientID=$patient";
 $pur=mysqli_query($conn,$puc);
-//$purc=mysqli_fetch_assoc($pur);
+
 
 
 while($purc=mysqli_fetch_assoc($pur)){
   $id=$purc['POID'];
 
 ?>
-<div class='col-md-4' style="width:110%">
+<div class='column' style="width:110%">
 <div class="bcart" style="margin-left:300px;margin-top: 60px">
- <div style="background:blue;color:white; width:32%;border-radius:10px 10px 0 0; height: 50px">
+ <div style="background:blue;color:white; width:40%;border-radius:10px 10px 0 0; height: 50px">
   <h5 style="float:left;margin-left: 8px;margin-top: 15px;">Order#JT<?php
   echo $id?></h5>
 
@@ -102,7 +105,7 @@ while($purc=mysqli_fetch_assoc($pur)){
  </div>
 
 
-<div class="tcart" style="width: 32%; border: 2px solid blue;border-radius:0 0 10px 10px">
+<div class="tcart" style="width: 40%; border: 2px solid blue;border-radius:0 0 10px 10px">
 <table class="table">
   <thead>
     <tr>
@@ -182,12 +185,12 @@ while($purc=mysqli_fetch_assoc($pur)){
 
 
 </div>
-<?php }?>
+
 
 </div>
+<?php }?>
 
-
-   
+   </div>
 <div class="imgchat" style="margin-left:85%;position:fixed">
 <a href="../chatbot/bot.php?prev=../pharmacy/pharmacy_main.php"><img style="width:30%;margin-top:60%;margin-left:40%" src="../images/chat.png" alt="chatbot"></a>
 

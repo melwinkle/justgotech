@@ -50,8 +50,10 @@ $redise=mysqli_query($conn,$dise);
 $rowdise=mysqli_fetch_assoc($redise);
 
 
-$count=0;
-$countp=0;
+$count="SELECT count(*) as total from temp_cart where PatientID=$patient and status='Basket'";
+$conph=mysqli_query($conn,$count);
+$cout=mysqli_fetch_assoc($conph);
+$cart=$cout['total'];
 ?>
 <html>
 <head>
@@ -92,13 +94,13 @@ $countp=0;
   
   <div style="float:right">
  
- <span style="font-size:20px;cursor:pointer;margin-left:65% " onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:10%" src="../../images/stethoscope.png" alt="profile"> </span>
- <button onclick="cartP()"style="background:none;border:none"><img   src="https://img.icons8.com/fluent/48/4a90e2/fast-cart.png"/></button>
+ <span style="font-size:20px;cursor:pointer;margin-left:60% " onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:10%" src="../../images/stethoscope.png" alt="profile"> </span>
+ <button onclick="cartP()"style="background:none;border:none"><img   src="https://img.icons8.com/fluent/48/4a90e2/fast-cart.png"/><img style="width:25%"src="https://img.icons8.com/ios-filled/50/000000/<?php echo $cart;?>-circle.png"/></button>
  </div>
 </div>
 
 
-<div class="hname" style="margin-left:45%;color:rgb(23, 79, 182)">
+<div class="hname" style="margin-left:35%;color:rgb(23, 79, 182)">
 <h1>PHARMACY TRACKER</h1>
 </div>
 
@@ -179,6 +181,8 @@ if(isset($_GET['id'])){
       $bil=$bisl['P_Bill'];
       echo $bil;
       ?> </p>
+
+      <button class="btn btn-primary"onclick="paym()">MAKE PAYMENT</button>
 
 
 
@@ -331,12 +335,16 @@ function cartP(){
   window.location.href="../pharmacy/ph_cart.php?mprev=../pharmacy/ph_pay.php";
 }
 
+function paym(){
+  window.location.href="https://flutterwave.com/pay/paymenttwo";
+}
+
 </script>
 <script>
     <?php 
     if(isset($_GET["success"])){
         ?>
-        swal("Payment successful!", "Continue Shopping for more experience!", "success");
+        swal("Order Confirmed!", "Continue Shopping for more experience!", "success");
         <?php
     }
     ?>
