@@ -207,7 +207,7 @@ if(isset($_GET['phd'])){
     </div>
     <div class="container">
     
-      <form action="ph_suc.php?success=true&bill=<?php echo $bill;?>"class="needs-validation" style="margin-left:-5px;"novalidate>
+      <form action="https://flutterwave.com/pay/justgotech"class="needs-validation" style="margin-left:-5px;"novalidate>
       <div class="rw" style="border:2px solid blue;border-radius:0 0 10px 10px;">
   <div class="form-row" >
     <div style="margin-left:-150px;width: 250px;margin-top: 15px">

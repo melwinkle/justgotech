@@ -85,7 +85,7 @@ if(!isset($_SESSION['username'])){
   <div style="float:right">
  
   <span style="font-size:20px;cursor:pointer;margin-left:65% " onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:10%" src="../../images/stethoscope.png" alt="profile"> </span>
-  <button style="background:none;border:none"><img   src="https://img.icons8.com/fluent/48/4a90e2/fast-cart.png"/></button>
+  <button onclick="cartP()"style="background:none;border:none"><img   src="https://img.icons8.com/fluent/48/4a90e2/fast-cart.png"/></button>
   </div>
   
 </div>
@@ -140,7 +140,9 @@ function closeNav() {
   document.getElementById("main").style.marginLeft= "0";
 }
 
-
+function cartP(){
+  window.location.href="../pharmacy/ph_cart.php";
+}
 
 
 

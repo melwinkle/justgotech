@@ -72,7 +72,7 @@ require_once('../../database/connection.php');
         if($res->status == 'success')
         {
             $link = $res->data->link;
-            header('Location: '.$link);
+            header('Location: ../pharmacy/pharmacy_main.php'.$link);
         }
         else
         {
