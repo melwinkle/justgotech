@@ -27,7 +27,7 @@ if(!isset($_SESSION['username'])){
 		<h1>Payment  Details</h1>
 						<h2>Welcome to Just Go Tech Payment Portal </h2>
                         <div>
-                            <button> <a href = "https://ravesandbox.flutterwave.com/pay/zeepayment" > PROCEED </a> </button>
+                            <button> <a href = "https://flutterwave.com/pay/justgotech" > PROCEED </a> </button>
            		        </div>
 
 </body>
