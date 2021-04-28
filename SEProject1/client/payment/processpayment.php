@@ -9,7 +9,6 @@
         elseif($_GET['status'] == 'successful')
         {
             $txid = $_GET['transaction_id']; //transaction ID
-
             $curl = curl_init();
 
             //verifying the transaction from the verification endpoint

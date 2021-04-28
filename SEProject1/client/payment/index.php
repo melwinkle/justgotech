@@ -31,7 +31,7 @@ if(!isset($_SESSION['username'])){
 						<!-- <input type = "submit"  name = "cardsubmit" value = "PROCEED" > -->
                             <button> <a href = "https://flutterwave.com/pay/paymenttwo" >PROCEED </a></button>
            		        </div>
-						
+			
 </body>
 </html>
 
