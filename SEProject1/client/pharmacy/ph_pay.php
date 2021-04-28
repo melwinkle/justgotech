@@ -19,7 +19,7 @@ if(isset($_GET['ph'])){
 
 
 ?>
-<!-- Home page for covid testing -->
+<!-- Home page for tracking orders-->
 <?php
 error_reporting(0);
 require_once("../../database/connection.php");
@@ -220,7 +220,16 @@ function shop(){
 }
 
 </script>
-
+<script>
+    <?php 
+    if(isset($_GET["success"])){
+        ?>
+        swal("Payment successful!", "Continue Shopping for more experience!", "success");
+        <?php
+    }
+    ?>
+    
+</script>
 </body>
 <footer>
   Copyright (c) JustGoTech 2021

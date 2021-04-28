@@ -50,8 +50,8 @@ $redise=mysqli_query($conn,$dise);
 $rowdise=mysqli_fetch_assoc($redise);
 
 
-$count=0;
-$countp=0;
+
+
 ?>
 <html>
 <head>
@@ -92,7 +92,7 @@ $countp=0;
   <div style="float:right">
  
  <span style="font-size:20px;cursor:pointer;margin-left:65% " onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:10%" src="../../images/stethoscope.png" alt="profile"> </span>
- <button style="background:none;border:none"><img   src="https://img.icons8.com/fluent/48/4a90e2/fast-cart.png"/></button>
+ <button onclick="cartP()"style="background:none;border:none"><img   src="https://img.icons8.com/fluent/48/4a90e2/fast-cart.png"/></button>
  </div>
 </div>
 
@@ -115,17 +115,31 @@ $countp=0;
     </tr>
   </thead>
   <tbody>
+  <?php
+
+if(isset($_GET['phd'])){
+  $phd=$_GET['phd'];
+}
+  $swl="SELECT * FROM temp_cart inner join pharm_drugs on temp_cart.PHD=pharm_drugs.PHD inner join pharmacists on pharm_drugs.PharmID=pharmacists.PharmID inner join drugs  on pharm_drugs.DID = drugs.DID where temp_cart.PatientID=$patient and DATE='2021-04-27' ";
+  $sw=mysqli_query($conn,$swl);
+
+  if(mysqli_num_rows($sw)>0){
+  while($sl=mysqli_fetch_assoc($sw)){
+
+  echo "
     <tr>
-      <th scope="row"><?php echo "<div>
-       <h5>".$med."</h5>
-    <h6>".$ph."</h6>
-    <p>12 strips in a box</p>
-    <p>".$loc."</p>
+      <th scope='row'>
+      <div>
+       <h5>".$sl['DName']."</h5>
+    <h6>".$sl['Pharm_Name']."</h6>
+    <p>".$sl['Description']."</p>
+    <p>".$sl['Location']."</p>
 </div>
-"; ?></th>
+</th>"; ?>
+
       <td style="width: 25%"> <input style="width:50%" class="quantity" min="0" name="quantity" value="1" type="number"></td>
       <td>
-        <div style="color:blue"><h5>Ghc 20</h5>
+        <div style="color:blue"><h5>Ghc <?php echo $sl['Price'];?></h5>
       </div>
         
       </td>
@@ -133,25 +147,20 @@ $countp=0;
         <button class="btn btn-danger">REMOVE</button>
       </td>
     </tr>
+    <?php
+ }
+}else{
+  echo " <td colspan='4'>
+  <div style='text-align:center'>
+    <p> NO ITEM IN CART</p>
 
-    <tr>
-      <th scope="row"><?php echo "<div>
-       <h5>".$med."</h5>
-    <h6>".$ph."</h6>
-    <p>12 strips in a box</p>
-    <p>".$loc."</p>
-</div>
-"; ?></th>
-      <td style="width: 25%"> <input style="width:50%"class="quantity" min="0" name="quantity" value="1" type="number"></td>
-      <td>
-        <div style="color:blue"><h5>Ghc 20</h5>
-      </div>
-        
-      </td>
-      <td>
-        <button class="btn btn-danger">REMOVE</button>
-      </td>
-    </tr>
+
+
+
+  </div>
+ </td>";
+}
+    ?>
     
   </tbody>
 
@@ -159,10 +168,28 @@ $countp=0;
 
   <td colspan="4">
     <div style="float:right">
-      <p>SubTotal: Ghc 20 </p>
-      <p>Tax: Ghc 2 </p>
-      <p>Delivery: Ghc 5 </p>
-      <p>Total: Ghc 27 </p>
+      <p>SubTotal: Ghc <?php 
+      $su="SELECT sum(Price) as total FROM temp_cart inner join pharm_drugs on temp_cart.PHD=pharm_drugs.PHD inner join pharmacists on pharm_drugs.PharmID=pharmacists.PharmID inner join drugs  on pharm_drugs.DID = drugs.DID where temp_cart.PatientID=$patient and DATE='2021-04-27'";
+      $suml=mysqli_query($conn,$su);
+      if($suml){
+        $sums=mysqli_fetch_assoc($suml);
+        $tot=$sums['total'];
+        echo "$tot";
+      } else{
+        echo "0.00";
+      }     ?> </p>
+      <p>Tax: Ghc <?php $tax=$tot*0.1; echo $tax;?></p>
+      <p>Delivery: Ghc <?php 
+      if($location==$sl['Location']){
+        $del=2.00;
+        echo $del;
+      }
+      else{
+        $del=5.00;
+        echo $del;
+      }
+      ?> </p>
+      <p>Total: Ghc <?php $bill=$tot+ $del + $tax;echo $bill;?> </p>
 
 
 
@@ -180,37 +207,29 @@ $countp=0;
     </div>
     <div class="container">
     
-      <form class="needs-validation" style="margin-left:-5px;"novalidate>
+      <form action="ph_suc.php?success=true&bill=<?php echo $bill;?>"class="needs-validation" style="margin-left:-5px;"novalidate>
       <div class="rw" style="border:2px solid blue;border-radius:0 0 10px 10px;">
   <div class="form-row" >
     <div style="margin-left:-150px;width: 250px;margin-top: 15px">
       <label for="validationTooltip01">Nickname</label>
-      <input  type="text" class="form-control" id="validationTooltip01" placeholder="First name"  required>
+      <input name="nick"  type="text" class="form-control" id="validationTooltip01" placeholder="First name"  required>
       <div class="valid-tooltip">
         Looks good!
       </div>
     </div>
     <div style="margin-left:20px;width: 250px;margin-top: 14px">
       <label for="validationTooltip02">Address</label>
-      <input type="text" class="form-control" id="validationTooltip02" placeholder="eg AnC Mall, East Legon"  required>
+      <input name="addr" type="text" class="form-control" id="validationTooltip02" placeholder="eg AnC Mall, East Legon"  required>
       <div class="valid-tooltip">
         Looks good!
       </div>
     </div>
 
-   
-  <div class="form-row">
-    <div style="margin-left:-150px;width: 250px;margin-top: 5px">
-      <label for="validationTooltip03">City</label>
-      <input type="text" class="form-control" id="validationTooltip03" placeholder="City" required>
-      <div class="invalid-tooltip">
-        Please provide a valid city.
-      </div>
-    </div>
-    <div style="width:250px;margin-left:20px;margin-top: 5px" >
+ 
+    <div style="width:250px;margin-left:-150px;margin-top: 15px" >
       <label for="validationTooltip04">Pickup Mode</label><br>
       
-      <select  class="custom-select" required>
+      <select  name="pick" class="custom-select" required>
       <option value="">Pickup</option>
       <option value="1">Delivery</option>
     </select>
@@ -224,9 +243,9 @@ $countp=0;
 
   <div class="form-row">
    
-  <div style="width:250px;margin-left:-150px;margin-top: 5px">
+  <div style="width:250px;margin-left:50px;margin-top: 5px">
       <label for="validationTooltip05">Mobile Money Network</label><br>
-      <select  class="custom-select" required>
+      <select  name="net" class="custom-select" required>
       <option value="">MTN</option>
       <option value="1">Vodafone</option>
       <option value="1">AirtelTigo</option>
@@ -240,15 +259,15 @@ $countp=0;
   
     <div style="width:250px;margin-left:20px;margin-top: 5px">
       <label for="validationTooltip03">Mobile Money Number</label>
-      <input style="width:250px;" type="text" class="form-control" id="validationTooltip03" placeholder="024 000 0000 " >
+      <input name="momo"style="width:250px;" type="text" class="form-control" id="validationTooltip03" placeholder="024 000 0000 " >
     </div>
 </div>
 
 
 <div class="form-row">
-    <div style="width:520px;margin-left:-150px;margin-bottom:25px;margin-top: 5px">
+    <div style="width:520px;margin-left:50px;margin-bottom:25px;margin-top: 5px">
       <label for="validationTooltip03">Special Note for rider/store</label>
-      <textarea  row="10" class="form-control" id="validationTooltip03" placeholder="eg Specific location details " ></textarea>
+      <textarea name="snotes" row="10" class="form-control" id="validationTooltip03" placeholder="eg Specific location details " ></textarea>
      
     </div>
     
@@ -257,7 +276,7 @@ $countp=0;
   
 </div>
         <div style="float:right;margin-top:10px;">
-        <button onclick="pays()" style="width:350px;height:70px;font-size: 14pt"class="btn btn-primary" type="button">Continue to Checkout</button>
+        <button  style="width:350px;height:70px;font-size: 14pt"class="btn btn-primary" name="shop" type="submit">Continue to Checkout</button>
         </div>
       
       </form>
@@ -293,7 +312,7 @@ function closeNav() {
   document.getElementById("main").style.marginLeft= "0";
 }
 function prevP(){
-  window.location.href="../pharmacy/ph_store.php?mprev=panadol"
+  window.location.href="../pharmacy/ph_info.php?mprev=panadol"
 }
 function pays(){
   window.location.href="../pharmacy/ph_suc.php?success=true";
