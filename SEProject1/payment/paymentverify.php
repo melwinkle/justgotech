@@ -1,7 +1,7 @@
 <?php
 
 /****
- * This file is used to verify the booking details  of the user. It includes the  database file and the form in booking.php 
+ * This file is used to verify the payment details  of the user. It includes the  database file and the form in booking.php 
  * If the user input is correctly filled in, it inserts it into the database.
  */
 session_start();
@@ -12,12 +12,6 @@ if(!isset($_SESSION['username'])){
    
 require_once('../database/connection.php'); 
 
-// $username=$_SESSION['username'];
-// $query="SELECT * from customer where username='$username'";
-// $result=mysqli_query($conn,$query);
-// $row=mysqli_fetch_assoc($result);
-
-// $PatientID=$row['PatientID'];
      
 // collecting records from payment card
     if(isset($_POST['cardsubmit'])){
@@ -29,12 +23,11 @@ require_once('../database/connection.php');
         $amount = $_POST['amount'];
 
 
-
        $request = [
            'tx_ref' => time(),
            'amount' => $amount,
            'currency' => 'GHS',
-            'payment_options' => 'card',
+            'payment_options' => 'card', 'mobile money',
             'redirect_url' => 'index.php',
             'customer' =>[
                 'email' => $email,
@@ -64,7 +57,7 @@ require_once('../database/connection.php');
         CURLOPT_CUSTOMREQUEST => 'POST',
         CURLOPT_POSTFIELDS => json_encode($request),  //converting the  array request into json
         CURLOPT_HTTPHEADER => array(
-            'Authorization: Bearer FLWSECK-8564bae5d603927c5430c0d7535900e2-X',
+            'Authorization: Bearer FLWPUBK-118ad777f65ef74dc553c4b2bc7e20b7-X',
             'Content-Type: application/json'
         ),
         ));
@@ -88,28 +81,5 @@ require_once('../database/connection.php');
     }
 
 
-
-    // $reason = $_POST['bookreason'];
-    // $apdate = $_POST['appDate'];
-    // $time = $_POST['apptime'];
-    // $dept = $_POST['departm'];
-
-    //     $quer="SELECT DocID from Doctor where DocFname='$doctor'";
-    //     $resu=mysqli_query($conn,$quer);
-    //     $raw=mysqli_fetch_assoc($resu);
-
-    //     $doct=$raw['DocID'];
-    //     $quey="INSERT INTO booking(Appointment,Department,Reason,Insurance,Insurance_Name,Insurance_ID,Doctor,ApTime,Person,PatientID) VALUES ('$apdate','$dept','$reason','$insure','$inname','$inid','$doct','$time','$person','$PatientID')";
-    //     $resut=mysqli_query($conn,$quey);
-    //     if($resut){
-    //         header("Location: viewbooking.php");
-    //     }
-
-    //     else{
-    //         mysqli_error($conn);
-    //     }
-    //    }
-
-    // mysqli_close($conn);
 
     ?>
