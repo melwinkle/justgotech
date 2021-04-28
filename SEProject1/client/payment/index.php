@@ -28,8 +28,8 @@ if(!isset($_SESSION['username'])){
   						<form method = "POST"  action = "paymentverify.php">
 						<h2>Welcome to Just Go Tech Payment Portal </h2>
                         <div>
-						<input type = "submit"  name = "cardsubmit" value = "PROCEED" >
-                            <!-- <button> <a href = "https://dashboard.flutterwave.com/donate/4qtsy7o32we1" >PROCEED </a></button> -->
+						<!-- <input type = "submit"  name = "cardsubmit" value = "PROCEED" > -->
+                            <button> <a href = "https://flutterwave.com/pay/justgotech" >PROCEED </a></button>
            		        </div>
 						
 </body>
