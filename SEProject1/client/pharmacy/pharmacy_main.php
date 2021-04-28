@@ -71,6 +71,9 @@ $countp=0;
   <span style="font-size:20px;cursor:pointer; float:right; margin-right: -32%" onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:10%" src="../../images/stethoscope.png" alt="profile"> </span>
 
 </div>
+<div class="hname" style="margin-left:45%;color:rgb(23, 79, 182)">
+<h1>PHARMACY</h1>
+</div>
 
 <div class="opt" style="margin-bottom: 20px">
 <button class="main" onclick="mainP()" style="width:40%;background:rgb(23, 79, 140);height:300px;border-radius:10px;border:3px black;color:white;font-size:24pt">
@@ -82,14 +85,14 @@ PURCHASES
 
 
 
-</div>
+<!-- </div>
 <div style="margin-left:35%;margin-top: 40px;">
   <button onclick="track()"style="width:55%;background:rgb(23, 79, 95);height:300px;border-radius:10px;border:3px black;color:white;font-size:24pt">TRACK ORDERS</buttom>
   <button class="purchase" onclick="payP()" style="width:40%;background:rgb(23, 79, 110);height:300px;border-radius:10px;border:3px black;color:white;font-size:24pt">
 PAYMENT
 </button>
 
-</div>
+</div> -->
 
    
 <div class="imgchat" style="margin-left:85%;position:fixed">

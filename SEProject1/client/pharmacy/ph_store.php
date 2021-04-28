@@ -67,6 +67,7 @@ if(!isset($_SESSION['username'])){
 <body >
 
   <div id="mySidenav" class="sidenav">
+  <a href="../pharmacy/pharmacy_main.php"><img src="https://img.icons8.com/material-sharp/24/000000/long-arrow-left.png"/>BACK</a>
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <img style="width:50%;margin-left: 20%;background:rgb(23, 79, 182);" src="../../images/justgotech.png" alt="justgotech">
   <a href="../account/accountinfo.php">Account Info</a>
@@ -91,8 +92,16 @@ if(!isset($_SESSION['username'])){
 </div>
 
 <div class="hname" style="margin-left:45%;color:rgb(23, 79, 182)">
+
 <h1>PHARMACY</h1>
+
+
+
+
+
 </div>
+
+
 <div class="store">
     
     <div class="card-body" style="border:2px solid blue;width:80%;">
@@ -141,7 +150,7 @@ function closeNav() {
 }
 
 function cartP(){
-  window.location.href="../pharmacy/ph_cart.php";
+  window.location.href="../pharmacy/ph_cart.php?mprev=../pharmacy/ph_store.php";
 }
 
 

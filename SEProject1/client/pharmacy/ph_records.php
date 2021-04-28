@@ -52,6 +52,7 @@ $countp=0;
 <body >
 
   <div id="mySidenav" class="sidenav">
+  <a href="../pharmacy/pharmacy_main.php"><img src="https://img.icons8.com/material-sharp/24/000000/long-arrow-left.png"/>BACK</a>
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <img style="width:50%;margin-left: 20%;background:rgb(23, 79, 182);" src="../../images/justgotech.png" alt="justgotech">
   <a href="../account/accountinfo.php">Account Info</a>
@@ -67,60 +68,90 @@ $countp=0;
 
 <div class="navb"id="main">
   <span style="font-size:30px;cursor:pointer" onclick="openNav()"><img style="width:10%" src="../../images/justgo.png" alt="justgotech"> </span>
+  <div style="float:right">
+ 
+  <span style="font-size:20px;cursor:pointer;margin-left:65% " onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:10%" src="../../images/stethoscope.png" alt="profile"> </span>
+  <button onclick="cartP()"style="background:none;border:none"><img   src="https://img.icons8.com/fluent/48/4a90e2/fast-cart.png"/></button>
+  </div>
   
-  <span style="font-size:20px;cursor:pointer; float:right; margin-right: -32%" onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:10%" src="../../images/stethoscope.png" alt="profile"> </span>
+</div>
 
+
+<div class="hname" style="margin-left:35%;color:rgb(23, 79, 182)">
+<h1>PHARMACY PURCHASES</h1>
 </div>
 
 <div class="row">
-  <div>
-<div class="bcart" style="margin-left:400px;margin-top: 10px">
- <div style="background:blue;color:white; width:40%;border-radius:10px 10px 0 0; height: 50px">
-  <h5 style="float:left;margin-left: 8px;margin-top: 15px;">Order#A123  </h5>
+<?php  $puc="SELECT * from pharm_orders where PatientID=$patient";
+$pur=mysqli_query($conn,$puc);
+//$purc=mysqli_fetch_assoc($pur);
+
+
+while($purc=mysqli_fetch_assoc($pur)){
+  $id=$purc['POID'];
+
+?>
+<div class='col-md-4' style="width:110%">
+<div class="bcart" style="margin-left:300px;margin-top: 60px">
+ <div style="background:blue;color:white; width:32%;border-radius:10px 10px 0 0; height: 50px">
+  <h5 style="float:left;margin-left: 8px;margin-top: 15px;">Order#JT<?php
+  echo $id?></h5>
+
+<a href="../pharmacy/ph_pay.php?id=<?php echo $id ?>" style="margin-left: 200px;margin-top:-50px" type="button" class="btn btn-primary" style="margin-bottom: 15px">TRACK ORDER</a>
 
  </div>
-<div class="tcart" style="width: 40%; border: 2px solid blue;border-radius:0 0 10px 10px">
+
+
+<div class="tcart" style="width: 32%; border: 2px solid blue;border-radius:0 0 10px 10px">
 <table class="table">
   <thead>
     <tr>
       <th scope="col">Product</th>
       <th scope="col">Quantity</th>
       <th scope="col">Price</th>
-      
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row"><?php echo "<div>
-       <h5>".$med."</h5>
-    <h6>".$ph."</h6>
-    <p>12 strips in a box</p>
-    <p>".$loc."</p>
-</div>
-"; ?></th>
-      <td > 1</td>
-      <td>
-        <div style="color:blue"><h5>Ghc 20</h5>
-      </div>
-        
-      </td>
-    </tr>
+  <?php
 
+
+  $swl="SELECT * FROM perm_cart 
+  inner join temp_cart on perm_cart.TC=temp_cart.TC 
+  inner join pharm_orders on perm_cart.POID=pharm_orders.POID 
+  inner join pharm_drugs on temp_cart.PHD=pharm_drugs.PHD 
+  inner join pharmacists on pharm_drugs.PharmID=pharmacists.PharmID 
+  inner join drugs  on pharm_drugs.DID = drugs.DID 
+  where temp_cart.PatientID=$patient and pharm_orders.POID=$id
+  ORDER BY perm_cart.TC DESC ";
+  $sw=mysqli_query($conn,$swl);
+
+  if(mysqli_num_rows($sw)>0){
+  while($sl=mysqli_fetch_assoc($sw)){
+
+  echo "
     <tr>
-      <th scope="row"><?php echo "<div>
-       <h5>".$med."</h5>
-    <h6>".$ph."</h6>
-    <p>12 strips in a box</p>
-    <p>".$loc."</p>
+      <th scope='row'>
+      <div>
+       <h5>".$sl['DName']."</h5>
+    <h6>".$sl['Pharm_Name']."</h6>
+    <p>".$sl['Description']."</p>
+    <p>".$sl['Special_notes']."</p>
+    <p>".$sl['Pickup_Mode']."</p>
 </div>
-"; ?></th>
-      <td > 1</td>
+</th>"; ?>
+<!-- <input style="width:50%" class="quantity" min="0" name="quantity" value="1" type="number"> -->
+      <td > <h4><?php echo $sl['Item_quantity']?></h4></td>
       <td>
-        <div style="color:blue"><h5>Ghc 20</h5>
+        <div style="color:blue"><h4>Ghc <?php $bill=$sl['Price']; echo "$bill" ;?></h4>
       </div>
         
       </td>
+     
     </tr>
+    <?php
+ }
+}
+    ?>
     
   </tbody>
 
@@ -128,10 +159,17 @@ $countp=0;
 
   <td colspan="4">
     <div style="float:right">
-      <p>SubTotal: Ghc 20 </p>
-      <p>Tax: Ghc 2 </p>
-      <p>Delivery: Ghc 5 </p>
-      <p>Total: Ghc 27 </p>
+      <p>TOTAL BILL:Ghc <?php 
+      $bils="SELECT P_Bill from pharm_orders where POID=$id";
+      $bis=mysqli_query($conn,$bils);
+      
+    
+      $bisl=mysqli_fetch_assoc($bis);
+      $bil=$bisl['P_Bill'];
+      echo $bil;
+      
+      
+      ?> </p>
 
 
 
@@ -141,77 +179,11 @@ $countp=0;
 </tr>
 </table>
 </div>
+
+
 </div>
+<?php }?>
 
-<div>
-<div class="bcart" style="margin-left:400px;margin-top: 10px">
- <div style="background:blue;color:white; width:40%;border-radius:10px 10px 0 0; height: 50px">
-  <h5 style="float:left;margin-left: 8px;margin-top: 15px;">Order#A123  </h5>
-
- </div>
-<div class="tcart" style="width: 40%; border: 2px solid blue;border-radius:0 0 10px 10px">
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Product</th>
-      <th scope="col">Quantity</th>
-      <th scope="col">Price</th>
-      
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row"><?php echo "<div>
-       <h5>".$med."</h5>
-    <h6>".$ph."</h6>
-    <p>12 strips in a box</p>
-    <p>".$loc."</p>
-</div>
-"; ?></th>
-      <td > 1</td>
-      <td>
-        <div style="color:blue"><h5>Ghc 20</h5>
-      </div>
-        
-      </td>
-    </tr>
-
-    <tr>
-      <th scope="row"><?php echo "<div>
-       <h5>".$med."</h5>
-    <h6>".$ph."</h6>
-    <p>12 strips in a box</p>
-    <p>".$loc."</p>
-</div>
-"; ?></th>
-      <td > 1</td>
-      <td>
-        <div style="color:blue"><h5>Ghc 20</h5>
-      </div>
-        
-      </td>
-    </tr>
-    
-  </tbody>
-
-  <tr>
-
-  <td colspan="4">
-    <div style="float:right">
-      <p>SubTotal: Ghc 20 </p>
-      <p>Tax: Ghc 2 </p>
-      <p>Delivery: Ghc 5 </p>
-      <p>Total: Ghc 27 </p>
-
-
-
-
-    </div>
-   </td>
-</tr>
-</table>
-</div>
-</div>
 </div>
 
 
@@ -240,6 +212,11 @@ function openNav() {
 function closeNav() {
   document.getElementById("mySidenav").style.width = "0";
   document.getElementById("main").style.marginLeft= "0";
+}
+function cartP(){
+
+  window.location.href="../pharmacy/ph_cart.php?mprev=../pharmacy/ph_records.php";
+
 }
 
 
