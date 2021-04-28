@@ -13,8 +13,8 @@ final class Testing extends TestCase
         $patientID =7;
         $mess = "Hi";
 
-        $sql = "SELECT * FROM customer WHERE username  = $username";
-        // $sql1 = "SELECT Egit mployeeFname FROM Employee WHERE EmployeeID = '$username'";
+        $sql = "SELECT * FROM customer WHERE username  = '$username'";
+        // $sql1 = "SELECT EmployeeFname FROM Employee WHERE EmployeeID = '$username'";
         // $result="INSERT INTO Customer (CustomerFName, CustomerLName, CustomerGender, CustomerTelephone, CustomerAddress, Status, Diagnosis, LastCheckupDate) VALUES ('Rachel', 'Asamoah', 'female', '0246055185', 'Teshie', 'Healthy', 'Head','2020-11-24')";
         // $department="SELECT DepartmentName from department";
 
