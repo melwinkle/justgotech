@@ -11,6 +11,7 @@
             $txid = $_GET['transaction_id']; //transaction ID
 
             $curl = curl_init();
+
             //verifying the transaction from the verification endpoint
             curl_setopt_array($curl, array(
                 CURLOPT_URL => "https://api.flutterwave.com/v3/transactions/{$txid}/verify",

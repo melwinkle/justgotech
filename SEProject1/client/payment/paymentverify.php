@@ -69,6 +69,7 @@ require_once('../../database/connection.php');
         echo $response;
         echo '</pre>';
         $res = json_decode($response);
+        
         if($res->status == 'success')
         {
             $link = $res->data->link;

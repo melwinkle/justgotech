@@ -29,7 +29,7 @@ if(!isset($_SESSION['username'])){
 						<h2>Welcome to Just Go Tech Payment Portal </h2>
                         <div>
 						<!-- <input type = "submit"  name = "cardsubmit" value = "PROCEED" > -->
-                            <button> <a href = "https://flutterwave.com/pay/justgotech" >PROCEED </a></button>
+                            <button> <a href = "https://flutterwave.com/pay/paymenttwo" >PROCEED </a></button>
            		        </div>
 						
 </body>
