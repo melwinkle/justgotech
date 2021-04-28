@@ -1,4 +1,4 @@
-<!-- Home page for covid testing -->
+<!-- Home page for pharmacy -->
 <?php
 error_reporting(0);
 require_once("../../database/connection.php");
@@ -85,6 +85,10 @@ PURCHASES
 </div>
 <div style="margin-left:35%;margin-top: 40px;">
   <button onclick="track()"style="width:55%;background:rgb(23, 79, 95);height:300px;border-radius:10px;border:3px black;color:white;font-size:24pt">TRACK ORDERS</buttom>
+  <button class="purchase" onclick="payP()" style="width:40%;background:rgb(23, 79, 110);height:300px;border-radius:10px;border:3px black;color:white;font-size:24pt">
+PAYMENT
+</button>
+
 </div>
 
    
@@ -122,6 +126,10 @@ function purP() {
 }
 function track() {
     window.location.href ="../pharmacy/ph_pay.php";
+}
+
+function payP() {
+    window.location.href ="../payment/index.php";
 }
 </script>
 </body>

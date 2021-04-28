@@ -10,7 +10,7 @@ if(!isset($_SESSION['username'])){
   echo "<script>location.href = './logout.php'</script>";
 }
    
-require_once('../database/connection.php'); 
+require_once('../../database/connection.php'); 
 
      
 // collecting records from payment card

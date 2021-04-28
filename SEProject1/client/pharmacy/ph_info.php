@@ -27,20 +27,28 @@ if(!isset($_SESSION['username'])){
   $dise="SELECT * from diseases where PatientID=$patient";
   $redise=mysqli_query($conn,$dise);
   $rowdise=mysqli_fetch_assoc($redise);
+  
+if(isset($_POST['shop'])){
+    $drug=$_POST['drug'];
+    $location=$_POST['location'];
 
 
-
-  if(isset($_GET['success'])|| isset($_GET['failure'])){
-    $drug=$_GET['drug'];
-    $location=$_GET['location'];
-
-
-
-    $sql_ph="SELECT * FROM pharm_drugs inner join pharmacists on pharm_drugs.PharmID=pharmacists.PharmID inner join drugs  on pharm_drugs.DID = drugs.DID where drugs.Queries LIKE '%$drug%' and pharmacists.Location_queries LIKE '%$location%'";
+    $sql_ph="SELECT * FROM pharm_drugs inner join pharmacists on pharm_drugs.PharmID=pharmacists.PharmID inner join drugs  on pharm_drugs.DID = drugs.DID where drugs.Queries LIKE '%$drug%' and pharmacists.Location_queries LIKE '%$location%';";
     $pharm=mysqli_query($conn,$sql_ph);
    
 }
 
+  
+if(isset($_GET['success'])|| isset($_GET['failure'])){
+  $drug=$_GET['drug'];
+  $location=$_GET['location'];
+
+
+
+  $sql_ph="SELECT * FROM pharm_drugs inner join pharmacists on pharm_drugs.PharmID=pharmacists.PharmID inner join drugs  on pharm_drugs.DID = drugs.DID where drugs.Queries LIKE '%$drug%' and pharmacists.Location_queries LIKE '%$location%'";
+  $pharm=mysqli_query($conn,$sql_ph);
+ 
+}
 
 ?>
 
@@ -85,7 +93,7 @@ if(!isset($_SESSION['username'])){
   <div style="float:right">
  
   <span style="font-size:20px;cursor:pointer;margin-left:65% " onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:10%" src="../../images/stethoscope.png" alt="profile"> </span>
-  <button style="background:none;border:none"><img   src="https://img.icons8.com/fluent/48/4a90e2/fast-cart.png"/></button>
+  <button onclick="cartP()"style="background:none;border:none"><img   src="https://img.icons8.com/fluent/48/4a90e2/fast-cart.png"/></button>
   </div>
   
 </div>
@@ -96,9 +104,9 @@ if(!isset($_SESSION['username'])){
 <div class="store">
     
     <div class="card-body" style="border:2px solid blue;width:80%;">
-    <form class="fsearch" action="ph_info.php" method="post" style="margin-left:20px">
-        <input type="text" name="drug" id="drug" placeholder="  Drug eg.Paracetamol" value="<?php if(isset($drug)){ echo $drug;} else{echo "";}?>"style="width:48%;height:6%;" >
-        <input type="text" name="location" id="location" placeholder="  Location eg.Osu" value="<?php if(isset($location)){ echo $location;} else{echo "";}?>" style="margin-left:40px;width:45%;height:6%;" ><br>
+    <form class="fsearch" action="<?php echo $_SERVER['PHP_SELF']?>" method="post" style="margin-left:20px">
+        <input type="text" name="drug" id="drug" placeholder="  Drug eg.Paracetamol" style="width:48%;height:6%;" value="<?php echo $drug?>">
+        <input type="text" name="location" id="location" placeholder="  Location eg.Osu" style="margin-left:40px;width:45%;height:6%;" value="<?php echo $location?>"><br>
 
 
         <button name="shop" type="submit" class="btn btn-primary btn-lg" style="color: white; background:rgb(23, 79, 182);margin-top:10px;margin-left:30%;width:40%">Search</button>
@@ -107,6 +115,80 @@ if(!isset($_SESSION['username'])){
 </div>
 
 
+
+<?php 
+if(mysqli_num_rows($pharm)>0){
+
+?>
+
+
+
+<div id="inf" class="info" style="margin-top: 30px;margin-left: 15%;" >
+
+<div class="row">
+
+  <?php 
+
+
+while($ph_row=mysqli_fetch_assoc($pharm)){
+  $phd=$ph_row['PHD'];
+  $phn=$ph_row['Pharm_Name'];
+  $phr=$ph_row['DName'];
+
+      echo "   
+
+<div class='col-md-4'>
+<div class='card  mb-4 shadow-sm '  style='background:rgb(23,79,182);width:90%;border-radius:10px;color:white'>
+      <div class='card-body'>
+    <h3>".$ph_row['Pharm_Name']."</h3>
+    <h4>".$ph_row['Location']."</h4>
+    <h5>".$ph_row['DName']."</h5>
+    <h3 >Ghc".$ph_row['Price']."</h3>
+    <div style='margin-top:25px'>
+
+
+
+    <img style='align:left' src='https://img.icons8.com/ios-filled/50/0E561F/filled-circle.png'/>
+    <a href='../pharmacy/ph_temp.php?action=add&phd=$phd&drug=$drug&location=$location' style='background: none;border:none;margin-left:70%'><img src='https://img.icons8.com/android/24/ffffff/plus.png'/></a>
+    
+</div>
+
+</div>
+    </div>
+  
+  </div>
+  ";
+
+ 
+}
+
+
+
+  ?>
+
+
+  
+  
+
+
+
+
+
+  </div>
+  </div>
+
+<?php
+}
+else{
+ echo "<div id='fail' style='text-align:center;margin-top:5%;margin-left: 100px; color:rgb(23,79,182)'>
+ <h3>DRUG NOT FOUND</h3>
+ </div>";
+}
+
+?>
+
+
+ 
 
 
 
@@ -141,7 +223,9 @@ function closeNav() {
 }
 
 
-
+function cartP(){
+  window.location.href="../pharmacy/ph_cart.php";
+}
 
 
 </script>
