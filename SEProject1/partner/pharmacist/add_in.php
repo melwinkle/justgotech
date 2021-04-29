@@ -1,0 +1,1 @@
+<!-- page for adding new inventory pharm_drugs -->
