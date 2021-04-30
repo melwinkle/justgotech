@@ -112,7 +112,7 @@ echo date('d-M');
     <div class="col-sm-4">    
 
     <div class='card  mb-4 shadow-sm '  style='background:white;height:150px;width:78%;border-radius:2px;color:#cccccc'>
-    <h2 style="margin-top:10px;color:skyblue;text-align:center"><img src="https://img.icons8.com/wired/64/3498db/get-cash.png"/>GHc <?php if($balance){echo $balance;}echo "0";?></h2>
+    <h2 style="margin-top:10px;color:skyblue;text-align:center"><img src="https://img.icons8.com/wired/64/3498db/get-cash.png"/>GHc <?php echo $balanc;?></h2>
                      <h6 style="text-align:center">BALANCE</h6>
             </div>
     </div>

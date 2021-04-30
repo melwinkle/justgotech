@@ -72,11 +72,11 @@ require_once("../../database/connection.php");
 			$id = $_GET['id'];
 			
 						
-			$query = "UPDATE Delivery SET DelFName='$firstname',DelLName='$lastname',DelNum='$num' where DelID=$id";
+			$query = "UPDATE Delivery SET DelFName='$firstname',DelLName='$lastname',DelNum='$num' WHERE DelID=$id";
 			$sql = mysqli_query($conn,$query);
 
 			if($sql){
-				header("Location: ../delivery/dupdate.php?succes=true");
+				header("Location: ../delivery/dupdate.php?success=true");
 			}
 			header("Location: ../delivery/dupdate.php?failure=true&id=$id&$firstname&$lastname&$num");
 			
