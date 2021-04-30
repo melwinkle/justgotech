@@ -87,36 +87,25 @@ echo date('d-M');
 
 <div class="main"style="margin-left:30%;margin-top:3%">
 <div style="margin-left:55%;color:#3498db">
-<a style="color:#3498db;font-size:18pt"href="../delivery/dpass.php"><img src="https://img.icons8.com/metro/26/3498db/lock-2.png"/>Change Password</a>
+<a style="color:#3498db;font-size:18pt"href="../delivery/dupdate.php"><img src="https://img.icons8.com/metro/26/3498db/lock-2.png"/>Back to Main</a>
 </div>
     <div class="row">
         <div class="col-sm-4">    
-             <div class='card  mb-4 shadow-sm '  style='background:#ffffff;height:600px;width:250%;border-radius:10px;color:#3498db'>
+             <div class='card  mb-4 shadow-sm '  style='background:#ffffff;height:300px;width:250%;border-radius:10px;color:#3498db'>
                     <h2 style="margin-top:10px;color:#3498db;text-align:center"><img src="https://img.icons8.com/fluent-systems-filled/48/3498db/guest-male.png"/>ACCOUNT INFORMATION</h2>
                
 
                     <div style="margin-left:15%;margin-top:2%">
                        
                       <form action="ddash.php?id=<?php echo $del;?>" method="post">
-                        <label for="user">Username</label><br>
-                        <input style="border:1px solid #3498db;border-radius:5px;width:80%"type="text" name="user" id="user" value="<?php echo $username;?>"readonly><br>
+                        <label for="user">New Password</label><br>
+                        <input style="border:1px solid #3498db;border-radius:5px;width:80%"type="password" name="newp" id="user" ><br>
 
-                        <label for="fname">First Name</label><br>
-                        <input style="border:1px solid #3498db;border-radius:5px;width:80%" type="text" name="fname" id="fname" value="<?php echo $fn;?>"><br>
+                        <label for="fname">Confirm New Passowrd</label><br>
+                        <input style="border:1px solid #3498db;border-radius:5px;width:80%" type="password" name="renewp" id="fname" ><br>
 
-                        <label for="lname">Last Name</label><br>
-                        <input style="border:1px solid #3498db;border-radius:5px;width:80%" type="text" name="lname" id="lname" value="<?php echo $ln;?>"><br>
-
-                        <label for="dob">Date of Birth</label><br>
-                        <input style="border:1px solid #3498db;border-radius:5px;width:80%" type="text" name="dob" id="dob" value="<?php echo $dob;?>" readonly ><br>
-
-                        <label for="gender">Gender</label><br>
-                        <input style="border:1px solid #3498db;border-radius:5px;width:80%"type="text" name="gender" id="gender"  value="<?php echo $gen;?>"readonly><br>
-
-                        <label for="num">Phone Number</label><br>
-                        <input style="border:1px solid #3498db;border-radius:5px;width:80%" type="text" name="num" id="num" value="<?php echo $num;?>"><br>
-
-                        <button name="update"type="submit" style="margin-top:5%;margin-left:20%;width:40%;height:10%;background:#3498db"class="btn btn-primary">UPDATE</a>
+                        
+                        <button name="pass"type="submit" style="margin-top:5%;margin-left:20%;width:40%;height:10%;background:#3498db"class="btn btn-primary">CHANGE PASSWORD</a>
                         </form>
                     </div>
                 </div>
@@ -139,7 +128,7 @@ if(isset($_GET['success'])){
     echo "<script>swal('Account Updated!')</script>";
 }
 if(isset($_GET['failure'])){
-    echo "<script>swal('Account Not Updated!')</script>";
+    echo "<script>swal('Passwordds do not match!')</script>";
 }
 
 

@@ -83,6 +83,29 @@ require_once("../../database/connection.php");
 		}
 
 
+		if(isset($_POST['pass'])){
+			$first = $_POST['newp'];
+			$last = $_POST['renewp'];
+			if($first==$last){
+				$newpass = md5(sha1($first));
+			
+			}else{
+				header("Location: ../delivery/dpass.php?failure=true");
+			}
+			$id = $_GET['id'];
+			
+						
+			$query = "UPDATE Delivery SET Delpassword='$newpass' WHERE DelID=$id";
+			$sql = mysqli_query($conn,$query);
+
+			if($sql){
+				header("Location: ../delivery/dpass.php?success=true");
+			}
+			else{
+			header("Location: ../delivery/dpass.php?failure=true&id=$id");
+			}
+		}
+
 
 		if(isset($_GET['accept'])){
 			$tc = $_GET['tc'];
