@@ -18,21 +18,21 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="sweetalert2.all.min.js"></script>
-<body style="height:120%;background-image: linear-gradient(to bottom right, skyblue, pink);">
+<body style="background-image: linear-gradient(to bottom right, skyblue, pink);">
 
 <div><img style="width:8%" src="../../images/justgotech.png" alt="justgo"></div>
 
 
-<div style="margin-left: 10%;margin-top: 3%;color:white;font-size: 48pt">
-<img style="width:20%;margin-left:45px" src="../../images/justgo.png" alt="justgo">
+<div style="margin-left:120px;margin-top:15px;color:white;font-size: 50pt">
+<img style="width:350px;margin-left:45px" src="../../images/justgo.png" alt="justgo">
 <h1>DELIVERY SERVICE</h1>
 
 
 </div>
 
-<div style="margin-left:8%;width:30%;background:white;border:none;border-radius:10px;">
+<div style="margin-left:100px;width:550px;background:white;border:none;border-radius:10px;">
 <!-- Default form login -->
-<form class="text-center border border-light p-5"style="border:none" action="ddash.php">
+<form class="text-center border border-light p-5"style="border:none" method="post" action="ddash.php">
 
     <p class="h4 mb-4">Sign in</p>
 
@@ -76,7 +76,7 @@
 <!-- Default form login -->
 </div>
 <div>
-<img style="width:40%;margin-left: 55%;margin-top: -31%"src="../../images/delivery-man.png" alt=""></div>
+<img style="width:40%;margin-left: 850px;margin-top: -400px"src="../../images/delivery-man.png" alt=""></div>
   
 </body>
 </html>

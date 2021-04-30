@@ -2,7 +2,40 @@
 <!-- page for monitoring orders -->
 
 <!-- page for delivery login -->
+<?php 
+session_start();
+require_once("../../database/connection.php");
 
+$username=$_SESSION['username'];
+$del=$_SESSION['delid'];
+$fn=$_SESSION['fname'];
+$ln=$_SESSION['lname'];
+
+
+
+$sql="SELECT sum(Fee) as balance from track_order where DelID=$del and Progress='Delivered' ";
+$result=mysqli_query($conn,$sql);
+$ri=mysqli_fetch_assoc($result);
+$balance=$ri['balance'];
+
+$date=date('Y-m-d');
+$month=date('m');
+
+$sqls="SELECT sum(Fee) as balance from track_order inner join pharm_orders on track_order.POID=pharm_orders.POID where DelID=$del and Progress='Delivered' and Order_Date=$date  ";
+$results=mysqli_query($conn,$sqls);
+$rc=mysqli_fetch_assoc($results);
+$balanc=$rc['balance'];
+
+
+$sqs="SELECT sum(Fee) as balance from track_order inner join pharm_orders on track_order.POID=pharm_orders.POID where DelID=$del and Progress='Delivered' and MONTH(Order_Date)=$month  ";
+$resuls=mysqli_query($conn,$sqs);
+$yr=mysqli_fetch_assoc($resuls);
+$balan=$yr['balance'];
+
+
+
+
+?>
 
 <!DOCTYPE html>
 <head>
@@ -60,9 +93,9 @@ echo date('d-M');
 <div class="row">
     <div class="col-sm-4">    
       
-            <div class='card  mb-4 shadow-sm '  style='background-image: linear-gradient(to bottom right,#3498db, #3488db);height:320px;width:160%;border-radius:8px;color:white'>
+            <div class='card  mb-4 shadow-sm '  style='background-image: linear-gradient(to bottom right,#3498db, #3488db);height:320px;width:600px;border-radius:8px;color:white'>
             <h4 style="float:left;margin-top:50px;"><img src="https://img.icons8.com/ios/50/ffffff/us-dollar--v1.png"/>Total Balance</h4>
-                 <h1 style="margin-top:40px;color:white;text-align:center">GHC 1000</h1>
+                 <h1 style="margin-top:40px;color:white;text-align:center">GHC <?php echo $balance;?></h1>
                    
  
              
@@ -78,7 +111,7 @@ echo date('d-M');
 
     <div class='card  mb-4 shadow-sm '  style='margin-left:70%;background-image: linear-gradient(to bottom right,#3488db, #3490db);height:150px;width:78%;border-radius:8px;color:white'>
     <h4 style="margin-top:5%;;text-align:center"><img src="https://img.icons8.com/ios/40/ffffff/us-dollar--v1.png"/>Daily Total</h4>
-            <h2 style="margin-top:10px;color:white;text-align:center">GHC 5</h2>
+            <h2 style="margin-top:10px;color:white;text-align:center">GHC <?php echo $balanc;?></h2>
                     
 
             </div>
@@ -87,7 +120,7 @@ echo date('d-M');
 
     <div class='card  mb-4 shadow-sm '  style='margin-left:-36%;background-image: linear-gradient(to bottom right,#3488db, #3478db);height:150px;width:78%;border-radius:8px;color:white;margin-top:45%'>
     <h4 style="margin-top:5%;;text-align:center"><img src="https://img.icons8.com/ios/40/ffffff/us-dollar--v1.png"/>Monthly Total</h4>
-            <h2 style="margin-top:10px;color:white;text-align:center">GHC 5</h2>
+            <h2 style="margin-top:10px;color:white;text-align:center">GHC <?php echo $balan;?></h2>
                     
 
             </div>
@@ -110,54 +143,48 @@ Receipts
 </div>
 
 <div class="row" style="margin-top: 2%">
+<?php
+$final="SELECT track_order.TID,customer.firstname,customer.lastname,pharmacists.Pharm_Name,pharmacists.Location as phLocation,track_order.Fee,pharm_orders.Location from track_order inner join perm_cart on track_order.POID=perm_cart.POID inner join pharm_orders on perm_cart.POID=pharm_orders.POID inner join temp_cart on perm_cart.TC=temp_cart.TC inner join pharm_drugs on temp_cart.PHD=pharm_drugs.PHD inner join pharmacists on pharm_drugs.PharmID=pharmacists.PharmID inner join customer on pharm_orders.PatientID=customer.PatientID where Progress='Delivered' and DelID=$del  GROUP BY track_order.POID ";
+$finale=mysqli_query($conn,$final);
+while($finales=mysqli_fetch_assoc($finale)){
+  $final_fn=$finales['firstname'];
+  $final_ln=$finales['lastname'];
+  $final_ph=$finales['Pharm_Name'];
+  $final_pl=$finales['phLocation'];
+  $final_fe=$finales['Fee'];
+  $final_lo=$finales['Location'];
+  $tc=$finales['TID'];
+  
+  ?>
     <div class="col-sm-4" >
-        <div class='card  mb-4 shadow-sm '  style='background:white;height:120px;width:115%;border-radius:2px;color:#cccccc'>
-        <span style="margin-top:2%;margin-left: 350px;color:#3498db">GHC 2</span>
-            <div style="width:90px;margin-left:20px;margin-top:-3%;color:white;background:skyblue;">
+        <div class='card  mb-4 shadow-sm '  style='background:white;height:120px;width:550px;border-radius:5px;color:#cccccc'>
+        <span style="margin-top:10px;margin-left: 440px;color:#3498db">GHC <?php echo $final_fe;?></span>
+            <div style="width:90px;margin-left:20px;margin-top:-4px;color:white;background:skyblue;">
                 <h5 style="margin-left:20px;margin-top:4px">Order
                     </h5>
-                <h4 style="margin-left: 22px">#JT1</h4>
+                <h4 style="margin-left: 15px">#TO<?php echo $tc;?></h4>
             </div>
 
-            <!-- <div style="margin-left:130px;margin-top:-12%;color:black">
+            <div style="margin-left:130px;margin-top:-60px;color:black">
                 <img src="../../images/user.png" style="width:10%;margin-left:15px"alt="">
-            <h5>Meli Zay</h5>
+            <h5><?php echo $final_fn." ".$final_ln;?></h5>
           
-            </div> -->
+            </div>
 
             
-            <div  style="margin-left:130px;margin-top:-12%">
-                <span style="color:black"><img style="width: 3%"src="../../images/oval.png"/>Pickup :</span> <span >Linux Pharmacy,Aiport</span><br>
-                <span style="color:black"><img style="width: 3%"src="../../images/place.png"/>DropOff: </span><span >Airport Mirage</span>
+            <div  style="margin-left:240px;margin-top:-80px">
+                <span style="color:black"><img style="width: 3%"src="../../images/oval.png"/>Pickup :</span> <span ><?php echo $final_ph." ".$final_pl;?></span><br>
+                <span style="color:black"><img style="width: 3%"src="../../images/place.png"/>DropOff: </span><span ><?php echo $final_lo;?></span>
             </div>       
         </div>
     </div>
 
-
+<?php
+}
+?>
 <!-- end -->
 <!-- next -->
-<div class="col-sm-4" style="margin-left:5%">
-        <div class='card  mb-4 shadow-sm '  style='background:white;height:120px;width:115%;border-radius:2px;color:#cccccc'>
-        <span style="margin-top:2%;margin-left: 350px;color:#3498db">GHC 2</span>
-            <div style="width:90px;margin-left:20px;margin-top:-3%;color:white;background:skyblue;">
-                <h5 style="margin-left:20px;margin-top:4px">Order
-                    </h5>
-                <h4 style="margin-left: 22px">#JT1</h4>
-            </div>
 
-            <!-- <div style="margin-left:130px;margin-top:-12%;color:black">
-                <img src="../../images/user.png" style="width:10%;margin-left:15px"alt="">
-            <h5>Meli Zay</h5>
-          
-            </div> -->
-
-            
-            <div  style="margin-left:130px;margin-top:-12%">
-                <span style="color:black"><img style="width: 3%"src="../../images/oval.png"/>Pickup :</span> <span >Linux Pharmacy,Aiport</span><br>
-                <span style="color:black"><img style="width: 3%"src="../../images/place.png"/>DropOff: </span><span >Airport Mirage</span>
-            </div>       
-        </div>
-    </div>
 <!-- end -->
 </div>
 

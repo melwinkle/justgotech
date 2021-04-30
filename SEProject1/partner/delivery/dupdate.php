@@ -2,6 +2,31 @@
 <!-- page for monitoring orders -->
 
 <!-- page for delivery login -->
+<?php 
+session_start();
+require_once("../../database/connection.php");
+
+$username=$_SESSION['username'];
+$del=$_SESSION['delid'];
+$fn=$_SESSION['fname'];
+$ln=$_SESSION['lname'];
+
+
+
+$sql="SELECT * from Delivery where DelID=$del  ";
+$result=mysqli_query($conn,$sql);
+$ri=mysqli_fetch_assoc($result);
+$gen=$ri['Gender'];
+$dob=$ri['DOB'];
+$num=$ri['DelNum'];
+
+
+
+
+
+
+
+?>
 
 
 <!DOCTYPE html>
@@ -28,7 +53,7 @@
 <h4 style="text-align:center;color:#2464ad">JustGo Delivery</h4>
 <hr>
   <img style="width:50%;margin-left: 20%;" src="../../images/us.png" alt="justgotech">
-  <a href="#"><h5 style="text-align:center">Frank Rose</h5></a>
+  <a href="#"><h5 style="text-align:center"><?php echo $fn." ".$ln; ?></h5></a>
   <hr>
   <a style="color:#cccccc" href="../delivery/dorder.php"><img src="https://img.icons8.com/material/24/cccccc/dashboard-layout.png"/>Dashboard</a>
   <hr>
@@ -72,26 +97,27 @@ echo date('d-M');
 
                     <div style="margin-left:15%;margin-top:2%">
                        
-
+                      <form action="ddash.php?id=<?php echo $del;?>" method="post">
                         <label for="user">Username</label><br>
-                        <input style="border:1px solid #3498db;border-radius:5px;width:80%"type="text" name="user" id="user" readonly><br>
+                        <input style="border:1px solid #3498db;border-radius:5px;width:80%"type="text" name="user" id="user" value="<?php echo $username;?>"readonly><br>
 
                         <label for="fname">First Name</label><br>
-                        <input style="border:1px solid #3498db;border-radius:5px;width:80%" type="text" name="fname" id="fname"><br>
+                        <input style="border:1px solid #3498db;border-radius:5px;width:80%" type="text" name="fname" id="fname" value="<?php echo $fn;?>"><br>
 
                         <label for="lname">Last Name</label><br>
-                        <input style="border:1px solid #3498db;border-radius:5px;width:80%" type="text" name="lname" id="lname"><br>
+                        <input style="border:1px solid #3498db;border-radius:5px;width:80%" type="text" name="lname" id="lname" value="<?php echo $ln;?>"><br>
 
                         <label for="dob">Date of Birth</label><br>
-                        <input style="border:1px solid #3498db;border-radius:5px;width:80%" type="text" name="dob" id="dob" readonly><br>
+                        <input style="border:1px solid #3498db;border-radius:5px;width:80%" type="text" name="dob" id="dob" value="<?php echo $dob;?>" readonly ><br>
 
                         <label for="gender">Gender</label><br>
-                        <input style="border:1px solid #3498db;border-radius:5px;width:80%"type="text" name="gender" id="gender" readonly><br>
+                        <input style="border:1px solid #3498db;border-radius:5px;width:80%"type="text" name="gender" id="gender"  value="<?php echo $gen;?>"readonly><br>
 
                         <label for="num">Phone Number</label><br>
-                        <input style="border:1px solid #3498db;border-radius:5px;width:80%" type="text" name="num" id="num"><br>
+                        <input style="border:1px solid #3498db;border-radius:5px;width:80%" type="text" name="num" id="num" value="<?php echo $num;?>"><br>
 
-                        <button style="margin-top:5%;margin-left:20%;width:40%;height:10%;background:#3498db"class="btn btn-primary">UPDATE</button>
+                        <button name="update"type="submit" style="margin-top:5%;margin-left:20%;width:40%;height:10%;background:#3498db"class="btn btn-primary">UPDATE</a>
+                        </form>
                     </div>
                 </div>
          </div>
