@@ -61,7 +61,7 @@
 
     <!-- Register -->
     <p>Not a member?
-        <a href="../delivery/dreg.php">Register</a>
+        <a href="../pharmacist/pharm_reg.php">Register</a>
     </p>
 
     <!-- Social login -->

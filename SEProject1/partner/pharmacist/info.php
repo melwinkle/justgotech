@@ -51,18 +51,10 @@
     </div>
 
    
-<!-- latest orders -->
-<div style="margin-left:-1%;margin-top:3%">
-<h3>
-Latest Orders
-</h3>
-<div class="progress" style="border-radius:5px;width:10%;height: 10px;margin-top:10px">
-  <div class="progress-bar bg-primary" role="progressbar" style="width:100%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-  
-</div>
-</div>
 
-<div class="main"style="margin-left:30%;margin-top:-5%">
+<!-- account -->
+
+<div class="main"style="margin-left:30%;margin-top:5%">
 <div style="margin-left:55%;color:rgb(4, 23, 75)">
 <a style="color:rgb(4, 23, 75);font-size:18pt"href="../pharmacist/update_in.php"><img src="https://img.icons8.com/metro/26/3498db/lock-2.png"/>Change Password</a>
 </div>

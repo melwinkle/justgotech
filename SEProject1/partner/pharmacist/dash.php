@@ -124,17 +124,18 @@ Latest Orders
               <li><img src="https://img.icons8.com/material-sharp/15/e74c3c/filled-circle.png"/><?php echo "Pending"; ?></li>
               <li><img src="https://img.icons8.com/material-outlined/18/cccccc/mobile-payment.png"/><?php echo "Mobile Money"; ?></li>
                     <li><img src="https://img.icons8.com/material-outlined/20/cccccc/average.png"/>Ghc <?php echo "46.2"; ?></li>
+                    <li><img src="https://img.icons8.com/ios-filled/20/e74c3c/passenger.png"/><?php echo "No Rider Assigned "; ?></li>
                   </ul>
 
               </span>
-
+<!-- 
 
             <span style="margin-left:1020px;margin-top:-110px">
             <h4>Quantity: 4</h4>
-            </span>
+            </span> -->
               
-            <span style="margin-left:980px;margin-top:20px">
-                <a href="../pharmacists/update_in.php?accept=true&pid=1&tc=1&poid=3" class="btn btn-warning">PROCESSED</a>
+            <span style="margin-left:980px;margin-top:-80px">
+                <a href="../pharmacists/update_in.php?accept=true&pid=1&tc=1&poid=3" class="btn btn-warning">PROCESS</a>
               </span>
             
           
