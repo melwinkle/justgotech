@@ -144,8 +144,8 @@ while($result=mysqli_fetch_assoc($query)){
        
          </div>
 
-            <div id="table" class="table-editable" style="margin-top:2%;background:white">
-            <table class="table table-bordered table-responsive-md w-auto">
+            <div id="table" class="table-editable" style="width:1500px;margin-top:2%;background:white">
+            <table class="table table-bordered table-responsive-md ">
             <thead>
                 <tr>
                 <th scope="col">Drug Name</th>
