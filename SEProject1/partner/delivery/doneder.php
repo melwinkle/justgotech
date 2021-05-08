@@ -7,7 +7,7 @@ session_start();
 require_once("../../database/connection.php");
 if(!isset($_SESSION['username'])){
   header("Location: ../delivery/dindex.php");
-
+}
 $username=$_SESSION['username'];
 $del=$_SESSION['delid'];
 $fn=$_SESSION['fname'];
@@ -69,7 +69,7 @@ $rating=$rc['rating']/$completed;
   <a style="color:#cccccc"href="../delivery/dbalance.php"><img src="https://img.icons8.com/wired/24/cccccc/get-cash.png"/>Balance</a>
   <hr>
 
-  <a style="color:#cccccc"href="../account/logout.php"><img src="https://img.icons8.com/material-sharp/24/e67e22/settings.png"/>Log Out</a>
+  <a style="color:#cccccc"href="../delivery/dlog.php"><img src="https://img.icons8.com/material-sharp/24/e67e22/settings.png"/>Log Out</a>
 </div>
 
 

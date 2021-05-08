@@ -21,6 +21,8 @@ $number=$result['Phnumber'];
 
 ?>
 
+<!-- dashboard for pharmacy -->
+
 
 <!DOCTYPE html>
 <head>
@@ -47,7 +49,7 @@ $number=$result['Phnumber'];
 <h4 style="text-align:center;color:white">JustGo Pharmacy</h4>
 <hr>
   <img style="width:50%;margin-left: 50px;" src="../../images/us.png" alt="justgotech">
-  <a href="#"><h4 style="text-align:center"><?php echo $fn;?></h4></a>
+  <a href="#"><h4 style="text-align:center">Linux Pharmacy</h4></a>
   <hr>
   <a style="color:#cccccc" href="../pharmacist/dash.php"><img src="https://img.icons8.com/material/24/cccccc/dashboard-layout.png"/>Dashboard</a>
   <hr>
@@ -73,35 +75,31 @@ $number=$result['Phnumber'];
 <!-- account -->
 
 <div class="main"style="margin-left:30%;margin-top:5%">
-<div style="margin-left:55%;color:rgb(4, 23, 75)">
-<a style="color:rgb(4, 23, 75);font-size:18pt"href="../pharmacist/update_pass.php"><img src="https://img.icons8.com/metro/26/3498db/lock-2.png"/>Change Password</a>
+<div style="margin-left:68%;color:rgb(4, 23, 75)">
+<a style="color:rgb(4, 23, 75);font-size:18pt"href="../pharmacist/info.php"><img src="https://img.icons8.com/ios-filled/40/4a90e2/back.png"/>BACK</a>
 </div>
     <div class="row">
         <div class="col-sm-4">    
-             <div class='card  mb-4 shadow-sm '  style='background:#ffffff;height:600px;width:250%;border-radius:10px;color:rgb(4, 23, 75)'>
-                    <h2 style="margin-top:10px;color:rgb(4, 23, 75);text-align:center"><img src="https://img.icons8.com/fluent-systems-filled/48/3498db/guest-male.png"/>ACCOUNT INFORMATION</h2>
+             <div class='card  mb-4 shadow-sm '  style='background:#ffffff;height:350px;width:250%;border-radius:10px;color:rgb(4, 23, 75)'>
+                    <h2 style="margin-top:10px;color:rgb(4, 23, 75);text-align:center"><img src="https://img.icons8.com/metro/26/3498db/lock-2.png"/>CHANGE PASSWORD</h2>
                
 
                     <div style="margin-left:15%;margin-top:2%">
                        
-                      <form action="update_in.php?pid=<?php echo $id;?>" method="post">
-                        <label for="user">Username</label><br>
-                        <input style="border:1px solid #3498db;border-radius:5px;width:80%;height:40px"type="text" name="un" id="un" value="<?php echo $username;?>"readonly><br>
+                      <form action="update_in.php?id=<?php echo $id;?>" method="post">
+                        <label for="user">New password</label><br>
+                        <input style="border:1px solid #3498db;border-radius:5px;width:80%;height:40px"type="password" name="newpass" id="user"><br>
 
 
 
-                        <label for="lname">Company Name</label><br>
-                        <input style="border:1px solid #3498db;border-radius:5px;width:80%;height:40px" type="text" name="ph" id="ph" value="<?php echo $fn;?>"><br>
+                        <label for="lname">Re-enter new password</label><br>
+                        <input style="border:1px solid #3498db;border-radius:5px;width:80%;height:40px" type="password" name="repass" id="lname"><br>
 
-                        <label for="dob">Location</label><br>
-                        <input style="border:1px solid #3498db;border-radius:5px;width:80%;height:40px" type="text" name="loc" id="loc" value="<?php echo $loc;?>" readonly ><br>
-
-                        <label for="gender">Mobile </label><br>
-                        <input style="border:1px solid #3498db;border-radius:5px;width:80%;height:40px"type="text" name="num" id="num"  maxlength=10 value="<?php echo $number;?>"><br>
+                       
 
                     
 
-                        <button name="update"type="submit" style="margin-top:5%;margin-left:20%;width:40%;height:20%;background:rgb(4, 23, 75)"class="btn btn-primary">UPDATE</a>
+                        <button name="change"type="submit" style="margin-top:5%;margin-left:20%;width:40%;height:20%;background:rgb(4, 23, 75)"class="btn btn-primary">UPDATE</a>
                         </form>
                     </div>
                 </div>
@@ -119,24 +117,8 @@ $number=$result['Phnumber'];
 
 </div>
 
-<?php
-if(isset($_GET['updated'])){
-  echo '<script>swal({
-    title: "Good job!",
-    text: "Item Updated Succesfully!",
-    icon: "success",
-    button: "Okay",
-  });</script> ';
-}
-if(isset($_GET['changed'])){
-  echo '<script>swal({
-    title: "Good job!",
-    text: "Password Updated!",
-    icon: "success",
-    button: "Okay",
-  });</script> ';
-}
-?>
+
+
 
 
 

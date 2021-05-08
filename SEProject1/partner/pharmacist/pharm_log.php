@@ -40,7 +40,7 @@
     <input type="text" name="username" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="Pharmacy ID">
 
     <!-- Password -->
-    <input type="password"  name="password "id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password">
+    <input type="password"  name="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password">
 
     <div class="d-flex justify-content-around">
         <div>
@@ -64,13 +64,7 @@
         <a href="../pharmacist/pharm_reg.php">Register</a>
     </p>
 
-    <!-- Social login -->
-    <!-- <p>or sign in with:</p>
-
-    <a href="#" class="mx-2" role="button"><i class="fab fa-facebook-f light-blue-text"></i></a>
-    <a href="#" class="mx-2" role="button"><i class="fab fa-twitter light-blue-text"></i></a>
-    <a href="#" class="mx-2" role="button"><i class="fab fa-linkedin-in light-blue-text"></i></a>
-    <a href="#" class="mx-2" role="button"><i class="fab fa-github light-blue-text"></i></a> -->
+    
 
 </form>
 <!-- Default form login -->

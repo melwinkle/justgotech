@@ -1,6 +1,47 @@
 <!-- Page for inventory-->
 
 
+<?php 
+
+session_start();
+require_once("../../database/connection.php");
+if(!isset($_SESSION['username'])){
+  header("Location: ../pharmacist/pharm_log.php" );
+}
+
+
+$username=$_SESSION['username'];
+$id=$_SESSION['phid'];
+$fn=$_SESSION['phname'];
+$loc=$_SESSION['location'];
+
+$today=date("Y-m-d");
+
+$sql="SELECT * from pharm_drugs where PharmID=$id";
+$query=mysqli_query($conn,$sql);
+$count=0;
+
+$number=mysqli_num_rows($query);
+
+
+$sdate="SELECT * from pharm_drugs where PharmID=$id and E_date <= CURRENT_DATE - INTERVAL 1 DAY";
+$squery=mysqli_query($conn,$sdate);
+$expg=mysqli_num_rows($squery);
+
+
+while($result=mysqli_fetch_assoc($query)){
+  $quan=$result['Quantity'];
+  if($quan<100){
+    $count=$count+1;
+  }
+
+ 
+
+
+}
+
+
+?>
 
 
 <!DOCTYPE html>
@@ -20,7 +61,9 @@
     <script src="sweetalert2.all.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js"></script>
     <script src="sweetalert2.all.min.js"></script>
+    <script src="pharm.js"></script>
 <body >
 
 
@@ -28,7 +71,7 @@
 <h4 style="text-align:center;color:white">JustGo Pharmacy</h4>
 <hr>
   <img style="width:50%;margin-left: 50px;" src="../../images/us.png" alt="justgotech">
-  <a href="#"><h4 style="text-align:center">Linux Pharmacy</h4></a>
+  <a href="#"><h4 style="text-align:center"><?php echo $fn;?></h4></a>
   <hr>
   <a style="color:#cccccc" href="../pharmacist/dash.php"><img src="https://img.icons8.com/material/24/cccccc/dashboard-layout.png"/>Dashboard</a>
   <hr>
@@ -55,7 +98,7 @@
     <div class="row">
                 <div class="col-sm-4">    
                          <div class='card  mb-4 shadow-sm '  style='background:rgb(4, 23, 70);height:150px;width:78%;border-radius:5px;color: white'>
-                                 <h2 style="margin-top:10px;color: white;text-align:center"><img src="https://img.icons8.com/windows/64/ffffff/packaging.png"/>100</h2>
+                                 <h2 style="margin-top:10px;color: white;text-align:center"><img src="https://img.icons8.com/windows/64/ffffff/packaging.png"/><?php echo $number; ?></h2>
                                  <h6 style="text-align:center">TOTAL STOCK</h6>
                             
                             </div>
@@ -64,7 +107,7 @@
 <!-- next card -->
                 <div class="col-sm-4">    
                         <div class='card  mb-4 shadow-sm '  style='background:rgb(4, 23, 120);height:150px;width:78%;border-radius:5px;color: white'>
-                                <h2 style="margin-top:10px;color: white;text-align:center"><img src="https://img.icons8.com/windows/64/ffffff/packaging.png"/>2</h2>
+                                <h2 style="margin-top:10px;color: white;text-align:center"><img src="https://img.icons8.com/windows/64/ffffff/packaging.png"/><?php echo $expg; ?></h2>
                                 <h6 style="text-align:center">EXPIRED STOCK</h6>
 
                             </div>
@@ -74,7 +117,7 @@
                 
                 <div class="col-sm-4">    
                         <div class='card  mb-4 shadow-sm '  style='background:rgb(4, 23, 90);height:150px;width:78%;border-radius:5px;color: white'>
-                                <h2 style="margin-top:10px;color: white;text-align:center"><img src="https://img.icons8.com/wired/64/ffffff/get-cash.png"/>5</h2>
+                                <h2 style="margin-top:10px;color: white;text-align:center"><img src="https://img.icons8.com/wired/64/ffffff/get-cash.png"/><?php echo $count; ?></h2>
                                 <h6 style="text-align:center">LOW STOCK</h6>
                             </div>
                     
@@ -95,6 +138,7 @@
 
          
 </div>
+
 <div style="margin-left:1000px;margin-top:-2.5%;">
          <a style="color:#26e07f;font-size:14pt" href="../pharmacist/add_in.php">  New Stock<img src="https://img.icons8.com/android/24/26e07f/plus.png"/></a>
        
@@ -116,43 +160,60 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="table-danger">
+            <?php 
+              $sph="SELECT * from pharm_drugs inner join drugs on pharm_drugs.DID=drugs.DID where PharmID=$id";
+              $phquery=mysqli_query($conn,$sph);
+              $i=0;
+
+
+              while($phs=mysqli_fetch_assoc($phquery)){
                
-                <td scope="row"contenteditable="true">Panadol Plus</td>
-                <td contenteditable="true">Antibiotics</td>
-                <td contenteditable="true">10 tablets per strip</td>
-                <td contenteditable="true">2025-04-21</td>
-                <td contenteditable="true">2020-03-31</td>
-                <td contenteditable="true">5</td>
-                <td contenteditable="true">Ghc 20</td>
-                <td contenteditable="true">Panadol|Paracetamol|Panadol Plus|panadol|paracetamol</td>
-                <td><button class="btn btn-warning btn-rounded btn-sm my-0">UPDATE</button></td>
-                </tr>
-               
-                <tr class="table-warning">
-                
-                <td scope="row"contenteditable="true">Panadol Plus</td>
-                <td contenteditable="true">Antibiotics</td>
-                <td contenteditable="true">10 tablets per strip</td>
-                <td contenteditable="true">2025-04-21</td>
-                <td contenteditable="true">2020-03-31</td>
-                <td contenteditable="true">105</td>
-                <td contenteditable="true">Ghc 20</td>
-                <td contenteditable="true">Panadol|Paracetamol|Panadol Plus|panadol|paracetamol</td>
-                <td><button class="btn btn-warning btn-rounded btn-sm my-0">UPDATE</button></td>
-                </tr>
+                $pid=$phs['DID'];
+                  
+              if($phs['Quantity']>=150){
+
+              
+
+
+
+              ?>
                 <tr>
+               <?php 
+              }
+              else if($phs['Quantity']>=100 && $phs['Quantity']<150){
+
+              
+               ?>
+                <tr class="table-warning" >
+                <?php 
+              }
+                else if($phs['Quantity']<100){
+                  ?>
+
+                <tr class="table-danger" >  
+                <?php
                 
-                <td scope="row"contenteditable="true">Panadol Plus</td>
-                <td contenteditable="true">Antibiotics</td>
-                <td contenteditable="true">10 tablets per strip</td>
-                <td contenteditable="true">2025-04-21</td>
-                <td contenteditable="true">2020-03-31</td>
-                <td contenteditable="true">200</td>
-                <td contenteditable="true">Ghc 20</td>
-                <td contenteditable="true">Panadol|Paracetamol|Panadol Plus|panadol|paracetamol</td>
-                <td><button class="btn btn-warning btn-rounded btn-sm my-0">UPDATE</button></td>
+                }
+                
+                ?>
+                
+                <td scope="row" contenteditable="false"><?php echo $phs['DName']; ?></td>
+                <td contenteditable="false"><?php echo $phs['Drug_type'];?></td>
+                <td contenteditable="false"><?php echo $phs['Description'];?></td>
+                <td contenteditable="false" id="md"><?php echo $phs['M_date'];?></td>
+                <td contenteditable="false" id="ed"><?php echo $phs['E_date'];?></td>
+                <td contenteditable="false" id="Quantity"><?php echo $phs['Quantity'];?></td>
+                <td contenteditable="false" id="price">Ghc <?php echo $phs['Price'];?></td>
+                <td contenteditable="false" id="quer"><?php echo $phs['Queries'];?></td>
+                <td><button onclick="upd('<?php echo $pid;?>')"class="btn btn-success btn-rounded btn-sm my-0">UPDATE</button></td>
                 </tr>
+               
+               
+                
+              <?php 
+             $i++;
+              }
+              ?>
             </tbody>
             </table>
 
@@ -161,6 +222,27 @@
         
                 <!-- end of table -->
 </div>
+
+<?php 
+if(isset($_GET['success'])){
+  ?>
+<script>swal({
+  title: "Good job!",
+  text: "Item Added Succesfully!",
+  icon: "success",
+  button: "Okay",
+});</script> 
+<?php
+}
+if(isset($_GET['updated'])){
+  echo '<script>swal({
+    title: "Good job!",
+    text: "Item Updated Succesfully!",
+    icon: "success",
+    button: "Okay",
+  });</script> ';
+}
+?>
 <script>
 function openTab(tabName) {
   var i, x;
@@ -187,7 +269,17 @@ function nec(){
 }
 
 
+function upd(did){
+     //let quant=document.getElementById("Quantity").innerHTML;
+     window.location.href = "../pharmacist/update_inv.php?edit&did="+did;
+    // window.location.href = "../pharmacist/update_in.php?edit&did=<?php echo $pid;?>&pid=<?php echo $id;?>&quan=" + quant; 
+      
+}
+
+
 </script>
+
+
 </body>
 
 </html>

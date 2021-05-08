@@ -3,7 +3,23 @@
 
 
 <!-- dashboard for pharmacy -->
+<?php 
 
+session_start();
+require_once("../../database/connection.php");
+if(!isset($_SESSION['username'])){
+  header("Location: ../pharmacist/pharm_log.php" );
+}
+
+
+$username=$_SESSION['username'];
+$id=$_SESSION['phid'];
+$fn=$_SESSION['phname'];
+$loc=$_SESSION['location'];
+
+
+
+?>
 
 <!DOCTYPE html>
 <head>
@@ -68,14 +84,39 @@
 
                     <div style="margin-left:15%;margin-top:2%">
                        
-                      <form action="update_in.php?id=<?php echo "Linux";?>" method="post">
+                      <form action="update_in.php?pid=<?php echo $id;?>" method="post">
                         <label for="user">Drug Name</label><br>
                         <input style="border:1px solid #3498db;border-radius:5px;width:80%;height:40px"type="text" name="dn" id="user" ><br>
 
 
 
                         <label for="lname">Drug Type</label><br>
-                        <input style="border:1px solid #3498db;border-radius:5px;width:80%;height:40px" type="text" name="dt" id="lname" ><br>
+                        <select style="border:1px solid #3498db;border-radius:5px;width:80%;height:40px" name="dt" id="dt">
+                        
+                          <?php 
+                          $dr="SELECT COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'drugs' AND COLUMN_NAME = 'Drug_type'";
+                          $drs=mysqli_query($conn,$dr);
+                          while($rw = mysqli_fetch_array($drs)) {
+                             $type=$rw['COLUMN_TYPE'];
+                      
+                             $output = str_replace("enum('", "", $type);
+                      
+                      // $output will now be: Equipment','Set','Show
+                             $output = str_replace("')", "", $output);
+                      
+                             // array $results contains the ENUM values
+                             $results = explode("','", $output);
+                      
+                             for($i = 0; $i < count($results); $i++) {
+                                 echo " <option value='$results[$i]'>$results[$i]</option>";
+                             }
+                              
+                          }
+                          
+                          ?>
+                          
+                        </select><br>
+                        
 
                         <label for="dob">Description</label><br>
                         <input style="border:1px solid #3498db;border-radius:5px;width:80%;height:40px" type="text" name="desc" id="dob" ><br>
@@ -89,7 +130,7 @@
                         <label for="price">Price </label><br>
                         <input style="border:1px solid #3498db;border-radius:5px;width:80%;height:40px"type="number" name="price" id="price" ><br>
                         <label for="quer">Queries </label><br>
-                        <input style="border:1px solid #3498db;border-radius:5px;width:80%;height:40px"type="text" name="quers" id="quer" ><br>
+                        <input style="border:1px solid #3498db;border-radius:5px;width:80%;height:40px"type="text" name="quer" id="quer" ><br>
 
                     
 

@@ -40,7 +40,7 @@
     <input type="text" name="username" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="Username">
 
     <!-- Password -->
-    <input type="password"  name="password "id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password">
+    <input type="password"  name="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password">
 
     <div class="d-flex justify-content-around">
         <div>
@@ -57,7 +57,7 @@
     </div>
 
     <!-- Sign in button -->
-    <button name="submit"class="btn btn-primary btn-block my-4" type="submit">Sign in</button>
+    <button name="submit" class="btn btn-primary btn-block my-4" type="submit">Sign in</button>
 
     <!-- Register -->
     <p>Not a member?
