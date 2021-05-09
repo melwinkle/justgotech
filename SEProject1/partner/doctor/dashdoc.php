@@ -20,10 +20,29 @@ $fn=$_SESSION['fname'];
 $ln=$_SESSION['lname'];
 $dn=$_SESSION['dept'];
 
+$today=date('Y-m-d');
 $sql="SELECT Docnum from Doctor where DocID=$id";
 $query=mysqli_query($conn,$sql);
 $result=mysqli_fetch_assoc($query);
 $number=$result['Docnum'];
+
+
+
+$bk="SELECT * from booking where Doctor=$id and STATUS='PENDING'";
+$bkq=mysqli_query($conn,$bk);
+$number=mysqli_num_rows($bkq);
+
+
+
+$bkd="SELECT * from booking where Doctor=$id and STATUS='COMPLETED'";
+$bkdq=mysqli_query($conn,$bkd);
+$db=mysqli_num_rows($bkdq);
+
+
+
+$bkb="SELECT * from book_pay inner join booking on book_pay.BID=booking.BID where Doctor=$id and Appointment=$today";
+$bkbq=mysqli_query($conn,$bkb);
+$expg=mysqli_num_rows($bkbq);
 
 ?>
 
@@ -55,9 +74,9 @@ $number=$result['Docnum'];
   <img style="width:50%;margin-left: 50px;" src="../../images/us.png" alt="justgotech">
   <a href="#"><h4 style="text-align:center"><?php echo $fn;echo $ln;?></h4></a>
   <hr>
-  <a style="color:#cccccc" href="../doctor/dashdoc.php"><img src="https://img.icons8.com/material/24/cccccc/dashboard-layout.png"/>Dashboard</a>
+  <a  href="../doctor/dashdoc.php"><img src="https://img.icons8.com/material/24/3498db//dashboard-layout.png"/>Dashboard</a>
   <hr>
-  <a href="../doctor/daccount.php"><img src="https://img.icons8.com/fluent-systems-filled/24/3498db/delivery-scooter.png"/>Account</a>
+  <a style="color:#cccccc" href="../doctor/daccount.php"><img src="https://img.icons8.com/fluent-systems-filled/24/cccccc/delivery-scooter.png"/>Account</a>
   <hr>
   <a style="color:#cccccc" href="../doctor/book.php"><img src="https://img.icons8.com/fluent-systems-filled/24/cccccc/guest-male.png"/>Bookings</a>
   <hr>
@@ -80,14 +99,208 @@ $number=$result['Docnum'];
 
 <!-- account -->
 
-<div class="main"style="margin-left:30%;margin-top:5%">
+<div class="main"style="margin-left:18%;margin-top:2%">
 
     <div class="row">
-        
+        <div class="col-sm-4">    
+                         <div class='card  mb-4 shadow-sm '  style='background:rgb(4, 23, 70);height:150px;width:78%;border-radius:5px;color: white'>
+                                 <h2 style="margin-top:10px;color: white;text-align:center"><img src="https://img.icons8.com/windows/64/ffffff/packaging.png"/><?php echo $number;?></h2>
+                                 <h6 style="text-align:center">DAILY INCOMING CONSULTATION</h6>
+                            
+                            </div>
+
+                     </div>
+<!-- next card -->
+                <div class="col-sm-4">    
+                        <div class='card  mb-4 shadow-sm '  style='background:rgb(4, 23, 120);height:150px;width:78%;border-radius:5px;color: white'>
+                                <h2 style="margin-top:10px;color: white;text-align:center"><img src="https://img.icons8.com/windows/64/ffffff/packaging.png"/><?php echo $db;?></h2>
+                                <h6 style="text-align:center">DAILY COMPLETED CONSULTATION</h6>
+
+                            </div>
+                
+                    </div>
+                    <!-- next card -->
+                
+                <div class="col-sm-4">    
+                        <div class='card  mb-4 shadow-sm '  style='background:rgb(4, 23, 90);height:150px;width:78%;border-radius:5px;color: white'>
+                                <h2 style="margin-top:10px;color: white;text-align:center"><img src="https://img.icons8.com/wired/64/ffffff/get-cash.png"/><?php echo $expg;?></h2>
+                                <h6 style="text-align:center">DAILY BALANCE</h6>
+                            </div>
+                    
+                    </div>
+            </div>
     </div>
+
+    
 </div>
 <!-- next -->
+<div style="margin-left:18%;margin-top:3%">
+             <h3>Latest Bookings</h3>
+            <div class="progress" style="border-radius:5px;width:10%;height: 10px;margin-top:10px">
+                    <div class="progress-bar bg-primary" role="progressbar" style="width:100%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+  
+                </div>
+       
 
+
+        <div class="row" style="margin-top: 2%">
+
+<?php  
+
+$final="SELECT * from booking  inner join customer on booking.PatientID=customer.PatientID where Doctor=$id order by booking.BID";
+$finale=mysqli_query($conn,$final);
+if(mysqli_num_rows($finale)>0){
+while($finales=mysqli_fetch_assoc($finale)){
+  $final_fn=$finales['firstname'];
+  $final_ln=$finales['lastname'];
+$final_id=$finales['BID'];
+  
+  $final_pr=$finales['STATUS'];
+  $final_py=$finales['Department'];
+$final_q=$finales['Appointment'];
+//$final_fe=$finales['PaymentFee'];
+  $final_r=$finales['Reason'];
+  $final_in=$finales['Insurance'];
+  $final_name=$finales['Person'];
+  $final_delid=$finales['Insurance_Name'];
+  $final_num=$finales['phonenumber'];
+
+
+   
+
+
+  ?>
+<div class="column">
+        <div class='card  mb-4 shadow-sm '  style='background:white;height:145px;width:1150px;border-radius:2px;color:#cccccc'>
+            <span style="width:90px;margin-left:20px;margin-top:15px;color:white;background:rgb(4, 23, 75);;">
+              <h1 style="margin-left:20px;margin-top:4px">29</h1>
+              <h4 style="margin-left: 22px">Apr</h4>
+            </span>
+
+          <span style="margin-left:150px;margin-top:-99px;color:black">
+          
+              <img src="../../images/user.png" style="width:5%;margin-left:13px"alt="">
+              <h6 style="margin-left:15px;font-size:10px">#Book JP<?php echo $final_id;?></h6>
+              <h6><?php echo $final_num;?></h6>
+              <h5><?php echo $final_fn." ".$final_ln; ?></h5>
+            </span>
+
+          <span style="margin-left:290px;margin-top:-130px">
+                <ul style=" list-style-type: none">
+                    <li><span style="color:black"><img style="width: 1.5%" src="../../images/oval.png">Department: <?php echo $final_py;?></span> </li>
+                    <li><span style="color:black"><img style="width: 1.5%" src="../../images/oval.png">Reason: <?php echo $final_r;?></span> </li>
+
+                  </ul>
+              </span>
+           
+            <span style="margin-left:700px;margin-top:-60px">
+                <ul style=" list-style-type: none">
+                <?php 
+                
+                $book="SELECT PaymentFee from book_pay where BID=$final_id";
+                $bookq=mysqli_query($conn,$book);
+                $numb=mysqli_num_rows($bookq);
+                if($numb>0){
+                    $fin=mysqli_fetch_assoc($bookq);
+                    $final_fe=$fin['PaymentFee'];
+                }
+                else{
+                    $final_fe=0.0;
+                }
+
+                if($final_pr=="PENDING"){
+                  ?>
+                <li><img src="https://img.icons8.com/material-sharp/15/e67e22/filled-circle.png"/><?php echo $final_pr; ?></li>
+                <li><img src="https://img.icons8.com/material-outlined/18/cccccc/mobile-payment.png"/>Insurance:<?php echo $final_in; ?></li>
+                        <li><img src="https://img.icons8.com/material-outlined/20/cccccc/average.png"/><?php echo $final_name; ?></li>
+                        <li><img src="https://img.icons8.com/ios-filled/20/e74c3c/passenger.png"/>Ghc <?php echo $final_fe;?></li>
+                        <?php if($final_in=="Yes"){
+                           echo ' <li><img src="https://img.icons8.com/material-outlined/18/cccccc/mobile-payment.png"/>'.$final_delid.'</li>';
+                            }else{
+                                echo " ";
+                            }
+                            ?>
+                      </ul>
+    
+                  </span>
+    
+    
+                  
+                <span style="margin-left:970px;margin-top:-85px">
+                    <a href="../doctor/notify.php?accept=true&tc=<?php echo $final_id;?>"  class="btn btn-warning">ACCEPT</a>
+                  </span>
+                <?php
+                }
+            if($final_pr=="BOOKED"){
+              ?>
+            <li><img src="https://img.icons8.com/material-sharp/15/e67e22/filled-circle.png"/><?php echo $final_pr; ?></li>
+                <li><img src="https://img.icons8.com/material-outlined/18/cccccc/mobile-payment.png"/><?php echo $final_in; ?></li>
+                        <li><img src="https://img.icons8.com/material-outlined/20/cccccc/average.png"/><?php echo $final_name; ?></li>
+                        <li><img src="https://img.icons8.com/ios-filled/20/e74c3c/passenger.png"/>Ghc <?php echo $final_fe;?></li>
+                        <?php if($final_in=="Yes"){
+                           echo ' <li><img src="https://img.icons8.com/material-outlined/18/cccccc/mobile-payment.png"/>'.$final_delid.'</li>';
+                            }else{
+                                echo " ";
+                            }
+                            ?>
+                      </ul>
+    
+                  </span>
+    
+    
+                  
+                <span style="margin-left:970px;margin-top:-85px">
+                    <a href="../doctor/notify.php?complete=true&tc=<?php echo $final_id;?>"  class="btn btn-success">COMPLETE</a>
+                  </span>
+
+
+              
+            
+            <?php
+            }
+            
+            if($final_pr=="COMPLETED"){
+              ?>
+          <li><img src="https://img.icons8.com/material-sharp/15/e67e22/filled-circle.png"/><?php echo $final_pr; ?></li>
+                <li><img src="https://img.icons8.com/material-outlined/18/cccccc/mobile-payment.png"/><?php echo $final_in; ?></li>
+                        <li><img src="https://img.icons8.com/material-outlined/20/cccccc/average.png"/><?php echo $final_name; ?></li>
+                        <li><img src="https://img.icons8.com/ios-filled/20/e74c3c/passenger.png"/>Ghc <?php echo $final_fe;?></li>
+                        <?php if($final_in=="Yes"){
+                           echo ' <li><img src="https://img.icons8.com/material-outlined/18/cccccc/mobile-payment.png"/>'.$final_delid.'</li>';
+                            }else{
+                                echo " ";
+                            }
+                            ?>
+                      </ul>
+    
+                  </span>
+    
+    
+                  
+               
+
+
+              
+            
+            <?php
+            }
+        
+        
+           ?>
+                    
+          </div>
+      </div>
+      <?php
+}
+      }
+      else{
+        echo "<h2>NO CONSULTATION COMPLETED</h2>";
+      }
+      ?>
+<!-- next -->
+<!-- end -->
+</div>
+    </div>
 <!-- next -->
 
 <!-- end -->

@@ -5,9 +5,9 @@ require_once("../../database/connection.php");
     if(!isset($_SESSION['username'])){
         if(isset($_POST['submit'])){
             $username = $_POST['username'];
-           $password = md5(sha1($_POST['password']));
+         $password = md5(sha1($_POST['password']));
 			
-              
+             
              
 
             $query = "SELECT * from Doctor WHERE Docuser = '$username' and Dpassword = '$password'";
@@ -73,6 +73,67 @@ require_once("../../database/connection.php");
         }
         else{
             header("Location: ../doctor/daccount.php?fail");
+        }
+        
+    }
+
+
+    if(isset($_POST['change'])){
+        $firstname = $_POST['newp'];
+        $lastname = $_POST['repass'];
+        $doc=$_GET['doc'];
+       
+        if($lastname==$firstname){
+            $password=md5(sha1($firstname));
+        }
+
+        
+                    
+        $query = "UPDATE Doctor set Dpassword='$password' where DocID=$doc";
+        $sql = mysqli_query($conn,$query);
+
+        if($sql){
+            header("Location: ../doctor/daccount.php?success&$doc");
+        }
+        else{
+            header("Location: ../doctor/daccount.php?fail");
+        }
+        
+    }
+
+
+    if(isset($_GET['accept'])){
+        $doc=$_GET['tc'];
+       
+       
+        
+                    
+        $query = "UPDATE Booking set STATUS='BOOKED' where BID=$doc";
+        $sql = mysqli_query($conn,$query);
+
+        if($sql){
+            header("Location: ../doctor/dashdoc.php?success&$doc");
+        }
+        else{
+            header("Location: ../doctor/dashdoc.php?fail");
+        }
+        
+    }
+
+    if(isset($_GET['complete'])){
+        $doc=$_GET['tc'];
+       
+       
+        
+                    
+        $query = "UPDATE Booking set STATUS='COMPLETED' where BID=$doc";
+        $sql = mysqli_query($conn,$query);
+
+        if($sql){
+            header("Location: ../doctor/dashdoc.php?success&$doc");
+        }
+        else{
+            header("Location: ../doctor/dashdoc.php?fail");
         }
         
     }

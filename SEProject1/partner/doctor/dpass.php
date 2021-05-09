@@ -80,37 +80,30 @@ $number=$result['Docnum'];
 
 <div class="main"style="margin-left:30%;margin-top:5%">
 <div style="margin-left:55%;color:rgb(4, 23, 75)">
-<a style="color:rgb(4, 23, 75);font-size:18pt"href="../doctor/dpass.php"><img src="https://img.icons8.com/metro/26/3498db/lock-2.png"/>Change Password</a>
+<a style="color:rgb(4, 23, 75);font-size:18pt"href="../doctor/daccount.php"><img src="https://img.icons8.com/metro/26/3498db/lock-2.png"/>BACK</a>
 </div>
     <div class="row">
         <div class="col-sm-4">    
              <div class='card  mb-4 shadow-sm '  style='background:#ffffff;height:600px;width:250%;border-radius:10px;color:rgb(4, 23, 75)'>
-                    <h2 style="margin-top:10px;color:rgb(4, 23, 75);text-align:center"><img src="https://img.icons8.com/fluent-systems-filled/48/3498db/guest-male.png"/>ACCOUNT INFORMATION</h2>
+                    <h2 style="margin-top:10px;color:rgb(4, 23, 75);text-align:center"><img src="https://img.icons8.com/fluent-systems-filled/48/3498db/guest-male.png"/>CHANGE PASSWORD</h2>
                
 
                     <div style="margin-left:15%;margin-top:2%">
                        
                       <form action="notify.php?doc=<?php echo $id;?>" method="post">
-                        <label for="user">Username</label><br>
-                        <input style="border:1px solid #3498db;border-radius:5px;width:80%;height:40px"type="text" name="un" id="un" value="<?php echo $username;?>"readonly><br>
+                        <label for="user">New Password</label><br>
+                        <input style="border:1px solid #3498db;border-radius:5px;width:80%;height:40px"type="password" name="newp" id="un" ><br>
 
 
 
                         <label for="lname">First Name</label><br>
-                        <input style="border:1px solid #3498db;border-radius:5px;width:80%;height:40px" type="text" name="fname" id="ph" value="<?php echo $fn;?>" ><br>
+                        <input style="border:1px solid #3498db;border-radius:5px;width:80%;height:40px" type="password" name="repass" id="ph" ><br>
 
-                        <label for="dob">Last Name</label><br>
-                        <input style="border:1px solid #3498db;border-radius:5px;width:80%;height:40px" type="text" name="lname" id="loc" value="<?php echo $ln;?>" ><br>
-
-                        <label for="dob">Department</label><br>
-                        <input style="border:1px solid #3498db;border-radius:5px;width:80%;height:40px" type="text" name="dept" id="loc" value="<?php echo $dn;?>" ><br>
-
-                        <label for="gender">Mobile </label><br>
-                        <input style="border:1px solid #3498db;border-radius:5px;width:80%;height:40px"type="text" name="num" id="num"  maxlength=10 value="<?php echo $number;?>"><br>
+                       
 
                     
 
-                        <button name="update"type="submit" style="margin-top:5%;margin-left:20%;width:40%;height:20%;background:rgb(4, 23, 75)"class="btn btn-primary">UPDATE</a>
+                        <button name="change"type="submit" style="margin-top:5%;margin-left:20%;width:40%;height:20%;background:rgb(4, 23, 75)"class="btn btn-primary">UPDATE</a>
                         </form>
                     </div>
                 </div>
