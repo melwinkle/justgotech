@@ -9,6 +9,7 @@
 
 session_start();
 require_once("../../database/connection.php");
+
 if(!isset($_SESSION['username'])){
   header("Location: ../doctor/doc_log.php" );
 }
@@ -20,13 +21,35 @@ $fn=$_SESSION['fname'];
 $ln=$_SESSION['lname'];
 $dn=$_SESSION['dept'];
 
+$today=date('Y-m-d');
+$month=date('m');
 $sql="SELECT Docnum from Doctor where DocID=$id";
 $query=mysqli_query($conn,$sql);
 $result=mysqli_fetch_assoc($query);
 $number=$result['Docnum'];
 
-?>
 
+
+$bk="SELECT sum(PaymentFee) as msum from book_pay inner join booking on book_pay.BID=booking.BID where Doctor=$id and Appointment=$today";
+$bkq=mysqli_query($conn,$bk);
+$num=mysqli_fetch_assoc($bkq);
+$number=$num['msum'];
+
+
+
+$bkd="SELECT sum(PaymentFee) as tsum from book_pay inner join booking on book_pay.BID=booking.BID where Doctor=$id and MONTH(Appointment)=$month";
+$bkdq=mysqli_query($conn,$bkd);
+$bq=mysqli_fetch_assoc($bkdq);
+$db=$bq['tsum'];
+
+
+
+$bkb="SELECT sum(PaymentFee) as sum from book_pay inner join booking on book_pay.BID=booking.BID where Doctor=$id ";
+$bkbq=mysqli_query($conn,$bkb);
+$eg=mysqli_fetch_assoc($bkbq);
+$expg=$eg['sum'];
+
+?>
 
 <!DOCTYPE html>
 <head>
@@ -55,18 +78,17 @@ $number=$result['Docnum'];
   <img style="width:50%;margin-left: 50px;" src="../../images/us.png" alt="justgotech">
   <a href="#"><h4 style="text-align:center"><?php echo $fn;echo $ln;?></h4></a>
   <hr>
-  <a style="color:#cccccc" href="../doctor/dashdoc.php"><img src="https://img.icons8.com/material/24/cccccc/dashboard-layout.png"/>Dashboard</a>
+  <a style="color:#cccccc" href="../doctor/daccount.php"><img src="https://img.icons8.com/fluent-systems-filled/24/cccccc/delivery-scooter.png"/>Account</a>
   <hr>
-  <a href="../doctor/daccount.php"><img src="https://img.icons8.com/fluent-systems-filled/24/3498db/delivery-scooter.png"/>Account</a>
-  <hr>
-  <a style="color:#cccccc" href="../doctor/book.php"><img src="https://img.icons8.com/fluent-systems-filled/24/cccccc/guest-male.png"/>Bookings</a>
+  <a  href="../doctor/book.php"><img src="https://img.icons8.com/fluent-systems-filled/24/3498db/guest-male.png"/>Bookings</a>
   <hr>
   <a style="color:#cccccc"href="../doctor/diagnosis.php"><img src="https://img.icons8.com/wired/24/cccccc/get-cash.png"/>Diagnosis</a>
   <hr>
-  <a style="color:#cccccc"href="../doctor/prescription.php"><img src="https://img.icons8.com/wired/24/cccccc/get-cash.png"/>Balance</a>
+  <a style="color:#cccccc"href="../doctor/balance.php"><img src="https://img.icons8.com/wired/24/cccccc/get-cash.png"/>Balance</a>
   <hr>
 
   <a style="color:#cccccc"href="../doctor/prescription.php?logout"><img src="https://img.icons8.com/material-sharp/24/e67e22/settings.png"/>Log Out</a>
+ 
 </div>
 
 
@@ -80,14 +102,94 @@ $number=$result['Docnum'];
 
 <!-- account -->
 
-<div class="main"style="margin-left:30%;margin-top:5%">
+<div class="main"style="margin-left:18%;margin-top:2%">
 
     <div class="row">
-        
+        <div class="col-sm-4">    
+                         <div class='card  mb-4 shadow-sm '  style='background:rgb(4, 23, 70);height:150px;width:78%;border-radius:5px;color: white'>
+                                 <h2 style="margin-top:10px;color: white;text-align:center"><img src="https://img.icons8.com/windows/64/ffffff/packaging.png"/>GHC <?php if($number){ echo $number;}else{echo 0.0;}?></h2>
+                                 <h6 style="text-align:center">DAILY BALANCE</h6>
+                            
+                            </div>
+
+                     </div>
+<!-- next card -->
+                <div class="col-sm-4">    
+                        <div class='card  mb-4 shadow-sm '  style='background:rgb(4, 23, 120);height:150px;width:78%;border-radius:5px;color: white'>
+                                <h2 style="margin-top:10px;color: white;text-align:center"><img src="https://img.icons8.com/windows/64/ffffff/packaging.png"/>GHC <?php if($db){echo $db;}else{echo 0.0;}?></h2>
+                                <h6 style="text-align:center">MONTHLY BALANCE</h6>
+
+                            </div>
+                
+                    </div>
+                    <!-- next card -->
+                
+                <div class="col-sm-4">    
+                        <div class='card  mb-4 shadow-sm '  style='background:rgb(4, 23, 90);height:150px;width:78%;border-radius:5px;color: white'>
+                                <h2 style="margin-top:10px;color: white;text-align:center"><img src="https://img.icons8.com/wired/64/ffffff/get-cash.png"/>GHC <?php if($expg>0){ echo $expg;}else{echo 0.0;}?></h2>
+                                <h6 style="text-align:center">TOTAL BALANCE</h6>
+                            </div>
+                    
+                    </div>
+            </div>
     </div>
+
+    
 </div>
 <!-- next -->
+<div style="margin-left:18%;margin-top:3%">
+             <h3>Statistics</h3>
+            <div class="progress" style="border-radius:5px;width:10%;height: 10px;margin-top:10px">
+                    <div class="progress-bar bg-primary" role="progressbar" style="width:100%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+  
+                </div>
+       
 
+
+        <div class="row" style="margin-top: 2%">
+
+        <?php
+        $month=array("January","February","March","April","May","June","July","August","September","October","November","December");
+        $dp="SELECT MONTH(Appointment) as mon,sum(PaymentFee) msum from booking inner join book_pay on booking.BID=book_pay.BID where Doctor=$id";
+        $dpq=mysqli_query($conn,$dp);
+        
+   
+        
+        while($dr=mysqli_fetch_assoc($dpq)) { 
+            foreach ($month as $key => $value)  { 
+                $mon=$dr['mon'];
+                if($mon==$key){
+                    $fee=$dr['msum'];
+                }else{
+                    $fee=0.0;
+                }
+                        $dataPoints = array(array("y" => $fee, "label" => $value));
+            }
+        }
+ 
+
+  
+ ?>
+     <script>
+window.onload = function () {
+ 
+var chart = new CanvasJS.Chart("chartContainer", {
+	title: {
+		text: "Balance Per Month (GHS)"
+	},
+	axisY: {
+		title: "Consultation Fee"
+	},
+	data: [{
+		type: "line",
+		dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+	}]
+});
+chart.render();
+ 
+}
+</script>
+    </div>
 <!-- next -->
 
 <!-- end -->
@@ -146,5 +248,6 @@ function nec(){
 
 </script>
 </body>
-
+<div id="chartContainer" style="margin-left:18%;height: 500px; width: 80%;"></div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </html>

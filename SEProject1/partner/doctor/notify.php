@@ -26,7 +26,7 @@ require_once("../../database/connection.php");
 				$_SESSION['fname']=$fn;
                 $_SESSION['lname']=$ln;
                 $_SESSION['dept']=$dept;
-                header("Location: ../doctor/dashdoc.php?success=true");
+                header("Location: ../doctor/book.php?success=true");
             }
             
         }
@@ -112,10 +112,10 @@ require_once("../../database/connection.php");
         $sql = mysqli_query($conn,$query);
 
         if($sql){
-            header("Location: ../doctor/dashdoc.php?success&$doc");
+            header("Location: ../doctor/book.php?success&$doc");
         }
         else{
-            header("Location: ../doctor/dashdoc.php?fail");
+            header("Location: ../doctor/book.php?fail");
         }
         
     }
@@ -125,17 +125,69 @@ require_once("../../database/connection.php");
        
        
         
-                    
+            
         $query = "UPDATE Booking set STATUS='COMPLETED' where BID=$doc";
         $sql = mysqli_query($conn,$query);
 
         if($sql){
-            header("Location: ../doctor/dashdoc.php?success&$doc");
+            $bk="INSERT INTO book_pay(BID,PaymentFee) VALUES($doc,250)";
+            $bkq=mysqli_query($conn,$bk);
+            if($bkq){
+            header("Location: ../doctor/book.php?success&$doc");
+            }else{
+                header("Location: ../doctor/book.php?nosuccess&$doc");
+            }
         }
         else{
-            header("Location: ../doctor/dashdoc.php?fail");
+            header("Location: ../doctor/book.php?fail");
         }
         
     }
+
+
+    if(isset($_POST['diag'])){
+        $doc=$_GET['tc'];
+        $bd=$_GET['bc'];
+        $pre=$_POST['pre'];
+        $dru=$_POST['drug'];
+       
+       
+        
+            
+        $query = "INSERT INTO Prescriptions(PresDesc,BID,DocID,Drugdesc) VALUES('$pre',$bd,$doc,'$dru')";
+        $sql = mysqli_query($conn,$query);
+
+        if($sql){
+            header("Location: ../doctor/diagnosis.php?success&$doc");
+            
+        }
+        else{
+            header("Location: ../doctor/book.php?fail");
+        }
+        
+    }
+
+
+    if(isset($_POST['updi'])){
+        $doc=$_GET['bc'];
+        $pre=$_POST['pre'];
+        $dru=$_POST['drug'];
+       
+       
+        
+            
+        $query = "UPDATE Prescriptions set PresDesc='$pre',Drugdesc='$dru' where PresID=$doc";
+        $sql = mysqli_query($conn,$query);
+
+        if($sql){
+            header("Location: ../doctor/diagnosis.php?success&$doc");
+            
+        }
+        else{
+            header("Location: ../doctor/diagnosis.php?fail");
+        }
+        
+    }
+
 
 ?>
