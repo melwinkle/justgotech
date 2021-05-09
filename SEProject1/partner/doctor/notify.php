@@ -5,12 +5,12 @@ require_once("../../database/connection.php");
     if(!isset($_SESSION['username'])){
         if(isset($_POST['submit'])){
             $username = $_POST['username'];
-           // $password = md5(sha1($_POST['password']));
+           $password = md5(sha1($_POST['password']));
 			
-               $pass=$_POST['password'] ;
+              
              
 
-            $query = "SELECT * from Doctor WHERE Docuser = '$username' and Dpassword = '$pass'";
+            $query = "SELECT * from Doctor WHERE Docuser = '$username' and Dpassword = '$password'";
             $sql = mysqli_query($conn, $query);
             $results = mysqli_num_rows($sql);
 
@@ -36,11 +36,11 @@ require_once("../../database/connection.php");
 
 
     if(isset($_POST['register'])){
-        $firstname = $_POST['firstname'];
-        $lastname = $_POST['lastname'];
-        $username = $_POST['username'];
-        $gdept= $_POST['dept'];
-        $phonenumber=$_POST['num'];
+        $firstname = $_POST['fname'];
+        $lastname = $_POST['lname'];
+        $username = $_POST['docuser'];
+        $dept= $_POST['dept'];
+        $phonenumber=$_POST['docnum'];
         $password = md5(sha1($_POST['password']));
         
                     
@@ -52,6 +52,27 @@ require_once("../../database/connection.php");
         }
         else{
             header("Location: ../doctor/docreg.php?fail");
+        }
+        
+    }
+
+    if(isset($_POST['update'])){
+        $firstname = $_POST['fname'];
+        $lastname = $_POST['lname'];
+        $dept= $_POST['dept'];
+        $phonenumber=$_POST['num'];
+        $doc=$_GET['doc'];
+
+        
+                    
+        $query = "UPDATE Doctor set DocFname='$firstname',DocLname='$lastname',Department='$dept',Docnum='$phonenumber' where DocID=$doc";
+        $sql = mysqli_query($conn,$query);
+
+        if($sql){
+            header("Location: ../doctor/daccount.php?success&$doc");
+        }
+        else{
+            header("Location: ../doctor/daccount.php?fail");
         }
         
     }

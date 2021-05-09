@@ -4,6 +4,7 @@
 
 require_once("../../database/connection.php");
 
+
     if(!isset($_SESSION['username'])){
         if(isset($_POST['submit'])){
             $username = $_POST['username'];
@@ -32,8 +33,10 @@ require_once("../../database/connection.php");
             
         }
         
+        
     
     }
+    
 
 
     if(isset($_POST['register'])){
