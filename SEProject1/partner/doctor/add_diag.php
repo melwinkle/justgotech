@@ -22,6 +22,19 @@ $sql="SELECT Docnum from Doctor where DocID=$id";
 $query=mysqli_query($conn,$sql);
 $result=mysqli_fetch_assoc($query);
 $number=$result['Docnum'];
+ 
+
+if(isset($_GET['edit'])){
+    $bd=$_GET['did'];
+
+    $bkd="SELECT firstname,lastname from booking inner join customer on booking.PatientID=customer.PatientID where BID=$bd ";
+$bkdq=mysqli_query($conn,$bkd);
+$db=mysqli_fetch_assoc($bkdq);
+$fn=$db['firstname'];
+$ln=$db['lastname'];
+
+
+}
 
 ?>
 
@@ -53,13 +66,15 @@ $number=$result['Docnum'];
   <img style="width:50%;margin-left: 50px;" src="../../images/us.png" alt="justgotech">
   <a href="#"><h4 style="text-align:center"><?php echo $fn;echo $ln;?></h4></a>
   <hr>
-  <a style="color:#cccccc" href="../doctor/daccount.php"><img src="https://img.icons8.com/fluent-systems-filled/24/cccccc/delivery-scooter.png"/>Account</a>
+  <a style="color:#cccccc" href="../doctor/dashdoc.php"><img src="https://img.icons8.com/material/24/cccccc/dashboard-layout.png"/>Dashboard</a>
   <hr>
-  <a  href="../doctor/book.php"><img src="https://img.icons8.com/fluent-systems-filled/24/3498db/guest-male.png"/>Bookings</a>
+  <a href="../doctor/daccount.php"><img src="https://img.icons8.com/fluent-systems-filled/24/3498db/delivery-scooter.png"/>Account</a>
+  <hr>
+  <a style="color:#cccccc" href="../doctor/book.php"><img src="https://img.icons8.com/fluent-systems-filled/24/cccccc/guest-male.png"/>Bookings</a>
   <hr>
   <a style="color:#cccccc"href="../doctor/diagnosis.php"><img src="https://img.icons8.com/wired/24/cccccc/get-cash.png"/>Diagnosis</a>
   <hr>
-  <a style="color:#cccccc"href="../doctor/balance.php"><img src="https://img.icons8.com/wired/24/cccccc/get-cash.png"/>Balance</a>
+  <a style="color:#cccccc"href="../doctor/prescription.php"><img src="https://img.icons8.com/wired/24/cccccc/get-cash.png"/>Balance</a>
   <hr>
 
   <a style="color:#cccccc"href="../doctor/prescription.php?logout"><img src="https://img.icons8.com/material-sharp/24/e67e22/settings.png"/>Log Out</a>
@@ -78,37 +93,33 @@ $number=$result['Docnum'];
 
 <div class="main"style="margin-left:30%;margin-top:5%">
 <div style="margin-left:55%;color:rgb(4, 23, 75)">
-<a style="color:rgb(4, 23, 75);font-size:18pt"href="../doctor/dpass.php"><img src="https://img.icons8.com/metro/26/3498db/lock-2.png"/>Change Password</a>
+<a style="color:rgb(4, 23, 75);font-size:18pt"href="../doctor/book.php"><img src="https://img.icons8.com/metro/26/3498db/lock-2.png"/>BACK</a>
 </div>
     <div class="row">
         <div class="col-sm-4">    
              <div class='card  mb-4 shadow-sm '  style='background:#ffffff;height:600px;width:250%;border-radius:10px;color:rgb(4, 23, 75)'>
-                    <h2 style="margin-top:10px;color:rgb(4, 23, 75);text-align:center"><img src="https://img.icons8.com/fluent-systems-filled/48/3498db/guest-male.png"/>ACCOUNT INFORMATION</h2>
+                    <h2 style="margin-top:10px;color:rgb(4, 23, 75);text-align:center"><img src="https://img.icons8.com/fluent-systems-filled/48/3498db/guest-male.png"/>NEW DIAGNOSIS</h2>
                
 
-                    <div style="margin-left:15%;margin-top:2%">
+                    <div style="margin-left:10%;margin-top:2%">
                        
-                      <form action="notify.php?doc=<?php echo $id;?>" method="post">
-                        <label for="user">Username</label><br>
-                        <input style="border:1px solid #3498db;border-radius:5px;width:80%;height:40px"type="text" name="un" id="un" value="<?php echo $username;?>"readonly><br>
+                      <form action="notify.php?bc=<?php echo $bd;?>&tc=<?php echo $id;?>" method="post">
+                        <label for="user">Patient Name</label><br>
+                        <input style="border:1px solid #3498db;border-radius:5px;width:93%;height:40px"type="text" name="newp" id="un" value="<?php echo $fn.' '.$ln;?>" readonly><br>
 
 
 
-                        <label for="lname">First Name</label><br>
-                        <input style="border:1px solid #3498db;border-radius:5px;width:80%;height:40px" type="text" name="fname" id="ph" value="<?php echo $fn;?>" ><br>
+                        <label for="lname">Diagnosis</label><br>
+                        <textarea  style="border:1px solid #3498db;border-radius:5px;" name="pre" id="pre" cols="130" rows="5"></textarea><br>
+                        
 
-                        <label for="dob">Last Name</label><br>
-                        <input style="border:1px solid #3498db;border-radius:5px;width:80%;height:40px" type="text" name="lname" id="loc" value="<?php echo $ln;?>" ><br>
-
-                        <label for="dob">Department</label><br>
-                        <input style="border:1px solid #3498db;border-radius:5px;width:80%;height:40px" type="text" name="dept" id="loc" value="<?php echo $dn;?>" ><br>
-
-                        <label for="gender">Mobile </label><br>
-                        <input style="border:1px solid #3498db;border-radius:5px;width:80%;height:40px"type="text" name="num" id="num"  maxlength=10 value="<?php echo $number;?>"><br>
-
+                       
+                        <label for="lname">Prescription</label><br>
+                        <textarea  style="border:1px solid #3498db;border-radius:5px;" name="drug" id="pre" cols="130" rows="5"></textarea><br>
+                        
                     
 
-                        <button name="update"type="submit" style="margin-top:5%;margin-left:20%;width:40%;height:20%;background:rgb(4, 23, 75)"class="btn btn-primary">UPDATE</a>
+                        <button name="diag"type="submit" style="margin-top:5%;margin-left:20%;width:40%;height:20%;background:rgb(4, 23, 75)"class="btn btn-primary">DIAGNOSE</a>
                         </form>
                     </div>
                 </div>

@@ -79,15 +79,15 @@ $expg=mysqli_num_rows($bkbq);
   <img style="width:50%;margin-left: 50px;" src="../../images/us.png" alt="justgotech">
   <a href="#"><h4 style="text-align:center"><?php echo $fn;echo $ln;?></h4></a>
   <hr>
-  <a  style="color:#cccccc" href="../doctor/dashdoc.php"><img src="https://img.icons8.com/material/24/cccccc/dashboard-layout.png"/>Dashboard</a>
-  <hr>
+
+
   <a style="color:#cccccc" href="../doctor/daccount.php"><img src="https://img.icons8.com/fluent-systems-filled/24/cccccc/delivery-scooter.png"/>Account</a>
   <hr>
   <a  href="../doctor/book.php"><img src="https://img.icons8.com/fluent-systems-filled/24/3498db/guest-male.png"/>Bookings</a>
   <hr>
   <a style="color:#cccccc"href="../doctor/diagnosis.php"><img src="https://img.icons8.com/wired/24/cccccc/get-cash.png"/>Diagnosis</a>
   <hr>
-  <a style="color:#cccccc"href="../doctor/prescription.php"><img src="https://img.icons8.com/wired/24/cccccc/get-cash.png"/>Balance</a>
+  <a style="color:#cccccc"href="../doctor/balance.php"><img src="https://img.icons8.com/wired/24/cccccc/get-cash.png"/>Balance</a>
   <hr>
 
   <a style="color:#cccccc"href="../doctor/prescription.php?logout"><img src="https://img.icons8.com/material-sharp/24/e67e22/settings.png"/>Log Out</a>
@@ -320,6 +320,7 @@ $final_q=$finales['Appointment'];
                     <table id="example" class="table table-striped table-bordered" style="background:white">
                         <thead>
                             <tr>
+                                <th scope="col">Booking ID</th>
                                 <th scope="col">Patient Name</th>
                                 <th scope="col">Patient Number</th>
                                 <th scope="col">Appointment Date</th>
@@ -328,12 +329,13 @@ $final_q=$finales['Appointment'];
                                 <th scope="col">Person</th>
                                 <th scope="col">Insurance</th>
                                 <th scope="col">Price</th>
+                                <th scope="col">Actions</th>
                                 
                             </tr>
                         </thead>
                         <tbody>
             <?php 
-              $final="SELECT * from booking  inner join customer on booking.PatientID=customer.PatientID inner join book_pay on booking.BID=book_pay.BID where Doctor=$id and STATUS='COMPLETED'order by booking.BID";
+              $final="SELECT * from booking  inner join customer on booking.PatientID=customer.PatientID inner join book_pay on booking.BID=book_pay.BID where Doctor=$id and STATUS='COMPLETED' ";
               $finale=mysqli_query($conn,$final);
               if(mysqli_num_rows($finale)>0){
               while($finales=mysqli_fetch_assoc($finale)){
@@ -368,8 +370,8 @@ $final_q=$finales['Appointment'];
                 
                 
                 
-                
-                <td scope="row" contenteditable="false"><?php echo $final_fn." ".$final_ln; ?></td>
+                <td scope="row" contenteditable="false"><?php echo $final_id; ?></td>
+                <td  contenteditable="false"><?php echo $final_fn." ".$final_ln; ?></td>
                 <td contenteditable="false"><?php echo $final_num;?></td>
                 <td contenteditable="false"><?php echo $final_q;?></td>
                 <td contenteditable="false" id="md"><?php echo $final_r;?></td>
@@ -377,6 +379,7 @@ $final_q=$finales['Appointment'];
                 <td contenteditable="false" id="Quantity"><?php echo $final_name;?></td>
                 <td contenteditable="false" id="price"> <?php echo $final_delid;?></td>
                 <td contenteditable="false" id="quer">GHC <?php echo $final_fe;?></td>
+                <td contenteditable="false" id="ed" ><a href="../doctor/add_diag.php?edit&did=<?php echo $final_id;?>"  class="btn btn-danger btn-rounded btn-sm my-0">DIAGNOSE</a></td>
                
                 </tr>
                
@@ -388,7 +391,7 @@ $final_q=$finales['Appointment'];
             }
             else{
               echo "<tr class='table-danger'>
-              <td colspan=8> No Completed Consultation</td>
+              <td colspan=9> No Completed Consultation</td>
               </tr>";
             }
               ?>
@@ -451,6 +454,12 @@ function nec(){
   window.location.href="../delivery/doneder.php";
 }
 
+function upd(did){
+     //let quant=document.getElementById("Quantity").innerHTML;
+     window.location.href = "../doctor/add_diag.php?edit&did="+did;
+    // window.location.href = "../pharmacist/update_in.php?edit&did=<?php echo $pid;?>&pid=<?php echo $id;?>&quan=" + quant; 
+      
+}
 
 </script>
 <script>$(document).ready(function() {
