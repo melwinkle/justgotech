@@ -6,14 +6,13 @@ session_start();
 
 if(!isset($_SESSION['username'])){
 	echo "<script>location.href = 'viewbooking.php'</script>";
-  
 }
 
-$username=$_SESSION['username'];
+	$username=$_SESSION['username'];
+	$query="SELECT * from customer where username='$username'";
+	$result=mysqli_query($conn,$query);
+	$row=mysqli_fetch_assoc($result);
 
-$query="SELECT * from customer where username='$username'";
-$result=mysqli_query($conn,$query);
-$row=mysqli_fetch_assoc($result);
 ?>
 
 <!DOCTYPE html>
@@ -89,7 +88,7 @@ $row=mysqli_fetch_assoc($result);
 													for($i = 0; $i < count($results); $i++) {
 														echo "  <option name='person'value='$results[$i]'>$results[$i]</option><br>";
 													} 
-													}
+												}
 												?>
 											</select>
 										</div>
@@ -101,23 +100,22 @@ $row=mysqli_fetch_assoc($result);
 								<select class="form-control" name="doctor" id="doctor" required>
 									<option>Select</option>
 										
-									<!--printing vlaues from the database-->
-										<?php 
+									<!-- printing Doctor's values from the database -->
+
+									<?php 
 										$sql="SELECT * FROM Doctor ";
 										$result=mysqli_query($conn,$sql);
 										while($row = mysqli_fetch_array($result)) {
-											$type=$row['DocFname'];
-
+											$type = $row['DocFname'];
 											$output = str_replace("enum('", "", $type);
-
 											$output = str_replace("')", "", $output);
-
 											$result = explode("','", $output);
-
 												for($i = 0; $i < count($result); $i++) {
+													$docname = $result[$i];
 												echo "<option name='doctor'value='$result[$i]'>Dr.$result[$i]</option><br>";
 												} 
 											}
+
 										?>
 								</select>
 							</div>
@@ -168,10 +166,25 @@ $row=mysqli_fetch_assoc($result);
 									<div class="form-group">
 										<span class="form-label">Appointment Time</span>
 										<input class="form-control"  name="apptime" id="apptime"  type="time" required>
-									</div>
-								</div>
+											<!-- Selecting the doctors'available time -->
 
-                       
+										<?php
+										
+											$sql="SELECT Time_available FROM doctor_time WHERE";
+											$result=mysqli_query($conn,$sql);
+											while($row = mysqli_fetch_array($result)) {
+												$type  = $row['DocFname'];
+												$output = str_replace("enum('", "", $type);
+												$output = str_replace("')", "", $output);
+												$result = explode("','", $output);
+												for($i = 0; $i < count($result); $i++) {
+												echo "<option name='doctor'value='$result[$i]'>Dr.$result[$i]</option><br>";
+											} 
+										}
+										
+										?>
+									</div>
+								</div>                 
 
                                 <div class="row">
                                     <div class="col-sm-5">
@@ -207,8 +220,9 @@ $row=mysqli_fetch_assoc($result);
 													echo "  <option name='dept'value='$results[$i]'>$results[$i]</option><br>";
 												   } 
 												}
-												?>
-															</select>
+											?>
+
+										</select>
 					<span class="select-arrow"></span>
 					  </div>
 						</div>
