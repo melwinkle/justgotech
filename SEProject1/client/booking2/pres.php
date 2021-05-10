@@ -34,7 +34,7 @@ $countp=0;
 ?>
 <html>
 <head>
-<title>Pharmacy</title>
+<title>Booking</title>
 </head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
@@ -42,7 +42,7 @@ $countp=0;
   href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.2.0/mdb.min.css"
   rel="stylesheet"
 />
-<link rel="stylesheet" href="pharm.css">
+<link rel="stylesheet" href="css/covid.css">
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="sweetalert2.all.min.js"></script>
@@ -75,33 +75,83 @@ $countp=0;
 </div>
 </div>
 <div class="hname" style="margin-left:45%;color:rgb(23, 79, 182)">
-<h1>PHARMACY</h1>
+<h1>CONSULTATION</h1>
 </div>
 
-<div class="opt" style="margin-bottom: 20px">
-<button class="main" onclick="mainP()" style="width:40%;background:rgb(23, 79, 140);height:300px;border-radius:10px;border:3px black;color:white;font-size:24pt">
-MAIN STORE
-</button>
-<button class="purchase" onclick="purP()" style="width:40%;background:rgb(23, 79, 110);height:300px;border-radius:10px;border:3px black;color:white;font-size:24pt">
-PURCHASES
-</button>
+<div id="table" class="table-editable" style="width:1100px;margin-top:2%;margin-left:20%">
+                    <table id="example" class="table table-striped table-bordered" style="background:white">
+                        <thead>
+                            <tr>
+                                <th scope="col">Booking ID</th>
+                                <th scope="col">Doctor Name</th>
+                                <th scope="col">Doctor Number</th>
+                                <th scope="col">Prescription</th>
+                                <th scope="col">Diagnosis</th>
+                             
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+            <?php 
+              $final="SELECT * from Prescriptions  inner join booking on Prescriptions.BID=booking.BID inner join Doctor on booking.Doctor=Doctor.DocID where booking.PatientID=$patient order by Prescriptions.PresID;";
+              $finale=mysqli_query($conn,$final);
+              if(mysqli_num_rows($finale)>0){
+              while($finales=mysqli_fetch_assoc($finale)){
+                $final_fn=$finales['DocFname'];
+                $final_ln=$finales['DocLname'];
+              $final_id=$finales['BID'];
+              $pid=$finales['PresID'];
+                
+                $final_pre=$finales['Drugdesc'];
+                $final_di=$finales['PresDesc'];
+                $final_num=$finales['Docnum'];
+               
+                
+                
+              
 
 
 
-<!-- </div>
-<div style="margin-left:35%;margin-top: 40px;">
-  <button onclick="track()"style="width:55%;background:rgb(23, 79, 95);height:300px;border-radius:10px;border:3px black;color:white;font-size:24pt">TRACK ORDERS</buttom>
-  <button class="purchase" onclick="payP()" style="width:40%;background:rgb(23, 79, 110);height:300px;border-radius:10px;border:3px black;color:white;font-size:24pt">
-PAYMENT
-</button>
+              ?>
+              
 
-</div> -->
+                <tr class="table-success" >  
+                
+                
+                
+                
+                <td scope="row" contenteditable="false"><?php echo $final_id; ?></td>
+                <td contenteditable="false"><?php echo $final_fn." ".$final_ln;?></td>
+                <td contenteditable="false"><?php echo $final_num;?></td>
+                <td contenteditable="false" id="md"><?php echo $final_pre;?></td>
+                <td contenteditable="false" id="ed"><?php echo $final_di;?></td>
+               
+               
+               
+                </tr>
+               
+               
+                
+              <?php 
+           
+              }
+            }
+            else{
+              echo "<tr class='table-danger'>
+              <td colspan=5> No Diagnosis Completed</td>
+              </tr>";
+            }
+              ?>
+            </tbody>
+            </table>
+
+                </div>
 
    
-<div class="imgchat" style="margin-left:85%;position:fixed">
+<!-- <div class="imgchat" style="margin-left:85%;position:fixed">
 <a href="../chatbot/bot.php?prev=../pharmacy/pharmacy_main.php"><img style="width:30%;margin-top:60%;margin-left:40%" src="../images/chat.png" alt="chatbot"></a>
 
-</div>
+</div> -->
 
 <script>
 function openTab(tabName) {
@@ -125,19 +175,19 @@ function closeNav() {
 }
 
 function mainP() {
-    window.location.href ="../pharmacy/ph_store.php";
+    window.location.href ="../booking2/booking.php";
 }
 function purP() {
-    window.location.href ="../pharmacy/ph_records.php";
+    window.location.href ="../booking2/viewbooking.php";
 }
-function track() {
-    window.location.href ="../pharmacy/ph_pay.php";
+function presP() {
+    window.location.href ="../booking2/pres.php";
 }
 
-function payP() {
-    window.location.href ="../payment/index.php";
-}
+
 </script>
+<script type="text/javascript">function add_chatinline(){var hccid=33480640;var nt=document.createElement("script");nt.async=true;nt.src="https://mylivechat.com/chatinline.aspx?hccid="+hccid;var ct=document.getElementsByTagName("script")[0];ct.parentNode.insertBefore(nt,ct);}
+add_chatinline();</script>
 </body>
 <footer>
   Copyright (c) JustGoTech 2021

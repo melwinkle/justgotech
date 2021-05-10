@@ -1,4 +1,4 @@
-<!-- Home page for covid testing -->
+<!-- Home page for pharmacy -->
 <?php
 error_reporting(0);
 require_once("../../database/connection.php");
@@ -34,7 +34,7 @@ $countp=0;
 ?>
 <html>
 <head>
-<title>COVID-19</title>
+<title>Booking</title>
 </head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
@@ -42,7 +42,7 @@ $countp=0;
   href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.2.0/mdb.min.css"
   rel="stylesheet"
 />
-<link rel="stylesheet" href="covid.css">
+<link rel="stylesheet" href="css/covid.css">
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="sweetalert2.all.min.js"></script>
@@ -67,113 +67,45 @@ $countp=0;
 
 <div class="navb"id="main">
   <span style="font-size:30px;cursor:pointer" onclick="openNav()"><img style="width:10%" src="../../images/justgo.png" alt="justgotech"> </span>
- 
   <div style="float:right">
 
-  <button style="background:none;border:none;margin-left:65%"><img style="width:25%"src="https://img.icons8.com/plasticine/100/000000/appointment-reminders.png"/><img style="width:10%"src="https://img.icons8.com/ios-filled/50/e74c3c/2-circle.png"/></button>
- <span style="font-size:20px;cursor:pointer;margin-left:-6% " onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:5%" src="../../images/stethoscope.png" alt="profile"> </span>
- 
- </div>
+<button style="background:none;border:none;margin-left:65%"><img style="width:25%"src="https://img.icons8.com/plasticine/100/000000/appointment-reminders.png"/><img style="width:10%"src="https://img.icons8.com/ios-filled/50/e74c3c/2-circle.png"/></button>
+<span style="font-size:20px;cursor:pointer;margin-left:-6% " onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:5%" src="../../images/stethoscope.png" alt="profile"> </span>
+
+</div>
+</div>
+<div class="hname" style="margin-left:45%;color:rgb(23, 79, 182)">
+<h1>CONSULTATION</h1>
 </div>
 
+<div class="opt" style="margin-bottom: 20px;margin-left:28%">
+<button class="main" onclick="mainP()" style="width:40%;background:rgb(23, 79, 140);height:300px;border-radius:10px;border:3px black;color:white;font-size:24pt">
+CONSULTATION
+</button>
+<button class="purchase" onclick="purP()" style="margin-left:3%;width:40%;background:rgb(23, 79, 110);height:300px;border-radius:10px;border:3px black;color:white;font-size:24pt">
+BOOKINGS
+</button>
+<button class="purchase" onclick="presP()" style="margin-top:3%;margin-left:15%;width:40%;background:rgb(23, 79, 110);height:300px;border-radius:10px;border:3px black;color:white;font-size:24pt">
+PRESCRIPTIONS
+</button>
+
+</div>
+
+<!-- </div>
+<div style="margin-left:35%;margin-top: 40px;">
+  <button onclick="track()"style="width:55%;background:rgb(23, 79, 95);height:300px;border-radius:10px;border:3px black;color:white;font-size:24pt">TRACK ORDERS</buttom>
+  <button class="purchase" onclick="payP()" style="width:40%;background:rgb(23, 79, 110);height:300px;border-radius:10px;border:3px black;color:white;font-size:24pt">
+PAYMENT
+</button>
+
+</div> -->
 
    
-<div class="test" >
-  <h5 class="card-header"></h5>
-  <div class="card-body" style="background:#ff9900;height:90%">
-  
-    <h2 class="card-title">
-    VIRTUAL SCREENING TESTS
-    </h2><br>
-    <ul>
-    <?php 
-        while($rownum=mysqli_fetch_assoc($resnum)){
-
-          ?>
-        <h4>TOTAL NUMBER OF TESTS: <?php echo $rownum['c']?></h4>
-  
-       
-        <h4> NO EXPOSURE:<?php 
-        
-          if($rownum['Status']=="Not exposed"||$rownum['Status']=="Not Likely Exposed"){
-            $count=$count +1;
-            $e=($count/$rownum['c'])*100;
-            echo $e."%";
-              }
-              else{
-                  echo "0%";
-  
-              }
-        
-        
-           
-            
-           
-            ?> </h4>
-      
-  
-        <h4>EXPOSURE:<?php 
-
-        if($rownum['Status']=="Exposed"||$rownum['Status']=="Likely Exposed"){
-            $countp=$countp +1;
-            $c=($countp/$rownum['c'])*100;
-            echo $c."%";
-            }
-            else{
-                echo "0%";
-            }
-          }
-            ?> </h4>
-    
-    </ul>
-   <br>
-
-
-<br>
-    <a href="../screening/results.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182)">View all</a>
-  </div>
-</div>
-
-
-<div class="test">
-  <h5 class="card-header"></h5>
-  <div class="card-body" style="background:skyblue;height:90%">
-  
-    <h2 class="card-title">
-    BOOKING INFORMATION
-    </h2><br>
-<h4>TOTAL NUMBER OF BOOKINGS: <?php
-    
-    echo $rowbook['b'];
-    ?></h4>
-
-    
-
-    
-<br>
-    <a href="../booking2/viewbooking.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182)">View all</a>
-  </div>
-</div>
-
-
 <div class="imgchat" style="margin-left:85%;position:fixed">
-<a href="../chatbot/bot.php?prev=../tracker/tracker.php"><img style="width:30%;margin-top:-150%;margin-left:40%" src="../images/chat.png" alt="chatbot"></a>
+<a href="../chatbot/bot.php?prev=../pharmacy/pharmacy_main.php"><img style="width:30%;margin-top:60%;margin-left:40%" src="../images/chat.png" alt="chatbot"></a>
 
 </div>
 
-<div class="test">
-  <h5 class="card-header"></h5>
-  <div class="card-body" style="background:pink;height:90%">
-  
-    <h2 class="card-title">
-    ONLINE PHARMACY
-    </h2><br>
-    
-    <h4>UPDATED SOON</h4>
-<br>
-    <a href="../pharmacy/pharmacy_main.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182)">View all</a>
-  </div>
-</div>
 <script>
 function openTab(tabName) {
   var i, x;
@@ -194,6 +126,18 @@ function closeNav() {
   document.getElementById("mySidenav").style.width = "0";
   document.getElementById("main").style.marginLeft= "0";
 }
+
+function mainP() {
+    window.location.href ="../booking2/booking.php";
+}
+function purP() {
+    window.location.href ="../booking2/viewbooking.php";
+}
+function presP() {
+    window.location.href ="../booking2/pres.php";
+}
+
+
 </script>
 <script type="text/javascript">function add_chatinline(){var hccid=33480640;var nt=document.createElement("script");nt.async=true;nt.src="https://mylivechat.com/chatinline.aspx?hccid="+hccid;var ct=document.getElementsByTagName("script")[0];ct.parentNode.insertBefore(nt,ct);}
 add_chatinline();</script>

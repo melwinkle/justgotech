@@ -145,6 +145,8 @@ $expg=mysqli_num_rows($bkbq);
                     <div class="progress-bar bg-primary" role="progressbar" style="width:100%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
   
                 </div>
+
+                <div><a href="https://mylivechat.com/webconsole/">CHAT </a></div>
        
 
 
