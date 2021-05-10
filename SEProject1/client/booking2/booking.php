@@ -38,7 +38,6 @@ if(!isset($_SESSION['username'])){
 	<link type="text/css" rel="stylesheet" href="css/style.css" />
 </head>
 
-
 <body>
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -60,12 +59,11 @@ if(!isset($_SESSION['username'])){
 			<div class="container">
 				<div class="row">
 					<div class="booking-form">
-						<div class="form-header">
-							<h1>Book an appointment</h1>
-						</div>
+
 						<form method="POST" id="signup-form" class="signup-form" action= "bookingverify.php">
 							<div class="row">
 								<div class="col-sm-6">
+								     
 									<div class="form-group">
 										<span class="form-label">Patient</span>
 											<select class="form-control"  name="patient" id="patient" required>
@@ -74,7 +72,7 @@ if(!isset($_SESSION['username'])){
 												<?php 
 													$sql="SELECT COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'booking' AND COLUMN_NAME = 'Person' ";
 													$result=mysqli_query($conn,$sql);
-													while($row = mysqli_fetch_array($result)) {
+													while($row = mysqli_fetch_array($result)){
 													$type=$row['COLUMN_TYPE'];
 
 													$output = str_replace("enum('", "", $type);
