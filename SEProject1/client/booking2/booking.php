@@ -126,8 +126,8 @@ if(!isset($_SESSION['username'])){
 								<select class="form-control" name="healthIn" id="healthIn" required>
 					           
 							   <?php 
-                                     $sql="SELECT COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'booking' AND COLUMN_NAME = 'Insurance' ";
-                                     $result=mysqli_query($conn,$sql);
+                                    $sql="SELECT COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'booking' AND COLUMN_NAME = 'Insurance' ";
+                                    $result=mysqli_query($conn,$sql);
                                       while($row = mysqli_fetch_array($result)) {
                                         $type=$row['COLUMN_TYPE'];
 
@@ -169,21 +169,23 @@ if(!isset($_SESSION['username'])){
 
 										<?php
 										
-											$sql="SELECT Time_available FROM doctor_time WHERE";
-											$result=mysqli_query($conn,$sql);
-											while($row = mysqli_fetch_array($result)) {
-												$type  = $row['DocFname'];
-												$output = str_replace("enum('", "", $type);
-												$output = str_replace("')", "", $output);
-												$result = explode("','", $output);
-												for($i = 0; $i < count($result); $i++) {
-												echo "<option name='doctor'value='$result[$i]'>Dr.$result[$i]</option><br>";
-											} 
-										}
+										// 	$sql="SELECT Time_available FROM doctor_time WHERE";
+										// 	$result=mysqli_query($conn,$sql);
+										// 	while($row = mysqli_fetch_array($result)) {
+										// 		$type  = $row['DocFname'];
+										// 		$output = str_replace("enum('", "", $type);
+										// 		$output = str_replace("')", "", $output);
+										// 		$result = explode("','", $output);
+										// 		for($i = 0; $i < count($result); $i++) {
+										// 		echo "<option name='doctor'value='$result[$i]'>Dr.$result[$i]</option><br>";
+										// 	} 
+										// }
 										
 										?>
+
 									</div>
-								</div>                 
+								   </div>   
+						    
 
                                 <div class="row">
                                     <div class="col-sm-5">
@@ -209,10 +211,10 @@ if(!isset($_SESSION['username'])){
 
 												$output = str_replace("enum('", "", $type);
 
-											// $output will now be: Equipment','Set','Show
+											     // $output will now be: Equipment','Set','Show
 												$output = str_replace("')", "", $output);
 
-												// array $results contains the ENUM values
+												  // array $results contains the ENUM values
 												$results = explode("','", $output);
 
 												for($i = 0; $i < count($results); $i++) {
