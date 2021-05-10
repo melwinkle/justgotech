@@ -1,1 +1,0 @@
-<!-- Page to notify patient -->

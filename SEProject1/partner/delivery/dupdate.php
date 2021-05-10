@@ -5,7 +5,9 @@
 <?php 
 session_start();
 require_once("../../database/connection.php");
-
+if(!isset($_SESSION['username'])){
+  header("Location: ../delivery/dindex.php");
+}
 $username=$_SESSION['username'];
 $del=$_SESSION['delid'];
 $fn=$_SESSION['fname'];
@@ -64,7 +66,7 @@ $num=$ri['DelNum'];
   <a style="color:#cccccc"href="../delivery/dbalance.php"><img src="https://img.icons8.com/wired/24/cccccc/get-cash.png"/>Balance</a>
   <hr>
 
-  <a style="color:#cccccc"href="../account/logout.php"><img src="https://img.icons8.com/material-sharp/24/e67e22/settings.png"/>Log Out</a>
+  <a style="color:#cccccc"href="../delivery/dlog.php"><img src="https://img.icons8.com/material-sharp/24/e67e22/settings.png"/>Log Out</a>
 </div>
 
 
@@ -87,7 +89,7 @@ echo date('d-M');
 
 <div class="main"style="margin-left:30%;margin-top:3%">
 <div style="margin-left:55%;color:#3498db">
-<a style="color:#3498db;font-size:18pt"href="../delivery/ddash.php"><img src="https://img.icons8.com/metro/26/3498db/lock-2.png"/>Change Password</a>
+<a style="color:#3498db;font-size:18pt"href="../delivery/dpass.php"><img src="https://img.icons8.com/metro/26/3498db/lock-2.png"/>Change Password</a>
 </div>
     <div class="row">
         <div class="col-sm-4">    

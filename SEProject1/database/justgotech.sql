@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 29, 2021 at 01:11 AM
+-- Generation Time: May 08, 2021 at 05:42 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -193,9 +193,21 @@ CREATE TABLE `Delivery` (
   `DelID` int(11) NOT NULL,
   `DelFName` varchar(255) NOT NULL,
   `DelLName` varchar(255) NOT NULL,
-  `DelImage` varchar(255) NOT NULL,
-  `DelNum` varchar(10) NOT NULL
+  `Gender` enum('Male','Female') NOT NULL,
+  `DOB` date NOT NULL,
+  `DelNum` varchar(10) NOT NULL,
+  `Deluser` varchar(255) NOT NULL,
+  `Delpassword` varchar(255) NOT NULL,
+  `DelImage` varchar(255) DEFAULT NULL,
+  `Trips` int(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `Delivery`
+--
+
+INSERT INTO `Delivery` (`DelID`, `DelFName`, `DelLName`, `Gender`, `DOB`, `DelNum`, `Deluser`, `Delpassword`, `DelImage`, `Trips`) VALUES
+(1, 'Frank', 'Osei', 'Male', '1989-11-13', '0240000000', 'fosei', '804fa3e057a2c2500ff7859b0651d2d7', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -238,15 +250,18 @@ CREATE TABLE `Doctor` (
   `DocID` int(11) NOT NULL,
   `DocFname` varchar(255) NOT NULL,
   `DocLname` varchar(255) NOT NULL,
-  `Department` varchar(255) NOT NULL
+  `Department` varchar(255) NOT NULL,
+  `Dpassword` varchar(255) NOT NULL,
+  `Docuser` varchar(255) NOT NULL,
+  `Docnum` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `Doctor`
 --
 
-INSERT INTO `Doctor` (`DocID`, `DocFname`, `DocLname`, `Department`) VALUES
-(1, 'Rita', 'Osei', 'Surgery');
+INSERT INTO `Doctor` (`DocID`, `DocFname`, `DocLname`, `Department`, `Dpassword`, `Docuser`, `Docnum`) VALUES
+(1, 'Rita', 'Osei', 'Surgery', 'rita', 'ROsei', '0240002342');
 
 -- --------------------------------------------------------
 
@@ -277,7 +292,7 @@ CREATE TABLE `drugs` (
   `DID` int(10) NOT NULL,
   `DName` varchar(255) NOT NULL,
   `Drug_type` enum('Antibiotic','Antidepressants','Antiretroviral','Vitamin') NOT NULL,
-  `Queries` varchar(255) NOT NULL,
+  `Queries` text NOT NULL,
   `Description` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -286,8 +301,9 @@ CREATE TABLE `drugs` (
 --
 
 INSERT INTO `drugs` (`DID`, `DName`, `Drug_type`, `Queries`, `Description`) VALUES
-(1, 'Panadol Plus', 'Antibiotic', 'Panadol|Paracetamol|Panadol Plus|panadol|paracetamol', '12 tablets per Single strip'),
-(2, 'Andorin Paracetamol', 'Antibiotic', 'paracetamol|Paracetamol', '10 tablets per strip');
+(1, 'Panadol Plus', 'Antibiotic', 'Panadol|Paracetamol|Panadol Plus|panadol|paracetamol', '12 tablets per strip'),
+(2, 'Andorin Paracetamol', 'Antibiotic', 'paracetamol|Paracetamol', '10 tablets per strip'),
+(3, 'Chewette Vitamin C', 'Vitamin', 'Vitamin|Vitamin C|vitamin c|vitamins|chewette|Chewette|Chewette Vitamin C|chewette vitamin c', '24 tablets in a strip');
 
 -- --------------------------------------------------------
 
@@ -308,7 +324,8 @@ CREATE TABLE `perm_cart` (
 INSERT INTO `perm_cart` (`PC`, `POID`, `TC`) VALUES
 (1, 2, 1),
 (2, 2, 2),
-(3, 3, 13);
+(3, 3, 13),
+(4, 4, 15);
 
 -- --------------------------------------------------------
 
@@ -318,17 +335,20 @@ INSERT INTO `perm_cart` (`PC`, `POID`, `TC`) VALUES
 
 CREATE TABLE `pharmacists` (
   `PharmID` int(11) NOT NULL,
+  `PhID` varchar(10) NOT NULL,
+  `Phpassword` varchar(255) NOT NULL,
   `Pharm_Name` varchar(255) NOT NULL,
   `Location` varchar(255) NOT NULL,
-  `Location_queries` varchar(255) NOT NULL
+  `Location_queries` varchar(255) NOT NULL,
+  `Phnumber` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `pharmacists`
 --
 
-INSERT INTO `pharmacists` (`PharmID`, `Pharm_Name`, `Location`, `Location_queries`) VALUES
-(1, 'Linux Pharmacy', 'Airport Residential Area', 'Airport|airport|Ridge|ridge|');
+INSERT INTO `pharmacists` (`PharmID`, `PhID`, `Phpassword`, `Pharm_Name`, `Location`, `Location_queries`, `Phnumber`) VALUES
+(1, 'PHLinux', '9005da6542dedcf7d3e8ebd4e7d9461f', 'Linux Pharmacy', 'Airport Residential Area', 'Airport|airport|Ridge|ridge|', '0240000000');
 
 -- --------------------------------------------------------
 
@@ -351,8 +371,9 @@ CREATE TABLE `pharm_drugs` (
 --
 
 INSERT INTO `pharm_drugs` (`PHD`, `PharmID`, `DID`, `Quantity`, `Price`, `M_date`, `E_date`) VALUES
-(1, 1, 1, 100, 10, '2020-09-15', '2024-05-08'),
-(2, 1, 2, 100, 12, '2020-10-13', '2025-02-13');
+(1, 1, 1, 200, 10, '2020-09-15', '2024-05-05'),
+(2, 1, 2, 100, 12, '2020-10-13', '2025-02-13'),
+(3, 1, 3, 170, 12, '2020-06-09', '2022-07-09');
 
 -- --------------------------------------------------------
 
@@ -379,8 +400,9 @@ CREATE TABLE `pharm_orders` (
 --
 
 INSERT INTO `pharm_orders` (`POID`, `P_Bill`, `Order_Date`, `Pickup_Mode`, `Payment`, `Network`, `Momo_num`, `Location`, `Special_notes`, `Nickname`, `PatientID`) VALUES
-(2, 26.2, '2021-04-28', 'Delivery', 'Mobile Money', 'MTN', '0240000000', 'airport mirage', 'Yellow House', 'Mely', 3),
-(3, 46, '2021-04-29', 'Delivery', 'Mobile Money', 'MTN', '0240000000', 'Association International', 'Gray gate next to blue kiosk', 'Mela', 3);
+(2, 26.2, '2021-04-27', 'Delivery', 'Mobile Money', 'MTN', '0240000000', 'airport mirage', 'Yellow House', 'Mely', 3),
+(3, 46, '2021-04-28', 'Delivery', 'Mobile Money', 'MTN', '0240000000', 'Association International', 'Gray gate next to blue kiosk', 'Mela', 3),
+(4, 46, '2021-04-28', 'Delivery', 'Mobile Money', 'MTN', '0240000000', 'Koala Shopping Center', 'Mirage apartment 105', 'Meli', 3);
 
 -- --------------------------------------------------------
 
@@ -406,6 +428,20 @@ INSERT INTO `preconditions` (`PID`, `PName`) VALUES
 (6, 'Heart condition'),
 (7, 'Weakened Immune system '),
 (8, 'Asthma');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Prescriptions`
+--
+
+CREATE TABLE `Prescriptions` (
+  `PresID` int(11) NOT NULL,
+  `PresDesc` text NOT NULL,
+  `PatientID` int(10) NOT NULL,
+  `DocID` int(11) NOT NULL,
+  `Drugdesc` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -457,7 +493,8 @@ CREATE TABLE `temp_bill` (
 
 INSERT INTO `temp_bill` (`TB`, `Nick`, `Address`, `Pickup`, `Network`, `Momo_num`, `Snotes`, `Bill`, `Order_date`, `PatientID`) VALUES
 (12, 'Mely', 'airport mirage', 'Delivery', 'MTN', '0240000000', 'Yellow House', 26.2, '2021-04-28', 3),
-(13, 'Mela', 'Association International', 'Delivery', 'MTN', '0240000000', 'Gray gate next to blue kiosk', 46, '2021-04-29', 3);
+(13, 'Mela', 'Association International', 'Delivery', 'MTN', '0240000000', 'Gray gate next to blue kiosk', 46, '2021-04-29', 3),
+(14, 'Meli', 'Koala Shopping Center', 'Delivery', 'MTN', '0240000000', 'Mirage apartment 105', 46, '2021-04-29', 3);
 
 -- --------------------------------------------------------
 
@@ -481,7 +518,8 @@ CREATE TABLE `temp_cart` (
 INSERT INTO `temp_cart` (`TC`, `PHD`, `PatientID`, `DATE`, `Item_quantity`, `status`) VALUES
 (1, 1, 3, '2021-04-27', 1, 'Purchased'),
 (2, 2, 3, '2021-04-27', 1, 'Purchased'),
-(13, 1, 3, '2021-04-29', 4, 'Purchased');
+(13, 1, 3, '2021-04-29', 4, 'Purchased'),
+(15, 1, 3, '2021-04-29', 4, 'Purchased');
 
 -- --------------------------------------------------------
 
@@ -515,16 +553,19 @@ CREATE TABLE `track_order` (
   `TID` int(11) NOT NULL,
   `POID` int(11) NOT NULL,
   `DelID` int(11) DEFAULT NULL,
-  `Progress` enum('Pending','Processed','Picked','Route','Rejected','Delivered') NOT NULL DEFAULT 'Pending'
+  `Progress` enum('Pending','Processed','Picked','Route','Rejected','Delivered','Accepted') NOT NULL DEFAULT 'Pending',
+  `Ratings` int(10) NOT NULL DEFAULT 0,
+  `Fee` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `track_order`
 --
 
-INSERT INTO `track_order` (`TID`, `POID`, `DelID`, `Progress`) VALUES
-(1, 2, NULL, 'Pending'),
-(3, 3, NULL, 'Pending');
+INSERT INTO `track_order` (`TID`, `POID`, `DelID`, `Progress`, `Ratings`, `Fee`) VALUES
+(1, 2, 1, 'Delivered', 0, 2),
+(3, 3, NULL, 'Pending', 0, 2),
+(4, 4, NULL, 'Pending', 0, 2);
 
 --
 -- Indexes for dumped tables
@@ -580,7 +621,8 @@ ALTER TABLE `customer`
 -- Indexes for table `Delivery`
 --
 ALTER TABLE `Delivery`
-  ADD PRIMARY KEY (`DelID`);
+  ADD PRIMARY KEY (`DelID`),
+  ADD UNIQUE KEY `Deluser` (`Deluser`);
 
 --
 -- Indexes for table `diseases`
@@ -622,7 +664,8 @@ ALTER TABLE `perm_cart`
 -- Indexes for table `pharmacists`
 --
 ALTER TABLE `pharmacists`
-  ADD PRIMARY KEY (`PharmID`);
+  ADD PRIMARY KEY (`PharmID`),
+  ADD UNIQUE KEY `PhID` (`PhID`);
 
 --
 -- Indexes for table `pharm_drugs`
@@ -644,6 +687,14 @@ ALTER TABLE `pharm_orders`
 --
 ALTER TABLE `preconditions`
   ADD PRIMARY KEY (`PID`);
+
+--
+-- Indexes for table `Prescriptions`
+--
+ALTER TABLE `Prescriptions`
+  ADD PRIMARY KEY (`PresID`),
+  ADD KEY `DocID` (`DocID`),
+  ADD KEY `PatientID` (`PatientID`);
 
 --
 -- Indexes for table `symptoms`
@@ -724,7 +775,7 @@ ALTER TABLE `customer`
 -- AUTO_INCREMENT for table `Delivery`
 --
 ALTER TABLE `Delivery`
-  MODIFY `DelID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `DelID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `diseases`
@@ -748,13 +799,13 @@ ALTER TABLE `Doctor_Time`
 -- AUTO_INCREMENT for table `drugs`
 --
 ALTER TABLE `drugs`
-  MODIFY `DID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `DID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `perm_cart`
 --
 ALTER TABLE `perm_cart`
-  MODIFY `PC` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `PC` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `pharmacists`
@@ -766,19 +817,25 @@ ALTER TABLE `pharmacists`
 -- AUTO_INCREMENT for table `pharm_drugs`
 --
 ALTER TABLE `pharm_drugs`
-  MODIFY `PHD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `PHD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `pharm_orders`
 --
 ALTER TABLE `pharm_orders`
-  MODIFY `POID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `POID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `preconditions`
 --
 ALTER TABLE `preconditions`
   MODIFY `PID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `Prescriptions`
+--
+ALTER TABLE `Prescriptions`
+  MODIFY `PresID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `symptoms`
@@ -790,13 +847,13 @@ ALTER TABLE `symptoms`
 -- AUTO_INCREMENT for table `temp_bill`
 --
 ALTER TABLE `temp_bill`
-  MODIFY `TB` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `TB` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `temp_cart`
 --
 ALTER TABLE `temp_cart`
-  MODIFY `TC` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `TC` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `testing_centre`
@@ -808,7 +865,7 @@ ALTER TABLE `testing_centre`
 -- AUTO_INCREMENT for table `track_order`
 --
 ALTER TABLE `track_order`
-  MODIFY `TID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `TID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
@@ -852,6 +909,13 @@ ALTER TABLE `pharm_drugs`
 --
 ALTER TABLE `pharm_orders`
   ADD CONSTRAINT `pharm_orders_ibfk_1` FOREIGN KEY (`PatientID`) REFERENCES `customer` (`PatientID`);
+
+--
+-- Constraints for table `Prescriptions`
+--
+ALTER TABLE `Prescriptions`
+  ADD CONSTRAINT `prescriptions_ibfk_1` FOREIGN KEY (`DocID`) REFERENCES `Doctor` (`DocID`),
+  ADD CONSTRAINT `prescriptions_ibfk_2` FOREIGN KEY (`PatientID`) REFERENCES `customer` (`PatientID`);
 
 --
 -- Constraints for table `temp_bill`

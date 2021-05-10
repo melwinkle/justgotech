@@ -45,7 +45,7 @@ if(isset($_GET["ageb"])){
   <a href="/justgotech/SEProject1/client/account/accountinfo.php">Account Info</a>
   <a href="/justgotech/SEProject1/client/tracker/tracker.php">Tracker</a>
   <a href="/justgotech/SEProject1/client/screening/covid/covid.php">Virtual Screening</a>
-  <a href="../booking2/booking.php">Consultation</a>
+  <a href="../booking2/bookmain.php">Consultation</a>
 
  
   <a href="/justgotech/SEProject1/client/account/logout.php">Log Out</a>
