@@ -88,110 +88,64 @@ $cart=$cout['total'];
 </div>
 
 <div class="row">
-<?php  $puc="SELECT * from pharm_orders where PatientID=$patient";
-$pur=mysqli_query($conn,$puc);
-
-
-
-while($purc=mysqli_fetch_assoc($pur)){
-  $id=$purc['POID'];
-
-?>
-<div class='column' style="width:110%">
-<div class="bcart" style="margin-left:300px;margin-top: 60px">
- <div style="background:blue;color:white; width:40%;border-radius:10px 10px 0 0; height: 50px">
-  <h5 style="float:left;margin-left: 8px;margin-top: 15px;">Order#JT<?php
-  echo $id?></h5>
-
-<a href="../pharmacy/ph_pay.php?id=<?php echo $id ?>" style="margin-left: 200px;margin-top:-50px" type="button" class="btn btn-primary" style="margin-bottom: 15px">TRACK ORDER</a>
-
- </div>
-
-
-<div class="tcart" style="width: 40%; border: 2px solid blue;border-radius:0 0 10px 10px">
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Product</th>
-      <th scope="col">Quantity</th>
-      <th scope="col">Price</th>
-    </tr>
-  </thead>
-  <tbody>
   <?php
-
-
   $swl="SELECT * FROM perm_cart 
   inner join temp_cart on perm_cart.TC=temp_cart.TC 
   inner join pharm_orders on perm_cart.POID=pharm_orders.POID 
   inner join pharm_drugs on temp_cart.PHD=pharm_drugs.PHD 
   inner join pharmacists on pharm_drugs.PharmID=pharmacists.PharmID 
   inner join drugs  on pharm_drugs.DID = drugs.DID 
-  where temp_cart.PatientID=$patient and pharm_orders.POID=$id
+  where temp_cart.PatientID=$patient 
   ORDER BY perm_cart.TC DESC ";
   $sw=mysqli_query($conn,$swl);
 
-  if(mysqli_num_rows($sw)>0){
-  while($sl=mysqli_fetch_assoc($sw)){
+ ?>
+  <div id="table" class="table-editable" style="margin-left:15%;width:1200px;margin-top:2%;background:white">
+            <table class="table table-bordered table-responsive-md ">
+            <thead>
+                <tr>
+                <th scope="col">Drug Name</th>
+                <th scope="col">Pharmacy</th>
+                <th scope="col">Drug Description</th>
+                <th scope="col">Delivery Details</th>
+                <th scope="col">Drug Mode</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Unit Price</th>
+                <th scope="col">Total Bill</th>
+                <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php
+            if(mysqli_num_rows($sw)>0){
+                while($sl=mysqli_fetch_assoc($sw)){
+            ?>
+            <tr class="table-success" >  
+                <td scope="row" contenteditable="false"><?php echo $sl['DName']; ?></td>
+                <td contenteditable="false"><?php echo $sl['Pharm_Name'];?></td>
+                <td contenteditable="false"><?php echo $sl['Description'];?></td>
+                <td contenteditable="false" id="md"><?php echo $sl['Special_notes'];?></td>
+                <td contenteditable="false" id="ed"><?php echo $sl['Pickup_Mode'];?></td>
+                <td contenteditable="false" id="Quantity"><?php echo $sl['Item_quantity'];?></td>
+                <td contenteditable="false" id="price">Ghc <?php echo $sl['Price'];?></td>
+                <td contenteditable="false" id="quer"><?php echo $sl['P_Bill'];?></td>
+                <td><a href="../pharmacy/ph_pay.php?id=<?php echo $sl['POID']; ?>"  type="button" class="btn btn-primary" >TRACK ORDER</a></td>
+              </tr>
 
-  echo "
-    <tr>
-      <th scope='row'>
-      <div>
-       <h5>".$sl['DName']."</h5>
-    <h6>".$sl['Pharm_Name']."</h6>
-    <p>".$sl['Description']."</p>
-    <p>".$sl['Special_notes']."</p>
-    <p>".$sl['Pickup_Mode']."</p>
-</div>
-</th>"; ?>
-<!-- <input style="width:50%" class="quantity" min="0" name="quantity" value="1" type="number"> -->
-      <td > <h4><?php echo $sl['Item_quantity']?></h4></td>
-      <td>
-        <div style="color:blue"><h4>Ghc <?php $bill=$sl['Price']; echo "$bill" ;?></h4>
-      </div>
-        
-      </td>
-     
-    </tr>
-    <?php
- }
-}
-    ?>
-    
-  </tbody>
+                <?php
+                }
+                }else{
+                  echo "<tr class='table-danger'>
+                  <td colspan=9> No Purchases Made</td>
+                  </tr>";
+                }
 
-  <tr>
+                ?>
 
-  <td colspan="4">
-    <div style="float:right">
-      <p>TOTAL BILL:Ghc <?php 
-      $bils="SELECT P_Bill from pharm_orders where POID=$id";
-      $bis=mysqli_query($conn,$bils);
-      
-    
-      $bisl=mysqli_fetch_assoc($bis);
-      $bil=$bisl['P_Bill'];
-      echo $bil;
-      
-      
-      ?> </p>
+</tbody>
+            </table>
 
-
-
-
-    </div>
-   </td>
-</tr>
-</table>
-</div>
-
-
-</div>
-
-
-</div>
-<?php }?>
+         </div>
 
    </div>
 <div class="imgchat" style="margin-left:85%;position:fixed">

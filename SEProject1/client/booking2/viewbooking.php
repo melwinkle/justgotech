@@ -44,7 +44,7 @@ $PatientID=$row['PatientID'];
   <a href="../tracker/tracker.php">Tracker</a>
   <a href="../screening/covid/covid.php">Virtual Screening</a>
   <a href="../booking2/bookmain.php">Consultation</a>
-
+  <a href="../pharmacy/pharmacy_main.php">Consultation</a>
  
   <a href="../account/logout.php">Log Out</a>
 </div>

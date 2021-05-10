@@ -43,6 +43,7 @@
   <a href="../tracker/tracker.php">Tracker</a>
   <a href="../screening/covid/covid.php">Virtual Screening</a>
   <a href="../booking2/bookmain.php">Consultation</a>
+  <a href="../pharmacy/pharmacy_main.php">Pharmacy</a>
  
   <a href="../account/logout.php">Log Out</a>
 </div>
@@ -55,58 +56,59 @@
 
 </div>
 
-<div class="test" style="margin-left:20%;width:60%">
+<div class="test" style="margin-left:25%;width:800px">
   <h5 class="card-header"></h5>
-  <div class="card-body" style="background:skyblue">
+  <div class="card-body"  style="border:1px solid #3498db;background:#ffffff;height:800px;width:800px;border-radius:10px;color:rgb(4, 23, 75)">
   
-    <h2 class="card-title">
+    <h2 style="margin-top:10px;color:rgb(4, 23, 75);text-align:center" class="card-title">
     Account Information
     </h2><br>
-
+    <div style="margin-left:8%">
     <form class="accountinfo" action="edit.php" method="post">
 <div class="form-group">
                                 <label class="header">First Name </label><br>
-                                <input id="firstname" style="width:90%" type="text" name="fname" value="<?php echo $row['firstname']?>" >
+                                <input style="border:1px solid #3498db;border-radius:5px;width:85%;height:40px" id="firstname" style="width:90%" type="text" name="fname" value="<?php echo $row['firstname']?>" >
                             </div>
 
                             <div class="form-group">
                                 <label class="header">Last Name </label><br>
-                                <input id="lastname" style="width:90%" type="text"  name="lname" value="<?php echo $row['lastname']?>">
+                                <input style="border:1px solid #3498db;border-radius:5px;width:85%;height:40px" id="lastname" style="width:90%" type="text"  name="lname" value="<?php echo $row['lastname']?>">
                                 
                             </div>
 
                             <div class="form-group">
                                 <label class="header">Email </label><br>
-                                <input id="email" style="width:90%" type="text" name="email" value="<?php echo $row['email']?>" readonly>
+                                <input style="border:1px solid #3498db;border-radius:5px;width:85%;height:40px" id="email" style="width:90%" type="text" name="email" value="<?php echo $row['email']?>" readonly>
                             </div>
                             
                             <div class="form-group">
                                 <label class="header">Gender </label><br>
-                                <input style="width:90%" type="text" name="gender" value="<?php echo $row['gender']?>" >
+                                <input  style="border:1px solid #3498db;border-radius:5px;width:85%;height:40px"style="width:90%" type="text" name="gender" value="<?php echo $row['gender']?>" >
 
                              
                             </div>
 
                             <div class="form-group">
                                 <label class="header">Date of birth </label><br>
-                                <input  style="width:90%" type="text"  name="dob" value="<?php echo $row['dob']?>" >
+                                <input  style="border:1px solid #3498db;border-radius:5px;width:85%;height:40px" style="width:90%" type="text"  name="dob" value="<?php echo $row['dob']?>" >
                             </div>
 
                             
                             <div class="form-group">	
                                 <label class="header">Phone Number </label><br>
-                                <input id="telephone" style="width:90%" type="text"   name="phone" value="<?php echo $row['phonenumber']?>"  >
+                                <input style="border:1px solid #3498db;border-radius:5px;width:85%;height:40px" id="telephone" style="width:90%" type="text"   name="phone" value="<?php echo $row['phonenumber']?>"  >
                             </div>
                             
                             <div class="form-group">  
                                 <label class="header">Nationality </label><br>
                                
-                               <input style="width:90%" type="text" name="nationality" value="<?php echo $row['nationality']?>">
+                               <input style="border:1px solid #3498db;border-radius:5px;width:85%;height:40px" type="text" name="nationality" value="<?php echo $row['nationality']?>">
                             </div>
 
                             <button  type="submit" class="btn btn-primary btn-lg" style="background: rgb(23, 79, 182); width: 50%;color:white; margin-left:15%" name="edit">Edit</button>
 
 </form>
+</div>
     
 
     
