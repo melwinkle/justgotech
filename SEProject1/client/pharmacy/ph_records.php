@@ -182,10 +182,16 @@ if(mysqli_num_rows($noq)>0){
 
 
 
+
+
+</div>
+<div class="imgchat" style="margin-left:85%;position:fixed">
+<a href="../chatbot/bot.php?prev=../pharmacy/pharmacy_main.php"><img style="width:30%;margin-top:60%;margin-left:40%" src="../images/chat.png" alt="chatbot"></a>
+
+</div>
+
 <script>
-/* When the user clicks on the button, 
-toggle between hiding and showing the dropdown content */
-function myFunction() {
+  function myFunction() {
   document.getElementById("myDropdown").classList.toggle("show");
 }
 
@@ -202,15 +208,6 @@ window.onclick = function(event) {
     }
   }
 }
-</script>
-<!-- Basic
-</div>
-<div class="imgchat" style="margin-left:85%;position:fixed">
-<a href="../chatbot/bot.php?prev=../pharmacy/pharmacy_main.php"><img style="width:30%;margin-top:60%;margin-left:40%" src="../images/chat.png" alt="chatbot"></a>
-
-</div>
-
-<script>
 function openTab(tabName) {
   var i, x;
   x = document.getElementsByClassName("containerTab");
