@@ -145,42 +145,37 @@ Receipts
 </div>
 
 <div class="row" style="margin-top: 2%">
+<div id="table" class="table-editable" style="width:1000px;margin-top:2%;">
+                    <table id="example" class="table table-striped table-bordered" style="background:white">
+                        <thead>
+                            <tr>
+                                <th scope="col">Delivery ID </th>
+                                <th scope="col">Fee</th>
+                                
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
 <?php
-$final="SELECT track_order.TID,customer.firstname,customer.lastname,pharmacists.Pharm_Name,pharmacists.Location as phLocation,track_order.Fee,pharm_orders.Location from track_order inner join perm_cart on track_order.POID=perm_cart.POID inner join pharm_orders on perm_cart.POID=pharm_orders.POID inner join temp_cart on perm_cart.TC=temp_cart.TC inner join pharm_drugs on temp_cart.PHD=pharm_drugs.PHD inner join pharmacists on pharm_drugs.PharmID=pharmacists.PharmID inner join customer on pharm_orders.PatientID=customer.PatientID where Progress='Delivered' and DelID=$del  GROUP BY track_order.POID ";
-$finale=mysqli_query($conn,$final);
+$fin="SELECT * track_order where DelID=$del and Progress='Delivered'";
+$finale=mysqli_query($conn,$fin);
+
 while($finales=mysqli_fetch_assoc($finale)){
-  $final_fn=$finales['firstname'];
-  $final_ln=$finales['lastname'];
-  $final_ph=$finales['Pharm_Name'];
-  $final_pl=$finales['phLocation'];
+
   $final_fe=$finales['Fee'];
-  $final_lo=$finales['Location'];
   $tc=$finales['TID'];
   
   ?>
-    <div class="col-sm-4" >
-        <div class='card  mb-4 shadow-sm '  style='background:white;height:120px;width:550px;border-radius:5px;color:#cccccc'>
-        <span style="margin-top:10px;margin-left: 440px;color:#3498db">GHC <?php echo $final_fe;?></span>
-            <div style="width:90px;margin-left:20px;margin-top:-4px;color:white;background:skyblue;">
-                <h5 style="margin-left:20px;margin-top:4px">Order
-                    </h5>
-                <h4 style="margin-left: 15px">#TO<?php echo $tc;?></h4>
-            </div>
+  
+  <tr>
+                                <th scope="col"><?php echo $tc;?></th>
+                                <th scope="col"><?php echo $final_fe;?></th>
+                                
+                                
+                            </tr>
 
-            <div style="margin-left:130px;margin-top:-60px;color:black">
-                <img src="../../images/user.png" style="width:10%;margin-left:15px"alt="">
-            <h5><?php echo $final_fn." ".$final_ln;?></h5>
-          
-            </div>
-
-            
-            <div  style="margin-left:240px;margin-top:-80px">
-                <span style="color:black"><img style="width: 3%"src="../../images/oval.png"/>Pickup :</span> <span ><?php echo $final_ph." ".$final_pl;?></span><br>
-                <span style="color:black"><img style="width: 3%"src="../../images/place.png"/>DropOff: </span><span ><?php echo $final_lo;?></span>
-            </div>       
-        </div>
-    </div>
-
+</tbody>
+</table>
 <?php
 }
 ?>
@@ -188,6 +183,7 @@ while($finales=mysqli_fetch_assoc($finale)){
 <!-- next -->
 
 <!-- end -->
+</div>
 </div>
 
 

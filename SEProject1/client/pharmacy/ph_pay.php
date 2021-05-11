@@ -54,6 +54,9 @@ $count="SELECT count(*) as total from temp_cart where PatientID=$patient and sta
 $conph=mysqli_query($conn,$count);
 $cout=mysqli_fetch_assoc($conph);
 $cart=$cout['total'];
+
+
+
 ?>
 <html>
 <head>
@@ -64,8 +67,9 @@ $cart=$cout['total'];
 <link
   href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.2.0/mdb.min.css"
   rel="stylesheet"
-/>
+/><link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="pharm.css">
+<link rel="stylesheet" href="star.css">
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="sweetalert2.all.min.js"></script>
@@ -94,7 +98,7 @@ $cart=$cout['total'];
   
   <div style="float:right">
  
-  <button style="background:none;border:none;margin-left:63%"><img style="width:25%"src="https://img.icons8.com/plasticine/100/000000/appointment-reminders.png"/><img style="width:10%"src="https://img.icons8.com/ios-filled/50/e74c3c/2-circle.png"/></button>
+  <button style="background:none;border:none;margin-left:61%"><img style="width:25%"src="https://img.icons8.com/plasticine/100/000000/appointment-reminders.png"/><img style="width:10%"src="https://img.icons8.com/ios-filled/50/e74c3c/2-circle.png"/></button>
 
 <button onclick="cartP()"style="background:none;border:none;margin-left:-9%"><img  style="width:30%" src="https://img.icons8.com/fluent/48/4a90e2/fast-cart.png"/><img style="width:20%"src="https://img.icons8.com/ios-filled/50/000000/<?php echo $cart;?>-circle.png"/></button>
 <span style="font-size:20px;cursor:pointer;margin-left:-2% " onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:5%" src="../../images/stethoscope.png" alt="profile"> </span>
@@ -208,10 +212,52 @@ if(isset($_GET['id'])){
 $track="SELECT * from track_order where POID=$id";
 $tr=mysqli_query($conn,$track);
 $sm=mysqli_fetch_assoc($tr);
+
+$rid=$sm['DelID'];
+if($sm['Ratings']==0){
+  $rate='<div class="stars">
+
+  <div class="d-flex justify-content-left my-4" style="margin-left:80px" >
+  <span class="font-weight-bold indigo-text mr-2 mt-1">0</span>
+    <form class="range-field w-100" action="ph_suc.php?id='.$id.'" method="post">
+  
+      <input class="border-0" style="width:450px"name="rate" type="range" min="0" steps="0.5"max="5" /><br>
+      
+      <button name="ratings" style="margin-top:5px;margin-left:200px" class="btn btn-primary" type="submit">Rate</button>
+    </form>
+    <span style="margin-left:280px" class="font-weight-bold ">5</span>
+  </div>
+  
+     
+  </div>';
+}else{
+  $rat=$sm['Ratings'];
+  $rate="<div><h3><img src='https://img.icons8.com/fluent/48/26e07f/filled-star.png'/>Rating:$rat/5</h3></div>";
+}
+
+
+$ride="SELECT * from delivery where DelID=$rid";
+
+$ri=mysqli_query($conn,$ride);
+if($ri){
+
+
+$riq=mysqli_fetch_assoc($ri);
+$rn=$riq['DelFName'];
+$rl=$riq['DeLName'];
+$ru=$riq['DelNum'];
+}else{
+  $rn="No";
+$rl="Rider";
+$ru="00000000000";
+}
 if($sm['Progress']=="Pending"){
 
 
+
 ?>
+
+<div><h2>Rating:</h2><h1>$rat/5</h1></div>
    <div class="progress" style="border-radius:5px;margin-left: 40px;width:90%;height: 15px;margin-top:10px">
   <div class="progress-bar bg-warning" role="progressbar" style="width: 25%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
   
@@ -247,6 +293,9 @@ if($sm['Progress']=="Processed"){
 
 if($sm['Progress']=="Picked"){
 
+
+
+
 ?>
 <div class="progress" style="border-radius:5px;margin-left: 40px;width:90%;height: 15px;margin-top:10px">
   <div class="progress-bar bg-success" role="progressbar" style="width: 75%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
@@ -260,6 +309,20 @@ if($sm['Progress']=="Picked"){
      
   </div>
   
+</div>
+
+<div style="background:blue;color:white;border-radius:10px 10px 0 0;width: 60%;margin-top:20px;height: 40px;margin-bottom:1px">
+       <h5 style="float:left;margin-left: 8px;margin-top: 15px;">Delivery Details</h5>
+   </div>
+<div style="border:1px solid blue;border-radius:0 0 10px 10px; width: 60%;margin-top:5px;">
+
+<img src="../../images/us.png" alt="delivery" style="width:65px;float:left;margin-left:10px">
+<ul style="list-style:none"><li><h5  >Rider Name:<?php echo $rn.' '.$rl;?></h5></li>
+<li><h5 >Rider Number:<?php echo $ru;?></h5></li></ul>
+
+
+
+
 </div>
 
 <?php 
@@ -279,8 +342,21 @@ if($sm['Progress']=="Route"){
     </div>
     
   </div>
+
+  <div style="background:blue;color:white;border-radius:10px 10px 0 0;width: 60%;margin-top:20px;height: 40px;margin-bottom:1px">
+       <h5 style="float:left;margin-left: 8px;margin-top: 15px;">Delivery Details</h5>
+   </div>
+<div style="border:1px solid blue;border-radius:0 0 10px 10px; width: 60%;margin-top:5px;">
+
+<img src="../../images/us.png" alt="delivery" style="width:65px;float:left;margin-left:10px">
+<ul style="list-style:none"><li><h5  >Rider Name:<?php echo $rn.' '.$rl;?></h5></li>
+<li><h5 >Rider Number:<?php echo $ru;?></h5></li></ul>
+
+
+</div>
   
   <?php 
+
   
 }
 
@@ -300,17 +376,47 @@ if($sm['Progress']=="Delivered"){
     
   </div>
   
-  <?php 
+
+
+ 
+  
+
+<div style="background:blue;color:white;border-radius:10px 10px 0 0;width: 60%;margin-top:20px;height: 40px;margin-bottom:1px">
+       <h5 style="float:left;margin-left: 8px;margin-top: 15px;">Delivery Details</h5>
+   </div>
+<div style="border:1px solid blue;border-radius:0 0 10px 10px; width: 60%;margin-top:5px;">
+
+<img src="../../images/us.png" alt="delivery" style="width:65px;float:left;margin-left:10px">
+<ul style="list-style:none"><li><h5  >Rider Name:<?php echo $rn.' '.$rl;?></h5></li>
+<li><h5 >Rider Number:<?php echo $ru;?></h5></li></ul>
+
+<?php echo $rate;?>
+<!-- <div class="stars">
+
+<div class="d-flex justify-content-left my-4" style="margin-left:80px" >
+<span class="font-weight-bold indigo-text mr-2 mt-1">0</span>
+  <form class="range-field w-100" action="ph_suc.php?id=<?php echo $id;?>" method="post">
+
+    <input class="border-0" style="width:450px"name="rate" type="range" min="0" steps="0.5"max="5" /><br>
+    
+    <button name="ratings" style="margin-top:5px;margin-left:200px" class="btn btn-primary" type="submit">Rate</button>
+  </form>
+  <span style="margin-left:280px" class="font-weight-bold ">5</span>
+</div>
+
+   
+</div> -->
+
+
+</div>
+<?php 
   }
 ?>
-
-
-
         
         
-
 
 <script>
+
 function openTab(tabName) {
   var i, x;
   x = document.getElementsByClassName("containerTab");
@@ -351,6 +457,8 @@ function paym(){
         <?php
     }
     ?>
+
+
     
 </script>
 </body>

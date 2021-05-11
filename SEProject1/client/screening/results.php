@@ -33,7 +33,12 @@ $resut=mysqli_query($conn,$quey);
   rel="stylesheet"
 />
 <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="covid.css">
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
 
 <body >
 <div id="mySidenav" class="sidenav">
@@ -43,6 +48,7 @@ $resut=mysqli_query($conn,$quey);
   <a href="../tracker/tracker.php">Tracker</a>
   <a href="../screening/covid/covid.php">Virtual Screening</a>
   <a href="../booking2/bookmain.php">Consultation</a>
+  <a href="../pharmacy/pharmacy_main.php">Consultation</a>
 
  
   <a href="../account/logout.php">Log Out</a>
@@ -55,39 +61,72 @@ $resut=mysqli_query($conn,$quey);
   <span style="font-size:20px;cursor:pointer; float:right; margin-right: -32%" onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:10%" src="../../images/stethoscope.png" alt="profile"> </span>
 
 </div>
-
+<div id="table" class="table-editable" style="margin-left:17%;width:1100px;margin-top:2%;background:white">
+            <table class="table table-bordered table-responsive-md ">
+            <thead>
+                <tr>
+                
+                <th scope="col">Age Bracket</th>
+                <th scope="col">Region</th>
+                <th scope="col">Test Status</th>
+                <th scope="col">Symptoms</th>
+                <th scope="col">Preconditions</th>
+                <th scope="col">Health Status</th>
+                <th scope="col">Time Completed</th>
+                <th scope="col">Contact Status</th>
+                </tr>
+            </thead>
+            <tbody>
        <?php
+       if(mysqli_num_rows($resut)){
        while($rw=mysqli_fetch_assoc($resut)){
         $con=$rw['ConID'];
 
+        if($rw['Status']=="Exposed"){
+         echo " <tr class='table-danger'>";
+        }
+        else if($rw['Status']=="Likely Exposed"){
+          echo " <tr class='table-warning'>";
+        }
+        else if($rw['Status']=="Not Likely Exposed"){
+          echo " <tr class='table-warning'>";
+        }
+
+        else{
+          echo " <tr class='table-success'>";
+        }
+        ?>
+
+
        
-       echo '
-       <div class="res" style="margin-bottom:2%">
-<div class="covidinf" >
-   
-   <h5 class="card-header">
-       Response ID: #
-   '.$rw['ResponseID'].'
-   <div class="card-body" >
+  
  
-     <h2 class="card-title">
-     Your Responses
-     </h2><br>
-     <p>Age: '.$rw['age_bracket'].'</p><br>
-     <p>Region:'.$rw['Region'].'</p><br>
-     <p>Test Status:'.$rw['testing'].'</p><br>
-     <p>Symptoms:'.$rw['symptom'].'</p><br>
-     <p>Preconditions:'.$rw['precon'].'</p><br>
-     <p>Health Status:'.$rw['Status'].'</p><br>
-     <p>Time Completed:'.$rw['Time'].'</p><br>
-     <p>Contact Status:'.$rw['Contact'].'</p><br>
-       </div>
-       </div><br>
-     ';
+     
+  
+     <td><?php echo $rw['age_bracket'];?></td>
+     <td><?php echo $rw['Region'];?></td>
+     <td><?php echo $rw['testing'];?></td>
+     <td><?php echo $rw['symptom'];?></td>
+     <td><?php echo $rw['precon'];?></td>
+     <td><?php echo $rw['Status']?></td>
+     <td><?php echo$rw['Time'];?></td>
+     <td><?php echo $rw['Contact'];?></td>
+     </tr>
+     
+     <?php
+       }
+       }else{
+        echo "<tr class='table-danger'>
+        <td colspan=9> No Purchases Made</td>
+        </tr>";
        }
        
      
      ?>
+    
+     </tbody>
+     </table>
+     </div>
    </div>
 
 
@@ -103,9 +142,12 @@ function closeNav() {
   document.getElementById("main").style.marginLeft= "0";
 }
 </script>
+
+<script>$(document).ready(function() {
+    $('#example').DataTable();
+} );</script>
+</body>
 <footer >
   Copyright (c) JustGoTech 2021 
 </footer>
-</body>
-
 </html>

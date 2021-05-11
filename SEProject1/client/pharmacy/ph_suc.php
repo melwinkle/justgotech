@@ -71,4 +71,22 @@ if(isset($_POST['phshop'])){
   }
 
 }
-echo "oh no ";
+
+
+
+
+
+if(isset($_POST['ratings'])){
+ 
+  $id=$_GET['id'];
+  $st=$_POST['rate'];
+
+
+  $upd="UPDATE track_order set Ratings=$st where POID=$id";
+  $up=mysqli_query($conn,$upd);
+  if($up){
+      header("Location: ../pharmacy/ph_pay.php?rate=$st&id=$id");
+  }else{
+    header("Location: ../pharmacy/ph_pay.php?norate=$st&id=$id");
+  }
+}

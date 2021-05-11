@@ -42,11 +42,16 @@ $countp=0;
   href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.2.0/mdb.min.css"
   rel="stylesheet"
 />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="css/covid.css">
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="sweetalert2.all.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
 
 
 <body >
@@ -69,13 +74,13 @@ $countp=0;
   <span style="font-size:30px;cursor:pointer" onclick="openNav()"><img style="width:10%" src="../../images/justgo.png" alt="justgotech"> </span>
   <div style="float:right">
 
-<button style="background:none;border:none;margin-left:65%"><img style="width:25%"src="https://img.icons8.com/plasticine/100/000000/appointment-reminders.png"/><img style="width:10%"src="https://img.icons8.com/ios-filled/50/e74c3c/2-circle.png"/></button>
+<button style="background:none;border:none;margin-left:64%"><img style="width:25%"src="https://img.icons8.com/plasticine/100/000000/appointment-reminders.png"/><img style="width:10%"src="https://img.icons8.com/ios-filled/50/e74c3c/2-circle.png"/></button>
 <span style="font-size:20px;cursor:pointer;margin-left:-6% " onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:5%" src="../../images/stethoscope.png" alt="profile"> </span>
 
 </div>
 </div>
 <div class="hname" style="margin-left:45%;color:rgb(23, 79, 182)">
-<h1>CONSULTATION</h1>
+<h1>DIAGNOSIS</h1>
 </div>
 
 <div id="table" class="table-editable" style="width:1100px;margin-top:2%;margin-left:20%">
@@ -109,13 +114,26 @@ $countp=0;
                 
                 
               
+                  if(isset($_GET['rid'])){
+                    $id=$_GET['rid'];
+                    if($id==$final_id){
+                      echo '<tr class="table-success" >  ';
 
+                    }else{
+                      echo '<tr class="table-warning">  ';
+
+                    }
+      
+                   
+                  }else{
+                    echo '<tr class="table-warning" >  ';
+                  }
 
 
               ?>
               
 
-                <tr class="table-success" >  
+               
                 
                 
                 
@@ -186,6 +204,9 @@ function presP() {
 
 
 </script>
+<script>$(document).ready(function() {
+    $('#example').DataTable();
+} );</script>
 <script type="text/javascript">function add_chatinline(){var hccid=33480640;var nt=document.createElement("script");nt.async=true;nt.src="https://mylivechat.com/chatinline.aspx?hccid="+hccid;var ct=document.getElementsByTagName("script")[0];ct.parentNode.insertBefore(nt,ct);}
 add_chatinline();</script>
 </body>

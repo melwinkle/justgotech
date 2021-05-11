@@ -8,5 +8,5 @@
         echo "<script>location.href='/justgotech/index.html'</script>";
     }
 
-    echo "<script>location.href='..Regforms/Login.html'</script>";
+    echo "<script>location.href='../Regforms/Login.html'</script>";
 ?>
