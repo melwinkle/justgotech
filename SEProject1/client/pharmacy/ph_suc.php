@@ -29,6 +29,7 @@ if(isset($_POST['phshop'])){
   $notes=$_POST['snotes'];
   $nick=$_POST['nick'];
   $num=$_POST['momo'];
+  $dl=$_GET['del'];
 
 
   $forder="INSERT INTO temp_bill(Nick,Address,Pickup,Network,Momo_num,Snotes,Bill,Order_date,PatientID) VALUES('$nick','$location','$pick','$net','$num','$notes',$bill,'$odate',$patient)";
@@ -52,7 +53,7 @@ if(isset($_POST['phshop'])){
         if($pord){
           $update="UPDATE temp_cart SET status='Purchased'";
           $up=mysqli_query($conn,$update);
-          $tl="INSERT INTO track_order(POID) VALUES($last_id)";
+          $tl="INSERT INTO track_order(POID,Fee) VALUES($last_id,$dl)";
           $tw=mysqli_query($conn,$tl);
           }
           header("Location: ../pharmacy/ph_pay.php?success=added&id=$last_id&bill=$bill" );

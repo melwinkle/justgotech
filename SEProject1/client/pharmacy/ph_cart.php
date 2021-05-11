@@ -195,11 +195,11 @@ if(isset($_GET['phd'])){
       <p>Tax: Ghc <?php $tax=$tot*0.1; echo $tax;?></p>
       <p>Delivery: Ghc <?php 
       if($location==$sl['Location']){
-        $del=2.00;
+        $del=5.00;
         echo $del;
       }
       else{
-        $del=5.00;
+        $del=10.00;
         echo $del;
       }
       ?> </p>
@@ -221,7 +221,7 @@ if(isset($_GET['phd'])){
     </div>
     <div class="container">
     
-      <form action="ph_suc.php?bill=<?php echo $bill;?>" method="post"class="needs-validation" style="margin-left:-5px;"novalidate>
+      <form action="ph_suc.php?bill=<?php echo $bill;?>&del=<?php echo $del;?>" method="post"class="needs-validation" style="margin-left:-5px;"novalidate>
       <div class="rw" style="border:2px solid blue;border-radius:0 0 10px 10px;">
   <div class="form-row" >
     <div style="margin-left:-150px;width: 250px;margin-top: 15px">
