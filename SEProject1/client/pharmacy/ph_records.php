@@ -34,6 +34,15 @@ $conph=mysqli_query($conn,$count);
 $cout=mysqli_fetch_assoc($conph);
 $cart=$cout['total'];
 
+
+$notif="SELECT * from notification where PatientID=$patient and NRead='Unread'";
+$noq=mysqli_query($conn,$notif);
+if(mysqli_num_rows($noq)>0){
+  $nn=mysqli_num_rows($noq);
+ 
+}else{
+  $nn=0;
+}
 ?>
 <html>
 <head>
@@ -46,10 +55,12 @@ $cart=$cout['total'];
   rel="stylesheet"
 />
 <link rel="stylesheet" href="pharm.css">
+<link rel="stylesheet" href="num.css">
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="sweetalert2.all.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 
 
 <body >
@@ -73,7 +84,25 @@ $cart=$cout['total'];
   <span style="font-size:30px;cursor:pointer" onclick="openNav()"><img style="width:10%" src="../../images/justgo.png" alt="justgotech"> </span>
   <div style="float:right">
  
-  <button style="background:none;border:none;margin-left:63%"><img style="width:25%"src="https://img.icons8.com/plasticine/100/000000/appointment-reminders.png"/><img style="width:10%"src="https://img.icons8.com/ios-filled/50/e74c3c/2-circle.png"/></button>
+  <div class="dropdown" style="margin-left:61%">
+  <button onclick="myFunction()" class="dropbtn" style="background:none;border:none;"><img style="width:25%"src="https://img.icons8.com/plasticine/100/000000/appointment-reminders.png"/><img style="width:10%"src="https://img.icons8.com/ios-filled/50/e74c3c/<?php echo $nn;?>-circle.png"/></button>
+  <div id="myDropdown" class="dropdown-content">
+    <?php
+    if($nn>0){
+     while($num=mysqli_fetch_assoc($noq)){
+       $nt=$num['NID'];
+       $mes=$num['NMessage'];
+       $da=$num['NTime'];
+       echo "<a href='../pharmacy/ph_suc.php?not&id=$nt&mprev=../pharmacy/ph_records.php'>$mes $da</a>";
+     }
+    }else{
+      echo "<a >No Unread Notifications</a>";
+    }
+     ?>
+   
+  </div>
+</div>
+ 
 
   <button onclick="cartP()"style="background:none;border:none;margin-left:-9%"><img  style="width:30%" src="https://img.icons8.com/fluent/48/4a90e2/fast-cart.png"/><img style="width:20%"src="https://img.icons8.com/ios-filled/50/000000/<?php echo $cart;?>-circle.png"/></button>
   <span style="font-size:20px;cursor:pointer;margin-left:-2% " onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:5%" src="../../images/stethoscope.png" alt="profile"> </span>
@@ -129,7 +158,7 @@ $cart=$cout['total'];
                 <td contenteditable="false" id="Quantity"><?php echo $sl['Item_quantity'];?></td>
                 <td contenteditable="false" id="price">Ghc <?php echo $sl['Price'];?></td>
                 <td contenteditable="false" id="quer"><?php echo $sl['P_Bill'];?></td>
-                <td><a href="../pharmacy/ph_pay.php?id=<?php echo $sl['POID']; ?>"  type="button" class="btn btn-primary" >TRACK ORDER</a></td>
+                <td><a href="../pharmacy/ph_pay.php?id=<?php echo $sl['POID']; ?>"  class="btn btn-primary" >TRACK ORDER</a></td>
               </tr>
 
                 <?php
@@ -148,6 +177,34 @@ $cart=$cout['total'];
          </div>
 
    </div>
+
+
+
+
+
+<script>
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>
+<!-- Basic
+</div>
 <div class="imgchat" style="margin-left:85%;position:fixed">
 <a href="../chatbot/bot.php?prev=../pharmacy/pharmacy_main.php"><img style="width:30%;margin-top:60%;margin-left:40%" src="../images/chat.png" alt="chatbot"></a>
 

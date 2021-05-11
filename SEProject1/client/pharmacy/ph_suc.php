@@ -91,3 +91,21 @@ if(isset($_POST['ratings'])){
     header("Location: ../pharmacy/ph_pay.php?norate=$st&id=$id");
   }
 }
+
+
+if(isset($_GET['not'])){
+ 
+  $id=$_GET['id'];
+  $mprev=$_GET['mprev'];
+
+
+
+  $upd="UPDATE notification set NRead='Read' where NID=$id";
+  $up=mysqli_query($conn,$upd);
+  if($up){
+      header("Location: $mprev");
+  }else{
+    header("Location: $mprev");
+  }
+  
+}
