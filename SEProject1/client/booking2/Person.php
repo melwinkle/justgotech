@@ -40,11 +40,18 @@ class Person extends Database{
         $sql = "SELECT Replies FROM chatbot WHERE Queries LIKE '%$mess%'";
         $query = $this->connection->query($sql);
         if($query->num_rows > 0){
+<<<<<<< HEAD
             echo "\n(3)chatbot is active";
           
         }
         else{
             echo "\n(3)chatbot is NOT active";
+=======
+            echo "\n(1)chatbot is active";
+         }
+        else{
+        echo "\n(1)chatbot is NOT active";
+>>>>>>> cde678e2ad28a5307106cee8cbbc9b1cd36aa309
         }
     }
 
