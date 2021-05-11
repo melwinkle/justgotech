@@ -41,10 +41,9 @@ class Person extends Database{
         $query = $this->connection->query($sql);
         if($query->num_rows > 0){
             echo "\n(1)chatbot is active";
-            return true;
-        }
+         }
         else{
-            return false;
+        echo "\n(1)chatbot is NOT active";
         }
     }
 
