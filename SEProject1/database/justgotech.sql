@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 08, 2021 at 01:13 AM
+-- Generation Time: May 08, 2021 at 05:42 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -13,8 +13,6 @@ START TRANSACTION;
 SET time_zone = "+00:00";
 
 
-create database justgotech;
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -23,6 +21,21 @@ create database justgotech;
 --
 -- Database: `justgotech`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin_one`
+--
+
+CREATE TABLE `admin_one` (
+  `AdminID` int(11) NOT NULL,
+  `AdminFName` varchar(255) NOT NULL,
+  `AdminLName` varchar(255) NOT NULL,
+  `AdminNick` varchar(255) NOT NULL,
+  `AdminPass` varchar(255) NOT NULL,
+  `AdminLocation` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -38,12 +51,23 @@ CREATE TABLE `booking` (
   `Insurance` enum('Yes','No') NOT NULL,
   `Insurance_Name` varchar(255) DEFAULT NULL,
   `Insurance_ID` varchar(255) DEFAULT NULL,
-  `Image` varchar(255) DEFAULT NULL,
   `Doctor` int(11) NOT NULL,
   `ApTime` varchar(255) NOT NULL,
   `Person` enum('Self','Other') NOT NULL,
-  `PatientID` int(10) NOT NULL
+  `PatientID` int(10) NOT NULL,
+  `STATUS` enum('BOOKED','PENDING','COMPLETED','') NOT NULL DEFAULT 'PENDING'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `booking`
+--
+
+INSERT INTO `booking` (`BID`, `Appointment`, `Department`, `Reason`, `Insurance`, `Insurance_Name`, `Insurance_ID`, `Doctor`, `ApTime`, `Person`, `PatientID`, `STATUS`) VALUES
+(1, '2021-04-10', 'Specialist', 'Sick', 'No', '', '', 1, '10:00', 'Self', 3, 'PENDING'),
+(2, '2021-04-10', 'Surgery', 'sick', 'No', '', '', 1, '10:00', 'Self', 3, 'PENDING'),
+(3, '2021-04-10', 'Dentistry', 'My teeth', 'Yes', 'Medifem', '1243', 1, '12:00', 'Self', 4, 'PENDING'),
+(4, '2021-04-13', 'Specialist', 'I have a tummy ache and i feel nauseous', 'No', '', '', 1, '09:00', 'Self', 3, 'PENDING'),
+(5, '2021-04-15', 'Dentistry', 'Tooth ache', 'No', '', '', 1, '11:00', 'Self', 3, 'PENDING');
 
 -- --------------------------------------------------------
 
@@ -64,13 +88,17 @@ CREATE TABLE `chatbot` (
 INSERT INTO `chatbot` (`MID`, `Queries`, `Replies`) VALUES
 (1, 'Hello|Hi|Hy|Hey|hello|hi|hy|hey', 'Hi there,'),
 (2, 'What is your name|What is your name?|What\'s your name', 'My name is my JustGo bot!'),
-(3, 'help|services|MM', 'Here is the Main Menu:\r\n1. General Screening(GS)\r\n2. Pharmacy(P)\r\n3. Consultation(C)\r\n4. About JustGo Tech Healthcare(AJ)\r\n\r\nPlease reply with the abbreviations in bracket'),
-(4, 'GS|gs|General Screening|general screening', 'General Screening Menu\r\n1.View Reports(VR)\r\n2.Submit Report(SR)\r\n3.Take a test(TT)\r\n0.Main Menu(MM)'),
-(5, 'P|p|pharmacy|Pharmacy|PHARMACY', 'Pharmacy Menu\r\n1.Search for drug(SD)\r\n2.View Page(VP)\r\n0.Main Menu(MM)'),
-(6, 'C|c|consultation', 'Consulation Menu:\r\n1.Book Appointment\r\n2.Manaage Bookings\r\n0.Main Menu'),
+(3, 'help|services|MM|mm|menu|main', 'Here is the Main Menu:\r\n1. General Screening(GS)\r\n2. Pharmacy(PT)\r\n3. Consultation(CT)\r\n4. About JustGo Tech Healthcare(AJ)\r\n\r\nPlease reply with the abbreviations in bracket'),
+(4, 'GS|gs|General Screening|general screening', 'General Screening Menu\r\n1.View Reports(VR)\r\n2.Take a test(TT)                              3.About General Screening(AGS)\r\n0.Main Menu(MM)'),
+(5, 'PT|pt|pharmacy|Pharmacy|PHARMACY', 'Pharmacy Menu\r\n1.Search for drug(SD)\r\n2.View Page(VP)\r\n3.About Pharmacy(AP)\r\n0.Main Menu(MM)'),
+(6, 'CT|ct|consultation', 'Consulation Menu:\r\n1.Book Appointment(BA)\r\n2.Manage Bookings(MB)\r\n0.Main Menu(MM)'),
 (7, 'AJ|aj|About|about', 'JustGo Tech Digital Healthcare is tailored to provide healthcare to all social groups. '),
 (8, 'TT|Test|test|tt', 'Use the link below to access the test. All the best!!'),
-(9, 'VR|vr|view reports|View reports|', 'Find your statistics and analysis for your tests. To view more, click the link below.');
+(9, 'VR|vr|view reports|View reports|', 'Find your statistics and analysis for your tests. To view more, click the link below.'),
+(10, 'AGS', 'The general screening is tailored to help you to analyze your symptoms for a particular disease and give an on-the spot diagnosis. The model will soon be powered by AI model.'),
+(11, 'AP', 'The pharmacy service is tailored to help you find the nearest partner pharmacy with the best price for a drug you are searching for.The component is currently under review.'),
+(12, 'BA|ba|Book|book|Book Appointment|book appointment', 'Get in touch with our renowned doctors. Click the button below to get the best treatment'),
+(13, 'MB|mb|manage|manage bookings|Manage Bookings', 'You have got access to the best services. Now you can manage the bookings. Click below to view more. ');
 
 -- --------------------------------------------------------
 
@@ -152,7 +180,34 @@ CREATE TABLE `customer` (
 INSERT INTO `customer` (`PatientID`, `firstname`, `lastname`, `username`, `email`, `gender`, `dob`, `nationality`, `phonenumber`, `userpassword`) VALUES
 (1, 'Mark', 'Zoiku', 'mzoiku', 'jzoiku@gmail.com', 'Male', '2021-02-28', 'Ghana', '0555777803', 'a7f57ac5f16536d452fc407ee22dee1c'),
 (2, 'Aileen', 'Akpalu', 'aileenlisa', 'adzo.lisa@gmail.com', 'Female', '2000-03-20', 'Ghana', '0245673212', 'a452d4423a20c686a13ce3131a7ae7ef'),
-(3, 'Mel', 'Zay', 'melzy', 'melzay@gmail.com', 'Female', '1985-04-09', 'Ghana', '0245673212', 'de06a11cbec10d19a26d21bf64cfcf8e');
+(3, 'Mela', 'Zayn', 'melzy', 'melzay@gmail.com', 'Female', '1985-04-09', 'Ghana', '0245673214', 'de06a11cbec10d19a26d21bf64cfcf8e'),
+(4, 'Pete', 'Rug', 'prug', 'peterug@gmail.com', 'Male', '1996-04-10', 'Ghana', '0245673234', '4da30385ca2ecc83cb90262860ba62fc');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Delivery`
+--
+
+CREATE TABLE `Delivery` (
+  `DelID` int(11) NOT NULL,
+  `DelFName` varchar(255) NOT NULL,
+  `DelLName` varchar(255) NOT NULL,
+  `Gender` enum('Male','Female') NOT NULL,
+  `DOB` date NOT NULL,
+  `DelNum` varchar(10) NOT NULL,
+  `Deluser` varchar(255) NOT NULL,
+  `Delpassword` varchar(255) NOT NULL,
+  `DelImage` varchar(255) DEFAULT NULL,
+  `Trips` int(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `Delivery`
+--
+
+INSERT INTO `Delivery` (`DelID`, `DelFName`, `DelLName`, `Gender`, `DOB`, `DelNum`, `Deluser`, `Delpassword`, `DelImage`, `Trips`) VALUES
+(1, 'Frank', 'Osei', 'Male', '1989-11-13', '0240000000', 'fosei', '804fa3e057a2c2500ff7859b0651d2d7', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -180,7 +235,10 @@ CREATE TABLE `diseases` (
 
 INSERT INTO `diseases` (`ResponseID`, `age_bracket`, `symptom`, `testing`, `disease_id`, `PatientID`, `Region`, `precon`, `ConID`, `Time`, `Status`) VALUES
 (7, 'Between 18-55', 'Sore Throat', 'Tested but result was negative', 'SARS-COV2', 2, 'Greater Accra Region', 'Anaemia', 3, '2021-02-28 22:35:54', 'Exposed'),
-(8, 'Between 18-55', 'None of the above', 'Not tested', 'SARS-COV2', 2, 'Greater Accra Region', 'None of the above', 5, '2021-02-28 22:45:53', 'Not exposed');
+(8, 'Between 18-55', 'None of the above', 'Not tested', 'SARS-COV2', 2, 'Greater Accra Region', 'None of the above', 5, '2021-02-28 22:45:53', 'Not exposed'),
+(9, 'Between 18-55', 'Fatigue', 'Tested but result was negative', 'SARS-COV2', 3, 'Central Region', 'None of the above', 5, '2021-04-08 23:33:34', 'Not Likely Exposed'),
+(10, 'Between 18-55', 'None of the above', 'Tested and awaiting results', 'SARS-COV2', 4, 'Ashanti Region', 'None of the above', 4, '2021-04-10 11:14:50', 'Not Likely Exposed'),
+(11, 'Between 18-55', 'None of the above', 'Not tested', 'SARS-COV2', 3, 'Greater Accra Region', 'None of the above', 4, '2021-04-14 21:07:26', 'Not Likely Exposed');
 
 -- --------------------------------------------------------
 
@@ -192,15 +250,18 @@ CREATE TABLE `Doctor` (
   `DocID` int(11) NOT NULL,
   `DocFname` varchar(255) NOT NULL,
   `DocLname` varchar(255) NOT NULL,
-  `Department` varchar(255) NOT NULL
+  `Department` varchar(255) NOT NULL,
+  `Dpassword` varchar(255) NOT NULL,
+  `Docuser` varchar(255) NOT NULL,
+  `Docnum` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `Doctor`
 --
 
-INSERT INTO `Doctor` (`DocID`, `DocFname`, `DocLname`, `Department`) VALUES
-(1, 'Rita', 'Osei', 'Surgery');
+INSERT INTO `Doctor` (`DocID`, `DocFname`, `DocLname`, `Department`, `Dpassword`, `Docuser`, `Docnum`) VALUES
+(1, 'Rita', 'Osei', 'Surgery', 'rita', 'ROsei', '0240002342');
 
 -- --------------------------------------------------------
 
@@ -230,8 +291,118 @@ INSERT INTO `Doctor_Time` (`TID`, `DocID`, `Time_Available`) VALUES
 CREATE TABLE `drugs` (
   `DID` int(10) NOT NULL,
   `DName` varchar(255) NOT NULL,
-  `Quantity` int(10) NOT NULL
+  `Drug_type` enum('Antibiotic','Antidepressants','Antiretroviral','Vitamin') NOT NULL,
+  `Queries` text NOT NULL,
+  `Description` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `drugs`
+--
+
+INSERT INTO `drugs` (`DID`, `DName`, `Drug_type`, `Queries`, `Description`) VALUES
+(1, 'Panadol Plus', 'Antibiotic', 'Panadol|Paracetamol|Panadol Plus|panadol|paracetamol', '12 tablets per strip'),
+(2, 'Andorin Paracetamol', 'Antibiotic', 'paracetamol|Paracetamol', '10 tablets per strip'),
+(3, 'Chewette Vitamin C', 'Vitamin', 'Vitamin|Vitamin C|vitamin c|vitamins|chewette|Chewette|Chewette Vitamin C|chewette vitamin c', '24 tablets in a strip');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `perm_cart`
+--
+
+CREATE TABLE `perm_cart` (
+  `PC` int(11) NOT NULL,
+  `POID` int(11) NOT NULL,
+  `TC` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `perm_cart`
+--
+
+INSERT INTO `perm_cart` (`PC`, `POID`, `TC`) VALUES
+(1, 2, 1),
+(2, 2, 2),
+(3, 3, 13),
+(4, 4, 15);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pharmacists`
+--
+
+CREATE TABLE `pharmacists` (
+  `PharmID` int(11) NOT NULL,
+  `PhID` varchar(10) NOT NULL,
+  `Phpassword` varchar(255) NOT NULL,
+  `Pharm_Name` varchar(255) NOT NULL,
+  `Location` varchar(255) NOT NULL,
+  `Location_queries` varchar(255) NOT NULL,
+  `Phnumber` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pharmacists`
+--
+
+INSERT INTO `pharmacists` (`PharmID`, `PhID`, `Phpassword`, `Pharm_Name`, `Location`, `Location_queries`, `Phnumber`) VALUES
+(1, 'PHLinux', '9005da6542dedcf7d3e8ebd4e7d9461f', 'Linux Pharmacy', 'Airport Residential Area', 'Airport|airport|Ridge|ridge|', '0240000000');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pharm_drugs`
+--
+
+CREATE TABLE `pharm_drugs` (
+  `PHD` int(11) NOT NULL,
+  `PharmID` int(11) NOT NULL,
+  `DID` int(10) NOT NULL,
+  `Quantity` int(11) NOT NULL,
+  `Price` int(11) NOT NULL,
+  `M_date` date NOT NULL,
+  `E_date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pharm_drugs`
+--
+
+INSERT INTO `pharm_drugs` (`PHD`, `PharmID`, `DID`, `Quantity`, `Price`, `M_date`, `E_date`) VALUES
+(1, 1, 1, 200, 10, '2020-09-15', '2024-05-05'),
+(2, 1, 2, 100, 12, '2020-10-13', '2025-02-13'),
+(3, 1, 3, 170, 12, '2020-06-09', '2022-07-09');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pharm_orders`
+--
+
+CREATE TABLE `pharm_orders` (
+  `POID` int(11) NOT NULL,
+  `P_Bill` double NOT NULL,
+  `Order_Date` date NOT NULL,
+  `Pickup_Mode` enum('Delivery','Pickup') NOT NULL,
+  `Payment` varchar(255) DEFAULT 'Mobile Money',
+  `Network` enum('MTN','Vodafone','AirtelTigo') NOT NULL,
+  `Momo_num` varchar(10) NOT NULL,
+  `Location` varchar(255) NOT NULL,
+  `Special_notes` text NOT NULL,
+  `Nickname` varchar(255) NOT NULL,
+  `PatientID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pharm_orders`
+--
+
+INSERT INTO `pharm_orders` (`POID`, `P_Bill`, `Order_Date`, `Pickup_Mode`, `Payment`, `Network`, `Momo_num`, `Location`, `Special_notes`, `Nickname`, `PatientID`) VALUES
+(2, 26.2, '2021-04-27', 'Delivery', 'Mobile Money', 'MTN', '0240000000', 'airport mirage', 'Yellow House', 'Mely', 3),
+(3, 46, '2021-04-28', 'Delivery', 'Mobile Money', 'MTN', '0240000000', 'Association International', 'Gray gate next to blue kiosk', 'Mela', 3),
+(4, 46, '2021-04-28', 'Delivery', 'Mobile Money', 'MTN', '0240000000', 'Koala Shopping Center', 'Mirage apartment 105', 'Meli', 3);
 
 -- --------------------------------------------------------
 
@@ -261,6 +432,20 @@ INSERT INTO `preconditions` (`PID`, `PName`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `Prescriptions`
+--
+
+CREATE TABLE `Prescriptions` (
+  `PresID` int(11) NOT NULL,
+  `PresDesc` text NOT NULL,
+  `PatientID` int(10) NOT NULL,
+  `DocID` int(11) NOT NULL,
+  `Drugdesc` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `symptoms`
 --
 
@@ -286,6 +471,59 @@ INSERT INTO `symptoms` (`SID`, `Sname`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `temp_bill`
+--
+
+CREATE TABLE `temp_bill` (
+  `TB` int(11) NOT NULL,
+  `Nick` varchar(255) NOT NULL,
+  `Address` varchar(255) NOT NULL,
+  `Pickup` enum('Pickup','Delivery') NOT NULL,
+  `Network` enum('MTN','Vodafone','AirtelTigo') NOT NULL,
+  `Momo_num` varchar(10) NOT NULL,
+  `Snotes` text NOT NULL,
+  `Bill` double NOT NULL,
+  `Order_date` date NOT NULL,
+  `PatientID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `temp_bill`
+--
+
+INSERT INTO `temp_bill` (`TB`, `Nick`, `Address`, `Pickup`, `Network`, `Momo_num`, `Snotes`, `Bill`, `Order_date`, `PatientID`) VALUES
+(12, 'Mely', 'airport mirage', 'Delivery', 'MTN', '0240000000', 'Yellow House', 26.2, '2021-04-28', 3),
+(13, 'Mela', 'Association International', 'Delivery', 'MTN', '0240000000', 'Gray gate next to blue kiosk', 46, '2021-04-29', 3),
+(14, 'Meli', 'Koala Shopping Center', 'Delivery', 'MTN', '0240000000', 'Mirage apartment 105', 46, '2021-04-29', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `temp_cart`
+--
+
+CREATE TABLE `temp_cart` (
+  `TC` int(11) NOT NULL,
+  `PHD` int(11) NOT NULL,
+  `PatientID` int(11) NOT NULL,
+  `DATE` date NOT NULL,
+  `Item_quantity` int(100) NOT NULL,
+  `status` enum('Basket','Purchased') NOT NULL DEFAULT 'Basket'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `temp_cart`
+--
+
+INSERT INTO `temp_cart` (`TC`, `PHD`, `PatientID`, `DATE`, `Item_quantity`, `status`) VALUES
+(1, 1, 3, '2021-04-27', 1, 'Purchased'),
+(2, 2, 3, '2021-04-27', 1, 'Purchased'),
+(13, 1, 3, '2021-04-29', 4, 'Purchased'),
+(15, 1, 3, '2021-04-29', 4, 'Purchased');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `testing_centre`
 --
 
@@ -305,9 +543,40 @@ INSERT INTO `testing_centre` (`CID`, `CName`, `Location`) VALUES
 (3, 'Akai Clinic', 'Cantonments,Accra'),
 (4, 'Nyaho Medical Centre', 'Airport West, Accra');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `track_order`
+--
+
+CREATE TABLE `track_order` (
+  `TID` int(11) NOT NULL,
+  `POID` int(11) NOT NULL,
+  `DelID` int(11) DEFAULT NULL,
+  `Progress` enum('Pending','Processed','Picked','Route','Rejected','Delivered','Accepted') NOT NULL DEFAULT 'Pending',
+  `Ratings` int(10) NOT NULL DEFAULT 0,
+  `Fee` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `track_order`
+--
+
+INSERT INTO `track_order` (`TID`, `POID`, `DelID`, `Progress`, `Ratings`, `Fee`) VALUES
+(1, 2, 1, 'Delivered', 0, 2),
+(3, 3, NULL, 'Pending', 0, 2),
+(4, 4, NULL, 'Pending', 0, 2);
+
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `admin_one`
+--
+ALTER TABLE `admin_one`
+  ADD PRIMARY KEY (`AdminID`),
+  ADD UNIQUE KEY `nadmin` (`AdminNick`);
 
 --
 -- Indexes for table `booking`
@@ -349,6 +618,13 @@ ALTER TABLE `customer`
   ADD UNIQUE KEY `username` (`username`);
 
 --
+-- Indexes for table `Delivery`
+--
+ALTER TABLE `Delivery`
+  ADD PRIMARY KEY (`DelID`),
+  ADD UNIQUE KEY `Deluser` (`Deluser`);
+
+--
 -- Indexes for table `diseases`
 --
 ALTER TABLE `diseases`
@@ -377,10 +653,48 @@ ALTER TABLE `drugs`
   ADD PRIMARY KEY (`DID`);
 
 --
+-- Indexes for table `perm_cart`
+--
+ALTER TABLE `perm_cart`
+  ADD PRIMARY KEY (`PC`),
+  ADD KEY `POID` (`POID`),
+  ADD KEY `TC` (`TC`);
+
+--
+-- Indexes for table `pharmacists`
+--
+ALTER TABLE `pharmacists`
+  ADD PRIMARY KEY (`PharmID`),
+  ADD UNIQUE KEY `PhID` (`PhID`);
+
+--
+-- Indexes for table `pharm_drugs`
+--
+ALTER TABLE `pharm_drugs`
+  ADD PRIMARY KEY (`PHD`),
+  ADD KEY `DID` (`DID`),
+  ADD KEY `PharmID` (`PharmID`);
+
+--
+-- Indexes for table `pharm_orders`
+--
+ALTER TABLE `pharm_orders`
+  ADD PRIMARY KEY (`POID`),
+  ADD KEY `PatientID` (`PatientID`);
+
+--
 -- Indexes for table `preconditions`
 --
 ALTER TABLE `preconditions`
   ADD PRIMARY KEY (`PID`);
+
+--
+-- Indexes for table `Prescriptions`
+--
+ALTER TABLE `Prescriptions`
+  ADD PRIMARY KEY (`PresID`),
+  ADD KEY `DocID` (`DocID`),
+  ADD KEY `PatientID` (`PatientID`);
 
 --
 -- Indexes for table `symptoms`
@@ -389,26 +703,55 @@ ALTER TABLE `symptoms`
   ADD PRIMARY KEY (`SID`);
 
 --
+-- Indexes for table `temp_bill`
+--
+ALTER TABLE `temp_bill`
+  ADD PRIMARY KEY (`TB`),
+  ADD KEY `PatientID` (`PatientID`);
+
+--
+-- Indexes for table `temp_cart`
+--
+ALTER TABLE `temp_cart`
+  ADD PRIMARY KEY (`TC`),
+  ADD KEY `PHD` (`PHD`),
+  ADD KEY `PatientID` (`PatientID`);
+
+--
 -- Indexes for table `testing_centre`
 --
 ALTER TABLE `testing_centre`
   ADD PRIMARY KEY (`CID`);
 
 --
+-- Indexes for table `track_order`
+--
+ALTER TABLE `track_order`
+  ADD PRIMARY KEY (`TID`),
+  ADD KEY `POID` (`POID`),
+  ADD KEY `DelID` (`DelID`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `admin_one`
+--
+ALTER TABLE `admin_one`
+  MODIFY `AdminID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `BID` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `BID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `chatbot`
 --
 ALTER TABLE `chatbot`
-  MODIFY `MID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `MID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `contact`
@@ -426,13 +769,19 @@ ALTER TABLE `contactus`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `PatientID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `PatientID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `Delivery`
+--
+ALTER TABLE `Delivery`
+  MODIFY `DelID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `diseases`
 --
 ALTER TABLE `diseases`
-  MODIFY `ResponseID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `ResponseID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `Doctor`
@@ -450,7 +799,31 @@ ALTER TABLE `Doctor_Time`
 -- AUTO_INCREMENT for table `drugs`
 --
 ALTER TABLE `drugs`
-  MODIFY `DID` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `DID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `perm_cart`
+--
+ALTER TABLE `perm_cart`
+  MODIFY `PC` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `pharmacists`
+--
+ALTER TABLE `pharmacists`
+  MODIFY `PharmID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `pharm_drugs`
+--
+ALTER TABLE `pharm_drugs`
+  MODIFY `PHD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `pharm_orders`
+--
+ALTER TABLE `pharm_orders`
+  MODIFY `POID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `preconditions`
@@ -459,16 +832,40 @@ ALTER TABLE `preconditions`
   MODIFY `PID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
+-- AUTO_INCREMENT for table `Prescriptions`
+--
+ALTER TABLE `Prescriptions`
+  MODIFY `PresID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `symptoms`
 --
 ALTER TABLE `symptoms`
   MODIFY `SID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
+-- AUTO_INCREMENT for table `temp_bill`
+--
+ALTER TABLE `temp_bill`
+  MODIFY `TB` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `temp_cart`
+--
+ALTER TABLE `temp_cart`
+  MODIFY `TC` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
 -- AUTO_INCREMENT for table `testing_centre`
 --
 ALTER TABLE `testing_centre`
   MODIFY `CID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `track_order`
+--
+ALTER TABLE `track_order`
+  MODIFY `TID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
@@ -492,6 +889,53 @@ ALTER TABLE `diseases`
 --
 ALTER TABLE `Doctor_Time`
   ADD CONSTRAINT `doctor_time_ibfk_1` FOREIGN KEY (`DocID`) REFERENCES `Doctor` (`DocID`);
+
+--
+-- Constraints for table `perm_cart`
+--
+ALTER TABLE `perm_cart`
+  ADD CONSTRAINT `perm_cart_ibfk_1` FOREIGN KEY (`POID`) REFERENCES `pharm_orders` (`POID`),
+  ADD CONSTRAINT `perm_cart_ibfk_2` FOREIGN KEY (`TC`) REFERENCES `temp_cart` (`TC`);
+
+--
+-- Constraints for table `pharm_drugs`
+--
+ALTER TABLE `pharm_drugs`
+  ADD CONSTRAINT `pharm_drugs_ibfk_1` FOREIGN KEY (`DID`) REFERENCES `drugs` (`DID`),
+  ADD CONSTRAINT `pharm_drugs_ibfk_2` FOREIGN KEY (`PharmID`) REFERENCES `pharmacists` (`PharmID`);
+
+--
+-- Constraints for table `pharm_orders`
+--
+ALTER TABLE `pharm_orders`
+  ADD CONSTRAINT `pharm_orders_ibfk_1` FOREIGN KEY (`PatientID`) REFERENCES `customer` (`PatientID`);
+
+--
+-- Constraints for table `Prescriptions`
+--
+ALTER TABLE `Prescriptions`
+  ADD CONSTRAINT `prescriptions_ibfk_1` FOREIGN KEY (`DocID`) REFERENCES `Doctor` (`DocID`),
+  ADD CONSTRAINT `prescriptions_ibfk_2` FOREIGN KEY (`PatientID`) REFERENCES `customer` (`PatientID`);
+
+--
+-- Constraints for table `temp_bill`
+--
+ALTER TABLE `temp_bill`
+  ADD CONSTRAINT `temp_bill_ibfk_1` FOREIGN KEY (`PatientID`) REFERENCES `customer` (`PatientID`);
+
+--
+-- Constraints for table `temp_cart`
+--
+ALTER TABLE `temp_cart`
+  ADD CONSTRAINT `temp_cart_ibfk_1` FOREIGN KEY (`PHD`) REFERENCES `pharm_drugs` (`PHD`),
+  ADD CONSTRAINT `temp_cart_ibfk_2` FOREIGN KEY (`PatientID`) REFERENCES `customer` (`PatientID`);
+
+--
+-- Constraints for table `track_order`
+--
+ALTER TABLE `track_order`
+  ADD CONSTRAINT `track_order_ibfk_1` FOREIGN KEY (`POID`) REFERENCES `pharm_orders` (`POID`),
+  ADD CONSTRAINT `track_order_ibfk_2` FOREIGN KEY (`DelID`) REFERENCES `Delivery` (`DelID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

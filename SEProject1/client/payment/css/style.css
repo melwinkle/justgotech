@@ -1,0 +1,27 @@
+
+body{
+    padding:0;
+    margin:0;
+    font-family: 'Open Sans', sans-serif;
+	font-size: large;
+    background: url(../images/1.jpg) no-repeat;
+    color: white;
+    background-size: auto auto contain;
+	text-align: center;
+    }
+    
+
+    
+	button{
+		background-color: #4CAF50;
+		border: none;
+		color: red;
+		padding: 15px 32px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+		margin: 4px 2px;
+		cursor: pointer;
+		width: 10%;
+	}
