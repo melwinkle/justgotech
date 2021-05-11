@@ -276,82 +276,8 @@ if($finales=mysqli_fetch_assoc($finale)){
 </div>
 
 <!-- old deliveries -->
-<div class="column" style="margin-left:-1%;margin-top:3%">
-    <h3>Completed Requests </h3>
-    <div class="progress" style="border-radius:5px;width:10%;height: 10px;margin-top:10px">
-        <div class="progress-bar bg-primary" role="progressbar" style="width:100%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">
-          </div>
-  
-      </div>
-</div>
-
-<div class="row" style="margin-top: 2%">
-<?php  
-
-$final="SELECT track_order.Ratings,track_order.TID,customer.firstname,customer.lastname,pharmacists.Pharm_Name,pharmacists.Location as phLocation,track_order.Progress,pharm_orders.Payment,track_order.Fee,pharm_orders.Location from track_order inner join perm_cart on track_order.POID=perm_cart.POID inner join pharm_orders on perm_cart.POID=pharm_orders.POID inner join temp_cart on perm_cart.TC=temp_cart.TC inner join pharm_drugs on temp_cart.PHD=pharm_drugs.PHD inner join pharmacists on pharm_drugs.PharmID=pharmacists.PharmID inner join customer on pharm_orders.PatientID=customer.PatientID where TID=$td and DelID=$del   ";
-$finale=mysqli_query($conn,$final);
-if($finales=mysqli_fetch_assoc($finale)){
-  $final_fn=$finales['firstname'];
-  $final_ln=$finales['lastname'];
-  $final_ph=$finales['Pharm_Name'];
-  $final_pl=$finales['phLocation'];
-  $final_pr=$finales['Progress'];
-  $final_py=$finales['Payment'];
-  $final_fe=$finales['Fee'];
-  $final_lo=$finales['Location'];
-  $final_r=$finales['Ratings'];
-  
-  ?>
-<div class="column">
-        <div class='card  mb-4 shadow-sm '  style='background:white;height:135px;width:1150px;border-radius:2px;color:#cccccc'>
-            <span style="width:90px;margin-left:20px;margin-top:15px;color:white;background:skyblue;">
-              <h1 style="margin-left:20px;margin-top:4px">29</h1>
-              <h4 style="margin-left: 22px">Apr</h4>
-            </span>
-
-          <span style="margin-left:150px;margin-top:-85px;color:black">
-              <img src="../../images/user.png" style="width:5%;margin-left:13px"alt="">
-              <h5><?php echo $final_fn." ".$final_ln; ?></h5>
-            </span>
-
-          <span style="margin-left:250px;margin-top:-86px">
-                <ul style=" list-style-type: none">
-                    <li ><span style="color:black"><img style="width: 1.5%"src="../../images/oval.png"/>Pickup :</span> <span ><?php echo $final_ph." ".$final_pl; ?></span></li><br>
-                    <li><span style="color:black"><img style="width: 2%"src="../../images/place.png"/>DropOff: </span><span ><?php echo $final_lo; ?></span></li>
-                  </ul>
-              </span>
-           
-            <span style="margin-left:650px;margin-top:-90px">
-                <ul style=" list-style-type: none">
-               
-              
-            <li><img src="https://img.icons8.com/material-sharp/15/2ecc71/filled-circle.png"/><?php echo $final_pr; ?></li>
-            <li><img src="https://img.icons8.com/material-outlined/18/cccccc/mobile-payment.png"/><?php echo $final_py; ?></li>
-                    <li><img src="https://img.icons8.com/material-outlined/20/cccccc/average.png"/>Ghc <?php echo $final_fe; ?></li>
-                  </ul>
-
-              </span>
 
 
-              <span style="margin-left:850px;margin-top:-78px">
-              <h5><img src="https://img.icons8.com/material-sharp/28/FFC509/star.png"/><?php echo $final_r;?></h5>
-              </span>
-              
-           
-            
-            
-                    
-                    
-          </div>
-      </div>
-      <?php
-      }
-      ?>
-<!-- next -->
-
-
-<!-- next -->
-</div>
 <!-- end -->
 </div>
 </div>
