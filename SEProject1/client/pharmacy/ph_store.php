@@ -108,7 +108,7 @@ if(mysqli_num_rows($noq)>0){
        $nt=$num['NID'];
        $mes=$num['NMessage'];
        $da=$num['NTime'];
-       echo "<a href='../pharmacy/ph_suc.php?not&id=$nt&mprev=../pharmacy/ph_records.php'>$mes $da</a>";
+       echo "<a href='../pharmacy/ph_suc.php?not&id=$nt&mprev=../pharmacy/ph_store.php'>$mes $da</a>";
      }
     }else{
       echo "<a >No Unread Notifications</a>";

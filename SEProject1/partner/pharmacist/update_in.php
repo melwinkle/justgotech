@@ -132,7 +132,8 @@ require_once("../../database/connection.php");
 
      if(isset($_GET['accept'])){
         $tid = $_GET['tc'];
-        
+        $od=$_GET['od'];
+        $pat=$_GET['pt'];
 
         // M_date='$md',E_date='$ed',Price='$pri',
         
@@ -142,6 +143,10 @@ require_once("../../database/connection.php");
      
 
         if($res){
+            $dat=date("Y-m-d h:i:s");
+            $mes="Order#$od has been processed";
+				$notif="INSERT INTO notification(NMessage,PatientID,NTime) values('$mes',$pat,'$dat')";
+				$not=mysqli_query($conn,$notif);
             header("Location: ../pharmacist/dash.php?updated");
         }else{
             header("Location: ../pharmacist/dash.php?notupdated");

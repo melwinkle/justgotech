@@ -131,12 +131,12 @@ Latest Orders
 
 <?php  
 
-$final="SELECT Item_quantity,track_order.TID,track_order.DelID as del,customer.firstname,customer.lastname,pharm_orders.POID as Phid,customer.PhoneNumber,P_Bill,drugs.DName,track_order.Progress,pharm_orders.Payment from track_order inner join perm_cart on track_order.POID=perm_cart.POID inner join pharm_orders on perm_cart.POID=pharm_orders.POID inner join temp_cart on perm_cart.TC=temp_cart.TC inner join pharm_drugs on temp_cart.PHD=pharm_drugs.PHD inner join drugs on pharm_drugs.DID=drugs.DID inner join pharmacists on pharm_drugs.PharmID=pharmacists.PharmID inner join customer on pharm_orders.PatientID=customer.PatientID where pharm_drugs.PharmID=$id order by track_order.POID";
+$final="SELECT customer.PatientID as pd,Item_quantity,track_order.TID,track_order.DelID as del,customer.firstname,customer.lastname,pharm_orders.POID as Phid,customer.PhoneNumber,P_Bill,drugs.DName,track_order.Progress,pharm_orders.Payment from track_order inner join perm_cart on track_order.POID=perm_cart.POID inner join pharm_orders on perm_cart.POID=pharm_orders.POID inner join temp_cart on perm_cart.TC=temp_cart.TC inner join pharm_drugs on temp_cart.PHD=pharm_drugs.PHD inner join drugs on pharm_drugs.DID=drugs.DID inner join pharmacists on pharm_drugs.PharmID=pharmacists.PharmID inner join customer on pharm_orders.PatientID=customer.PatientID where pharm_drugs.PharmID=$id order by track_order.POID";
 $finale=mysqli_query($conn,$final);
 while($finales=mysqli_fetch_assoc($finale)){
   $final_fn=$finales['firstname'];
   $final_ln=$finales['lastname'];
-
+  $pd=$finales['pd'];
   
   $final_pr=$finales['Progress'];
   $final_py=$finales['Payment'];
@@ -191,7 +191,7 @@ $final_fe=$finales['P_Bill'];
     
                   
                 <span style="margin-left:970px;margin-top:-85px">
-                    <a href="../pharmacist/update_in.php?accept=true&tc=<?php echo $tc;?>"  class="btn btn-success">ACCEPT</a>
+                    <a href="../pharmacist/update_in.php?accept=true&tc=<?php echo $tc;?>&od=<?php echo $final_id;?>&pt=<?php echo $pd;?>"  class="btn btn-success">ACCEPT</a>
                   </span>
                 <?php
                 }

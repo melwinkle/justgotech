@@ -119,43 +119,68 @@ require_once("../../database/connection.php");
 			if($sql){
 				header("Location: ../delivery/doneder.php?success=acc&$tc");
 			}
-			header("Location: ../delivery/doneder.php?failure=true&$tc");
-			
+			else{
+			header("Location: ../delivery/doneder.php?tfailure=true&$tc");
+			}
 		}
 		if(isset($_GET['fin'])){
 			$tc = $_GET['tc'];
 			$del = $_GET['del'];
-			
+			$od=$_GET['pd'];
+			$n=$_GET['nm'];
+			$pat=$_GET['pt'];
 			
 						
 			$query = "UPDATE track_order SET DelID=$del,Progress='Picked' where TID=$tc";
 			$sql = mysqli_query($conn,$query);
 
 			if($sql){
-				header("Location: ../delivery/doneder.php?success=true&$tc");
+				$dat=date('Y-m-d h:i:s');
+				$mes="Rider $n has picked your order #$od";
+				$notif="INSERT INTO notification(NMessage,PatientID,NTime) values('$mes',$pat,'$dat')";
+				$not=mysqli_query($conn,$notif);
+				if($not){
+				header("Location: ../delivery/doneder.php?nsuccess=true&$tc");
+				}else{
+					header("Location: ../delivery/doneder.php?failure=true&$tc&nm=$n&pat=$pat");
+				}
 			}
-			header("Location: ../delivery/doneder.php?failure=true&$tc");
-			
+			else{
+			header("Location: ../delivery/doneder.php?nfailure=true&$tc");
+			}
 		}
 		if(isset($_GET['str'])){
 			$tc = $_GET['tc'];
 			$del = $_GET['del'];
-			
+			$od=$_GET['pd'];
+			$n=$_GET['nm'];
+			$pat=$_GET['pt'];
 			
 						
 			$query = "UPDATE track_order SET DelID=$del,Progress='Route' where TID=$tc";
 			$sql = mysqli_query($conn,$query);
 
 			if($sql){
-				header("Location: ../delivery/doneder.php?success=true&$tc");
-			}
+				$dat=date('Y-m-d h:i:s');
+				$mes="Rider $n is on his way with order #$od";
+				$notif="INSERT INTO notification(NMessage,PatientID,NTime) values('$mes',$pat,'$dat')";
+				$not=mysqli_query($conn,$notif);
+				if($not){
+				header("Location: ../delivery/doneder.php?nsuccess=true&$tc");
+				}else{
+					header("Location: ../delivery/doneder.php?fnailure=true&$tc");
+				}
+			}else{
 			header("Location: ../delivery/doneder.php?failure=true&$tc");
-			
+			}
 		}
 		if(isset($_GET['arr'])){
 			$tc = $_GET['tc'];
 			$del = $_GET['del'];
 			$trip= $_GET['trip'];
+			$od=$_GET['pd'];
+			$n=$_GET['nm'];
+			$pat=$_GET['pt'];
 			
 			
 						
@@ -166,9 +191,20 @@ require_once("../../database/connection.php");
 				$trips=$trip+1;
 				$up="UPDATE Delivery SET Trips=$trips where DelID=$del";
 				$sup=mysqli_query($conn,$up);
+				$dat=date('Y-m-d h:i:s');
+				$mes="Rider $n has arrived with order #$od";
+				$notif="INSERT INTO notification(NMessage,PatientID,NTime) values('$mes',$pat,'$dat')";
+				$not=mysqli_query($conn,$notif);
+				if($not){
+
+				header("Location: ../delivery/doneder.php?nsuccess=true&$tc");
+				}else{
+					header("Location: ../delivery/doneder.php?failure=true&$tc");
+				}
+				
 				header("Location: ../delivery/doneder.php?success=true&$tc");
 			}
-			header("Location: ../delivery/doneder.php?failure=true&$tc");
+			header("Location: ../delivery/doneder.php?nfailure=true&$tc");
 			
 		}
 

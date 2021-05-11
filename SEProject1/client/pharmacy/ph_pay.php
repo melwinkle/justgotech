@@ -284,7 +284,7 @@ if($sm['Progress']=="Pending"){
 
 ?>
 
-<div><h2>Rating:</h2><h1>$rat/5</h1></div>
+
    <div class="progress" style="border-radius:5px;margin-left: 40px;width:90%;height: 15px;margin-top:10px">
   <div class="progress-bar bg-warning" role="progressbar" style="width: 25%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
   

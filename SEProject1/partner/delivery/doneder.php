@@ -142,7 +142,7 @@ Latest Requests
 <div class="row" style="margin-top: 2%">
 <?php  
 
-$final="SELECT track_order.TID,customer.firstname,customer.lastname,pharmacists.Pharm_Name,pharmacists.Location as phLocation,track_order.Progress,pharm_orders.Payment,track_order.Fee,pharm_orders.Location from track_order inner join perm_cart on track_order.POID=perm_cart.POID inner join pharm_orders on perm_cart.POID=pharm_orders.POID inner join temp_cart on perm_cart.TC=temp_cart.TC inner join pharm_drugs on temp_cart.PHD=pharm_drugs.PHD inner join pharmacists on pharm_drugs.PharmID=pharmacists.PharmID inner join customer on pharm_orders.PatientID=customer.PatientID where Progress!='Delivered'  ";
+$final="SELECT customer.PatientID as pid,track_order.TID,customer.firstname,customer.lastname,pharmacists.Pharm_Name,pharmacists.Location as phLocation,track_order.Progress,pharm_orders.Payment,track_order.Fee,pharm_orders.Location,track_order.POID as POID from track_order inner join perm_cart on track_order.POID=perm_cart.POID inner join pharm_orders on perm_cart.POID=pharm_orders.POID inner join temp_cart on perm_cart.TC=temp_cart.TC inner join pharm_drugs on temp_cart.PHD=pharm_drugs.PHD inner join pharmacists on pharm_drugs.PharmID=pharmacists.PharmID inner join customer on pharm_orders.PatientID=customer.PatientID where Progress!='Delivered'  ";
 $finale=mysqli_query($conn,$final);
 while($finales=mysqli_fetch_assoc($finale)){
   $final_fn=$finales['firstname'];
@@ -153,6 +153,8 @@ while($finales=mysqli_fetch_assoc($finale)){
   $final_py=$finales['Payment'];
   $final_fe=$finales['Fee'];
   $final_lo=$finales['Location'];
+  $pd=$finales['POID'];
+  $pt=$finales['pid'];
   
   ?>
 <div class="column">
@@ -207,7 +209,7 @@ while($finales=mysqli_fetch_assoc($finale)){
 
               
             <span style="margin-left:970px;margin-top:-85px">
-                <a href="../delivery/ddash.php?fin=true&tc=<?php echo $tc;?>&del=<?php echo $del ;?>"  class="btn btn-warning">FINALIZE</a>
+                <a href="../delivery/ddash.php?fin=true&tc=<?php echo $tc;?>&del=<?php echo $del ;?>&pd=<?php echo $pd ;?>&nm=<?php echo $fn.' '.$ln ;?>&pt=<?php echo $pt ;?>"  class="btn btn-warning">FINALIZE</a>
               </span>
             <?php
             }
@@ -223,7 +225,7 @@ while($finales=mysqli_fetch_assoc($finale)){
 
               
             <span style="margin-left:970px;margin-top:-85px">
-                <a href="../delivery/ddash.php?str=true&tc=<?php echo $tc;?>&del=<?php echo $del ;?>" class="btn btn-primary">START JOURNEY</a>
+                <a href="../delivery/ddash.php?str=true&tc=<?php echo $tc;?>&del=<?php echo $del ;?>&pd=<?php echo $pd ;?>&nm=<?php echo $fn.' '.$ln ;?>&pt=<?php echo $pt ;?>" class="btn btn-primary">START JOURNEY</a>
               </span>
             <?php
             }
@@ -239,7 +241,7 @@ while($finales=mysqli_fetch_assoc($finale)){
 
               
             <span style="margin-left:970px;margin-top:-85px">
-                <a href="../delivery/ddash.php?arr=true&tc=<?php echo $tc;?>&del=<?php echo $del ;?>&trip=<?php echo $completed;?>" class="btn btn-info">ARRIVED</a>
+                <a href="../delivery/ddash.php?arr=true&tc=<?php echo $tc;?>&del=<?php echo $del ;?>&trip=<?php echo $completed;?>&pd=<?php echo $pd ;?>&nm=<?php echo $fn.' '.$ln ;?>&pt=<?php echo $pt ;?>" class="btn btn-info">ARRIVED</a>
               </span>
             <?php
             }
