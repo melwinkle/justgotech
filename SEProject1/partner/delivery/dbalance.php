@@ -157,8 +157,8 @@ Receipts
                         </thead>
                         <tbody>
 <?php
-$fin="SELECT * track_order where DelID=$del and Progress='Delivered'";
-$finale=mysqli_query($conn,$fin);
+$rec="SELECT * from track_order where DelID=$del and Progress='Delivered'";
+$finale=mysqli_query($conn,$rec);
 
 while($finales=mysqli_fetch_assoc($finale)){
 
@@ -174,8 +174,7 @@ while($finales=mysqli_fetch_assoc($finale)){
                                 
                             </tr>
 
-</tbody>
-</table>
+
 <?php
 }
 ?>
@@ -183,6 +182,8 @@ while($finales=mysqli_fetch_assoc($finale)){
 <!-- next -->
 
 <!-- end -->
+</tbody>
+</table>
 </div>
 </div>
 
