@@ -64,11 +64,8 @@ if(isset($_POST['scan'])){
     $score['con']=2;
   }
 
-$pro=0;
-  foreach ($score as $key => $val){ 
-    $pro=$val+$val;
-   
-} 
+$pro=array_sum($score);
+  
   $probability=($pro/10)*100;
 
 

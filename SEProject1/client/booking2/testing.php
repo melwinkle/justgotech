@@ -12,7 +12,7 @@ final class Testing extends TestCase
         $password='french1';
         $patientID =7;
         $mess = "Hi";
-        $pass=md5(sha1("rose"));
+        $pass="kweks";
 
         $sql = "SELECT * FROM customer WHERE username  = '$username'";
         $query = "INSERT INTO Doctor(DocFname,DocLname,Department,Dpassword,Docuser,Docnum) VALUES ('Rose', 'Bear', 'Surgery', '$pass', 'RBear,'0240000000')";
@@ -23,7 +23,7 @@ final class Testing extends TestCase
       
 
         // Checks if login is true
-        $this->assertTrue($user->check_login($username,$password));
+        $this->assertTrue($user->check_login($username,$pass));
 
         //check if booking works
         $this->assertTrue($user->book_appoint($patientID));

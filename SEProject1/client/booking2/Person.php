@@ -18,7 +18,8 @@ class Person extends Database{
             return true;
         }
         else{
-            return false;
+            echo "\n(1)User not Found";
+           
         }
     }
 
