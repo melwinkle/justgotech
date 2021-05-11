@@ -50,8 +50,10 @@ final class Testing extends TestCase
 
 
         // screeening
+        $this->assertTrue($user->screen($q3));
 
         // add to cart
+        $this->assertTrue($user->cart($q4));
 
 
     }
