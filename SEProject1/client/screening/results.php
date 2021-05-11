@@ -48,7 +48,7 @@ $resut=mysqli_query($conn,$quey);
   <a href="../tracker/tracker.php">Tracker</a>
   <a href="../screening/covid/covid.php">Virtual Screening</a>
   <a href="../booking2/bookmain.php">Consultation</a>
-  <a href="../pharmacy/pharmacy_main.php">Consultation</a>
+  <a href="../pharmacy/pharmacy_main.php">Pharmacy</a>
 
  
   <a href="../account/logout.php">Log Out</a>
@@ -68,6 +68,7 @@ $resut=mysqli_query($conn,$quey);
                 
                 <th scope="col">Age Bracket</th>
                 <th scope="col">Region</th>
+                <th scope="col">Disease</th>
                 <th scope="col">Test Status</th>
                 <th scope="col">Symptoms</th>
                 <th scope="col">Preconditions</th>
@@ -104,6 +105,7 @@ $resut=mysqli_query($conn,$quey);
      
   
      <td><?php echo $rw['age_bracket'];?></td>
+     <td><?php echo $rw['disease_id'];?></td>
      <td><?php echo $rw['Region'];?></td>
      <td><?php echo $rw['testing'];?></td>
      <td><?php echo $rw['symptom'];?></td>

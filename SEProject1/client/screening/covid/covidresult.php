@@ -15,66 +15,31 @@ $query="SELECT * from customer where username='$username'";
 $result=mysqli_query($conn,$query);
 $row=mysqli_fetch_assoc($result);
 
-$probability=0.0;
-$score=0;
-if(isset($_GET["person"])){
-  $person=$_GET["person"];
-}
-if(isset($_GET["ageb"])){
-  $age=$_GET["ageb"];
-  if(($age=='Between 56-64')|| $age==('More than 64')){
-    $score=$score+2;
-  }else{
-    $score=$score+1;
-  }
-}
-  if(isset($_GET["test"])){
-    $test=$_GET["test"];
-    if( $test==('Tested but result was positive')){
-      $score=$score+2;
-    }
-    else if( $test==('Tested but result was negative')||$test==('Tested and awaiting results')){
-      $score=$score+1;
-    }
-    else{
-      $score=$score+0;
-    }
-}
+$patient=$row['PatientID'];
 
-if(isset($_GET["sym"])){
-  $sym=$_GET["sym"];
-  if($sym=='None of the above'){
-    $score=$score+0;
-  }else{
-    $score=$score+2;
-  }
-}
+$rid=$_GET['rid'];
 
-if(isset($_GET["pre"])){
-  $pre=$_GET["pre"];
-  if($pre=='None of the above'){
-    $score=$score+0;
-  }else{
-    $score=$score+2;
-  }
-}
+$des="SELECT * FROM diseases where PatientID=$patient and ResponseID=$rid";
+$deq=mysqli_query($conn,$des);
+$der=mysqli_fetch_assoc($deq);
 
-if(isset($_GET["con"])){
-  $con=$_GET["con"];
-  if($con=='I have no exposure of Covid-19'){
-    $score=$score+0;
-  }else{
-    $score=$score+2;
-  }
-}
+$person=$der['Person'];
+$age=$der['age_bracket'];
+$sym=$der['symptom'];
+$test=$der['testing'];
+$pre=$der['precon'];
+$reg=$der['Region'];
+$con=$der['ConID'];
+$status=$der['Status'];
+$time=$der['Time'];
+$probability=$_GET['prob'];
 
-if(isset($_GET["reg"])){
-  $reg=$_GET["reg"];
-}
 
-$probability=($score/10)*100;
+$cr="SELECT * from contact where ConID=$con";
+$conresult=mysqli_query($conn,$cr);
+$conrow=mysqli_fetch_assoc($conresult);
+$conr=$conrow['Contact'];
 
-$date=date('Y-m-d H:i:s'); 
 ?>
 <html>
 <head>
@@ -112,21 +77,24 @@ $date=date('Y-m-d H:i:s');
 <div class="covidinf" >
    
    <h5 class="card-header">
-   <?php
-   echo "<a href='covidarea.php?person=$person&ageb=$age&test=$test&sym=$sym&pre=$pre&con=$con&reg=$reg' style='color:white'>BACK</a>"?>
+  
+   
    </h5>
    <div class="card-body" >
  
      <h2 class="card-title">
      Your Responses
      </h2><br>
+     <p>Completed:<?php echo $time?></p><br>
      <p>Person Status:<?php echo $person?></p><br>
      <p>Age:<?php echo $age?></p><br>
      <p>Region:<?php echo $reg?></p><br>
      <p>Test Status:<?php echo $test?></p><br>
      <p>Symptoms:<?php echo $sym?></p><br>
      <p>Preconditions:<?php echo $pre?></p><br>
-     <p>Contact Status:<?php echo $con?></p><br>
+     <p>Contact Status:<?php echo $conr?></p><br>
+     <p>Status:<?php echo $status?></p><br>
+     
 
      
      
@@ -155,7 +123,7 @@ $date=date('Y-m-d H:i:s');
       <p> No Testing Required!
       Based your results, you do not need testing. However do not forget to mask up and follow all the protocols.</p>";
 
-      $status="Not exposed";
+     
      }
      else if ($probability>=11 & $probability <=40){
       echo "<div class='covidin' style='float:left;background:#ffcc00'>
@@ -173,7 +141,7 @@ $date=date('Y-m-d H:i:s');
       <a href='covid.php'>testing centres</a>
       However do not forget to mask up and follow all the protocols.</p>";
 
-      $status="Not likely exposed";
+
      }
      else if ($probability>=41 & $probability <=60){
       echo "
@@ -191,7 +159,7 @@ $date=date('Y-m-d H:i:s');
       please go and get tested. Here is a link to all <a href='testingcentres.php'>testing centres</a>
       However do not forget to mask up and follow all the protocols. STAY SAFE!!</p>";
 
-      $status="Likely exposed";
+
      }
 
      else {
@@ -210,22 +178,19 @@ $date=date('Y-m-d H:i:s');
       Here is a link to all <a href='testingcentres.php'>testing centres</a>
       Do not forget to mask up and follow all the protocols. STAY SAFE!!</p>";
 
-      $status="Exposed";
+  
      }
        ?>
 
      
      <div>
-     <a href="covid_print.php" style="color:white"><i class='icon ion-md-home' size='large'></i>Print</a>
-     <?php
-     echo "<a href='covid_restart.php?person=$person&ageb=$age&test=$test&sym=$sym&pre=$pre&con=$con&reg=$reg&date=$date&status=$status' style='color:white'>Done</a>";?>
+     <a href="../results.php" style="color:white;font-size:20px"><i class='icon ion-md-home' size='large'></i>Done</a>
+    
      </div>
     
   </div>
 </div>
-<div class="com" style="margin-top:-25%;margin-left: 67%">
-  <h5>Completed <?php  echo $date; ?></h5>
-</div>
+
 
 </div>
 

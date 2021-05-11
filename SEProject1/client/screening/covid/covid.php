@@ -71,7 +71,7 @@ $resultss=mysqli_query($conn,$query2);
     <p> This tool is designed to help evaluate your symptoms and determine if you need further assistance. <br>
     Do not forget to mask up and social distance.</p>
 <br>
-    <a href="covid_start.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182)">Start Screening</a>
+    <a href="covid_form.php" class="btn btn-primary btn-lg" style="background: white; color:rgb(23, 79, 182)">Start Screening</a>
   </div>
 </div>
 
