@@ -28,7 +28,7 @@ class Person extends Database{
         $sql = "SELECT * FROM booking WHERE patientID = '$patientID'";
         $query = $this->connection->query($sql);
         if($query->num_rows > 0){
-            echo "\n(1)booking Succesful";
+            echo "\n(2)booking Succesful";
             return true;
         }
         else{
@@ -40,11 +40,11 @@ class Person extends Database{
         $sql = "SELECT Replies FROM chatbot WHERE Queries LIKE '%$mess%'";
         $query = $this->connection->query($sql);
         if($query->num_rows > 0){
-            echo "\n(1)chatbot is active";
-            return true;
+            echo "\n(3)chatbot is active";
+          
         }
         else{
-            return false;
+            echo "\n(3)chatbot is NOT active";
         }
     }
 
@@ -53,7 +53,7 @@ class Person extends Database{
     public function getsql($sql){
         $query = $this->connection->query($sql);
         if($query->num_rows > 0){
-            echo "\n(2)Patient Details Exist";
+            echo "\n(4)Patient Details Exist";
             return true;
         }else{
             return false;
@@ -65,7 +65,7 @@ class Person extends Database{
         $query = $this->connection->query($sql);
         if($query->num_rows > 0){
             $row = $query->fetch_array();
-            echo "\n(3)Patient First Name Exist";
+            echo "\n(5)Patient First Name Exist";
             return $row[0];
         }else{
             return false;
@@ -76,7 +76,7 @@ class Person extends Database{
     public function newdoc($sql){
         $query = $this->connection->query($sql);
         if($query){
-            echo "\n(4)New Doctor Added";
+            echo "\n(6)New Doctor Added";
             return true;
         }else{
             return false;
@@ -85,7 +85,7 @@ class Person extends Database{
     public function newpro($sql){
         $query = $this->connection->query($sql);
         if($query){
-            echo "\n(5)Order Processed";
+            echo "\n(7)Order Processed";
             return true;
         }else{
             return false;
@@ -95,7 +95,7 @@ class Person extends Database{
     public function newdel($sql){
         $query = $this->connection->query($sql);
         if($query){
-            echo "\n(5)Rider has accepted order";
+            echo "\n(8)Rider has accepted order";
             return true;
         }else{
             return false;
@@ -107,7 +107,7 @@ class Person extends Database{
         $query = $this->connection->query($sql);
         if($query){
             $row = $query->fetch_array();
-            echo "\n(6)Screening Status:".$row['Status'];
+            echo "\n(9)Screening Status:".$row['Status'];
             return true;
         }else{
             return false;
@@ -118,7 +118,7 @@ class Person extends Database{
         $query = $this->connection->query($sql);
         if($query){
            
-            echo "\n(7)Item Added to Cart";
+            echo "\n(10)Item Added to Cart";
             return true;
         }else{
             return false;

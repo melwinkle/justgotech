@@ -154,6 +154,30 @@ require_once("../../database/connection.php");
      
      }
 
+     if(isset($_GET['accep'])){
+        $tid = $_GET['tc'];
+        $od=$_GET['od'];
+        $pat=$_GET['pt'];
+
+        // M_date='$md',E_date='$ed',Price='$pri',
+        
+     
+        $query = "UPDATE track_order SET Progress='Processed' WHERE TID=$tid";
+        $res=mysqli_query($conn,$query);
+     
+
+        if($res){
+            $dat=date("Y-m-d h:i:s");
+            $mes="Order#$od has been processed";
+				$notif="INSERT INTO notification(NMessage,PatientID,NTime) values('$mes',$pat,'$dat')";
+				$not=mysqli_query($conn,$notif);
+            header("Location: ../pharmacist/dash.php?updated");
+        }else{
+            header("Location: ../pharmacist/dash.php?notupdated");
+        }
+     
+     }
+
 
      if(isset($_POST['add'])){
         $dn=$_POST['dn'];

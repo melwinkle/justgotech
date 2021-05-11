@@ -32,7 +32,7 @@ $loc=$_SESSION['location'];
   href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.2.0/mdb.min.css"
   rel="stylesheet"
 />
-<link rel="stylesheet" href="pharm.css">
+<link rel="stylesheet" href="./pharm.css">
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="sweetalert2.all.min.js"></script>

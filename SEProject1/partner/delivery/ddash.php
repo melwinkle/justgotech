@@ -166,7 +166,7 @@ require_once("../../database/connection.php");
 				$notif="INSERT INTO notification(NMessage,PatientID,NTime) values('$mes',$pat,'$dat')";
 				$not=mysqli_query($conn,$notif);
 				if($not){
-				header("Location: ../delivery/doneder.php?nsuccess=true&$tc");
+				header("Location: ../delivery/dmap.php?nsuccess=true&tid=$tc");
 				}else{
 					header("Location: ../delivery/doneder.php?fnailure=true&$tc");
 				}

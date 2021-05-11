@@ -10,11 +10,12 @@ final class Testing extends TestCase
         $user = new Person();
         $username='kweks';
         $password='french1';
-        $patientID =7;
-        $mess = "Hi";
+        $patientID =3;
+        $mess = "help";
         $pass="kweks";
+        $user2='melzy';
 
-        $sql = "SELECT * FROM customer WHERE username  = '$username'";
+        $sql = "SELECT * FROM customer WHERE username  = '$user2'";
         $query = "INSERT INTO Doctor(DocFname,DocLname,Department,Dpassword,Docuser,Docnum) VALUES ('Rose', 'Bear', 'Surgery', '$pass', 'RBear,'0240000000')";
         $q1 = "UPDATE track_order SET Progress='Processed' WHERE TID=4";
         $q2 = "UPDATE track_order SET Progress='Accepted' WHERE TID=4";
