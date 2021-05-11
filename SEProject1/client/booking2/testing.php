@@ -38,7 +38,6 @@ final class Testing extends TestCase
         $this->assertIsString($user->check_chatbot($mess));
 
 
-
         // insert new doctor
         $this->assertTrue($user->newdoc($query));
 
@@ -47,7 +46,6 @@ final class Testing extends TestCase
 
         // accept delivery by delivery
         $this->assertTrue($user->newdel($q2));
-
 
         // screeening
         $this->assertTrue($user->screen($q3));
