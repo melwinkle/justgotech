@@ -71,6 +71,35 @@ class Person extends Database{
     }
 
 
+    public function newdoc($sql){
+        $query = $this->connection->query($sql);
+        if($query){
+            echo "\n(4)New Doctor Added";
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public function newpro($sql){
+        $query = $this->connection->query($sql);
+        if($query){
+            echo "\n(5)Order Processed";
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function newdel($sql){
+        $query = $this->connection->query($sql);
+        if($query){
+            echo "\n(5)Rider has accepted order";
+            return true;
+        }else{
+            return false;
+        }
+    }
+
    
 }
 ?>

@@ -3,10 +3,11 @@
 <?php
 
 class Database{
-    private $host = '127.0.0.1';
-    private $username = 'root';
-    private $password = '';
-    private $database = 'justgotech';
+
+    private $host = 'us-cdbr-east-03.cleardb.com';
+    private $username = 'b242d5083dc100';
+    private $password = 'bd14bf3f';
+    private $database = 'heroku_c9b858a1f702a48';
     protected $connection;
     
     public function __construct(){

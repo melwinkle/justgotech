@@ -12,8 +12,12 @@ final class Testing extends TestCase
         $password='french1';
         $patientID =7;
         $mess = "Hi";
+        $pass=md5(sha1("rose"));
 
         $sql = "SELECT * FROM customer WHERE username  = '$username'";
+        $query = "INSERT INTO Doctor(DocFname,DocLname,Department,Dpassword,Docuser,Docnum) VALUES ('Rose', 'Bear', 'Surgery', '$pass', 'RBear,'0240000000')";
+        $q1 = "UPDATE track_order SET Progress='Processed' WHERE TID=4";
+        $q2 = "UPDATE track_order SET Progress='Accepted' WHERE TID=4";
         // $sql1 = "SELECT EmployeeFname FROM Employee WHERE EmployeeID = '$username'";
         // $result="INSERT INTO Customer (CustomerFName, CustomerLName, CustomerGender, CustomerTelephone, CustomerAddress, Status, Diagnosis, LastCheckupDate) VALUES ('Rachel', 'Asamoah', 'female', '0246055185', 'Teshie', 'Healthy', 'Head','2020-11-24')";
         // $department="SELECT DepartmentName from department";
@@ -33,13 +37,23 @@ final class Testing extends TestCase
         //checks if the chatbot can respond to the user's messages
         $this->assertIsString($user->check_chatbot($mess));
 
-    //    // checks if the return statement contains the word successful
-    //     $this->assertStringContainsString('succesful',$user->addcustomer($result));
-    //     // checks if department 4 is in the array
-    //     $this->assertContains(4,[1,2,3,4]);
-    //     // checks if the return statement is a string
-    //     $this->assertContainsOnly("string",[$user->checkd($department)]);
-    // }
+
+
+        // insert new doctor
+        $this->assertTrue($user->newdoc($query));
+
+        // process drug by pharmacy
+        $this->assertTrue($user->newpro($q1));
+
+        // accept delivery by delivery
+        $this->assertTrue($user->newdel($q2));
+
+
+        // screeening
+
+        // add to cart
+
+
     }
    }
 ?>
