@@ -16,7 +16,19 @@ $row=mysqli_fetch_assoc($result);
 
 
 
-$PatientID=$row['PatientID'];
+
+
+$patient=$row['PatientID'];
+
+
+	$notif="SELECT * from notification where PatientID=$patient and NRead='Unread'";
+	$noq=mysqli_query($conn,$notif);
+	if(mysqli_num_rows($noq)>0){
+	  $nn=mysqli_num_rows($noq);
+	 
+	}else{
+	  $nn=0;
+	}
 
 ?>
 
@@ -37,6 +49,7 @@ $PatientID=$row['PatientID'];
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="css/covid.css">
 <link type="text/css" rel="stylesheet" href="css/style.css" />
+<link type="text/css" rel="stylesheet" href="./num.css" />
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
@@ -57,8 +70,27 @@ $PatientID=$row['PatientID'];
 
 <div class="navb"id="main">
   <span style="font-size:30px;cursor:pointer" onclick="openNav()"><img style="width:10%" src="../../images/justgo.png" alt="justgotech"> </span>
-  
-  <span style="font-size:20px;cursor:pointer; float:right; margin-right: -400px" onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:10%" src="../../images/stethoscope.png" alt="profile"> </span>
+  <div style="float:right">
+ 
+  <div class="dropdown" style="margin-left:59%">
+  <button onclick="myFunction()" class="dropbtn" style="background:none;border:none;"><img style="width:25%"src="https://img.icons8.com/plasticine/100/000000/appointment-reminders.png"/><img style="width:10%"src="https://img.icons8.com/ios-filled/50/e74c3c/<?php echo $nn;?>-circle.png"/></button>
+  <div id="myDropdown" class="dropdown-content">
+    <?php
+    if($nn>0){
+     while($num=mysqli_fetch_assoc($noq)){
+       $nt=$num['NID'];
+       $mes=$num['NMessage'];
+       $da=$num['NTime'];
+       echo "<a href='../pharmacy/ph_suc.php?not&id=$nt&mprev=../pharmacy/ph_records.php'>$mes $da</a>";
+     }
+    }else{
+      echo "<a >No Unread Notifications</a>";
+    }
+     ?>
+   
+  </div>
+</div>
+<span style="font-size:20px;cursor:pointer;margin-left:-7% " onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:5%" src="../../images/stethoscope.png" alt="profile"> </span>
 
 </div>
 
@@ -86,7 +118,7 @@ $PatientID=$row['PatientID'];
             <tbody>
             <?php
                
-                    $sql = "SELECT * FROM booking inner join Doctor on booking.Doctor=Doctor.DocID where PatientID=$PatientID";
+                    $sql = "SELECT * FROM booking inner join Doctor on booking.Doctor=Doctor.DocID where PatientID=$patient";
                     $result = mysqli_query($conn, $sql);
                         if(mysqli_num_rows($result) > 0){
                             //associative array
@@ -145,6 +177,23 @@ $PatientID=$row['PatientID'];
 
 
 <script>
+  function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
 function openNav() {
   document.getElementById("mySidenav").style.width = "250px";
   document.getElementById("main").style.marginLeft = "75px";

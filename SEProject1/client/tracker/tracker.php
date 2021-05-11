@@ -109,6 +109,15 @@ $p=($dn/$tn)*100;
 $l=($ln/$tn)*100;
 
 
+$notif="SELECT * from notification where PatientID=$patient and NRead='Unread'";
+$noq=mysqli_query($conn,$notif);
+if(mysqli_num_rows($noq)>0){
+  $nn=mysqli_num_rows($noq);
+ 
+}else{
+  $nn=0;
+}
+
 ?>
 <html>
 <head>
@@ -120,7 +129,8 @@ $l=($ln/$tn)*100;
   href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.2.0/mdb.min.css"
   rel="stylesheet"
 />
-<link rel="stylesheet" href="covid.css">
+<link rel="stylesheet" href="./covid.css">
+<link rel="stylesheet" href="./num.css">
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="sweetalert2.all.min.js"></script>
@@ -145,26 +155,46 @@ $l=($ln/$tn)*100;
 
 <div class="navb"id="main">
   <span style="font-size:30px;cursor:pointer" onclick="openNav()"><img style="width:10%" src="../../images/justgo.png" alt="justgotech"> </span>
- 
   <div style="float:right">
-
-  <button style="background:none;border:none;margin-left:65%"><img style="width:25%"src="https://img.icons8.com/plasticine/100/000000/appointment-reminders.png"/><img style="width:10%"src="https://img.icons8.com/ios-filled/50/e74c3c/2-circle.png"/></button>
- <span style="font-size:20px;cursor:pointer;margin-left:-6% " onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:5%" src="../../images/stethoscope.png" alt="profile"> </span>
  
- </div>
+ <div class="dropdown" style="margin-left:59%">
+  
+  <div id="myDropdown" class="dropdown-content">
+    <?php
+    if($nn>0){
+     while($num=mysqli_fetch_assoc($noq)){
+       $nt=$num['NID'];
+       $mes=$num['NMessage'];
+       $da=$num['NTime'];
+       echo "<a href='../pharmacy/ph_suc.php?not&id=$nt&mprev=../pharmacy/ph_records.php'>$mes $da</a>";
+     }
+    }else{
+      echo "<a >No Unread Notifications</a>";
+    }
+     ?>
+   
+  </div>
+</div> 
+ 
+
+<button onclick="myFunction()" class="dropbtn" style="background:none;border:none;"><img style="width:25%"src="https://img.icons8.com/plasticine/100/000000/appointment-reminders.png"/><img style="width:10%"src="https://img.icons8.com/ios-filled/50/e74c3c/<?php echo $nn;?>-circle.png"/></button>
+  <span style="font-size:20px;cursor:pointer;margin-left:-7% " onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:5%" src="../../images/stethoscope.png" alt="profile"> </span>
+
+  </div>
+  
 </div>
 
 
-
-<div class="row" style="text-align:center;margin-left:17%">
-   <div class="col-sm-4"><div class="card  mb-4 shadow-sm " style="border:1px solid rgb(4, 23, 120);color:rgb(4, 23, 120);height:150px;width:78%;border-radius:5px;background: white"><h2 style="margin-top:10px;text-align:center"><img src="https://img.icons8.com/dotty/60/101550/test-tube.png"/><?php echo $tn;?></h2>
+<div>
+<div class="row" style="margin-left:15%">
+   <div class="column"><div class="card  mb-4 shadow-sm " style="border:1px solid rgb(4, 23, 120);color:rgb(4, 23, 120);height:150px;width:350px;border-radius:5px;background: white"><h2 style="margin-top:10px;text-align:center"><img src="https://img.icons8.com/dotty/60/101550/test-tube.png"/><?php echo $tn;?></h2>
                                 <h6 style="text-align:center">TOTAL TESTS</h6></div> </div>
-    <div class="col-sm-4"><div class="card  mb-4 shadow-sm " style="border:1px solid rgb(4, 23, 120);color:rgb(4, 23, 120);height:150px;width:78%;border-radius:5px;background: white"><h2 style="margin-top:10px;text-align:center"><img src="https://img.icons8.com/pastel-glyph/60/101550/money-circulation.png"/><?php echo $tot;?></h2>
+    <div class="column"><div class="card  mb-4 shadow-sm " style="border:1px solid rgb(4, 23, 120);color:rgb(4, 23, 120);height:150px;width:350px;border-radius:5px;background: white"><h2 style="margin-top:10px;text-align:center"><img src="https://img.icons8.com/pastel-glyph/60/101550/money-circulation.png"/><?php echo $tot;?></h2>
                                 <h6 style="text-align:center">TOTAL PURCHASE</h6></div> </div>
-    <div class="col-sm-4"><div class="card  mb-4 shadow-sm " style="border:1px solid rgb(4, 23, 120);color:rgb(4, 23, 120);height:150px;width:78%;border-radius:5px;background: white"><h2 style="margin-top:10px;text-align:center"><img src="https://img.icons8.com/wired/60/101550/medical-doctor.png"/><?php echo $nb;?></h2>
+    <div class="column"><div class="card  mb-4 shadow-sm " style="border:1px solid rgb(4, 23, 120);color:rgb(4, 23, 120);height:150px;width:350px;border-radius:5px;background: white"><h2 style="margin-top:10px;text-align:center"><img src="https://img.icons8.com/wired/60/101550/medical-doctor.png"/><?php echo $nb;?></h2>
                                 <h6 style="text-align:center">TOTAL CONSULTATION</h6></div> </div>
 </div>
-
+</div>
   
 
 
@@ -228,6 +258,23 @@ $l=($ln/$tn)*100;
 
 
 <script>
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
 function openTab(tabName) {
   var i, x;
   x = document.getElementsByClassName("containerTab");

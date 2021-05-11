@@ -56,6 +56,14 @@ $cout=mysqli_fetch_assoc($conph);
 $cart=$cout['total'];
 
 
+$notif="SELECT * from notification where PatientID=$patient and NRead='Unread'";
+$noq=mysqli_query($conn,$notif);
+if(mysqli_num_rows($noq)>0){
+  $nn=mysqli_num_rows($noq);
+ 
+}else{
+  $nn=0;
+}
 
 ?>
 <html>
@@ -70,6 +78,7 @@ $cart=$cout['total'];
 /><link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="pharm.css">
 <link rel="stylesheet" href="star.css">
+<link rel="stylesheet" href="num.css">
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="sweetalert2.all.min.js"></script>
@@ -95,15 +104,33 @@ $cart=$cout['total'];
 
 <div class="navb"id="main">
   <span style="font-size:30px;cursor:pointer" onclick="openNav()"><img style="width:10%" src="../../images/justgo.png" alt="justgotech"> </span>
-  
   <div style="float:right">
  
-  <button style="background:none;border:none;margin-left:61%"><img style="width:25%"src="https://img.icons8.com/plasticine/100/000000/appointment-reminders.png"/><img style="width:10%"src="https://img.icons8.com/ios-filled/50/e74c3c/2-circle.png"/></button>
+  <div class="dropdown" style="margin-left:61%">
+  <button onclick="myFunction()" class="dropbtn" style="background:none;border:none;"><img style="width:25%"src="https://img.icons8.com/plasticine/100/000000/appointment-reminders.png"/><img style="width:10%"src="https://img.icons8.com/ios-filled/50/e74c3c/<?php echo $nn;?>-circle.png"/></button>
+  <div id="myDropdown" class="dropdown-content">
+    <?php
+    if($nn>0){
+     while($num=mysqli_fetch_assoc($noq)){
+       $nt=$num['NID'];
+       $mes=$num['NMessage'];
+       $da=$num['NTime'];
+       echo "<a href='../pharmacy/ph_suc.php?not&id=$nt&mprev=../pharmacy/ph_records.php'>$mes $da</a>";
+     }
+    }else{
+      echo "<a >No Unread Notifications</a>";
+    }
+     ?>
+   
+  </div>
+</div>
+ 
 
-<button onclick="cartP()"style="background:none;border:none;margin-left:-9%"><img  style="width:30%" src="https://img.icons8.com/fluent/48/4a90e2/fast-cart.png"/><img style="width:20%"src="https://img.icons8.com/ios-filled/50/000000/<?php echo $cart;?>-circle.png"/></button>
-<span style="font-size:20px;cursor:pointer;margin-left:-2% " onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:5%" src="../../images/stethoscope.png" alt="profile"> </span>
+  <button onclick="cartP()"style="background:none;border:none;margin-left:-9%"><img  style="width:30%" src="https://img.icons8.com/fluent/48/4a90e2/fast-cart.png"/><img style="width:20%"src="https://img.icons8.com/ios-filled/50/000000/<?php echo $cart;?>-circle.png"/></button>
+  <span style="font-size:20px;cursor:pointer;margin-left:-2% " onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:5%" src="../../images/stethoscope.png" alt="profile"> </span>
 
- </div>
+  </div>
+  
 </div>
 
 
@@ -427,6 +454,23 @@ function openTab(tabName) {
 }
 </script>
 <script>
+  function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
 function openNav() {
   document.getElementById("mySidenav").style.width = "250px";
   document.getElementById("main").style.marginLeft = "75px";

@@ -13,6 +13,16 @@
     $query="SELECT * from customer where username='$username'";
     $result=mysqli_query($conn,$query);
     $row=mysqli_fetch_assoc($result);
+    $patient=$row['PatientID'];
+
+    $notif="SELECT * from notification where PatientID=$patient and NRead='Unread'";
+$noq=mysqli_query($conn,$notif);
+if(mysqli_num_rows($noq)>0){
+  $nn=mysqli_num_rows($noq);
+ 
+}else{
+  $nn=0;
+}
 ?>
 
 
@@ -28,6 +38,7 @@
   rel="stylesheet"
 />
 <link rel="stylesheet" href="./covid.css">
+<link rel="stylesheet" href="./num.css">
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="sweetalert2.all.min.js"></script>
@@ -49,14 +60,37 @@
 </div>
 
 
+
 <div class="navb"id="main">
   <span style="font-size:30px;cursor:pointer" onclick="openNav()"><img style="width:10%" src="../../images/justgo.png" alt="justgotech"> </span>
-  
-  <span style="font-size:20px;cursor:pointer; float:right; margin-right: -32%" onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:10%" src="/justgotech/SEProject1/images/stethoscope.png" alt="profile"> </span>
-
+  <div style="float:right">
+ 
+  <div class="dropdown" style="margin-left:63%">
+  <button onclick="myFunction()" class="dropbtn" style="background:none;border:none;"><img style="width:25%"src="https://img.icons8.com/plasticine/100/000000/appointment-reminders.png"/><img style="width:10%"src="https://img.icons8.com/ios-filled/50/e74c3c/<?php echo $nn;?>-circle.png"/></button>
+  <div id="myDropdown" class="dropdown-content">
+    <?php
+    if($nn>0){
+     while($num=mysqli_fetch_assoc($noq)){
+       $nt=$num['NID'];
+       $mes=$num['NMessage'];
+       $da=$num['NTime'];
+       echo "<a href='../pharmacy/ph_suc.php?not&id=$nt&mprev=../pharmacy/ph_records.php'>$mes $da</a>";
+     }
+    }else{
+      echo "<a >No Unread Notifications</a>";
+    }
+     ?>
+   
+  </div>
 </div>
 
-<div class="test" style="margin-left:25%;width:800px">
+  <span style="font-size:20px;cursor:pointer;margin-left:-7% " onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:5%" src="../../images/stethoscope.png" alt="profile"> </span>
+
+  </div>
+  
+</div>
+
+<div class="test" style="margin-left:25%;width:800px;margin-top:3%">
   <h5 class="card-header"></h5>
   <div class="card-body"  style="border:1px solid #3498db;background:#ffffff;height:800px;width:800px;border-radius:10px;color:rgb(4, 23, 75)">
   
@@ -119,6 +153,23 @@
 
   
 <script>
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
 function openTab(tabName) {
   var i, x;
   x = document.getElementsByClassName("containerTab");

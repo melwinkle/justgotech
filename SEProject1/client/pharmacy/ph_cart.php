@@ -33,6 +33,15 @@ $count="SELECT count(*) as total from temp_cart where PatientID=$patient and sta
 $conph=mysqli_query($conn,$count);
 $cout=mysqli_fetch_assoc($conph);
 $cart=$cout['total'];
+
+$notif="SELECT * from notification where PatientID=$patient and NRead='Unread'";
+$noq=mysqli_query($conn,$notif);
+if(mysqli_num_rows($noq)>0){
+  $nn=mysqli_num_rows($noq);
+ 
+}else{
+  $nn=0;
+}
 ?>
 
 <?php  
@@ -62,6 +71,7 @@ createConfirmationmbox();
   rel="stylesheet"
 />
 <link rel="stylesheet" href="pharm.css">
+<link rel="stylesheet" href="num.css">
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="sweetalert2.all.min.js"></script>
@@ -88,26 +98,44 @@ createConfirmationmbox();
 
 <div class="navb"id="main">
   <span style="font-size:30px;cursor:pointer" onclick="openNav()"><img style="width:10%" src="../../images/justgo.png" alt="justgotech"> </span>
-  
   <div style="float:right">
  
-  <button style="background:none;border:none;margin-left:63%"><img style="width:25%"src="https://img.icons8.com/plasticine/100/000000/appointment-reminders.png"/><img style="width:10%"src="https://img.icons8.com/ios-filled/50/e74c3c/2-circle.png"/></button>
+  <div class="dropdown" style="margin-left:50%">
+  <button onclick="myFunction()" class="dropbtn" style="background:none;border:none;"><img style="width:20%"src="https://img.icons8.com/plasticine/100/000000/appointment-reminders.png"/><img style="width:10%"src="https://img.icons8.com/ios-filled/50/e74c3c/<?php echo $nn;?>-circle.png"/></button>
+  <div id="myDropdown" class="dropdown-content">
+    <?php
+    if($nn>0){
+     while($num=mysqli_fetch_assoc($noq)){
+       $nt=$num['NID'];
+       $mes=$num['NMessage'];
+       $da=$num['NTime'];
+       echo "<a href='../pharmacy/ph_suc.php?not&id=$nt&mprev=../pharmacy/ph_records.php'>$mes $da</a>";
+     }
+    }else{
+      echo "<a >No Unread Notifications</a>";
+    }
+     ?>
+   
+  </div>
+</div>
+ 
 
-<button onclick="cartP()"style="background:none;border:none;margin-left:-9%"><img  style="width:30%" src="https://img.icons8.com/fluent/48/4a90e2/fast-cart.png"/><img style="width:20%"src="https://img.icons8.com/ios-filled/50/000000/<?php echo $cart;?>-circle.png"/></button>
-<span style="font-size:20px;cursor:pointer;margin-left:-2% " onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:5%" src="../../images/stethoscope.png" alt="profile"> </span>
+  <button onclick="cartP()"style="background:none;border:none;margin-left:-2%"><img  style="width:30%" src="https://img.icons8.com/fluent/48/4a90e2/fast-cart.png"/><img style="width:20%"src="https://img.icons8.com/ios-filled/50/000000/<?php echo $cart;?>-circle.png"/></button>
+  <span style="font-size:20px;cursor:pointer;margin-left:-2% " onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:5%" src="../../images/stethoscope.png" alt="profile"> </span>
 
- </div>
+  </div>
+  
 </div>
 
 
 <div class="bcart" style="margin-left:400px;margin-top: 10px">
- <div style="background:blue;color:white; width:60%;border-radius:10px 10px 0 0; height: 50px">
+ <div style="background:blue;color:white; width:700px;border-radius:10px 10px 0 0; height: 50px">
   <h5 style="float:left;margin-left: 8px;margin-top: 15px;">JustGo Cart</h5>
  <button onclick="prevP()" style="margin-left: 300px;margin-top: 10px" type="button" class="btn btn-primary" style="margin-bottom: 15px">Continue Shopping</button>
  </div>
 
 
-<div class="tcart" style="width: 60%; border: 2px solid blue;border-radius:0 0 10px 10px">
+<div class="tcart" style="width: 700px; border: 2px solid blue;border-radius:0 0 10px 10px">
 <table class="table">
   <thead>
     <tr>
@@ -215,78 +243,64 @@ if(isset($_GET['phd'])){
 </div>
 
 
-<div class="ro" style="margin-left:-112px;width:60%;margin-top: 15px">
-<div style="background:blue;color:white; width:97%;border-radius:10px 10px 0 0;height:50px;margin-left:119px">
+<div class="ro" style="margin-left:-140px;width:700px;margin-top: 15px">
+<div style="background:blue;color:white; width:100%;border-radius:10px 10px 0 0;height:50px;margin-left:140px">
       <h3 style="float:left;margin-left:8px;margin-top: 15px;">Billing Address</h3>
     </div>
     <div class="container">
     
       <form action="ph_suc.php?bill=<?php echo $bill;?>&del=<?php echo $del;?>" method="post"class="needs-validation" style="margin-left:-5px;"novalidate>
-      <div class="rw" style="border:2px solid blue;border-radius:0 0 10px 10px;">
-  <div class="form-row" >
-    <div style="margin-left:-150px;width: 250px;margin-top: 15px">
-      <label for="validationTooltip01">Nickname</label>
-      <input name="nick"  type="text" class="form-control" id="validationTooltip01" placeholder="First name"  required>
-      <div class="valid-tooltip">
-        Looks good!
-      </div>
-    </div>
-    <div style="margin-left:20px;width: 250px;margin-top: 14px">
-      <label for="validationTooltip02">Address</label>
-      <input name="addr" type="text" class="form-control" id="validationTooltip02" placeholder="eg AnC Mall, East Legon"  required>
-      <div class="valid-tooltip">
-        Looks good!
-      </div>
-    </div>
+      <div class="rw" style="width:700px;margin-left:7px;border:2px solid blue;border-radius:0 0 10px 10px;">
+  <div class="form-row" style="margin-left:20px;margin-top:3%" >
 
- 
-    <div style="width:250px;margin-left:-150px;margin-top: 15px" >
-      <label for="validationTooltip04">Pickup Mode</label><br>
+      <label for="validationTooltip01">Nickname</label>
+      <input name="nick"  type="text" class="form-control" id="validationTooltip01" style="width:250px;"placeholder="First name"  required>
+     
+
+
+      <label style="margin-left:15px"for="validationTooltip02">Address</label>
+      <input name="addr" type="text" class="form-control" style="width: 250px" id="validationTooltip02" placeholder="eg AnC Mall, East Legon"  required>
       
-      <select  name="pick" class="custom-select" required>
+    
+
+      <label style="margin-top:10px;margin-left:2px" for="validationTooltip04">Pickup Mode</label><br>
+      
+      <select style="width: 400px;margin-top:35px;margin-left:-100px"  name="pick" class="custom-select" required>
       <option value="Pickup">Pickup</option>
       <option value="Delivery">Delivery</option>
-    </select>
+    </select><br>
   
-      <div class="invalid-tooltip">
-        Please select a pickup mode.
-      </div>
-    </div>
-   
-  </div>
+      
 
-  <div class="form-row">
    
-  <div style="width:250px;margin-left:50px;margin-top: 5px">
-      <label for="validationTooltip05">Mobile Money Network</label><br>
-      <select  name="net" class="custom-select" required>
+
+   
+ 
+      <label style="margin-top:85px;margin-left:-400px" for="validationTooltip05">Mobile Money Network</label><br>
+      <select  style="width: 250px;margin-top:110px;margin-left:-160px" name="net" class="custom-select" required>
       <option value="MTN">MTN</option>
       <option value="Vodafone">Vodafone</option>
       <option value="AirtelTigo">AirtelTigo</option>
         </select>
-      <div class="invalid-tooltip">
-        Please select a provider.
-      </div>
-    </div>
+ 
   
 
   
-    <div style="width:250px;margin-left:20px;margin-top: 5px">
-      <label for="validationTooltip03">Mobile Money Number</label>
-      <input name="momo"style="width:250px;" type="text" class="form-control" id="validationTooltip03" placeholder="024 000 0000 " >
-    </div>
-</div>
+
+      <label style="margin-top:85px;margin-left:60px" for="validationTooltip03">Mobile Money Number</label>
+      <input  name="momo"style="width:350px;margin-top:-40px;margin-left:300px" type="text" class="form-control" id="validationTooltip03" placeholder="024 000 0000 " >
 
 
-<div class="form-row">
-    <div style="width:520px;margin-left:50px;margin-bottom:25px;margin-top: 5px">
+
+
+
       <label for="validationTooltip03">Special Note for rider/store</label>
-      <textarea name="snotes" row="10" class="form-control" id="validationTooltip03" placeholder="eg Specific location details " ></textarea>
+      <textarea  style="width: 520px;margin-bottom:10px" name="snotes" row="10" class="form-control" id="validationTooltip03" placeholder="eg Specific location details " ></textarea>
      
-    </div>
+
     
    
-  </div>
+  
   
 </div>
         <div style="float:right;margin-top:10px;">
@@ -316,6 +330,23 @@ function openTab(tabName) {
 }
 </script>
 <script>
+  function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
 function openNav() {
   document.getElementById("mySidenav").style.width = "250px";
   document.getElementById("main").style.marginLeft = "75px";

@@ -12,6 +12,17 @@ if(!isset($_SESSION['username'])){
 	$query="SELECT * from customer where username='$username'";
 	$result=mysqli_query($conn,$query);
 	$row=mysqli_fetch_assoc($result);
+	$patient=$row['PatientID'];
+
+
+	$notif="SELECT * from notification where PatientID=$patient and NRead='Unread'";
+	$noq=mysqli_query($conn,$notif);
+	if(mysqli_num_rows($noq)>0){
+	  $nn=mysqli_num_rows($noq);
+	 
+	}else{
+	  $nn=0;
+	}
 
 ?>
 
@@ -36,6 +47,7 @@ if(!isset($_SESSION['username'])){
 
 	<!-- Custom stlylesheet -->
 	<link type="text/css" rel="stylesheet" href="css/style.css" />
+	<link type="text/css" rel="stylesheet" href="./num.css" />
 </head>
 
 <body>
@@ -46,14 +58,40 @@ if(!isset($_SESSION['username'])){
   <a href="../tracker/tracker.php">Tracker</a>
   <a href="../screening/covid/covid.php">Virtual Screening</a>
   <a href="../booking2/bookmain.php">Consultation</a>
-  <a href="../pharmacy/pharmacy_main.php">Consultation</a>
+  <a href="../pharmacy/pharmacy_main.php">Pharmacy</a>
   <a href="../account/logout.php">Log Out</a>
 </div>
 
 
 <div class="navb"id="main">
   <span style="font-size:30px;cursor:pointer" onclick="openNav()"><img style="width:10%" src="../../images/justgo.png" alt="justgotech"> </span>
- <span style="font-size:20px;cursor:pointer; float:right; margin-right: -32%" onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:10%" src="../../images/stethoscope.png" alt="profile"> </span>
+  <div style="float:right">
+ 
+  <div class="dropdown" style="margin-left:59%">
+  <button onclick="myFunction()" class="dropbtn" style="background:none;border:none;"><img style="width:25%"src="https://img.icons8.com/plasticine/100/000000/appointment-reminders.png"/><img style="width:10%"src="https://img.icons8.com/ios-filled/50/e74c3c/<?php echo $nn;?>-circle.png"/></button>
+  <div id="myDropdown" class="dropdown-content">
+    <?php
+    if($nn>0){
+     while($num=mysqli_fetch_assoc($noq)){
+       $nt=$num['NID'];
+       $mes=$num['NMessage'];
+       $da=$num['NTime'];
+       echo "<a href='../pharmacy/ph_suc.php?not&id=$nt&mprev=../pharmacy/ph_records.php'>$mes $da</a>";
+     }
+    }else{
+      echo "<a >No Unread Notifications</a>";
+    }
+     ?>
+   
+  </div>
+</div>
+ 
+
+  
+  <span style="font-size:20px;cursor:pointer;margin-left:-7% " onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:5%" src="../../images/stethoscope.png" alt="profile"> </span>
+
+  </div>
+  
 </div>
 	<div id="booking" class="section">
 		<div class="section-center">
@@ -240,6 +278,23 @@ if(!isset($_SESSION['username'])){
 		</div>
 	</div>
 	<script>
+	  function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
 	function openNav() {
   document.getElementById("mySidenav").style.width = "250px";
   document.getElementById("main").style.marginLeft = "75px";
