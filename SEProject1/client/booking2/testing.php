@@ -23,7 +23,7 @@ final class Testing extends TestCase
       
 
         // Checks if login is true
-        $this->assertTrue($user->check_login($username,$pass));
+        $this->assertFalse($user->check_login($username,$pass));
 
         //check if booking works
         $this->assertTrue($user->book_appoint($patientID));
