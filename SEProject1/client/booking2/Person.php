@@ -100,6 +100,29 @@ class Person extends Database{
         }
     }
 
+
+    public function screen($sql){
+        $query = $this->connection->query($sql);
+        if($query){
+            $row = $query->fetch_array();
+            echo "\n(6)Screening Status:".$row['Status'];
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function cart($sql){
+        $query = $this->connection->query($sql);
+        if($query){
+           
+            echo "\n(7)Item Added to Cart";
+            return true;
+        }else{
+            return false;
+        }
+    }
+
    
 }
 ?>
