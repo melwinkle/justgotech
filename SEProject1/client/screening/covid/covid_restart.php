@@ -8,7 +8,7 @@ if(!isset($_SESSION['username'])){
 }
 
 $username=$_SESSION['username'];
-$score=0;
+
 $probability=0.0;
   
 $disease="SARS-COV2";
@@ -27,43 +27,49 @@ if(isset($_POST['scan'])){
   $time=date("Y-m-d h:i:s");
 
   if(($age=='Between 56-64')|| $age==('More than 64')){
-    $score=$score+2;
+   
+
+    $score['age']=2;
   }else{
-    $score=$score+1;
+    $score['age']=1;
   }
   
   if( $test==('Tested but result was positive')){
-    $score=$score+2;
+    $score['test']=2;
   }
   else if( $test==('Tested but result was negative')||$test==('Tested and awaiting results')){
-    $score=$score+1;
+    $score['test']=1;
   }
   else{
-    $score=$score+0;
+    $score['test']=0;
   }
 
   if($sym=='None of the above'){
-    $score=$score+0;
+    $score['sym']=0;
   }else{
-    $score=$score+2;
+    $score['sym']=2;
   }
 
 
   if($pre=='None of the above'){
-    $score=$score+0;
+    $score['pre']=0;
   }else{
-    $score=$score+2;
+    $score['pre']=2;
   }
 
 
   if($con=='I have no exposure of Covid-19'){
-    $score=$score+0;
+    $score['con']=0;
   }else{
-    $score=$score+2;
+    $score['con']=2;
   }
 
-
-  $probability=($score/10)*100;
+$pro=0;
+  foreach ($score as $key => $val){ 
+    $pro=$val+$val;
+   
+} 
+  $probability=($pro/10)*100;
 
 
   if($probability<11){
