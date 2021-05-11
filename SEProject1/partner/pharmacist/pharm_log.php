@@ -18,7 +18,7 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="sweetalert2.all.min.js"></script>
-<body style="background-image: linear-gradient(to bottom right, skyblue, pink);">
+<body style="background-image: linear-gradient(to bottom right, rgb(204, 102, 0), brown);">
 
 <div><img style="width:8%" src="../../images/justgotech.png" alt="justgo"></div>
 
@@ -57,7 +57,7 @@
     </div>
 
     <!-- Sign in button -->
-    <button name="submit"class="btn btn-primary btn-block my-4" type="submit">Sign in</button>
+    <button name="submit"class="btn btn-primary btn-block my-4"  style="background:brown"type="submit">Sign in</button>
 
     <!-- Register -->
     <p>Not a member?
@@ -70,7 +70,7 @@
 <!-- Default form login -->
 </div>
 <div>
-<img style="width:40%;margin-left: 850px;margin-top: -400px"src="../../images/delivery-man.png" alt=""></div>
+<img style="width:50%;margin-left: 850px;margin-top: -600px"src="../../images/pharm.png" alt=""></div>
   
 </body>
 </html>

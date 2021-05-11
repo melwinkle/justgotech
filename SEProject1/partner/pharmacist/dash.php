@@ -80,14 +80,14 @@ $expg=mysqli_num_rows($squery);
 <div style="margin-left:18%;margin-top:3%">
         <h3><?php echo date('d-M-Y');?></h3>
     <div class="progress" style="border-radius:5px;width:10%;height: 10px;margin-top:10px">
-        <div class="progress-bar bg-primary" role="progressbar" style="width:100%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div></div>
+        <div class="progress-bar bg" role="progressbar" style="width:100%;background:rgb(163, 83, 36)" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div></div>
     </div>
 
     <div class="main"style="margin-left:18%;margin-top:2%">
-    <!-- next row -->
+    <!-- next row rgb(4, 23, 70)-->
     <div class="row">
                 <div class="col-sm-4">    
-                         <div class='card  mb-4 shadow-sm '  style='background:rgb(4, 23, 70);height:150px;width:78%;border-radius:5px;color: white'>
+                         <div class='card  mb-4 shadow-sm '  style='background:brown;height:150px;width:78%;border-radius:5px;color: white'>
                                  <h2 style="margin-top:10px;color: white;text-align:center"><img src="https://img.icons8.com/windows/64/ffffff/packaging.png"/><?php echo $number;?></h2>
                                  <h6 style="text-align:center">TODAY'S ORDERS</h6>
                             
@@ -96,7 +96,7 @@ $expg=mysqli_num_rows($squery);
                      </div>
 <!-- next card -->
                 <div class="col-sm-4">    
-                        <div class='card  mb-4 shadow-sm '  style='background:rgb(4, 23, 120);height:150px;width:78%;border-radius:5px;color: white'>
+                        <div class='card  mb-4 shadow-sm '  style='background:rgb(163, 83, 36);height:150px;width:78%;border-radius:5px;color: white'>
                                 <h2 style="margin-top:10px;color: white;text-align:center"><img src="https://img.icons8.com/windows/64/ffffff/packaging.png"/>GHC <?php echo $db;?></h2>
                                 <h6 style="text-align:center">TODAY'S BALANCE</h6>
 
@@ -106,7 +106,7 @@ $expg=mysqli_num_rows($squery);
                     <!-- next card -->
                 
                 <div class="col-sm-4">    
-                        <div class='card  mb-4 shadow-sm '  style='background:rgb(4, 23, 90);height:150px;width:78%;border-radius:5px;color: white'>
+                        <div class='card  mb-4 shadow-sm '  style='background:rgb(170, 83, 36);height:150px;width:78%;border-radius:5px;color: white'>
                                 <h2 style="margin-top:10px;color: white;text-align:center"><img src="https://img.icons8.com/wired/64/ffffff/get-cash.png"/><?php echo $expg;?></h2>
                                 <h6 style="text-align:center">STOCK</h6>
                             </div>
@@ -122,7 +122,7 @@ $expg=mysqli_num_rows($squery);
 Latest Orders
 </h3>
 <div class="progress" style="border-radius:5px;width:10%;height: 10px;margin-top:10px">
-  <div class="progress-bar bg-primary" role="progressbar" style="width:100%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+  <div class="progress-bar bg"  role="progressbar" style="width:100%;background:rgb(163, 83, 36)" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
   
 </div>
 </div>
@@ -154,7 +154,7 @@ $final_fe=$finales['P_Bill'];
   ?>
 <div class="column">
         <div class='card  mb-4 shadow-sm '  style='background:white;height:135px;width:1150px;border-radius:2px;color:#cccccc'>
-            <span style="width:90px;margin-left:20px;margin-top:15px;color:white;background:rgb(4, 23, 75);;">
+            <span style="width:90px;margin-left:20px;margin-top:15px;color:white;background:rgb(163, 83, 36);">
               <h1 style="margin-left:20px;margin-top:4px">29</h1>
               <h4 style="margin-left: 22px">Apr</h4>
             </span>

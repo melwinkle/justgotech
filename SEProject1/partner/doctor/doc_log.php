@@ -4,7 +4,7 @@
 
 <!DOCTYPE html>
 <head>
-<title>JustGo Delivery</title>
+<title>JustGo Doctor</title>
 </head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
@@ -19,7 +19,7 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="sweetalert2.all.min.js"></script>
-<body style="background-image: linear-gradient(to bottom right, skyblue, pink);">
+<body style="background-image: linear-gradient(to bottom right, skyblue, purple);">
 
 <div><img style="width:8%" src="../../images/justgotech.png" alt="justgo"></div>
 
@@ -77,7 +77,7 @@
 <!-- Default form login -->
 </div>
 <div>
-<img style="width:40%;margin-left: 850px;margin-top: -400px"src="../../images/delivery-man.png" alt=""></div>
+<img style="width:50%;margin-left: 850px;margin-top: -800px"src="../../images/doctor.png" alt=""></div>
   
 </body>
 </html>

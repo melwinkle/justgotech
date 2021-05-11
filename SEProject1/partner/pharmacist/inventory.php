@@ -89,7 +89,7 @@ while($result=mysqli_fetch_assoc($query)){
 <div style="margin-left:18%;margin-top:3%">
         <h3><?php echo date('d-M-Y');?></h3>
         <div class="progress" style="border-radius:5px;width:10%;height: 10px;margin-top:10px">
-                <div class="progress-bar bg-primary" role="progressbar" style="width:100%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar bg" role="progressbar" style="width:100%;background:rgb(163, 83, 36)" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
          </div>
          </div>
 <!-- orders and balance -->
@@ -97,7 +97,7 @@ while($result=mysqli_fetch_assoc($query)){
     <!-- next row -->
     <div class="row">
                 <div class="col-sm-4">    
-                         <div class='card  mb-4 shadow-sm '  style='background:rgb(4, 23, 70);height:150px;width:78%;border-radius:5px;color: white'>
+                         <div class='card  mb-4 shadow-sm '  style='background:rgb(173, 83, 56);height:150px;width:78%;border-radius:5px;color: white'>
                                  <h2 style="margin-top:10px;color: white;text-align:center"><img src="https://img.icons8.com/windows/64/ffffff/packaging.png"/><?php echo $number; ?></h2>
                                  <h6 style="text-align:center">TOTAL STOCK</h6>
                             
@@ -106,7 +106,7 @@ while($result=mysqli_fetch_assoc($query)){
                      </div>
 <!-- next card -->
                 <div class="col-sm-4">    
-                        <div class='card  mb-4 shadow-sm '  style='background:rgb(4, 23, 120);height:150px;width:78%;border-radius:5px;color: white'>
+                        <div class='card  mb-4 shadow-sm '  style='background:rgb(123, 93, 36);height:150px;width:78%;border-radius:5px;color: white'>
                                 <h2 style="margin-top:10px;color: white;text-align:center"><img src="https://img.icons8.com/windows/64/ffffff/packaging.png"/><?php echo $expg; ?></h2>
                                 <h6 style="text-align:center">EXPIRED STOCK</h6>
 
@@ -116,7 +116,7 @@ while($result=mysqli_fetch_assoc($query)){
                     <!-- next card -->
                 
                 <div class="col-sm-4">    
-                        <div class='card  mb-4 shadow-sm '  style='background:rgb(4, 23, 90);height:150px;width:78%;border-radius:5px;color: white'>
+                        <div class='card  mb-4 shadow-sm '  style='background:rgb(163, 83, 36);height:150px;width:78%;border-radius:5px;color: white'>
                                 <h2 style="margin-top:10px;color: white;text-align:center"><img src="https://img.icons8.com/wired/64/ffffff/get-cash.png"/><?php echo $count; ?></h2>
                                 <h6 style="text-align:center">LOW STOCK</h6>
                             </div>
@@ -133,15 +133,15 @@ while($result=mysqli_fetch_assoc($query)){
 <div style="margin-left:-1%;margin-top:3%">
         <h3>STOCK</h3>
         <div class="progress" style="border-radius:5px;width:10%;height: 10px;margin-top:10px">
-                <div class="progress-bar bg-primary" role="progressbar" style="width:100%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar bg" role="progressbar" style="width:100%;background:rgb(163, 83, 36)" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
          </div>
 
          
 </div>
 
 <div style="margin-left:950px;margin-top:-1.5%;">
-         <a style="color:#26e07f;font-size:14pt" href="../pharmacist/add_in.php" >  New Existing Stock<img src="https://img.icons8.com/android/22/26e07f/plus.png"/></a>
-         <a style="color:#26e07f;font-size:14pt;margin-left:3px;" href="../pharmacist/nadd_in.php" >  New Stock<img src="https://img.icons8.com/android/24/26e07f/plus.png"/></a>
+         <a style="color:rgb(163, 83, 36);font-size:14pt" href="../pharmacist/add_in.php" >  New Existing Stock<img src="https://img.icons8.com/android/22/26e07f/plus.png"/></a>
+         <a style="color:rgb(163, 83, 36);font-size:14pt;margin-left:3px;" href="../pharmacist/nadd_in.php" >  New Stock<img src="https://img.icons8.com/android/24/26e07f/plus.png"/></a>
        
          </div>
 
@@ -206,7 +206,7 @@ while($result=mysqli_fetch_assoc($query)){
                 <td contenteditable="false" id="Quantity"><?php echo $phs['Quantity'];?></td>
                 <td contenteditable="false" id="price">Ghc <?php echo $phs['Price'];?></td>
                 <td contenteditable="false" id="quer"><?php echo $phs['Queries'];?></td>
-                <td><button onclick="upd('<?php echo $pid;?>')"class="btn btn-success btn-rounded btn-sm my-0">UPDATE</button></td>
+                <td><button onclick="upd('<?php echo $pid;?>')" style="background:rgb(123, 73, 36)"class="btn btn-success btn-rounded btn-sm my-0">UPDATE</button></td>
                 </tr>
                
                
