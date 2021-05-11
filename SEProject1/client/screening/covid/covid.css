@@ -227,6 +227,21 @@ body{
     font-size: 35px;
     cursor: pointer;
   }
+  .opt{
+    margin-left: 18%;
+    margin-top: 5%;
+    
+}
+.opt button{
+    height: 40%;
+    width: 40%;
+    border-radius: 15px;
+}
+
+.opt button.purchase{
+    margin-left: 50px;
+
+}
 
 
 footer{

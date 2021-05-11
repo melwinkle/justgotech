@@ -170,6 +170,43 @@ require_once("../../database/connection.php");
        
         
                     
+        $dru = "SELECT DID from drugs where DName='$dn'";
+        $sqd = mysqli_query($conn,$dru);
+
+        if($sqd){
+            $di=mysqli_fetch_assoc($sqd);
+            $did=$di['DID'];
+            $quer= "INSERT INTO pharm_drugs(PharmID,DID,Quantity,Price,M_date,E_date) VALUES ($pid,$did,$quan,$pri,'$md','$ed')";
+        $sl = mysqli_query($conn,$quer);
+
+        if($sl){
+            header("Location: ../pharmacist/inventory.php?success");
+        }else{
+            header("Location: ../pharmacist/inventory.php?fail");
+        }
+            
+        }else{
+            echo "no";
+        }
+        
+        
+    }
+
+    if(isset($_POST['nadd'])){
+        $dn=$_POST['dn'];
+        $dt = $_POST['dt'];
+        $desc=$_POST['desc'];
+        $que=$_POST['quer'];
+        $md=$_POST['md'];
+        $ed=$_POST['ed'];
+        $pri=$_POST['price'];
+        $quan=$_POST['quan'];
+        $pid=$_GET['pid'];
+
+        
+       
+        
+                    
         $dru = "INSERT INTO drugs(DName,Drug_type,Queries,Description) VALUES ('$dn','$dt', '$que','$desc')";
         $sqd = mysqli_query($conn,$dru);
 

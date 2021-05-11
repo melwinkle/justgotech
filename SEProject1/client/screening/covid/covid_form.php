@@ -47,8 +47,8 @@ $resultss=mysqli_query($conn,$query2);
   <img style="width:50%;margin-left: 20%;background:rgb(23, 79, 182);" src="../../../images/justgotech.png" alt="justgotech">
   <a href="../../account/accountinfo.php">Account Info</a>
   <a href="../../tracker/tracker.php">Tracker</a>
-  <a href="../../screening/covid/covid.php">Virtual Screening</a>
-<a href="../../booking2/booking.php">Consultation</a>
+  <a href="../../screening/covid/cov.php">Virtual Screening</a>
+<a href="../booking2/bookmain.php">Consultation</a>
 
  
   <a href="../../account/logout.php">Log Out</a>

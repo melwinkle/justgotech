@@ -71,7 +71,7 @@ if(mysqli_num_rows($noq)>0){
   <img style="width:50%;margin-left: 20%;background:rgb(23, 79, 182);" src="../../images/justgotech.png" alt="justgotech">
   <a href="../account/accountinfo.php">Account Info</a>
   <a href="../tracker/tracker.php">Tracker</a>
-  <a href="../screening/covid/covid.php">Virtual Screening</a>
+  <a href="../screening/covid/cov.php">Virtual Screening</a>
   <a href="../booking2/bookmain.php">Consultation</a>
   <a href="../pharmacy/pharmacy_main.php">Pharmacy</a>
 
@@ -124,12 +124,12 @@ PURCHASES
 
 
 
-<!-- </div>
-<div style="margin-left:35%;margin-top: 40px;">
+ </div>
+<!-- <div style="margin-left:35%;margin-top: 40px;">
   <button onclick="track()"style="width:55%;background:rgb(23, 79, 95);height:300px;border-radius:10px;border:3px black;color:white;font-size:24pt">TRACK ORDERS</buttom>
   <button class="purchase" onclick="payP()" style="width:40%;background:rgb(23, 79, 110);height:300px;border-radius:10px;border:3px black;color:white;font-size:24pt">
 PAYMENT
-</button>
+</button> -->
 
 </div> -->
 

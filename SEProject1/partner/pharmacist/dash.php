@@ -73,7 +73,7 @@ $expg=mysqli_num_rows($squery);
   <a style="color:#cccccc"href="../pharmacist/inventory.php"><img src="https://img.icons8.com/wired/24/cccccc/get-cash.png"/>Inventory</a>
   <hr>
 
-  <a style="color:#cccccc"href="../pharmacist/pharm_log.php?logout"><img src="https://img.icons8.com/material-sharp/24/e67e22/settings.png"/>Log Out</a>
+  <a style="color:#cccccc"href="../pharmacist/order.php"><img src="https://img.icons8.com/material-sharp/24/e67e22/settings.png"/>Log Out</a>
 </div>
 
 

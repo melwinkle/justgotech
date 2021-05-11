@@ -82,7 +82,7 @@ while($result=mysqli_fetch_assoc($query)){
   <a href="../pharmacist/inventory.php"><img src="https://img.icons8.com/wired/24/3498db/get-cash.png"/>Inventory</a>
   <hr>
 
-  <a style="color:#cccccc"href="../pharmacist/pharm_log.php?logout"><img src="https://img.icons8.com/material-sharp/24/e67e22/settings.png"/>Log Out</a>
+  <a style="color:#cccccc"href="../pharmacist/order.php"><img src="https://img.icons8.com/material-sharp/24/e67e22/settings.png"/>Log Out</a>
 </div>
 
 
@@ -139,12 +139,13 @@ while($result=mysqli_fetch_assoc($query)){
          
 </div>
 
-<div style="margin-left:1000px;margin-top:-2.5%;">
-         <a style="color:#26e07f;font-size:14pt" href="../pharmacist/add_in.php">  New Stock<img src="https://img.icons8.com/android/24/26e07f/plus.png"/></a>
+<div style="margin-left:950px;margin-top:-1.5%;">
+         <a style="color:#26e07f;font-size:14pt" href="../pharmacist/add_in.php" >  New Existing Stock<img src="https://img.icons8.com/android/22/26e07f/plus.png"/></a>
+         <a style="color:#26e07f;font-size:14pt;margin-left:3px;" href="../pharmacist/nadd_in.php" >  New Stock<img src="https://img.icons8.com/android/24/26e07f/plus.png"/></a>
        
          </div>
 
-            <div id="table" class="table-editable" style="width:1500px;margin-top:2%;background:white">
+            <div id="table" class="table-editable" style="width:1270px;margin-top:2%;background:white">
             <table class="table table-bordered table-responsive-md ">
             <thead>
                 <tr>

@@ -86,31 +86,7 @@ $loc=$_SESSION['location'];
                        
                       <form action="update_in.php?pid=<?php echo $id;?>" method="post">
                         <label for="user">Drug Name</label><br>
-                        <select style="border:1px solid #3498db;border-radius:5px;width:80%;height:40px" name="dn" id="dt">
-                        
-                          <?php 
-                          $dr="SELECT * from drugs ";
-                          $drs=mysqli_query($conn,$dr);
-                          while($rw = mysqli_fetch_array($drs)) {
-                             $type=$rw['DName'];
-                      
-                             $output = str_replace("enum('", "", $type);
-                      
-                      // $output will now be: Equipment','Set','Show
-                             $output = str_replace("')", "", $output);
-                      
-                             // array $results contains the ENUM values
-                             $results = explode("','", $output);
-                      
-                             for($i = 0; $i < count($results); $i++) {
-                                 echo " <option value='$results[$i]'>$results[$i]</option>";
-                             }
-                              
-                          }
-                          
-                          ?>
-                          
-                        </select><br>
+                        <input style="border:1px solid #3498db;border-radius:5px;width:80%;height:40px" type="text" name="dn" id="dn" ><br>
 
 
 
@@ -158,7 +134,7 @@ $loc=$_SESSION['location'];
 
                     
 
-                        <button name="add"type="submit" style="margin-top:5%;margin-left:20%;width:40%;height:20%;background:rgb(4, 23, 75)"class="btn btn-primary">ADD</a>
+                        <button name="nadd"type="submit" style="margin-top:5%;margin-left:20%;width:40%;height:20%;background:rgb(4, 23, 75)"class="btn btn-primary">ADD</a>
                         </form>
                     </div>
                 </div>

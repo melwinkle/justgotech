@@ -56,7 +56,7 @@ if(!isset($_SESSION['username'])){
   <img style="width:50%;margin-left: 20%;background:rgb(23, 79, 182);" src="../../images/justgotech.png" alt="justgotech">
   <a href="../account/accountinfo.php">Account Info</a>
   <a href="../tracker/tracker.php">Tracker</a>
-  <a href="../screening/covid/covid.php">Virtual Screening</a>
+  <a href="../screening/covid/cov.php">Virtual Screening</a>
   <a href="../booking2/bookmain.php">Consultation</a>
   <a href="../pharmacy/pharmacy_main.php">Pharmacy</a>
   <a href="../account/logout.php">Log Out</a>
@@ -140,15 +140,15 @@ if(!isset($_SESSION['username'])){
 									<!-- printing Doctor's values from the database -->
 
 									<?php 
-										$sql="SELECT * FROM Doctor ";
-										$result=mysqli_query($conn,$sql);
-										while($row = mysqli_fetch_array($result)) {
+										$sql="SELECT * FROM doctor";
+										$resut=mysqli_query($conn,$sql);
+										while($row = mysqli_fetch_array($resut)) {
 											$type = $row['DocFname'];
 											$output = str_replace("enum('", "", $type);
 											$output = str_replace("')", "", $output);
 											$result = explode("','", $output);
 												for($i = 0; $i < count($result); $i++) {
-													$docname = $result[$i];
+													
 												echo "<option name='doctor'value='$result[$i]'>Dr.$result[$i]</option><br>";
 												} 
 											}
@@ -207,17 +207,6 @@ if(!isset($_SESSION['username'])){
 
 										<?php
 										
-										// 	$sql="SELECT Time_available FROM doctor_time WHERE";
-										// 	$result=mysqli_query($conn,$sql);
-										// 	while($row = mysqli_fetch_array($result)) {
-										// 		$type  = $row['DocFname'];
-										// 		$output = str_replace("enum('", "", $type);
-										// 		$output = str_replace("')", "", $output);
-										// 		$result = explode("','", $output);
-										// 		for($i = 0; $i < count($result); $i++) {
-										// 		echo "<option name='doctor'value='$result[$i]'>Dr.$result[$i]</option><br>";
-										// 	} 
-										// }
 										
 										?>
 
