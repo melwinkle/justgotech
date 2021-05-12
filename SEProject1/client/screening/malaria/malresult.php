@@ -1,4 +1,4 @@
-<!-- Screening page for covid testing -->
+<!-- Screening page for malaria testing -->
 <?php
 
 require_once("../../../database/connection.php");
@@ -29,21 +29,18 @@ $sym=$der['symptom'];
 $test=$der['testing'];
 $pre=$der['precon'];
 $reg=$der['Region'];
-$con=$der['ConID'];
+$con=$der['Exposure'];
 $status=$der['Status'];
 $time=$der['Time'];
 $probability=$_GET['prob'];
 
 
-$cr="SELECT * from contact where ConID=$con";
-$conresult=mysqli_query($conn,$cr);
-$conrow=mysqli_fetch_assoc($conresult);
-$conr=$conrow['Contact'];
+
 
 ?>
 <html>
 <head>
-<title>COVID-19</title>
+<title>MALARIA</title>
 </head>
 <link
   href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.2.0/mdb.min.css"
@@ -92,7 +89,7 @@ $conr=$conrow['Contact'];
      <p>Test Status:<?php echo $test?></p><br>
      <p>Symptoms:<?php echo $sym?></p><br>
      <p>Preconditions:<?php echo $pre?></p><br>
-     <p>Contact Status:<?php echo $conr?></p><br>
+     <p>Exposure Status:<?php echo $con?></p><br>
      <p>Status:<?php echo $status?></p><br>
      
 
@@ -118,10 +115,10 @@ $conr=$conrow['Contact'];
       <div class='card-body' >
     
         <h2 class='card-title'>
-        COVID-19 SCREENING TOOL 
+        MALARIA SCREENING TOOL 
         </h2><br>
       <p> No Testing Required!
-      Based your results, you do not need testing. However do not forget to mask up and follow all the protocols.</p>";
+      Based your results, you do not need testing. However do not forget to protect and cover yourself and follow all the COVID protocols.</p>";
 
      
      }
@@ -134,12 +131,11 @@ $conr=$conrow['Contact'];
       <div class='card-body' >
     
         <h2 class='card-title'>
-        COVID-19 SCREENING TOOL 
+        MALARIA SCREENING TOOL 
         </h2><br>
-      <p> You may have been exposed to COVID-19. However no emergency COVID-19 Testing Required!
-      Please go and get checked for a flu. If however, the symptoms continue to persist, here is a link to all testing centres.
-      <a href='covid.php'>testing centres</a>
-      However do not forget to mask up and follow all the protocols.</p>";
+      <p> You may have Malaria.Testing Required!
+      If the symptoms still persist, kindly take a COVID-TEST too.
+      However do not forget to protect and cover yourself and follow all the COVID protocols.</p>";
 
 
      }
@@ -153,11 +149,11 @@ $conr=$conrow['Contact'];
    <div class='card-body' >
  
      <h2 class='card-title'>
-     COVID-19 SCREENING TOOL 
+    MALARIA SCREENING TOOL 
      </h2><br>
-      <p> There is a "; echo $probability; echo "% that you may have been exposed to COVID-19. After 2 days, if the symptoms persist,
-      please go and get tested. Here is a link to all <a href='testingcentres.php'>testing centres</a>
-      However do not forget to mask up and follow all the protocols. STAY SAFE!!</p>";
+      <p> There is a "; echo $probability; echo "% that you may have Malaria. After 2 days, if the symptoms persist,
+      please go and get tested for malaria and COVID-19.
+      However do not forget to protect and cover yourself ,mask up and follow all the protocols. STAY SAFE!!</p>";
 
 
      }
@@ -172,11 +168,11 @@ $conr=$conrow['Contact'];
    <div class='card-body' >
  
      <h2 class='card-title'>
-     COVID-19 SCREENING TOOL 
+     MALARIA SCREENING TOOL 
      </h2><br>
-      <p> There is a "; echo $probability; echo "% that you may have been exposed to COVID-19. Please go and get tested immediately. 
-      Here is a link to all <a href='testingcentres.php'>testing centres</a>
-      Do not forget to mask up and follow all the protocols. STAY SAFE!!</p>";
+      <p>There is a "; echo $probability; echo "% that you may have Malaria. After 2 days, if the symptoms persist,
+      please go and get tested for malaria and COVID-19.
+      However do not forget to protect and cover yourself ,mask up and follow all the protocols. STAY SAFE!!</p>";
 
   
      }

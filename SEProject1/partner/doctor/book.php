@@ -154,7 +154,7 @@ $expg=mysqli_num_rows($bkbq);
 
 <?php  
 
-$final="SELECT * from booking  inner join customer on booking.PatientID=customer.PatientID where Doctor=$id order by booking.BID";
+$final="SELECT *,MONTHNAME(Appointment) as OD,DAY(Appointment) as DA from booking  inner join customer on booking.PatientID=customer.PatientID where Doctor=$id order by booking.BID";
 $finale=mysqli_query($conn,$final);
 if(mysqli_num_rows($finale)>0){
 while($finales=mysqli_fetch_assoc($finale)){
@@ -164,13 +164,16 @@ $final_id=$finales['BID'];
   
   $final_pr=$finales['STATUS'];
   $final_py=$finales['Department'];
-$final_q=$finales['Appointment'];
+$final_q=$finales['OD'];
+$final_t=$finales['DA'];
 //$final_fe=$finales['PaymentFee'];
   $final_r=$finales['Reason'];
   $final_in=$finales['Insurance'];
   $final_name=$finales['Person'];
   $final_delid=$finales['Insurance_Name'];
   $final_num=$finales['phonenumber'];
+  $final_ti=$finales['ApTime'];
+ 
 
 
    
@@ -180,8 +183,8 @@ $final_q=$finales['Appointment'];
 <div class="column">
         <div class='card  mb-4 shadow-sm '  style='background:white;height:145px;width:1150px;border-radius:2px;color:#cccccc'>
             <span style="width:90px;margin-left:20px;margin-top:15px;color:white;background:rgb(4, 23, 75);;">
-              <h1 style="margin-left:20px;margin-top:4px">29</h1>
-              <h4 style="margin-left: 22px">Apr</h4>
+              <h1 style="margin-left:20px;margin-top:4px"><?php echo $final_t;?></h1>
+              <h4 style="margin-left: 22px"><?php echo $final_q;?></h4>
             </span>
 
           <span style="margin-left:150px;margin-top:-99px;color:black">
@@ -196,11 +199,12 @@ $final_q=$finales['Appointment'];
                 <ul style=" list-style-type: none">
                     <li><span style="color:black"><img style="width: 1.5%" src="../../images/oval.png">Department: <?php echo $final_py;?></span> </li>
                     <li><span style="color:black"><img style="width: 1.5%" src="../../images/oval.png">Reason: <?php echo $final_r;?></span> </li>
+                    <li><span style="color:black"><img style="width: 1.5%" src="../../images/oval.png">Time: <?php echo $final_ti;?></span> </li>
 
                   </ul>
               </span>
            
-            <span style="margin-left:700px;margin-top:-60px">
+            <span style="margin-left:700px;margin-top:-80px">
                 <ul style=" list-style-type: none">
                 <?php 
                 

@@ -103,23 +103,23 @@
                   <h2 style="margin-top:10px;color:white;text-align:center"><img src="https://img.icons8.com/windows/64/ffffff/packaging.png"/><?php echo $completed;?></h2>
                           <h6 style="text-align:center">COMPLETED TRIPS</h6>
 
-                  </div>
-          </div>
-          <div class="col-sm-4">    
+   
+    </div>
+    </div>
+    <div class="col-sm-4">    
 
-          <div class='card  mb-4 shadow-sm '  style='background:#3498db;height:150px;width:78%;border-radius:5px;color:white'>
-          <h2 style="margin-top:10px;color:white;text-align:center"><img src="https://img.icons8.com/material-sharp/64/FFC509/star.png"/><?php echo $rating;?></h2>
-                          <h6 style="text-align:center">AVERAGE RATING</h6>
-                  </div>
-          </div>
-          <div class="col-sm-4">    
-
-          
-      </div>
+    <div class='card  mb-4 shadow-sm '  style='background:#3498db;height:150px;width:78%;border-radius:5px;color:white'>
+    <h2 style="margin-top:10px;color:white;text-align:center"><img src="https://img.icons8.com/material-sharp/64/FFC509/star.png"/><?php echo $rating;?></h2>
+                     <h6 style="text-align:center">AVERAGE RATING</h6>
+            </div>
+</div>
 
 
-      <div>
-      </div>
+<div>
+</div>
+
+
+
 
 
       <div class="row">
@@ -277,7 +277,7 @@
       <div class="row" style="margin-top: 2%">
       <?php  
 
-      $final="SELECT track_order.Ratings,track_order.TID,customer.firstname,customer.lastname,pharmacists.Pharm_Name,pharmacists.Location as phLocation,track_order.Progress,pharm_orders.Payment,track_order.Fee,pharm_orders.Location from track_order inner join perm_cart on track_order.POID=perm_cart.POID inner join pharm_orders on perm_cart.POID=pharm_orders.POID inner join temp_cart on perm_cart.TC=temp_cart.TC inner join pharm_drugs on temp_cart.PHD=pharm_drugs.PHD inner join pharmacists on pharm_drugs.PharmID=pharmacists.PharmID inner join customer on pharm_orders.PatientID=customer.PatientID where Progress='Delivered' and DelID=$del  GROUP BY track_order.POID ";
+      $final="SELECT DAY(pharm_orders.Order_Date) as DA,MONTHNAME(pharm_orders.Order_Date) as OD,track_order.Ratings,track_order.TID,customer.firstname,customer.lastname,pharmacists.Pharm_Name,pharmacists.Location as phLocation,track_order.Progress,pharm_orders.Payment,track_order.Fee,pharm_orders.Location from track_order inner join perm_cart on track_order.POID=perm_cart.POID inner join pharm_orders on perm_cart.POID=pharm_orders.POID inner join temp_cart on perm_cart.TC=temp_cart.TC inner join pharm_drugs on temp_cart.PHD=pharm_drugs.PHD inner join pharmacists on pharm_drugs.PharmID=pharmacists.PharmID inner join customer on pharm_orders.PatientID=customer.PatientID where Progress='Delivered' and DelID=$del  GROUP BY track_order.POID ";
       $finale=mysqli_query($conn,$final);
       while($finales=mysqli_fetch_assoc($finale)){
         $final_fn=$finales['firstname'];
@@ -289,13 +289,15 @@
         $final_fe=$finales['Fee'];
         $final_lo=$finales['Location'];
         $final_r=$finales['Ratings'];
+        $date=$finales['OD'];
+  $dat=$finales['DA'];
         
         ?>
       <div class="column">
               <div class='card  mb-4 shadow-sm '  style='background:white;height:135px;width:1150px;border-radius:2px;color:#cccccc'>
                   <span style="width:90px;margin-left:20px;margin-top:15px;color:white;background:skyblue;">
-                    <h1 style="margin-left:20px;margin-top:4px">29</h1>
-                    <h4 style="margin-left: 22px">Apr</h4>
+                  <h1 style="margin-left:20px;margin-top:4px"><?php echo $dat;?></h1>
+              <h4 style="margin-left: 22px"><?php echo $date;?></h4>
                   </span>
 
                 <span style="margin-left:150px;margin-top:-85px;color:black">

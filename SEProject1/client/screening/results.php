@@ -75,6 +75,7 @@ $resut=mysqli_query($conn,$quey);
                 <th scope="col">Health Status</th>
                 <th scope="col">Time Completed</th>
                 <th scope="col">Contact Status</th>
+                <th scope="col">Exposure Status</th>
                 </tr>
             </thead>
             <tbody>
@@ -82,14 +83,15 @@ $resut=mysqli_query($conn,$quey);
        if(mysqli_num_rows($resut)){
        while($rw=mysqli_fetch_assoc($resut)){
         $con=$rw['ConID'];
+        $exp=$rw['Exposure'];
 
-        if($rw['Status']=="Exposed"){
+        if($rw['Status']=="Exposed"||$rw['Exposure']=='Yes'){
          echo " <tr class='table-danger'>";
         }
-        else if($rw['Status']=="Likely Exposed"){
+        else if($rw['Status']=="Likely Exposed"||$rw['Exposure']=='Yes'){
           echo " <tr class='table-warning'>";
         }
-        else if($rw['Status']=="Not Likely Exposed"){
+        else if($rw['Status']=="Not Likely Exposed" ||$rw['Exposure']=='No'){
           echo " <tr class='table-warning'>";
         }
 
@@ -113,13 +115,14 @@ $resut=mysqli_query($conn,$quey);
      <td><?php echo $rw['Status']?></td>
      <td><?php echo$rw['Time'];?></td>
      <td><?php echo $rw['Contact'];?></td>
+     <td><?php echo $rw['Exposure'];?></td>
      </tr>
      
      <?php
        }
        }else{
         echo "<tr class='table-danger'>
-        <td colspan=9> No Purchases Made</td>
+        <td colspan=10> No Purchases Made</td>
         </tr>";
        }
        
