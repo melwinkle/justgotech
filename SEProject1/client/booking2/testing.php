@@ -15,10 +15,7 @@ final class Testing extends TestCase
         $pass="kweks";
         $user2='melzy';
 
-<<<<<<< HEAD
-=======
-        $user2 = "melzy";
->>>>>>> cde678e2ad28a5307106cee8cbbc9b1cd36aa309
+
         $sql = "SELECT * FROM customer WHERE username  = '$user2'";
         $query = "INSERT INTO Doctor(DocFname,DocLname,Department,Dpassword,Docuser,Docnum) VALUES ('Rose', 'Bear', 'Surgery', '$pass', 'RBear,'0240000000')";
         $q1 = "UPDATE track_order SET Progress='Processed' WHERE TID=4";

@@ -39,19 +39,15 @@ class Person extends Database{
     public function check_chatbot($mess){
         $sql = "SELECT Replies FROM chatbot WHERE Queries LIKE '%$mess%'";
         $query = $this->connection->query($sql);
-        if($query->num_rows > 0){
-<<<<<<< HEAD
-            echo "\n(3)chatbot is active";
-          
-        }
-        else{
-            echo "\n(3)chatbot is NOT active";
-=======
+        $row = $query->fetch_array();
+        if($row){
+            
             echo "\n(1)chatbot is active";
+            return $row[0];
          }
         else{
         echo "\n(1)chatbot is NOT active";
->>>>>>> cde678e2ad28a5307106cee8cbbc9b1cd36aa309
+        return null;
         }
     }
 
@@ -113,8 +109,7 @@ class Person extends Database{
     public function screen($sql){
         $query = $this->connection->query($sql);
         if($query){
-            $row = $query->fetch_array();
-            echo "\n(9)Screening Status:".$row['Status'];
+            echo "\n(9)Screening Completed";
             return true;
         }else{
             return false;
