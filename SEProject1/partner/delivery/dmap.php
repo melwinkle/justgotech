@@ -41,12 +41,22 @@ $rating=$rc['rating']/$completed;
 <title>JustGo Delivery</title>
 </head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
+<link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
 <link
   href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.2.0/mdb.min.css"
   rel="stylesheet"
 />
 <link rel="stylesheet" href="pharm.css">
+
+
+<link href="./Google-map-distance-api/Distance cities/App.css" rel="stylesheet" />
+<link href="./Google-map-distance-api/Distance cities/Content/bootstrap.min.css" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.gstatic.com" />
+<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet"/>
+<script src="https://kit.fontawesome.com/ab2155e76b.js" crossorigin="anonymous"></script>
+
+
+
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="sweetalert2.all.min.js"></script>
@@ -276,6 +286,51 @@ if($finales=mysqli_fetch_assoc($finale)){
 </div>
 
 <!-- old deliveries -->
+                      <div class="jumbotron">
+                        <div class="container-fluid">
+                          <form class="form-horizontal">
+                            <div class="form-group">
+                              <label for="from" class="col-xs-2 control-label"
+                                ><i class="far fa-dot-circle"></i
+                              ></label>
+                              <div class="col-xs-4">
+                                <input
+                                  type="text"
+                                  id="from"
+                                  placeholder="Origin"
+                                  class="form-control"
+                                  value="<?php echo $final_ph." ".$final_pl; ?>"
+                                />
+                              </div>
+                            </div>
+                            
+                            <div class="form-group">
+                              <label for="to" class="col-xs-2 control-label"
+                                ><i class="fas fa-map-marker-alt"></i
+                              ></label>
+                              <div class="col-xs-4">
+                                <input
+                                  type="text"
+                                  id="to"
+                                  placeholder="Destination"
+                                  class="form-control"
+                                  value="<?php echo $final_lo; ?>"
+                                />
+                              </div>
+                            </div>
+                          </form>
+
+                          <div class="col-xs-offset-2 col-xs-10">
+                            <button class="btn btn-info btn-lg" onclick="calcRoute();">
+                              <i class="fas fa-map-signs"></i>
+                            </button>
+                          </div>
+                        </div>
+                        <div class="container-fluid">
+                          <div id="output"></div>
+                          <div id="googleMap"></div>
+                        </div>
+                      </div>
 
 
 <!-- end -->
@@ -309,6 +364,11 @@ function closeNav() {
   document.getElementById("main").style.marginLeft= "0";
 }
 </script>
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLtieryftZ8FCBcx-C4uxbnypYMOisBGI&libraries=places"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="./Google-map-distance-api/Distance cities/Main.js"></script>
 </body>
 
 </html>

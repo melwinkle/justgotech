@@ -1,5 +1,4 @@
-﻿//javascript.js
-//set map options
+﻿//set map options
 var myLatLng = { lat: 7.9465, lng: 1.0232 };
 var mapOptions = {
     center: myLatLng,
@@ -35,19 +34,20 @@ function calcRoute() {
         if (status == google.maps.DirectionsStatus.OK) {
 
             //Get distance and time
-            // const output = document.querySelector('#output');
-            // output.innerHTML = "<div class='alert-info'>From: " + document.getElementById("from").value + ".<br />To: " + document.getElementById("to").value + ".<br /> Driving distance <i class='fas fa-road'></i> : " + result.routes[0].legs[0].distance.text + ".<br />Duration <i class='fas fa-hourglass-start'></i> : " + result.routes[0].legs[0].duration.text + ".</div>";
+            const output = document.querySelector('#output');
+            output.innerHTML = "<div class='alert-info'>From: " + document.getElementById("from").value + ".<br />To: " + document.getElementById("to").value + ".<br /> Driving distance <i class='fas fa-road'></i> : " + result.routes[0].legs[0].distance.text + ".<br />Duration <i class='fas fa-hourglass-start'></i> : " + result.routes[0].legs[0].duration.text + ".</div>";
 
             // //display route
             directionsDisplay.setDirections(result);
         } else {
             //delete route from map
-            // directionsDisplay.setDirections({ routes: [] });
-            // //center map in London
-            // map.setCenter(myLatLng);
+            directionsDisplay.setDirections({ routes: [] });
+
+            //center map in London
+            map.setCenter(myLatLng);
 
             // //show error message
-            // output.innerHTML = "<div class='alert-danger'><i class='fas fa-exclamation-triangle'></i> Could not retrieve driving distance.</div>";
+            output.innerHTML = "<div class='alert-danger'><i class='fas fa-exclamation-triangle'></i> Could not retrieve driving distance.</div>";
         }
     });
 
