@@ -8,16 +8,19 @@ final class Testing extends TestCase
     public function testSuccess(): void
     {
         $user = new Person();
-        $username= 'kweks';
+        $username='kweks';
         $password='french1';
         $patientID =3;
-        $mess = "help";
+        $mess ="help";
         $pass="kweks";
         $user2='melzy';
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8d067207fb451f1191ff7678a601564daa6a659b
         $sql = "SELECT * FROM customer WHERE username  = '$user2'";
-        $query = "INSERT INTO Doctor(DocFname,DocLname,Department,Dpassword,Docuser,Docnum) VALUES ('Rose', 'Bear', 'Surgery', '$pass', 'RBear,'0240000000')";
+        $query ="INSERT INTO doctor(DocFname,DocLname,Department,Dpassword,Docuser,Docnum) VALUES('Rose', 'Bear', 'Surgery', 'kweks','RBear','0240000000')";   
         $q1 = "UPDATE track_order SET Progress='Processed' WHERE TID=4";
         $q2 = "UPDATE track_order SET Progress='Accepted' WHERE TID=4";
         $q3="INSERT INTO diseases(age_bracket,symptom,testing,disease_id,PatientID,Region,precon,ConID,Time,Status,Person) VALUES ('Between 18-55','None of the above','Not tested','SARS-COV2', 3, 'Greater Accra Region', 'None of the above', 5, '2021-04-11 10:00:00','Not exposed','Self')";

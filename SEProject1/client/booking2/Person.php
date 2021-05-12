@@ -41,12 +41,11 @@ class Person extends Database{
         $query = $this->connection->query($sql);
         $row = $query->fetch_array();
         if($row){
-            
-            echo "\n(1)chatbot is active";
+            echo "\n(5)chatbot is active";
             return $row[0];
          }
         else{
-        echo "\n(1)chatbot is NOT active";
+        echo "\n(5)chatbot is NOT active";
         return null;
         }
     }
@@ -56,7 +55,7 @@ class Person extends Database{
     public function getsql($sql){
         $query = $this->connection->query($sql);
         if($query->num_rows > 0){
-            echo "\n(4)Patient Details Exist";
+            echo "\n(3)Patient Details Exist";
             return true;
         }else{
             return false;
@@ -68,7 +67,7 @@ class Person extends Database{
         $query = $this->connection->query($sql);
         if($query->num_rows > 0){
             $row = $query->fetch_array();
-            echo "\n(5)Patient First Name Exist";
+            echo "\n(4)Patient First Name Exist";
             return $row[0];
         }else{
             return false;
@@ -105,11 +104,11 @@ class Person extends Database{
         }
     }
 
-
     public function screen($sql){
         $query = $this->connection->query($sql);
+        //$row = $query->fetch_array();
         if($query){
-            echo "\n(9)Screening Completed";
+            echo "\n(9)Screening completed";
             return true;
         }else{
             return false;
