@@ -1,33 +1,34 @@
 <!-- page for updating delivery information -->
 <!-- page for monitoring orders -->
 
+<?php 
+
+	session_start();
+
+	if(!isset($_SESSION['username'])){
+		header("Location: ./dindex.php");
+	}
+?>
+
 <!-- page for delivery login -->
 <?php 
-session_start();
-require_once("../../database/connection.php");
-if(!isset($_SESSION['username'])){
-  header("Location: ../delivery/dindex.php");
-}
-$username=$_SESSION['username'];
-$del=$_SESSION['delid'];
-$fn=$_SESSION['fname'];
-$ln=$_SESSION['lname'];
+  require_once("../../database/connection.php");
+  if(!isset($_SESSION['username'])){
+    header("Location: ../delivery/dindex.php");
+  }
+  $username=$_SESSION['username'];
+  $del=$_SESSION['delid'];
+  $fn=$_SESSION['fname'];
+  $ln=$_SESSION['lname'];
 
 
 
-$sql="SELECT * from Delivery where DelID=$del  ";
-$result=mysqli_query($conn,$sql);
-$ri=mysqli_fetch_assoc($result);
-$gen=$ri['Gender'];
-$dob=$ri['DOB'];
-$num=$ri['DelNum'];
-
-
-
-
-
-
-
+  $sql="SELECT * from Delivery where DelID=$del  ";
+  $result=mysqli_query($conn,$sql);
+  $ri=mysqli_fetch_assoc($result);
+  $gen=$ri['Gender'];
+  $dob=$ri['DOB'];
+  $num=$ri['DelNum'];
 ?>
 
 

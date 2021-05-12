@@ -4,37 +4,34 @@
 <!-- page for account info -->
 
 <?php 
-
-session_start();
-require_once("../../database/connection.php");
-if(!isset($_SESSION['username'])){
-  header("Location: ../doctor/doc_log.php" );
-}
-
-
-$username=$_SESSION['username'];
-$id=$_SESSION['docid'];
-$fn=$_SESSION['fname'];
-$ln=$_SESSION['lname'];
-$dn=$_SESSION['dept'];
-
-$sql="SELECT Docnum from Doctor where DocID=$id";
-$query=mysqli_query($conn,$sql);
-$result=mysqli_fetch_assoc($query);
-$number=$result['Docnum'];
- 
-
-if(isset($_GET['edit'])){
-    $bd=$_GET['did'];
-
-    $bkd="SELECT firstname,lastname from booking inner join customer on booking.PatientID=customer.PatientID where BID=$bd ";
-$bkdq=mysqli_query($conn,$bkd);
-$db=mysqli_fetch_assoc($bkdq);
-$fn=$db['firstname'];
-$ln=$db['lastname'];
+  session_start();
+  require_once("../../database/connection.php");
+  if(!isset($_SESSION['username'])){
+    header("Location: ./doc_log.php" );
+  }
 
 
-}
+  $username=$_SESSION['username'];
+  $id=$_SESSION['docid'];
+  $fn=$_SESSION['fname'];
+  $ln=$_SESSION['lname'];
+  $dn=$_SESSION['dept'];
+
+  $sql="SELECT Docnum from Doctor where DocID=$id";
+  $query=mysqli_query($conn,$sql);
+  $result=mysqli_fetch_assoc($query);
+  $number=$result['Docnum'];
+  
+
+  if(isset($_GET['edit'])){
+      $bd=$_GET['did'];
+
+      $bkd="SELECT firstname,lastname from booking inner join customer on booking.PatientID=customer.PatientID where BID=$bd ";
+  $bkdq=mysqli_query($conn,$bkd);
+  $db=mysqli_fetch_assoc($bkdq);
+  $fn=$db['firstname'];
+  $ln=$db['lastname'];
+  }
 
 ?>
 

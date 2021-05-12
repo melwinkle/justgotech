@@ -3,40 +3,36 @@
 
 <!-- page for delivery login -->
 <?php 
-session_start();
-require_once("../../database/connection.php");
-if(!isset($_SESSION['username'])){
-  header("Location: ../delivery/dindex.php");
-}
-$username=$_SESSION['username'];
-$del=$_SESSION['delid'];
-$fn=$_SESSION['fname'];
-$ln=$_SESSION['lname'];
+  session_start();
+  require_once("../../database/connection.php");
+  if(!isset($_SESSION['username'])){
+    header("Location: ./dindex.php");
+  }
+  $username=$_SESSION['username'];
+  $del=$_SESSION['delid'];
+  $fn=$_SESSION['fname'];
+  $ln=$_SESSION['lname'];
 
 
 
-$sql="SELECT sum(Fee) as balance from track_order where DelID=$del and Progress='Delivered' ";
-$result=mysqli_query($conn,$sql);
-$ri=mysqli_fetch_assoc($result);
-$balance=$ri['balance'];
+  $sql="SELECT sum(Fee) as balance from track_order where DelID=$del and Progress='Delivered' ";
+  $result=mysqli_query($conn,$sql);
+  $ri=mysqli_fetch_assoc($result);
+  $balance=$ri['balance'];
 
-$date=date('Y-m-d');
-$month=date('m');
+  $date=date('Y-m-d');
+  $month=date('m');
 
-$sqls="SELECT sum(Fee) as balance from track_order inner join pharm_orders on track_order.POID=pharm_orders.POID where DelID=$del and Progress='Delivered' and Order_Date=$date  ";
-$results=mysqli_query($conn,$sqls);
-$rc=mysqli_fetch_assoc($results);
-$balanc=$rc['balance'];
-
-
-$sqs="SELECT sum(Fee) as balance from track_order inner join pharm_orders on track_order.POID=pharm_orders.POID where DelID=$del and Progress='Delivered' and MONTH(Order_Date)=$month  ";
-$resuls=mysqli_query($conn,$sqs);
-$yr=mysqli_fetch_assoc($resuls);
-$balan=$yr['balance'];
+  $sqls="SELECT sum(Fee) as balance from track_order inner join pharm_orders on track_order.POID=pharm_orders.POID where DelID=$del and Progress='Delivered' and Order_Date=$date  ";
+  $results=mysqli_query($conn,$sqls);
+  $rc=mysqli_fetch_assoc($results);
+  $balanc=$rc['balance'];
 
 
-
-
+  $sqs="SELECT sum(Fee) as balance from track_order inner join pharm_orders on track_order.POID=pharm_orders.POID where DelID=$del and Progress='Delivered' and MONTH(Order_Date)=$month  ";
+  $resuls=mysqli_query($conn,$sqs);
+  $yr=mysqli_fetch_assoc($resuls);
+  $balan=$yr['balance'];
 ?>
 
 <!DOCTYPE html>

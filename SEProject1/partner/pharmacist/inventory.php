@@ -2,45 +2,37 @@
 
 
 <?php 
-
-session_start();
-require_once("../../database/connection.php");
-if(!isset($_SESSION['username'])){
-  header("Location: ../pharmacist/pharm_log.php" );
-}
-
-
-$username=$_SESSION['username'];
-$id=$_SESSION['phid'];
-$fn=$_SESSION['phname'];
-$loc=$_SESSION['location'];
-
-$today=date("Y-m-d");
-
-$sql="SELECT * from pharm_drugs where PharmID=$id";
-$query=mysqli_query($conn,$sql);
-$count=0;
-
-$number=mysqli_num_rows($query);
-
-
-$sdate="SELECT * from pharm_drugs where PharmID=$id and E_date <= CURRENT_DATE - INTERVAL 1 DAY";
-$squery=mysqli_query($conn,$sdate);
-$expg=mysqli_num_rows($squery);
-
-
-while($result=mysqli_fetch_assoc($query)){
-  $quan=$result['Quantity'];
-  if($quan<100){
-    $count=$count+1;
+  session_start();
+  require_once("../../database/connection.php");
+  if(!isset($_SESSION['username'])){
+    header("Location: ../pharmacist/pharm_log.php" );
   }
 
- 
+
+  $username=$_SESSION['username'];
+  $id=$_SESSION['phid'];
+  $fn=$_SESSION['phname'];
+  $loc=$_SESSION['location'];
+
+  $today=date("Y-m-d");
+
+  $sql="SELECT * from pharm_drugs where PharmID=$id";
+  $query=mysqli_query($conn,$sql);
+  $count=0;
+
+  $number=mysqli_num_rows($query);
+
+  $sdate="SELECT * from pharm_drugs where PharmID=$id and E_date <= CURRENT_DATE - INTERVAL 1 DAY";
+  $squery=mysqli_query($conn,$sdate);
+  $expg=mysqli_num_rows($squery);
 
 
-}
-
-
+  while($result=mysqli_fetch_assoc($query)){
+    $quan=$result['Quantity'];
+    if($quan<100){
+      $count=$count+1;
+    }
+  }
 ?>
 
 

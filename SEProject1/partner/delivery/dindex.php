@@ -1,5 +1,12 @@
 <!-- page for delivery login -->
+<?php 
 
+	session_start();
+
+	if(isset($_SESSION['username'])){
+		header("Location: ./dorder.php?success=true&$_SESSION[delid]&$$_SESSION[fname]&$_SESSION[lname]");
+	}
+?>
 
 <!DOCTYPE html>
 <head>
