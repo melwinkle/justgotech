@@ -199,7 +199,7 @@ if(mysqli_num_rows($noq)>0){
 
 
 <div class="row" style="margin-left:14.5%">
-<span style="margin-top:2.5%;margin-bottom:-75px"><h2 style="text-align:left;margin-left:35px">VIRTUAL SCREENING</h2></span> 
+<span style="margin-top:2.5%;margin-bottom:-75px;"><h2 style="text-align:left;margin-left:35px">VIRTUAL SCREENING</h2></span> 
     <span style="margin-top:2%;margin-left:980px;margin-bottom:-60px"> <a href="../screening/results.php"  style="height:40px;width:90px; color:#3478db">View all></a></span>
   <div class="column" style="width:1200px"><div class="card  mb-4 shadow-sm " style="height:250px;color:white;background:#3478db;">
   

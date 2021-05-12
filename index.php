@@ -2,7 +2,7 @@
 	session_start();
 
 	if(isset($_SESSION['username'])){
-		header("Location: ../tracker/tracker.php");
+		header("Location: ./SEProject1/client/tracker/tracker.php");
 	}
 ?>
 

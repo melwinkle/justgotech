@@ -302,7 +302,7 @@
 
                 <span style="margin-left:150px;margin-top:-85px;color:black">
                     <img src="../../images/user.png" style="width:5%;margin-left:13px"alt="">
-                    <h5><?php echo $final_fn." ".$final_ln; ?></h5>
+                    <h5 style="max-width: 10ch;  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><?php echo $final_fn." ".$final_ln; ?></h5>
                   </span>
 
                 <span style="margin-left:250px;margin-top:-86px">

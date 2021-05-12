@@ -1,140 +1,139 @@
-body{
-    background: white;
-
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap");
+* {
+  font-family: "Poppins", sans-serif;
 }
 
+body {
+  background: white;
+}
 
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgb(23, 79, 182);
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: white;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #b0cefc;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+#main {
+  transition: margin-left 0.5s;
+  padding: 16px;
+}
+
+@media screen and (max-height: 450px) {
   .sidenav {
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: rgb(23, 79, 182);
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 60px;
+    padding-top: 15px;
   }
-  
   .sidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: white;
-    display: block;
-    transition: 0.3s;
+    font-size: 18px;
   }
-  
-  .sidenav a:hover {
-    color: #b0cefc;
-  }
-  
-  .sidenav .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-  }
-  
-  #main {
-    transition: margin-left .5s;
-    padding: 16px;
-  }
-  
-  @media screen and (max-height: 450px) {
-    .sidenav {padding-top: 15px;}
-    .sidenav a {font-size: 18px;}
-  }
-
-  .navb img{
-      width:50px;
-  }
-
-.container{
-    margin-left: 18%;
-}
-  .column {
-    float: left;
-    width: 30%;
-    padding: 50px;
-    text-align: center;
-    font-size: 15px;
-    cursor: pointer;
-    color: black;
-    margin-bottom: 2px;
-    margin-top:10px
-  }
-  
-  .containerTab {
-    padding: 20px;
-    color: white;
-  }
-  
-  /* Clear floats after the columns */
-  .row:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-  
-  /* Closable button inside the container tab */
-  .closebtn {
-    float: right;
-    color: white;
-    font-size: 35px;
-    cursor: pointer;
-  }
-
-
-.opt{
-    margin-left: 18%;
-    margin-top: 5%;
-    
-}
-.opt button{
-    height: 40%;
-    width: 40%;
-    border-radius: 15px;
 }
 
-.opt button.purchase{
-    margin-left: 50px;
-
+.navb img {
+  width: 50px;
 }
 
-.main_img{
-    margin-left: -10px;
-    margin-top: -100px;
+.container {
+  margin-left: 18%;
+}
+.column {
+  float: left;
+  width: 30%;
+  padding: 50px;
+  text-align: center;
+  font-size: 15px;
+  cursor: pointer;
+  color: black;
+  margin-bottom: 2px;
+  margin-top: 10px;
 }
 
-.store{
-    border: 5px;
-    border-color: black;
-    margin-left:25%;
+.containerTab {
+  padding: 20px;
+  color: white;
 }
 
-
-.store.card-body{
-    border: 5px;
-    border-color: black;
-
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
 }
 
-.store button{
-    margin-left: 20%;
+/* Closable button inside the container tab */
+.closebtn {
+  float: right;
+  color: white;
+  font-size: 35px;
+  cursor: pointer;
 }
 
-
-
-.store.fsearch input{
-    width: 40%;
-    height: 15%;
+.opt {
+  margin-left: 18%;
+  margin-top: 5%;
+}
+.opt button {
+  height: 40%;
+  width: 40%;
+  border-radius: 15px;
 }
 
-footer{
-    text-align: center;
-    margin-top: 15%;
+.opt button.purchase {
+  margin-left: 50px;
 }
 
+.main_img {
+  margin-left: -10px;
+  margin-top: -100px;
+}
+
+.store {
+  border: 5px;
+  border-color: black;
+  margin-left: 25%;
+}
+
+.store.card-body {
+  border: 5px;
+  border-color: black;
+}
+
+.store button {
+  margin-left: 20%;
+}
+
+.store.fsearch input {
+  width: 40%;
+  height: 15%;
+}
+
+footer {
+  text-align: center;
+  margin-top: 15%;
+}

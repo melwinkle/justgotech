@@ -1,6 +1,11 @@
 @import "./appointmentSlots.css?v=0.13";
 @import "./control_inline/control_inline.css?v=0.3";
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+* {
+  font-family: 'Poppins', sans-serif;
+}
+
 .form-all {
 	font-size:14px;
 	color:#000;

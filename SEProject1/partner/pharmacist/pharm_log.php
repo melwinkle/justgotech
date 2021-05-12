@@ -74,7 +74,7 @@
 <!-- Default form login -->
 </div>
 <div>
-<img style="width:40%;margin-left: 750px;margin-top: -300px"src="../../images/pharm.png" alt=""></div>
+<img style="width:40%;margin-left: 750px;margin-top: -500px"src="../../images/pharm.png" alt=""></div>
   
 </body>
 </html>
