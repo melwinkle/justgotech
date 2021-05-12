@@ -8,7 +8,7 @@ require_once("../../database/connection.php");
     if(!isset($_SESSION['username'])){
         if(isset($_POST['submit'])){
             $username = $_POST['username'];
-            $password = md5(sha1($_POST['password']));
+            $password = md5($_POST['password']);
            
          
                 
