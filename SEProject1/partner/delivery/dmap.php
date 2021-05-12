@@ -154,7 +154,7 @@ Latest Requests
 <div class="row" style="margin-top: 2%">
 <?php  
 
-$final="SELECT customer.PatientID as pid,track_order.TID,customer.firstname,customer.lastname,pharmacists.Pharm_Name,pharmacists.Location as phLocation,track_order.Progress,pharm_orders.Payment,track_order.Fee,pharm_orders.Location,track_order.POID as POID from track_order inner join perm_cart on track_order.POID=perm_cart.POID inner join pharm_orders on perm_cart.POID=pharm_orders.POID inner join temp_cart on perm_cart.TC=temp_cart.TC inner join pharm_drugs on temp_cart.PHD=pharm_drugs.PHD inner join pharmacists on pharm_drugs.PharmID=pharmacists.PharmID inner join customer on pharm_orders.PatientID=customer.PatientID where TID=$tc  ";
+$final="SELECT pharm_orders.Order_Date as OD,customer.PatientID as pid,track_order.TID,customer.firstname,customer.lastname,pharmacists.Pharm_Name,pharmacists.Location as phLocation,track_order.Progress,pharm_orders.Payment,track_order.Fee,pharm_orders.Location,track_order.POID as POID from track_order inner join perm_cart on track_order.POID=perm_cart.POID inner join pharm_orders on perm_cart.POID=pharm_orders.POID inner join temp_cart on perm_cart.TC=temp_cart.TC inner join pharm_drugs on temp_cart.PHD=pharm_drugs.PHD inner join pharmacists on pharm_drugs.PharmID=pharmacists.PharmID inner join customer on pharm_orders.PatientID=customer.PatientID where TID=$tc  ";
 $finale=mysqli_query($conn,$final);
 if($finales=mysqli_fetch_assoc($finale)){
   $final_fn=$finales['firstname'];
@@ -167,6 +167,7 @@ if($finales=mysqli_fetch_assoc($finale)){
   $final_lo=$finales['Location'];
   $pd=$finales['POID'];
   $pt=$finales['pid'];
+  $date=$finales['OD'];
   
   ?>
 <div class="column">
