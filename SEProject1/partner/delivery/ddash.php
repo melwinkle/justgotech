@@ -1,16 +1,23 @@
 <!-- dashboard -->
 <?php 
 
+	session_start();
+
+	if(!isset($_SESSION['username'])){
+		header("Location: ./dindex.php");
+	}
+?>
+
+
+<?php 
+
 require_once("../../database/connection.php");
 
     if(!isset($_SESSION['username'])){
         if(isset($_POST['submit'])){
             $username = $_POST['username'];
             $password = md5(sha1($_POST['password']));
-			
-                
              
-
             $query = "SELECT * from Delivery WHERE Deluser = '$username' and Delpassword = '$password'";
             $sql = mysqli_query($conn, $query);
             $results = mysqli_num_rows($sql);
@@ -25,14 +32,11 @@ require_once("../../database/connection.php");
 				$_SESSION['delid']=$del;
 				$_SESSION['fname']=$fn;
 				$_SESSION['lname']=$ln;
-                header("Location: ../delivery/dorder.php?success=true&$del&$$fn&$rln");
+
+                header("Location: ./dorder.php?success=true&$del&$$fn&$ln");
             }
-            
         }
     }
-
-
-
 ?>
 
 
@@ -55,10 +59,10 @@ require_once("../../database/connection.php");
 			$sql = mysqli_query($conn,$query);
 
 			if($sql){
-				header("Location: ../delivery/dindex.php?success");
+				header("Location: ./dindex.php?success");
 			}
 			else{
-				header("Location: ../delivery/dreg.php?fail");
+				header("Location: ./dreg.php?fail");
 			}
 			
 		}
@@ -76,9 +80,9 @@ require_once("../../database/connection.php");
 			$sql = mysqli_query($conn,$query);
 
 			if($sql){
-				header("Location: ../delivery/dupdate.php?success=true");
+				header("Location: ./dupdate.php?success=true");
 			}
-			header("Location: ../delivery/dupdate.php?failure=true&id=$id&$firstname&$lastname&$num");
+			header("Location: ./dupdate.php?failure=true&id=$id&$firstname&$lastname&$num");
 			
 		}
 
@@ -90,7 +94,7 @@ require_once("../../database/connection.php");
 				$newpass = md5(sha1($first));
 			
 			}else{
-				header("Location: ../delivery/dpass.php?failure=true");
+				header("Location: ./dpass.php?failure=true");
 			}
 			$id = $_GET['id'];
 			
@@ -99,10 +103,10 @@ require_once("../../database/connection.php");
 			$sql = mysqli_query($conn,$query);
 
 			if($sql){
-				header("Location: ../delivery/dpass.php?success=true");
+				header("Location: ./dpass.php?success=true");
 			}
 			else{
-			header("Location: ../delivery/dpass.php?failure=true&id=$id");
+			header("Location: ./dpass.php?failure=true&id=$id");
 			}
 		}
 
@@ -117,10 +121,10 @@ require_once("../../database/connection.php");
 			$sql = mysqli_query($conn,$query);
 
 			if($sql){
-				header("Location: ../delivery/doneder.php?success=acc&$tc");
+				header("Location: ./doneder.php?success=acc&$tc");
 			}
 			else{
-			header("Location: ../delivery/doneder.php?tfailure=true&$tc");
+			header("Location: ./doneder.php?tfailure=true&$tc");
 			}
 		}
 		if(isset($_GET['fin'])){
@@ -140,13 +144,13 @@ require_once("../../database/connection.php");
 				$notif="INSERT INTO notification(NMessage,PatientID,NTime) values('$mes',$pat,'$dat')";
 				$not=mysqli_query($conn,$notif);
 				if($not){
-				header("Location: ../delivery/doneder.php?nsuccess=true&$tc");
+				header("Location: ./doneder.php?nsuccess=true&$tc");
 				}else{
-					header("Location: ../delivery/doneder.php?failure=true&$tc&nm=$n&pat=$pat");
+					header("Location: ./doneder.php?failure=true&$tc&nm=$n&pat=$pat");
 				}
 			}
 			else{
-			header("Location: ../delivery/doneder.php?nfailure=true&$tc");
+			header("Location: ./doneder.php?nfailure=true&$tc");
 			}
 		}
 		if(isset($_GET['str'])){
@@ -166,12 +170,12 @@ require_once("../../database/connection.php");
 				$notif="INSERT INTO notification(NMessage,PatientID,NTime) values('$mes',$pat,'$dat')";
 				$not=mysqli_query($conn,$notif);
 				if($not){
-				header("Location: ../delivery/dmap.php?nsuccess=true&tid=$tc");
+				header("Location: ./dmap.php?nsuccess=true&tid=$tc");
 				}else{
-					header("Location: ../delivery/doneder.php?fnailure=true&$tc");
+					header("Location: ./doneder.php?fnailure=true&$tc");
 				}
 			}else{
-			header("Location: ../delivery/doneder.php?failure=true&$tc");
+			header("Location: ./doneder.php?failure=true&$tc");
 			}
 		}
 		if(isset($_GET['arr'])){
@@ -197,14 +201,14 @@ require_once("../../database/connection.php");
 				$not=mysqli_query($conn,$notif);
 				if($not){
 
-				header("Location: ../delivery/doneder.php?nsuccess=true&$tc");
+				header("Location: ./doneder.php?nsuccess=true&$tc");
 				}else{
-					header("Location: ../delivery/doneder.php?failure=true&$tc");
+					header("Location: ./doneder.php?failure=true&$tc");
 				}
 				
-				header("Location: ../delivery/doneder.php?success=true&$tc");
+				header("Location: ./doneder.php?success=true&$tc");
 			}
-			header("Location: ../delivery/doneder.php?nfailure=true&$tc");
+			header("Location: ./doneder.php?nfailure=true&$tc");
 			
 		}
 

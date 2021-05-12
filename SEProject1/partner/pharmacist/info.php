@@ -1,24 +1,21 @@
 <!-- page for account info -->
 
 <?php 
+  session_start();
+  require_once("../../database/connection.php");
+  if(!isset($_SESSION['username'])){
+    header("Location: ./pharm_log.php" );
+  }
 
-session_start();
-require_once("../../database/connection.php");
-if(!isset($_SESSION['username'])){
-  header("Location: ../pharmacist/pharm_log.php" );
-}
+  $username=$_SESSION['username'];
+  $id=$_SESSION['phid'];
+  $fn=$_SESSION['phname'];
+  $loc=$_SESSION['location'];
 
-
-$username=$_SESSION['username'];
-$id=$_SESSION['phid'];
-$fn=$_SESSION['phname'];
-$loc=$_SESSION['location'];
-
-$sql="SELECT Phnumber from pharmacists where PharmID=$id";
-$query=mysqli_query($conn,$sql);
-$result=mysqli_fetch_assoc($query);
-$number=$result['Phnumber'];
-
+  $sql="SELECT Phnumber from pharmacists where PharmID=$id";
+  $query=mysqli_query($conn,$sql);
+  $result=mysqli_fetch_assoc($query);
+  $number=$result['Phnumber'];
 ?>
 
 
@@ -74,12 +71,12 @@ $number=$result['Phnumber'];
 
 <div class="main"style="margin-left:30%;margin-top:5%">
 <div style="margin-left:55%;color:rgb(163, 83, 36)">
-<a style="color:rgb(4, 23, 75);font-size:18pt"href="../pharmacist/update_pass.php"><img src="https://img.icons8.com/metro/26/3498db/lock-2.png"/>Change Password</a>
+<a style="color:rgb(4, 23, 75);font-size:18pt;" href="../pharmacist/update_pass.php"><img style="margin:30px 0" src="https://img.icons8.com/metro/26/3498db/lock-2.png"/>Change Password</a>
 </div>
     <div class="row">
         <div class="col-sm-4">    
              <div class='card  mb-4 shadow-sm '  style='background:#ffffff;height:600px;width:250%;border-radius:10px;color:rgb(4, 23, 75)'>
-                    <h2 style="margin-top:10px;color:rgb(4, 23, 75);text-align:center"><img src="https://img.icons8.com/fluent-systems-filled/48/3498db/guest-male.png"/>ACCOUNT INFORMATION</h2>
+                    <h2 style="padding:30px; margin-top:10px;color:rgb(4, 23, 75);text-align:center"><img src="https://img.icons8.com/fluent-systems-filled/48/3498db/guest-male.png"/>ACCOUNT INFORMATION</h2>
                
 
                     <div style="margin-left:15%;margin-top:2%">

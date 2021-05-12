@@ -3,31 +3,24 @@
 
 <!-- page for delivery login -->
 <?php 
-session_start();
-require_once("../../database/connection.php");
-if(!isset($_SESSION['username'])){
-  header("Location: ../delivery/dindex.php");
-}
-$username=$_SESSION['username'];
-$del=$_SESSION['delid'];
-$fn=$_SESSION['fname'];
-$ln=$_SESSION['lname'];
+  session_start();
+  require_once("../../database/connection.php");
+  if(!isset($_SESSION['username'])){
+    header("Location: ./dindex.php");
+  }
+  $username=$_SESSION['username'];
+  $del=$_SESSION['delid'];
+  $fn=$_SESSION['fname'];
+  $ln=$_SESSION['lname'];
 
 
 
-$sql="SELECT * from Delivery where DelID=$del  ";
-$result=mysqli_query($conn,$sql);
-$ri=mysqli_fetch_assoc($result);
-$gen=$ri['Gender'];
-$dob=$ri['DOB'];
-$num=$ri['DelNum'];
-
-
-
-
-
-
-
+  $sql="SELECT * from Delivery where DelID=$del  ";
+  $result=mysqli_query($conn,$sql);
+  $ri=mysqli_fetch_assoc($result);
+  $gen=$ri['Gender'];
+  $dob=$ri['DOB'];
+  $num=$ri['DelNum'];
 ?>
 
 

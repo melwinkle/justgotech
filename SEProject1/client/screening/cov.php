@@ -1,12 +1,12 @@
 <!-- Home page for covid testing -->
 <?php
-require_once("../../../database/connection.php");
+require_once("../../database/connection.php");
 
 
 session_start();
 
 if(!isset($_SESSION['username'])){
-  echo "<script>location.href = '../account/logout.php'</script>";
+  echo "<script>location.href = '../../account/logout.php'</script>";
 }
 
 $username=$_SESSION['username'];
@@ -44,21 +44,21 @@ $resultss=mysqli_query($conn,$query2);
 
   <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <img style="width:50%;margin-left: 20%;background:rgb(23, 79, 182);" src="../../../images/justgotech.png" alt="justgotech">
-  <a href="../../account/accountinfo.php">Account Info</a>
-  <a href="../../tracker/tracker.php">Tracker</a>
-  <a href="../../screening/covid/cov.php">Virtual Screening</a>
+  <img style="width:50%;margin-left: 20%;background:rgb(23, 79, 182);" src="../../images/justgotech.png" alt="justgotech">
+  <a href="../account/accountinfo.php">Account Info</a>
+  <a href="../tracker/tracker.php">Tracker</a>
+  <a href="../screening/cov.php">Virtual Screening</a>
 <a href="../booking2/bookmain.php">Consultation</a>
-<a href="../../pharmacy/pharmacy_main.php">Pharmacy</a>
+<a href="../pharmacy/pharmacy_main.php">Pharmacy</a>
 
  
-  <a href="../../account/logout.php">Log Out</a>
+  <a href="../account/logout.php">Log Out</a>
 </div>
 
 <div class="navb"id="main">
-  <span style="font-size:30px;cursor:pointer" onclick="openNav()"><img style="width:10%" src="../../../images/justgo.png" alt="justgotech"> </span>
+  <span style="font-size:30px;cursor:pointer" onclick="openNav()"><img style="width:10%" src="../../images/justgo.png" alt="justgotech"> </span>
   
-  <span style="font-size:20px;cursor:pointer; float:right; margin-right: -32%" onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:10%" src="/justgotech/SEProject1/images/stethoscope.png" alt="profile"> </span>
+  <span style="font-size:20px;cursor:pointer; float:right; margin-right: -22%" onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:10%" src="/justgotech/SEProject1/images/stethoscope.png" alt="profile"> </span>
 
 </div>
    
@@ -97,6 +97,19 @@ function closeNav() {
   document.getElementById("mySidenav").style.width = "0";
   document.getElementById("main").style.marginLeft= "0";
 }
+
+function mainP() {
+  window.location.href="../screening/covid/covid.php"
+}
+
+function purP() {
+  window.location.href="../screening/malaria/mal_form.php"
+}
+
+function presP() {
+  window.location.href="../screening/results.php"
+}
+
 </script>
 </body>
 <footer>

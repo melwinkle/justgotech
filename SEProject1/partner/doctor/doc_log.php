@@ -1,6 +1,13 @@
 <!-- Login for partner -->
 <!-- page for delivery login -->
 
+<?php 
+    session_start();
+
+    if(isset($_SESSION['username'])){
+        header("Location: ./book.php?success=true");
+    }
+?>
 
 <!DOCTYPE html>
 <head>
@@ -21,12 +28,11 @@
     <script src="sweetalert2.all.min.js"></script>
 <body style="background-image: linear-gradient(to bottom right, skyblue, purple);">
 
-<div><img style="width:8%" src="../../images/justgotech.png" alt="justgo"></div>
-
+<div><a href="../../../index.php"><img style="width:8%" src="../../images/justgotech.png" alt="justgo"></a></div>
 
 <div style="margin-left:120px;margin-top:15px;color:white;font-size: 50pt">
 <img style="width:350px;margin-left:45px" src="../../images/justgo.png" alt="justgo">
-<h1 style="margin-left: 100px">DOCTOR</h1>
+<h1 style="margin-left: 150px">DOCTOR</h1>
 
 
 </div>
@@ -77,7 +83,7 @@
 <!-- Default form login -->
 </div>
 <div>
-<img style="width:50%;margin-left: 850px;margin-top: -800px"src="../../images/doctor.png" alt=""></div>
+<img style="width:50%;margin-left: 650px;margin-top: -800px"src="../../images/doctor.png" alt=""></div>
   
 </body>
 </html>

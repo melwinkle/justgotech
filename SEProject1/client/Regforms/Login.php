@@ -1,3 +1,11 @@
+<?php 
+	session_start();
+
+	if(isset($_SESSION['username'])){
+		header("Location: ../tracker/tracker.php");
+	}
+?>
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html class="supernova"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -571,7 +579,7 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"registrationForm","qid":"1","text":
 </script>
 </head>
 <div>
-  <h2><a href="../../../index.html" style="text-decoration: none;">Back Home <i class="zmdi zmdi-home"></i></a></h2>
+  <h2><a href="../../../index.php" style="text-decoration: none;">Back Home <i class="zmdi zmdi-home"></i></a></h2>
 </div>
 <body>
 <form class="jotform-form" action="user.php" method="post" name="form_211177547378060" id="211177547378060" accept-charset="utf-8" autocomplete="on">
@@ -667,7 +675,7 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"registrationForm","qid":"1","text":
       </li>
     </ul>
     <div>
-  <p style="text-align:center">Don't have an account?<a href="./signup.html" style="color:#7f5ca1"> Sign up!</a></P>
+  <p style="text-align:center">Don't have an account?<a href="./signup.php" style="color:#7f5ca1"> Sign up!</a></P>
 </div>  
   </div>
   
@@ -682,9 +690,6 @@ for (var i = 0; i < all_spc.length; i++)
   </script>
   <div class="formFooter-heightMask">
   </div>
-  
-    
-  
 </form></body>
 </html>
 

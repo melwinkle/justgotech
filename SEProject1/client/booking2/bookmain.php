@@ -67,7 +67,7 @@ if(mysqli_num_rows($noq)>0){
   <img style="width:50%;margin-left: 20%;background:rgb(23, 79, 182);" src="../../images/justgotech.png" alt="justgotech">
   <a href="../account/accountinfo.php">Account Info</a>
   <a href="../tracker/tracker.php">Tracker</a>
-  <a href="../screening/covid/cov.php">Virtual Screening</a>
+  <a href="../screening/cov.php">Virtual Screening</a>
   <a href="../booking2/bookmain.php">Consultation</a>
   <a href="../pharmacy/pharmacy_main.php">Pharmacy</a>
 
@@ -133,10 +133,10 @@ PAYMENT
 </div> -->
 
    
-<div class="imgchat" style="margin-left:85%;position:fixed">
+<!-- <div class="imgchat" style="margin-left:85%;position:fixed">
 <a href="../chatbot/bot.php?prev=../pharmacy/pharmacy_main.php"><img style="width:30%;margin-top:60%;margin-left:40%" src="../images/chat.png" alt="chatbot"></a>
 
-</div>
+</div> -->
 
 <script>
   function myFunction() {

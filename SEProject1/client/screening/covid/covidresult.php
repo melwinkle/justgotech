@@ -6,7 +6,7 @@ require_once("../../../database/connection.php");
 session_start();
 
 if(!isset($_SESSION['username'])){
-  echo "<script>location.href = '../account/logout.php'</script>";
+  echo "<script>location.href = '../../account/logout.php'</script>";
 }
 
 $username=$_SESSION['username'];
@@ -35,10 +35,7 @@ $time=$der['Time'];
 $probability=$_GET['prob'];
 
 
-$cr="SELECT * from contact where ConID=$con";
-$conresult=mysqli_query($conn,$cr);
-$conrow=mysqli_fetch_assoc($conresult);
-$conr=$conrow['Contact'];
+
 
 ?>
 <html>
@@ -69,7 +66,7 @@ $conr=$conrow['Contact'];
 <div class="navb"id="main">
   <span style="font-size:30px;cursor:pointer" onclick="openNav()"><img style="width:10%" src="/justgotech/SEProject1/images/justgo.png" alt="justgotech"> </span>
   
-  <span style="font-size:20px;cursor:pointer; float:right; margin-right: -32%" onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:10%" src="/justgotech/SEProject1/images/stethoscope.png" alt="profile"> </span>
+  <span style="font-size:20px;cursor:pointer; float:right; margin-right: -22%" onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:10%" src="/justgotech/SEProject1/images/stethoscope.png" alt="profile"> </span>
 
 </div>
 
@@ -92,7 +89,7 @@ $conr=$conrow['Contact'];
      <p>Test Status:<?php echo $test?></p><br>
      <p>Symptoms:<?php echo $sym?></p><br>
      <p>Preconditions:<?php echo $pre?></p><br>
-     <p>Contact Status:<?php echo $conr?></p><br>
+     <p>Contact Status:<?php echo $con?></p><br>
      <p>Status:<?php echo $status?></p><br>
      
 
@@ -110,7 +107,7 @@ $conr=$conrow['Contact'];
    
      <?php 
      if($probability<11){
-      echo "<div class='covidin' style='float:left;background:green;>
+      echo "<div class='covidin' style='margin-top:800px;float:left;background:green;>
    
       <h5 class='card-header'>
       
@@ -126,7 +123,7 @@ $conr=$conrow['Contact'];
      
      }
      else if ($probability>=11 & $probability <=40){
-      echo "<div class='covidin' style='float:left;background:#ffcc00'>
+      echo "<div class='covidin' style='margin-top:800px;float:left;background:#ffcc00'>
    
       <h5 class='card-header'>
       
@@ -145,7 +142,7 @@ $conr=$conrow['Contact'];
      }
      else if ($probability>=41 & $probability <=60){
       echo "
-      <div class='covidin' style='float:left;background:orange'>
+      <div class='covidin' style='margin-top:-800px;float:left;background:orange'>
    
    <h5 class='card-header'>
    
@@ -164,7 +161,7 @@ $conr=$conrow['Contact'];
 
      else {
       echo "
-      <div class='covidin' style='float:left;background:brown'>
+      <div class='covidin' style='margin-top:-800px;float:left;background:brown'>
    
    <h5 class='card-header'>
    

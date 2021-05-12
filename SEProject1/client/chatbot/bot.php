@@ -42,7 +42,7 @@
         $(document).ready(function(){
             $("#send-btn").on("click", function(){
                 $value = $("#data").val();
-                $msg = '<div class="user-inbox inbox"><div class="msg-header"><p>'+ $value +'</p></div></div>';
+                $msg = '<div class="user-inbox inbox" style="width:auto"><div class="msg-header"><p>'+ $value +'</p></div></div>';
                 $(".form").append($msg);
                 $("#data").val('');
                 
@@ -52,18 +52,24 @@
                     type: 'POST',
                     data: 'text='+$value,
                     success: function(result){
-                        $replay = '<div class="bot-inbox inbox"><div class="icon"><i class="fas fa-user"></i></div><div class="msg-header"><p>'+ result +'</p></div></div>';
+                        $replay = '<div class="bot-inbox inbox" style="width:auto"><div class="icon"><i class="fas fa-user"></i></div><div class="msg-header"><p>'+ result +'</p></div></div>';
                         if(($value=="TT")||($value=="tt")){
-                            $replay = '<div class="bot-inbox inbox"><div class="icon"><i class="fas fa-user"></i></div><div class="msg-header"><p>'+ result +'</p></div></div></br><div><a href="../screening/covid/covid.php"><button style="color:#007bff;background:white;width:170px;height:40px;font-size:15px;margin-left:80px">TAKE TEST</button></a></div>';
+                            $replay = '<div class="bot-inbox inbox"><div class="icon"><i class="fas fa-user"></i></div><div class="msg-header"><p>'+ result +'</p></div></div></br><div><a href="../screening/cov.php"><button class="btn btn-primary" style="color:white;background:#3789db;border:none;border-radius:10px;width:230px;height:40px;font-size:15px;margin-left:80px">TAKE TEST</button></a></div>';
                 }
                         if($value=="VR"){
-                            $replay = '<div class="bot-inbox inbox"><div class="icon"><i class="fas fa-user"></i></div><div class="msg-header"><p>'+ result +'</p></div></div></br><div><a href="../screening/results.php"><button style="color:#007bff;background:white;width:170px;height:40px;font-size:15px">VIEW MORE</button></a></div>';
+                            $replay = '<div class="bot-inbox inbox"><div class="icon"><i class="fas fa-user"></i></div><div class="msg-header"><p>'+ result +'</p></div></div></br><div><a href="../screening/results.php"><button style="color:white;background:#3789db;border:none;border-radius:10px;width:230px;height:40px;font-size:15px">VIEW MORE</button></a></div>';
                 }
                         if($value=="BA"){
-                            $replay = '<div class="bot-inbox inbox"><div class="icon"><i class="fas fa-user"></i></div><div class="msg-header"><p>'+ result +'</p></div></div></br><div><a href="../booking2/booking.php"><button style="color:#007bff;background:white;width:170px;height:40px;font-size:15px">VIEW MORE</button></a></div>';
+                            $replay = '<div class="bot-inbox inbox"><div class="icon"><i class="fas fa-user"></i></div><div class="msg-header"><p>'+ result +'</p></div></div></br><div><a href="../booking2/booking.php"><button style="color:white;background:#3789db;border:none;border-radius:10px;width:230px;height:40px;font-size:15px">VIEW MORE</button></a></div>';
                 }
                         if($value=="MB"){
-                            $replay = '<div class="bot-inbox inbox"><div class="icon"><i class="fas fa-user"></i></div><div class="msg-header"><p>'+ result +'</p></div></div></br><div><a href="../booking2/viewbooking.php"><button style="color:#007bff;background:white;width:170px;height:40px;font-size:15px">VIEW MORE</button></a></div>';
+                            $replay = '<div class="bot-inbox inbox"><div class="icon"><i class="fas fa-user"></i></div><div class="msg-header"><p>'+ result +'</p></div></div></br><div><a href="../booking2/viewbooking.php"><button style="color:white;background:#3789db;border:none;border-radius:10px;width:230px;height:40px;font-size:15px">VIEW MORE</button></a></div>';
+                }
+                if($value=="SD"){
+                            $replay = '<div class="bot-inbox inbox"><div class="icon"><i class="fas fa-user"></i></div><div class="msg-header"><p>'+ result +'</p></div></div></br><div><a href="../pharmacy/ph_store.php"><button style="color:white;background:#3789db;border:none;border-radius:10px;width:230px;height:40px;font-size:15px">VIEW MORE</button></a></div>';
+                }
+                if($value=="VP"){
+                            $replay = '<div class="bot-inbox inbox"><div class="icon"><i class="fas fa-user"></i></div><div class="msg-header"><p>'+ result +'</p></div></div></br><div><a href="../pharmacy/ph_records.php"><button style="color:white;background:#3789db;border:none;border-radius:10px;width:230px;height:40px;font-size:15px">VIEW MORE</button></a></div>';
                 }
                         $(".form").append($replay);
                         $(".form").scrollTop($(".form")[0].scrollHeight);

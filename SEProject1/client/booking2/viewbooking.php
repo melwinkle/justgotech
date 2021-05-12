@@ -60,7 +60,7 @@ $patient=$row['PatientID'];
   <img style="width:50%;margin-left: 20%;background:rgb(23, 79, 182);" src="../../images/justgotech.png" alt="justgotech">
   <a href="../account/accountinfo.php">Account Info</a>
   <a href="../tracker/tracker.php">Tracker</a>
-  <a href="../screening/covid/cov.php">Virtual Screening</a>
+  <a href="../screening/cov.php">Virtual Screening</a>
   <a href="../booking2/bookmain.php">Consultation</a>
   <a href="../pharmacy/pharmacy_main.php">Pharmacy</a>
  
@@ -207,5 +207,8 @@ function closeNav() {
 <script>$(document).ready(function() {
     $('#example').DataTable();
 } );</script>
+
+<script type="text/javascript">function add_chatinline(){var hccid=33480640;var nt=document.createElement("script");nt.async=true;nt.src="https://mylivechat.com/chatinline.aspx?hccid="+hccid;var ct=document.getElementsByTagName("script")[0];ct.parentNode.insertBefore(nt,ct);}
+add_chatinline();</script>
 </body>
 </html>

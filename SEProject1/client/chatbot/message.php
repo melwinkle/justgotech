@@ -1,7 +1,8 @@
 
 <?php
 // connecting to database
-$conn = mysqli_connect("localhost", "root", "", "justgotech") or die("Database Error");
+require_once("../../database/connection.php");
+
 
 // getting user message through ajax
 $getMesg = mysqli_real_escape_string($conn, $_POST['text']);

@@ -5,7 +5,7 @@ require_once("../../database/connection.php");
 session_start();
 
 if(!isset($_SESSION['username'])){
-	echo "<script>location.href = 'viewbooking.php'</script>";
+	echo "<script>location.href = '../account/logout.php'</script>";
 }
 
 	$username=$_SESSION['username'];
@@ -56,7 +56,7 @@ if(!isset($_SESSION['username'])){
   <img style="width:50%;margin-left: 20%;background:rgb(23, 79, 182);" src="../../images/justgotech.png" alt="justgotech">
   <a href="../account/accountinfo.php">Account Info</a>
   <a href="../tracker/tracker.php">Tracker</a>
-  <a href="../screening/covid/cov.php">Virtual Screening</a>
+  <a href="../screening/cov.php">Virtual Screening</a>
   <a href="../booking2/bookmain.php">Consultation</a>
   <a href="../pharmacy/pharmacy_main.php">Pharmacy</a>
   <a href="../account/logout.php">Log Out</a>

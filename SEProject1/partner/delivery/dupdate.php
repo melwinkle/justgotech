@@ -1,33 +1,34 @@
 <!-- page for updating delivery information -->
 <!-- page for monitoring orders -->
 
+<?php 
+
+	session_start();
+
+	if(!isset($_SESSION['username'])){
+		header("Location: ./dindex.php");
+	}
+?>
+
 <!-- page for delivery login -->
 <?php 
-session_start();
-require_once("../../database/connection.php");
-if(!isset($_SESSION['username'])){
-  header("Location: ../delivery/dindex.php");
-}
-$username=$_SESSION['username'];
-$del=$_SESSION['delid'];
-$fn=$_SESSION['fname'];
-$ln=$_SESSION['lname'];
+  require_once("../../database/connection.php");
+  if(!isset($_SESSION['username'])){
+    header("Location: ../delivery/dindex.php");
+  }
+  $username=$_SESSION['username'];
+  $del=$_SESSION['delid'];
+  $fn=$_SESSION['fname'];
+  $ln=$_SESSION['lname'];
 
 
 
-$sql="SELECT * from Delivery where DelID=$del  ";
-$result=mysqli_query($conn,$sql);
-$ri=mysqli_fetch_assoc($result);
-$gen=$ri['Gender'];
-$dob=$ri['DOB'];
-$num=$ri['DelNum'];
-
-
-
-
-
-
-
+  $sql="SELECT * from Delivery where DelID=$del  ";
+  $result=mysqli_query($conn,$sql);
+  $ri=mysqli_fetch_assoc($result);
+  $gen=$ri['Gender'];
+  $dob=$ri['DOB'];
+  $num=$ri['DelNum'];
 ?>
 
 
@@ -89,11 +90,11 @@ echo date('d-M');
 
 <div class="main"style="margin-left:30%;margin-top:3%">
 <div style="margin-left:55%;color:#3498db">
-<a style="color:#3498db;font-size:18pt"href="../delivery/dpass.php"><img src="https://img.icons8.com/metro/26/3498db/lock-2.png"/>Change Password</a>
+<a style="color:#3498db;font-size:18pt"href="../delivery/dpass.php"><img style="margin: 10px 0;" src="https://img.icons8.com/metro/26/3498db/lock-2.png"/>Change Password</a>
 </div>
     <div class="row">
         <div class="col-sm-4">    
-             <div class='card  mb-4 shadow-sm '  style='background:#ffffff;height:600px;width:250%;border-radius:10px;color:#3498db'>
+             <div class='card  mb-4 shadow-sm '  style='background:#ffffff;height:600px;width:250%;border-radius:10px;color:#3498db; padding:20px'>
                     <h2 style="margin-top:10px;color:#3498db;text-align:center"><img src="https://img.icons8.com/fluent-systems-filled/48/3498db/guest-male.png"/>ACCOUNT INFORMATION</h2>
                
 

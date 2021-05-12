@@ -6,7 +6,7 @@ require_once("../../../database/connection.php");
 session_start();
 
 if(!isset($_SESSION['username'])){
-  echo "<script>location.href = '../account/logout.php'</script>";
+  echo "<script>location.href = '../../account/logout.php'</script>";
 }
 
 $username=$_SESSION['username'];
@@ -33,7 +33,7 @@ $resultss=mysqli_query($conn,$query2);
   href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.2.0/mdb.min.css"
   rel="stylesheet"
 />
-<link rel="stylesheet" href="covid.css">
+<link rel="stylesheet" href="../covid.css">
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="sweetalert2.all.min.js"></script>
@@ -45,29 +45,29 @@ $resultss=mysqli_query($conn,$query2);
   <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <img style="width:50%;margin-left: 20%;background:rgb(23, 79, 182);" src="../../../images/justgotech.png" alt="justgotech">
-  <a href="../../account/accountinfo.php">Account Info</a>
+  <a href="../account/accountinfo.php">Account Info</a>
   <a href="../../tracker/tracker.php">Tracker</a>
-  <a href="../../screening/covid/cov.php">Virtual Screening</a>
+  <a href="../screening/cov.php">Virtual Screening</a>
 <a href="../booking2/bookmain.php">Consultation</a>
 
- 
+<a href="../pharamcy/pharmacy_main.php">Pharmacy</a>
   <a href="../../account/logout.php">Log Out</a>
 </div>
 
 <div class="navb"id="main">
   <span style="font-size:30px;cursor:pointer" onclick="openNav()"><img style="width:10%" src="../../../images/justgo.png" alt="justgotech"> </span>
   
-  <span style="font-size:20px;cursor:pointer; float:right; margin-right: -32%" onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:10%" src="/justgotech/SEProject1/images/stethoscope.png" alt="profile"> </span>
+  <span style="font-size:20px;cursor:pointer; float:right; margin-right: -12%" onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:10%" src="/justgotech/SEProject1/images/stethoscope.png" alt="profile"> </span>
 
 </div>
    
-  <div class="covid" style="height:800px">
-
-  <div class="card-body">
+<div class="card-body"  style="margin-left:300px;margin-top:50px;border:1px solid #3498db;background:#ffffff;height:800px;width:800px;border-radius:10px;color:rgb(4, 23, 75)">
   
-    <h2 class="card-title">
-    MALARIA SCREENING TOOL 
-    </h2>
+  <h2 style="margin-top:10px;color:rgb(4, 23, 75);text-align:center" class="card-title">
+  Malaria Screening Tool
+  </h2><br>
+
+  <form class="accountinfo" action="malaria_restart.php" method="post">
 
 <form  action="covid_restart.php" method="post">
             <div class="form-group">
@@ -240,7 +240,7 @@ $resultss=mysqli_query($conn,$query2);
     </select>
                             </div>
 
-<button  type="submit" class="btn btn-primary btn-lg" style=" color:blue;width: 50%;background:white; margin-left:15%" name="scan">SCAN</button>
+<button  type="submit" class="btn btn-primary btn-lg" style=" color:blue;width: 50%;background:white; margin-left:25%" name="scan">SCAN</button>
 
 </form>
   

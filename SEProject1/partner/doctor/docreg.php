@@ -2,6 +2,13 @@
 
 <!-- page for delivery login -->
 
+<?php 
+    session_start();
+
+    if(isset($_SESSION['username'])){
+        header("Location: ./book.php?success=true");
+    }
+?>
 
 <!DOCTYPE html>
 <head>
@@ -22,12 +29,12 @@
     <script src="sweetalert2.all.min.js"></script>
 <body style="height:125%;background-image: linear-gradient(to bottom right, skyblue, pink);">
 
-<div><img style="width:8%" src="../../images/justgotech.png" alt="justgo"></div>
+<div><a href="../../../index.php"><img style="width:8%" src="../../images/justgotech.png" alt="justgo"></a></div>
 
 
 <div style="margin-left:10%;;color:white;font-size: 48pt">
 <img style="width:350px;margin-left:45px" src="../../images/justgo.png" alt="justgo">
-<h1>DOCTOR</h1>
+<h1 style="margin-left: 130px;">DOCTOR</h1>
 
 
 </div>
@@ -61,11 +68,13 @@
    
 
 </form>
-<a href="../delivery/dindex.php">Sign in </a>
+<div style="text-align: center; padding-bottom:10px">
+ <a href="./dindex.php">Sign in </a>
+</div>
 <!-- Default form login -->
 </div>
 <div>
-<img style="width:45%;margin-left: 800px;margin-top: -620px"src="../../images/delivery-man.png" alt=""></div>
+<img style="width:50%;margin-left: 650px;margin-top: -1000px"src="../../images/doctor.png" alt=""></div>
   
 </body>
 </html>

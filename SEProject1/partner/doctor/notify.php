@@ -1,15 +1,20 @@
 <?php 
+    session_start();
+
+    if(isset($_SESSION['username'])){
+        header("Location: ./book.php?success=true");
+    }
+?>
+
+<?php 
 
 require_once("../../database/connection.php");
 
     if(!isset($_SESSION['username'])){
         if(isset($_POST['submit'])){
             $username = $_POST['username'];
-         $password = md5(sha1($_POST['password']));
+            $password = md5(sha1($_POST['password']));
 			
-             
-             
-
             $query = "SELECT * from Doctor WHERE Docuser = '$username' and Dpassword = '$password'";
             $sql = mysqli_query($conn, $query);
             $results = mysqli_num_rows($sql);
@@ -20,13 +25,15 @@ require_once("../../database/connection.php");
 				$fn=$row['DocFname'];
                 $ln=$row['DocLname'];
                 $dept=$row['Department'];
-				session_start();
+
+
 				$_SESSION['username'] = $username;
 				$_SESSION['docid']=$del;
 				$_SESSION['fname']=$fn;
                 $_SESSION['lname']=$ln;
                 $_SESSION['dept']=$dept;
-                header("Location: ../doctor/book.php?success=true");
+                
+                header("Location: ./book.php?success=true");
             }
             
         }
@@ -48,10 +55,10 @@ require_once("../../database/connection.php");
         $sql = mysqli_query($conn,$query);
 
         if($sql){
-            header("Location: ../doctor/doc_log.php?success");
+            header("Location: ./doc_log.php?success");
         }
         else{
-            header("Location: ../doctor/docreg.php?fail");
+            header("Location: ./docreg.php?fail");
         }
         
     }
@@ -69,10 +76,10 @@ require_once("../../database/connection.php");
         $sql = mysqli_query($conn,$query);
 
         if($sql){
-            header("Location: ../doctor/daccount.php?success&$doc");
+            header("Location: ./daccount.php?success&$doc");
         }
         else{
-            header("Location: ../doctor/daccount.php?fail");
+            header("Location: ./daccount.php?fail");
         }
         
     }
@@ -93,10 +100,10 @@ require_once("../../database/connection.php");
         $sql = mysqli_query($conn,$query);
 
         if($sql){
-            header("Location: ../doctor/daccount.php?success&$doc");
+            header("Location: ./daccount.php?success&$doc");
         }
         else{
-            header("Location: ../doctor/daccount.php?fail");
+            header("Location: ./daccount.php?fail");
         }
         
     }
@@ -112,10 +119,10 @@ require_once("../../database/connection.php");
         $sql = mysqli_query($conn,$query);
 
         if($sql){
-            header("Location: ../doctor/book.php?success&$doc");
+            header("Location: ./book.php?success&$doc");
         }
         else{
-            header("Location: ../doctor/book.php?fail");
+            header("Location: ./book.php?fail");
         }
         
     }
@@ -133,13 +140,13 @@ require_once("../../database/connection.php");
             $bk="INSERT INTO book_pay(BID,PaymentFee) VALUES($doc,250)";
             $bkq=mysqli_query($conn,$bk);
             if($bkq){
-            header("Location: ../doctor/book.php?success&$doc");
+            header("Location: ./book.php?success&$doc");
             }else{
-                header("Location: ../doctor/book.php?nosuccess&$doc");
+                header("Location: ./book.php?nosuccess&$doc");
             }
         }
         else{
-            header("Location: ../doctor/book.php?fail");
+            header("Location: ./book.php?fail");
         }
         
     }
@@ -158,11 +165,11 @@ require_once("../../database/connection.php");
         $sql = mysqli_query($conn,$query);
 
         if($sql){
-            header("Location: ../doctor/diagnosis.php?success&$doc");
+            header("Location: ./diagnosis.php?success&$doc");
             
         }
         else{
-            header("Location: ../doctor/book.php?fail");
+            header("Location: ./book.php?fail");
         }
         
     }
@@ -180,11 +187,11 @@ require_once("../../database/connection.php");
         $sql = mysqli_query($conn,$query);
 
         if($sql){
-            header("Location: ../doctor/diagnosis.php?success&$doc");
+            header("Location: ./diagnosis.php?success&$doc");
             
         }
         else{
-            header("Location: ../doctor/diagnosis.php?fail");
+            header("Location: ./diagnosis.php?fail");
         }
         
     }

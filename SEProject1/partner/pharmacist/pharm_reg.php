@@ -1,14 +1,18 @@
 <!-- page for registration -->
 
 <!-- page for delivery login -->
-
+<?php 
+    if(isset($_SESSION['username'])){
+        header("Location: ./dash.php?success=true");
+    }
+?>
 
 <!DOCTYPE html>
 <head>
 <title>JustGo Delivery</title>
 </head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
+<link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
 <link
   href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.2.0/mdb.min.css"
   rel="stylesheet"
@@ -22,12 +26,12 @@
     <script src="sweetalert2.all.min.js"></script>
 <body style="height:120%;background-image: linear-gradient(to bottom right, skyblue, pink);">
 
-<div><img style="width:8%" src="../../images/justgotech.png" alt="justgo"></div>
+<div><a href="../../../index.php"><img style="width:8%" src="../../images/justgotech.png" alt="justgo"></a></div>
 
 
 <div style="margin-left:10%;;color:white;font-size: 48pt">
 <img style="width:350px;margin-left:45px" src="../../images/justgo.png" alt="justgo">
-<h1>DELIVERY SERVICE</h1>
+<h1 style="margin-left: 130px;">Pharmacy</h1>
 
 
 </div>
@@ -50,22 +54,17 @@
     <input type="text" name="phonenumber"  maxlength=10 id="defaultLoginFormEmail" class="form-control mb-4" placeholder="Phone Number">
     <!-- Email -->
 
-
-
-
     <!-- Sign in button -->
     <button name="register"class="btn btn-primary btn-block my-4" type="submit">Register</button>
 
- 
-
-   
-
 </form>
+<div style="text-align: center; padding-bottom:10px">
 <a href="../delivery/dindex.php">Sign in </a>
+</div>
+
 <!-- Default form login -->
 </div>
 <div>
-<img style="width:40%;margin-left: 800px;margin-top: -620px"src="../../images/delivery-man.png" alt=""></div>
-  
+<img style="width:40%;margin-left: 750px;margin-top: -1000px"src="../../images/pharm.png" alt=""></div>  
 </body>
 </html>

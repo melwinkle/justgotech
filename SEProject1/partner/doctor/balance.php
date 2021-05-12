@@ -11,7 +11,7 @@ session_start();
 require_once("../../database/connection.php");
 
 if(!isset($_SESSION['username'])){
-  header("Location: ../doctor/doc_log.php" );
+  header("Location: ./doc_log.php" );
 }
 
 
@@ -68,6 +68,7 @@ $expg=$eg['sum'];
     <script src="sweetalert2.all.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!--  -->
     <script src="sweetalert2.all.min.js"></script>
 <body >
 
@@ -80,11 +81,11 @@ $expg=$eg['sum'];
   <hr>
   <a style="color:#cccccc" href="../doctor/daccount.php"><img src="https://img.icons8.com/fluent-systems-filled/24/cccccc/delivery-scooter.png"/>Account</a>
   <hr>
-  <a  href="../doctor/book.php"><img src="https://img.icons8.com/fluent-systems-filled/24/3498db/guest-male.png"/>Bookings</a>
+  <a  style="color:#cccccc" href="../doctor/book.php"><img src="https://img.icons8.com/fluent-systems-filled/24/cccccc/guest-male.png"/>Bookings</a>
   <hr>
   <a style="color:#cccccc"href="../doctor/diagnosis.php"><img src="https://img.icons8.com/wired/24/cccccc/get-cash.png"/>Diagnosis</a>
   <hr>
-  <a style="color:#cccccc"href="../doctor/balance.php"><img src="https://img.icons8.com/wired/24/cccccc/get-cash.png"/>Balance</a>
+  <a href="../doctor/balance.php"><img src="https://img.icons8.com/wired/24/3498db/get-cash.png"/>Balance</a>
   <hr>
 
   <a style="color:#cccccc"href="../doctor/prescription.php?logout"><img src="https://img.icons8.com/material-sharp/24/e67e22/settings.png"/>Log Out</a>
@@ -146,49 +147,40 @@ $expg=$eg['sum'];
        
 
 
+
+
         <div class="row" style="margin-top: 2%">
 
         <?php
-        $month=array("January","February","March","April","May","June","July","August","September","October","November","December");
-        $dp="SELECT MONTH(Appointment) as mon,sum(PaymentFee) msum from booking inner join book_pay on booking.BID=book_pay.BID where Doctor=$id";
+  
+        $dp="SELECT Appointment, sum(PaymentFee) as TotalSum from booking inner join book_pay on booking.BID=book_pay.BID where Doctor=$id group by Appointment; ";
         $dpq=mysqli_query($conn,$dp);
         
    
         
-        while($dr=mysqli_fetch_assoc($dpq)) { 
-            foreach ($month as $key => $value)  { 
-                $mon=$dr['mon'];
-                if($mon==$key){
-                    $fee=$dr['msum'];
-                }else{
-                    $fee=0.0;
-                }
-                        $dataPoints = array(array("y" => $fee, "label" => $value));
-            }
+        while($dr=mysqli_fetch_array($dpq)) { 
+        
+          $mon[] = date_format(date_create($dr['Appointment']),"M d, Y") ;
+
+            $sales[] = $dr['TotalSum'];
+          
         }
  
 
   
  ?>
-     <script>
-window.onload = function () {
- 
-var chart = new CanvasJS.Chart("chartContainer", {
-	title: {
-		text: "Balance Per Month (GHS)"
-	},
-	axisY: {
-		title: "Consultation Fee"
-	},
-	data: [{
-		type: "line",
-		dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
-	}]
-});
-chart.render();
- 
-}
-</script>
+
+
+<div style="width:50%;hieght:20%;text-align:center">
+            <h2 class="page-header" >Analytics Sales Report </h2>
+            <div>
+            <canvas  id="chartjs_line"></canvas> 
+        </div>    
+
+  
+   
+
+
     </div>
 <!-- next -->
 
@@ -248,6 +240,42 @@ function nec(){
 
 </script>
 </body>
-<div id="chartContainer" style="margin-left:18%;height: 500px; width: 80%;"></div>
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script src="//code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <script type="text/javascript">
+      var ctx = document.getElementById("chartjs_line").getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels:<?php echo json_encode($mon); ?>,
+                        datasets: [{
+                            backgroundColor: [
+                               "#5969ff",
+                                "#ff407b",
+                                "#25d5f2",
+                                "#ffc750",
+                                "#2ec551",
+                                "#7040fa",
+                                "#ff004e"
+                            ],
+                            data:<?php echo json_encode($sales); ?>,
+                        }]
+                    },
+                    options: {
+                           legend: {
+                        display: true,
+                        position: 'bottom',
+ 
+                        labels: {
+                            fontColor: '#71748d',
+                            fontFamily: 'Circular Std Book',
+                            fontSize: 14,
+                        }
+                    },
+ 
+ 
+                }
+                });
+    </script>
+
 </html>

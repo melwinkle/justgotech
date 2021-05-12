@@ -4,21 +4,17 @@
 
 <!-- dashboard for pharmacy -->
 <?php 
-
-session_start();
-require_once("../../database/connection.php");
-if(!isset($_SESSION['username'])){
-  header("Location: ../pharmacist/pharm_log.php" );
-}
-
-
-$username=$_SESSION['username'];
-$id=$_SESSION['phid'];
-$fn=$_SESSION['phname'];
-$loc=$_SESSION['location'];
+  session_start();
+  require_once("../../database/connection.php");
+  if(!isset($_SESSION['username'])){
+    header("Location: ./pharm_log.php" );
+  }
 
 
-
+  $username=$_SESSION['username'];
+  $id=$_SESSION['phid'];
+  $fn=$_SESSION['phname'];
+  $loc=$_SESSION['location'];
 ?>
 
 <!DOCTYPE html>
@@ -117,10 +113,9 @@ $loc=$_SESSION['location'];
                         <label for="lname">Drug Type</label><br>
                         <input style="border:1px solid #3498db;border-radius:5px;width:80%;height:40px" type="text" name="dt" id="dob" ><br>
 
-                        <label for="dob">Description</label><br>
-                        <input style="border:1px solid #3498db;border-radius:5px;width:80%;height:40px" type="text" name="desc" id="dob" ><br>
+                       
 
-                        <label for="md">Mannufacturing date </label><br>
+                        <label for="md">Manufacturing date </label><br>
                         <input style="border:1px solid #3498db;border-radius:5px;width:80%;height:40px"type="date" name="md" id="md" ><br>
                         <label for="ed">Expiry Date </label><br>
                         <input style="border:1px solid #3498db;border-radius:5px;width:80%;height:40px"type="date" name="ed" id="ed"  ><br>
@@ -128,8 +123,7 @@ $loc=$_SESSION['location'];
                         <input style="border:1px solid #3498db;border-radius:5px;width:80%;height:40px"type="number" name="quan" id="quan" min=1 value="1" ><br>
                         <label for="price">Price </label><br>
                         <input style="border:1px solid #3498db;border-radius:5px;width:80%;height:40px"type="number" name="price" id="price" ><br>
-                        <label for="quer">Queries </label><br>
-                        <input style="border:1px solid #3498db;border-radius:5px;width:80%;height:40px"type="text" name="quer" id="quer" ><br>
+                       
 
                     
 
