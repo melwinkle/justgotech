@@ -68,7 +68,7 @@ if(mysqli_num_rows($noq)>0){
 ?>
 <html>
 <head>
-<title>COVID-19</title>
+<title>PHARMACY</title>
 </head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
@@ -115,7 +115,7 @@ if(mysqli_num_rows($noq)>0){
        $nt=$num['NID'];
        $mes=$num['NMessage'];
        $da=$num['NTime'];
-       echo "<a href='../pharmacy/ph_suc.php?not&id=$nt&mprev=../pharmacy/ph_records.php'>$mes $da</a>";
+       echo "<a href='../pharmacy/ph_suc.php?not&id=$nt&mprev=../pharmacy/ph_pay.php'>$mes $da</a>";
      }
     }else{
       echo "<a >No Unread Notifications</a>";

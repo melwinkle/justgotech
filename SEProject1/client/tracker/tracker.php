@@ -117,7 +117,7 @@ if (mysqli_num_rows($noq) > 0) {
 <html>
 
 <head>
-  <title>COVID-19</title>
+  <title>TRACKER</title>
 </head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
@@ -159,7 +159,7 @@ if (mysqli_num_rows($noq) > 0) {
               $nt = $num['NID'];
               $mes = $num['NMessage'];
               $da = $num['NTime'];
-              echo "<a href='../pharmacy/ph_suc.php?not&id=$nt&mprev=../pharmacy/ph_records.php'>$mes $da</a>";
+              echo "<a href='../pharmacy/ph_suc.php?not&id=$nt&mprev=../tracker/tracker.php'>$mes $da</a>";
             }
           } else {
             echo "<a >No Unread Notifications</a>";
@@ -180,20 +180,20 @@ if (mysqli_num_rows($noq) > 0) {
 
   <div>
     <div class="row" style="margin-left:15%">
-      <div class="col-sm-4">
-        <div class="card  mb-4 shadow-sm " style="border:1px solid rgb(4, 23, 120);color:rgb(4, 23, 120);height:150px;width:350px;border-radius:5px;background: white">
+      <div >
+        <div class="card  mb-4 shadow-sm " style="margin-top:20px;border:1px solid rgb(4, 23, 120);color:rgb(4, 23, 120);height:150px;width:350px;border-radius:5px;background: white">
           <h2 style="margin-top:10px;text-align:center"><img src="https://img.icons8.com/dotty/60/101550/test-tube.png" /><?php echo $tn; ?></h2>
           <h6 style="text-align:center">TOTAL TESTS</h6>
         </div>
       </div>
-      <div class="col-sm-4">
-        <div class="card  mb-4 shadow-sm " style="border:1px solid rgb(4, 23, 120);color:rgb(4, 23, 120);height:150px;width:350px;border-radius:5px;background: white">
+      <div >
+        <div class="card  mb-4 shadow-sm " style="margin-left:380px;margin-top:-172px;border:1px solid rgb(4, 23, 120);color:rgb(4, 23, 120);height:150px;width:350px;border-radius:5px;background: white">
           <h2 style="margin-top:10px;text-align:center"><img src="https://img.icons8.com/pastel-glyph/60/101550/money-circulation.png" /><?php echo $tot; ?></h2>
           <h6 style="text-align:center">TOTAL PURCHASE</h6>
         </div>
       </div>
-      <div class="col-sm-3">
-        <div class="card  mb-4 shadow-sm " style="border:1px solid rgb(4, 23, 120);color:rgb(4, 23, 120);height:150px;width:350px;border-radius:5px;background: white">
+      <div >
+        <div class="card  mb-4 shadow-sm " style="margin-left:760px;margin-top:-174px;border:1px solid rgb(4, 23, 120);color:rgb(4, 23, 120);height:150px;width:350px;border-radius:5px;background: white">
           <h2 style="margin-top:10px;text-align:center"><img src="https://img.icons8.com/wired/60/101550/medical-doctor.png" /><?php echo $nb; ?></h2>
           <h6 style="text-align:center">TOTAL CONSULTATION</h6>
         </div>
@@ -212,14 +212,14 @@ if (mysqli_num_rows($noq) > 0) {
       <div class="card  mb-4 shadow-sm " style="height:250px;color:white;background:#3478db;">
         <ul>
           <span>
-            <h4 style="text-align:left;margin-top:50px;"> NO EXPOSURE <?php echo $l; ?></h4>
+            <h4 style="text-align:left;margin-top:50px;"> NO EXPOSURE <?php echo ceil($l) ?></h4>
 
             <div class="progress" style="width:900px;height: 20px;">
               <div class="progress-bar bg-success" role="progressbar" style="width: <?php echo $l; ?>%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
           </span>
           <span style="">
-            <h4 style="text-align:left;margin-right:100px;margin-top:4%">EXPOSURE <?php echo $p; ?></h4>
+            <h4 style="text-align:left;margin-right:100px;margin-top:4%">EXPOSURE <?php echo ceil($p); ?></h4>
 
             <div class="progress" style="width:900px;height: 20px;">
               <div class="progress-bar bg-warning" role="progressbar" style="width: <?php echo $p; ?>%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
@@ -277,7 +277,7 @@ if (mysqli_num_rows($noq) > 0) {
           <h3 style="text-align:left">TOTAL BALANCE</h3>
         </span>
         <span style="margin-top:-55px;margin-left:800px">
-          <h1>GHC <?php echo $bn; ?></h1>
+          <h1>GHC <?php echo ceil($bn); ?></h1>
         </span>
 
       </div>
