@@ -6,7 +6,7 @@
 session_start();
 require_once("../../database/connection.php");
 if(!isset($_SESSION['username'])){
-  header("Location: ../pharmacist/pharm_log.php" );
+  header("Location: ./pharm_log.php" );
 }
 
 

@@ -1,40 +1,36 @@
 <!-- dashboard for pharmacy -->
 <?php 
 
-session_start();
-require_once("../../database/connection.php");
-if(!isset($_SESSION['username'])){
-  header("Location: ../pharmacist/pharm_log.php" );
-}
+  session_start();
+  require_once("../../database/connection.php");
+  
+  if(!isset($_SESSION['username'])){
+    header("Location: ./pharm_log.php" );
+  }
 
 
-$username=$_SESSION['username'];
-$id=$_SESSION['phid'];
-$fn=$_SESSION['phname'];
-$loc=$_SESSION['location'];
+  $username=$_SESSION['username'];
+  $id=$_SESSION['phid'];
+  $fn=$_SESSION['phname'];
+  $loc=$_SESSION['location'];
 
-$today=date("Y-m-d");
+  $today=date("Y-m-d");
 
-$sql="SELECT *,sum(P_Bill) as dailyb from perm_cart inner join temp_cart on perm_cart.TC=temp_cart.TC inner join pharm_orders on perm_cart.POID=pharm_orders.POID inner join pharm_drugs on temp_cart.PHD=pharm_drugs.PHD inner join track_order on perm_cart.POID=track_order.POID where pharm_drugs.PharmID=$id and Order_Date='$today' group by pharm_orders.POID";
-$query=mysqli_query($conn,$sql);
-$number=mysqli_num_rows($query);
-$res=mysqli_fetch_assoc($query);
-if($number>0){
-  $db=$res['dailyb'];
-}else{
-  $db=0.0;
-}
-
-
-// <li><img src="https://img.icons8.com/ios-filled/20/e74c3c/passenger.png"/><?php echo "No Rider Assigned ";</li>
-$sdate="SELECT * from pharm_drugs where PharmID=$id ";
-$squery=mysqli_query($conn,$sdate);
-$expg=mysqli_num_rows($squery);
+  $sql="SELECT *,sum(P_Bill) as dailyb from perm_cart inner join temp_cart on perm_cart.TC=temp_cart.TC inner join pharm_orders on perm_cart.POID=pharm_orders.POID inner join pharm_drugs on temp_cart.PHD=pharm_drugs.PHD inner join track_order on perm_cart.POID=track_order.POID where pharm_drugs.PharmID=$id and Order_Date='$today' group by pharm_orders.POID";
+  $query=mysqli_query($conn,$sql);
+  $number=mysqli_num_rows($query);
+  $res=mysqli_fetch_assoc($query);
+  if($number>0){
+    $db=$res['dailyb'];
+  }else{
+    $db=0.0;
+  }
 
 
-
-
-
+  // <li><img src="https://img.icons8.com/ios-filled/20/e74c3c/passenger.png"/><?php echo "No Rider Assigned ";</li>
+  $sdate="SELECT * from pharm_drugs where PharmID=$id ";
+  $squery=mysqli_query($conn,$sdate);
+  $expg=mysqli_num_rows($squery);
 ?>
 
 <!DOCTYPE html>

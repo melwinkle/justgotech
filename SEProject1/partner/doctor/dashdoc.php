@@ -10,7 +10,7 @@
 session_start();
 require_once("../../database/connection.php");
 if(!isset($_SESSION['username'])){
-  header("Location: ../doctor/doc_log.php" );
+  header("Location: ./doc_log.php" );
 }
 
 

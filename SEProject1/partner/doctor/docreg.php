@@ -2,6 +2,13 @@
 
 <!-- page for delivery login -->
 
+<?php 
+    session_start();
+
+    if(isset($_SESSION['username'])){
+        header("Location: ./book.php?success=true");
+    }
+?>
 
 <!DOCTYPE html>
 <head>

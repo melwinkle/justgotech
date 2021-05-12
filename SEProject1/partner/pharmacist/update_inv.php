@@ -1,51 +1,42 @@
 <!-- Page for inventory-->
 
 
-<?php 
+<?php
+  session_start();
+  require_once("../../database/connection.php");
+  if(!isset($_SESSION['username'])){
+    header("Location: ./pharm_log.php" );
+  }
 
-session_start();
-require_once("../../database/connection.php");
-if(!isset($_SESSION['username'])){
-  header("Location: ../pharmacist/pharm_log.php" );
-}
+  $username=$_SESSION['username'];
+  $id=$_SESSION['phid'];
+  $fn=$_SESSION['phname'];
+  $loc=$_SESSION['location'];
 
+  $today=date("Y-m-d");
 
-$username=$_SESSION['username'];
-$id=$_SESSION['phid'];
-$fn=$_SESSION['phname'];
-$loc=$_SESSION['location'];
+  $sql="SELECT * from pharm_drugs where PharmID=$id";
+  $query=mysqli_query($conn,$sql);
+  $count=0;
 
-$today=date("Y-m-d");
+  $number=mysqli_num_rows($query);
 
-$sql="SELECT * from pharm_drugs where PharmID=$id";
-$query=mysqli_query($conn,$sql);
-$count=0;
-
-$number=mysqli_num_rows($query);
-
-if(isset($_GET['edit'])){
+  if(isset($_GET['edit'])){
     $did=$_GET['did'];
 
     $sdate="SELECT * from pharm_drugs inner join drugs on pharm_drugs.DID=drugs.DID where PharmID=$id and pharm_drugs.DID=$did";
-$squery=mysqli_query($conn,$sdate);
-$result=mysqli_fetch_assoc($squery);
+    $squery=mysqli_query($conn,$sdate);
+    $result=mysqli_fetch_assoc($squery);
 
-$dname=$result['DName'];
-$dtype=$result['Drug_type'];
-$desc=$result['Description'];
-$md=$result['M_date'];
-$ed=$result['E_date'];
-$p=$result['Price'];
-$q=$result['Quantity'];
-$que=$result['Queries'];
-}
-
-
-
-
-
-
-
+    $dname=$result['DName'];
+    $dtype=$result['Drug_type'];
+    $desc=$result['Description'];
+    $md=$result['M_date'];
+    $ed=$result['E_date'];
+    $p=$result['Price'];
+    $q=$result['Quantity'];
+    $que=$result['Queries'];
+  }
 ?>
 
 

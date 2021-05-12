@@ -1,14 +1,18 @@
 <!-- page for registration -->
 
 <!-- page for delivery login -->
-
+<?php 
+    if(isset($_SESSION['username'])){
+        header("Location: ./dash.php?success=true");
+    }
+?>
 
 <!DOCTYPE html>
 <head>
 <title>JustGo Delivery</title>
 </head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
+<link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
 <link
   href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.2.0/mdb.min.css"
   rel="stylesheet"

@@ -1,34 +1,29 @@
 <!-- page for dashboard for delivery -->
 
 <?php 
-session_start();
-require_once("../../database/connection.php");
-if(!isset($_SESSION['username'])){
-  header("Location: ../delivery/dindex.php");
-}
-$username=$_SESSION['username'];
-$del=$_SESSION['delid'];
-$fn=$_SESSION['fname'];
-$ln=$_SESSION['lname'];
+  session_start();
+  require_once("../../database/connection.php");
+  
+  if(!isset($_SESSION['username'])){
+    header("Location: ./dindex.php");
+  }
+  
+  $username=$_SESSION['username'];
+  $del=$_SESSION['delid'];
+  $fn=$_SESSION['fname'];
+  $ln=$_SESSION['lname'];
 
+  $sql="SELECT *,sum(Fee) as balance,count(*) as total from track_order where DelID=$del and Progress!='Delivered' ";
+  $result=mysqli_query($conn,$sql);
+  $ri=mysqli_fetch_assoc($result);
+  $balance=$ri['balance'];
+  $incoming=$ri['total'];
 
-
-$sql="SELECT *,sum(Fee) as balance,count(*) as total from track_order where DelID=$del and Progress!='Delivered' ";
-$result=mysqli_query($conn,$sql);
-$ri=mysqli_fetch_assoc($result);
-$balance=$ri['balance'];
-$incoming=$ri['total'];
-
-$sqls="SELECT *,sum(Fee) as balance,count(*) as total from track_order where DelID=$del and Progress='Delivered' ";
-$results=mysqli_query($conn,$sqls);
-$rc=mysqli_fetch_assoc($results);
-$balanc=$rc['balance'];
-$completed=$rc['total'];
-
-
-
-
-
+  $sqls="SELECT *,sum(Fee) as balance,count(*) as total from track_order where DelID=$del and Progress='Delivered' ";
+  $results=mysqli_query($conn,$sqls);
+  $rc=mysqli_fetch_assoc($results);
+  $balanc=$rc['balance'];
+  $completed=$rc['total'];
 
 ?>
 

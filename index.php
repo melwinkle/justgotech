@@ -1,3 +1,11 @@
+<?php 
+	session_start();
+
+	if(isset($_SESSION['username'])){
+		header("Location: ../tracker/tracker.php");
+	}
+?>
+
 <!DOCTYPE html>
 <html style="font-size: 16px;">
   <head>
@@ -36,7 +44,7 @@
     <meta property="og:url" content="index.html">
   </head>
   <body data-home-page="Home.html" data-home-page-title="Home" class="u-body"><header class="u-clearfix u-header u-header" id="sec-a900"><div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
-        <a href="./index.html" class="u-image u-logo u-image-1" data-image-width="574" data-image-height="435">
+        <a href="./index.php" class="u-image u-logo u-image-1" data-image-width="574" data-image-height="435">
           <img src="./SEProject1/images/justgotech.png" class="u-logo-image u-logo-image-1" data-image-width="64">
         </a>
         <nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1">
@@ -50,10 +58,12 @@
           </div>
           <div class="u-custom-menu u-nav-container">
             <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="./index.html" style="padding: 10px 20px;">Home</a>
-<!-- </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="Services.html" style="padding: 10px 20px;">Services</a> -->
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="./SEProject1/client/landingpage/Services.html" style="padding: 10px 20px;">Services</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="./SEProject1/client/Regforms/Login.html" style="padding: 10px 20px;">Log in</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="./SEProject1/client/Regforms/signup.html" style="padding: 10px 20px;">Create Account</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="./SEProject1/partner/delivery/dlog.php" style="padding: 10px 20px;">Delivery</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="./SEProject1/partner/pharmacist/pharm_log.php" style="padding: 10px 20px;">Pharmacy</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="./SEProject1/partner/doctor/doc_log.php" style="padding: 10px 20px;">Doctor</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="./SEProject1/client/Regforms/Login.php" style="padding: 10px 20px;">Log in</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="./SEProject1/client/Regforms/signup.php" style="padding: 10px 20px;">Create Account</a>
 </li></ul>
           </div>
           <div class="u-custom-menu u-nav-container-collapse">

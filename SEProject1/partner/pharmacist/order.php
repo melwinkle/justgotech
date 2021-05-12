@@ -9,5 +9,4 @@
         echo "<script>location.href='../pharmacist/pharm_log.php'</script>";
     }
 
-   
 ?>

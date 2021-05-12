@@ -1,5 +1,9 @@
 <!-- page for delivery login -->
-
+<?php 
+    if(isset($_SESSION['username'])){
+        header("Location: ./dash.php?success=true");
+    }
+?>
 
 <!DOCTYPE html>
 <head>

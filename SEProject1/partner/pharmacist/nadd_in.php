@@ -4,21 +4,16 @@
 
 <!-- dashboard for pharmacy -->
 <?php 
+  session_start();
+  require_once("../../database/connection.php");
+  if(!isset($_SESSION['username'])){
+    header("Location: ./pharm_log.php" );
+  }
 
-session_start();
-require_once("../../database/connection.php");
-if(!isset($_SESSION['username'])){
-  header("Location: ../pharmacist/pharm_log.php" );
-}
-
-
-$username=$_SESSION['username'];
-$id=$_SESSION['phid'];
-$fn=$_SESSION['phname'];
-$loc=$_SESSION['location'];
-
-
-
+  $username=$_SESSION['username'];
+  $id=$_SESSION['phid'];
+  $fn=$_SESSION['phname'];
+  $loc=$_SESSION['location'];
 ?>
 
 <!DOCTYPE html>
