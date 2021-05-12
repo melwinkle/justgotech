@@ -26,7 +26,9 @@
 				$_SESSION['phname']=$fn;
 				$_SESSION['location']=$ln;
                 header("Location: ./dash.php?success=true");
-            }   
+            }else{
+                header("Location: ./pharm_log.php");
+            }
         }
     }
     

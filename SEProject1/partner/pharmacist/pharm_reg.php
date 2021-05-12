@@ -26,12 +26,12 @@
     <script src="sweetalert2.all.min.js"></script>
 <body style="height:120%;background-image: linear-gradient(to bottom right, skyblue, pink);">
 
-<div><img style="width:8%" src="../../images/justgotech.png" alt="justgo"></div>
+<div><a href="../../../index.php"><img style="width:8%" src="../../images/justgotech.png" alt="justgo"></a></div>
 
 
 <div style="margin-left:10%;;color:white;font-size: 48pt">
 <img style="width:350px;margin-left:45px" src="../../images/justgo.png" alt="justgo">
-<h1>DELIVERY SERVICE</h1>
+<h1 style="margin-left: 130px;">Pharmacy</h1>
 
 
 </div>
@@ -54,22 +54,17 @@
     <input type="text" name="phonenumber"  maxlength=10 id="defaultLoginFormEmail" class="form-control mb-4" placeholder="Phone Number">
     <!-- Email -->
 
-
-
-
     <!-- Sign in button -->
     <button name="register"class="btn btn-primary btn-block my-4" type="submit">Register</button>
 
- 
-
-   
-
 </form>
+<div style="text-align: center; padding-bottom:10px">
 <a href="../delivery/dindex.php">Sign in </a>
+</div>
+
 <!-- Default form login -->
 </div>
 <div>
-<img style="width:40%;margin-left: 800px;margin-top: -620px"src="../../images/delivery-man.png" alt=""></div>
-  
+<img style="width:40%;margin-left: 750px;margin-top: -1000px"src="../../images/pharm.png" alt=""></div>  
 </body>
 </html>
