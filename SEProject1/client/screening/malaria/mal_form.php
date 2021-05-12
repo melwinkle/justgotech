@@ -6,7 +6,7 @@ require_once("../../../database/connection.php");
 session_start();
 
 if(!isset($_SESSION['username'])){
-  echo "<script>location.href = '../account/logout.php'</script>";
+  echo "<script>location.href = '../../account/logout.php'</script>";
 }
 
 $username=$_SESSION['username'];
@@ -51,7 +51,7 @@ $resultss=mysqli_query($conn,$query2);
 <a href="../booking2/bookmain.php">Consultation</a>
 
 <a href="../pharamcy/pharmacy_main.php">Pharmacy</a>
-  <a href="../account/logout.php">Log Out</a>
+  <a href="../../account/logout.php">Log Out</a>
 </div>
 
 <div class="navb"id="main">

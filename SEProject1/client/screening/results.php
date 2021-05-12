@@ -8,7 +8,7 @@ session_start();
 
 $username=$_SESSION['username'];
 if(!isset($_SESSION['username'])){
-  echo "<script>location.href = '../../account/logout.php'</script>";
+  echo "<script>location.href = '../account/logout.php'</script>";
 }
 
 $username=$_SESSION['username'];
