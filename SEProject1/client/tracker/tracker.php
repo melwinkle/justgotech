@@ -187,11 +187,11 @@ if(mysqli_num_rows($noq)>0){
 
 <div>
 <div class="row" style="margin-left:15%">
-   <div class="column"><div class="card  mb-4 shadow-sm " style="border:1px solid rgb(4, 23, 120);color:rgb(4, 23, 120);height:150px;width:350px;border-radius:5px;background: white"><h2 style="margin-top:10px;text-align:center"><img src="https://img.icons8.com/dotty/60/101550/test-tube.png"/><?php echo $tn;?></h2>
+   <div class="col-sm-4"><div class="card  mb-4 shadow-sm " style="border:1px solid rgb(4, 23, 120);color:rgb(4, 23, 120);height:150px;width:350px;border-radius:5px;background: white"><h2 style="margin-top:10px;text-align:center"><img src="https://img.icons8.com/dotty/60/101550/test-tube.png"/><?php echo $tn;?></h2>
                                 <h6 style="text-align:center">TOTAL TESTS</h6></div> </div>
-    <div class="column"><div class="card  mb-4 shadow-sm " style="border:1px solid rgb(4, 23, 120);color:rgb(4, 23, 120);height:150px;width:350px;border-radius:5px;background: white"><h2 style="margin-top:10px;text-align:center"><img src="https://img.icons8.com/pastel-glyph/60/101550/money-circulation.png"/><?php echo $tot;?></h2>
+    <div class="col-sm-4"><div class="card  mb-4 shadow-sm " style="border:1px solid rgb(4, 23, 120);color:rgb(4, 23, 120);height:150px;width:350px;border-radius:5px;background: white"><h2 style="margin-top:10px;text-align:center"><img src="https://img.icons8.com/pastel-glyph/60/101550/money-circulation.png"/><?php echo $tot;?></h2>
                                 <h6 style="text-align:center">TOTAL PURCHASE</h6></div> </div>
-    <div class="column"><div class="card  mb-4 shadow-sm " style="border:1px solid rgb(4, 23, 120);color:rgb(4, 23, 120);height:150px;width:350px;border-radius:5px;background: white"><h2 style="margin-top:10px;text-align:center"><img src="https://img.icons8.com/wired/60/101550/medical-doctor.png"/><?php echo $nb;?></h2>
+    <div class="col-sm-4"><div class="card  mb-4 shadow-sm " style="border:1px solid rgb(4, 23, 120);color:rgb(4, 23, 120);height:150px;width:350px;border-radius:5px;background: white"><h2 style="margin-top:10px;text-align:center"><img src="https://img.icons8.com/wired/60/101550/medical-doctor.png"/><?php echo $nb;?></h2>
                                 <h6 style="text-align:center">TOTAL CONSULTATION</h6></div> </div>
 </div>
 </div>

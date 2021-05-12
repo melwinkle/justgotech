@@ -133,10 +133,10 @@ PAYMENT
 </div> -->
 
    
-<div class="imgchat" style="margin-left:85%;position:fixed">
+<!-- <div class="imgchat" style="margin-left:85%;position:fixed">
 <a href="../chatbot/bot.php?prev=../pharmacy/pharmacy_main.php"><img style="width:30%;margin-top:60%;margin-left:40%" src="../images/chat.png" alt="chatbot"></a>
 
-</div>
+</div> -->
 
 <script>
   function myFunction() {
