@@ -57,7 +57,7 @@ $probability=$_GET['prob'];
   <a href="/justgotech/SEProject1/client/tracker/tracker.php">Tracker</a>
   <a href="/justgotech/SEProject1/client/screening/covid/covid.php">Virtual Screening</a>
   <a href="../booking2/bookmain.php">Consultation</a>
-
+  <a href="../pharmacy/pharmacy_main.php">Pharmacy</a>
  
   <a href="/justgotech/SEProject1/client/account/logout.php">Log Out</a>
 </div>

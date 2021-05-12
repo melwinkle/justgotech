@@ -46,7 +46,7 @@ $resultss=mysqli_query($conn,$query2);
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <img style="width:50%;margin-left: 20%;background:rgb(23, 79, 182);" src="../../../images/justgotech.png" alt="justgotech">
   <a href="../account/accountinfo.php">Account Info</a>
-  <a href="../tracker/tracker.php">Tracker</a>
+  <a href="../../tracker/tracker.php">Tracker</a>
   <a href="../screening/cov.php">Virtual Screening</a>
 <a href="../booking2/bookmain.php">Consultation</a>
 
@@ -61,7 +61,7 @@ $resultss=mysqli_query($conn,$query2);
 
 </div>
    
-<div class="card-body"  style="margin-left:500px;margin-top:50px;border:1px solid #3498db;background:#ffffff;height:800px;width:800px;border-radius:10px;color:rgb(4, 23, 75)">
+<div class="card-body"  style="margin-left:300px;margin-top:50px;border:1px solid #3498db;background:#ffffff;height:800px;width:800px;border-radius:10px;color:rgb(4, 23, 75)">
   
   <h2 style="margin-top:10px;color:rgb(4, 23, 75);text-align:center" class="card-title">
   Malaria Screening Tool
@@ -240,7 +240,7 @@ $resultss=mysqli_query($conn,$query2);
     </select>
                             </div>
 
-<button  type="submit" class="btn btn-primary btn-lg" style=" color:blue;width: 50%;background:white; margin-left:15%" name="scan">SCAN</button>
+<button  type="submit" class="btn btn-primary btn-lg" style=" color:blue;width: 50%;background:white; margin-left:25%" name="scan">SCAN</button>
 
 </form>
   
