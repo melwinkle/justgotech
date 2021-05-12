@@ -80,7 +80,3 @@ require_once('../../database/connection.php');
             echo 'We can not process your payment';
         }
     }
-
-
-
-    ?>
