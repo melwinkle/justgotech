@@ -151,7 +151,7 @@ Latest Orders
 
 <?php  
 
-$final="SELECT customer.PatientID as pd,Item_quantity,track_order.TID,track_order.DelID as del,customer.firstname,customer.lastname,pharm_orders.POID as Phid,customer.PhoneNumber,P_Bill,drugs.DName,track_order.Progress,pharm_orders.Payment from track_order inner join perm_cart on track_order.POID=perm_cart.POID inner join pharm_orders on perm_cart.POID=pharm_orders.POID inner join temp_cart on perm_cart.TC=temp_cart.TC inner join pharm_drugs on temp_cart.PHD=pharm_drugs.PHD inner join drugs on pharm_drugs.DID=drugs.DID inner join pharmacists on pharm_drugs.PharmID=pharmacists.PharmID inner join customer on pharm_orders.PatientID=customer.PatientID where pharm_drugs.PharmID=$id and Progress='Pending' order by track_order.POID";
+$final="SELECT DAY(pharm_orders.Order_Date) as DA,MONTHNAME(pharm_orders.Order_Date) as OD,customer.PatientID as pd,Item_quantity,track_order.TID,track_order.DelID as del,customer.firstname,customer.lastname,pharm_orders.POID as Phid,customer.PhoneNumber,P_Bill,drugs.DName,track_order.Progress,pharm_orders.Payment from track_order inner join perm_cart on track_order.POID=perm_cart.POID inner join pharm_orders on perm_cart.POID=pharm_orders.POID inner join temp_cart on perm_cart.TC=temp_cart.TC inner join pharm_drugs on temp_cart.PHD=pharm_drugs.PHD inner join drugs on pharm_drugs.DID=drugs.DID inner join pharmacists on pharm_drugs.PharmID=pharmacists.PharmID inner join customer on pharm_orders.PatientID=customer.PatientID where pharm_drugs.PharmID=$id and Progress='Pending' order by track_order.POID";
 $finale=mysqli_query($conn,$final);
 while($finales=mysqli_fetch_assoc($finale)){
   $final_fn=$finales['firstname'];
@@ -167,6 +167,8 @@ $final_fe=$finales['P_Bill'];
   $final_num=$finales['PhoneNumber'];
   $final_name=$finales['DName'];
   $final_delid=$finales['del'];
+  $date=$finales['OD'];
+  $dat=$finales['DA'];
 
 
    
@@ -176,8 +178,8 @@ $final_fe=$finales['P_Bill'];
 <div class="column">
         <div class='card  mb-4 shadow-sm '  style='background:white;height:135px;width:1150px;border-radius:2px;color:#cccccc'>
             <span style="width:90px;margin-left:20px;margin-top:15px;color:white;background:rgb(163, 83, 36)">
-              <h1 style="margin-left:20px;margin-top:4px">29</h1>
-              <h4 style="margin-left: 22px">Apr</h4>
+            <h1 style="margin-left:20px;margin-top:4px"><?php echo $dat;?></h1>
+              <h4 style="margin-left: 22px"><?php echo $dat;?></h4>
             </span>
 
           <span style="margin-left:150px;margin-top:-99px;color:black">
