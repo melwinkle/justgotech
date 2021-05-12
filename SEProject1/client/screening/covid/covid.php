@@ -45,14 +45,14 @@ $resultss=mysqli_query($conn,$query2);
   <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <img style="width:50%;margin-left: 20%;background:rgb(23, 79, 182);" src="../../../images/justgotech.png" alt="justgotech">
-  <a href="../../account/accountinfo.php">Account Info</a>
-  <a href="../../tracker/tracker.php">Tracker</a>
+  <a href="../account/accountinfo.php">Account Info</a>
+  <a href="../tracker/tracker.php">Tracker</a>
   <a href="../screening/cov.php">Virtual Screening</a>
 <a href="../booking2/bookmain.php">Consultation</a>
 
-<a href="../../pharmacy/pharmacy_main.php">Pharmacy</a>
+<a href="../pharmacy/pharmacy_main.php">Pharmacy</a>
  
-  <a href="../../account/logout.php">Log Out</a>
+  <a href="../account/logout.php">Log Out</a>
 </div>
 
 <div class="navb"id="main">
