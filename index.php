@@ -70,7 +70,7 @@
             <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
               <div class="u-sidenav-overflow">
                 <div class="u-menu-close"></div>
-                <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="./index.html" style="padding: 10px 20px;">Home</a>
+                <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="./index.php" style="padding: 10px 20px;">Home</a>
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="./SEProject1/client/landingpage/Services.html" style="padding: 10px 20px;">Services</a>
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="./SEProject1/client/Regforms/Login.html" style="padding: 10px 20px;">Log in</a>
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="./SEProject1/client/Regforms/Register.html" style="padding: 10px 20px;">Create Account</a>

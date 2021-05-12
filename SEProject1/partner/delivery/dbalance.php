@@ -122,7 +122,7 @@ echo date('d-M');
 
 <div style="margin-left:-1%;margin-top:3%">
 <h3>
-Receipts
+Analytics
 </h3>
 <div class="progress" style="border-radius:5px;width:10%;height: 10px;margin-top:10px">
   <div class="progress-bar bg-primary" role="progressbar" style="width:100%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
@@ -131,46 +131,23 @@ Receipts
 </div>
 
 <div class="row" style="margin-top: 2%">
-<div id="table" class="table-editable" style="width:1000px;margin-top:2%;">
-                    <table id="example" class="table table-striped table-bordered" style="background:white">
-                        <thead>
-                            <tr>
-                                <th scope="col">Delivery ID </th>
-                                <th scope="col">Fee</th>
-                                
-                                
-                            </tr>
-                        </thead>
-                        <tbody>
+
 <?php
-$rec="SELECT * from track_order where DelID=$del and Progress='Delivered'";
+$rec="SELECT Order_date,sum(Fee) as fee from track_order inner join pharm_orders on track_order.POID=pharm_orders.POID where DelID=$del and Progress='Delivered' group by Order_date";
 $finale=mysqli_query($conn,$rec);
 
-while($finales=mysqli_fetch_assoc($finale)){
+while($dr=mysqli_fetch_array($finale)){
+  $mon[] = date_format(date_create($dr['Order_date']),"M d, Y") ;
 
-  $final_fe=$finales['Fee'];
-  $tc=$finales['TID'];
-  
-  ?>
-  
-  <tr>
-                                <th scope="col"><?php echo $tc;?></th>
-                                <th scope="col"><?php echo $final_fe;?></th>
-                                
-                                
-                            </tr>
-
-
-<?php
+  $sales[] = $dr['fee'];
 }
-?>
-<!-- end -->
-<!-- next -->
+  ?>
 
-<!-- end -->
-</tbody>
-</table>
-</div>
+<div style="width:70%;height:50%;text-align:center">
+            <h2 class="page-header" >Analytics Sales Report </h2>
+            <div>
+            <canvas  id="chartjs_line"></canvas> 
+        </div>    
 </div>
 
 
@@ -201,5 +178,41 @@ function closeNav() {
 }
 </script>
 </body>
-
+<script src="//code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <script type="text/javascript">
+      var ctx = document.getElementById("chartjs_line").getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels:<?php echo json_encode($mon); ?>,
+                        datasets: [{
+                            backgroundColor: [
+                               "#5969ff",
+                                "#ff407b",
+                                "#25d5f2",
+                                "#ffc750",
+                                "#2ec551",
+                                "#7040fa",
+                                "#ff004e"
+                            ],
+                            data:<?php echo json_encode($sales); ?>,
+                        }]
+                    },
+                    options: {
+                           legend: {
+                        display: true,
+                        position: 'bottom',
+ 
+                        labels: {
+                            fontColor: '#71748d',
+                            fontFamily: 'Circular Std Book',
+                            fontSize: 14,
+                        }
+                    },
+ 
+ 
+                }
+                });
+    </script>
 </html>

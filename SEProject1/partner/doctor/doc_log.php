@@ -83,7 +83,7 @@
 <!-- Default form login -->
 </div>
 <div>
-<img style="width:50%;margin-left: 650px;margin-top: -1000px"src="../../images/doctor.png" alt=""></div>
+<img style="width:50%;margin-left: 650px;margin-top: -800px"src="../../images/doctor.png" alt=""></div>
   
 </body>
 </html>

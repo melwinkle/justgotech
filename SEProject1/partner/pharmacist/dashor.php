@@ -79,7 +79,7 @@ $expg=mysqli_num_rows($squery);
 <h4 style="text-align:center;color:white">JustGo Pharmacy</h4>
 <hr>
   <img style="width:50%;margin-left: 50px;" src="../../images/us.png" alt="justgotech">
-  <a href="#"><h4 style="text-align:center">Linux Pharmacy</h4></a>
+  <a href="#"><h4 style="text-align:center"><?php echo $fn;?></h4></a>
   <hr>
   <a style="color:#cccccc" href="../pharmacist/dash.php"><img src="https://img.icons8.com/material/24/cccccc/dashboard-layout.png"/>Dashboard</a>
   <hr>
@@ -430,7 +430,44 @@ Completed Orders
 
                 </div>
 
-        
+
+        <!-- Analytics -->
+        <div style="margin-left:-1%;margin-top:3%">
+<h3>
+Sales Analytics 
+</h3>
+<div class="progress" style="border-radius:5px;width:10%;height: 10px;margin-top:10px">
+  <div class="progress-bar bg" role="progressbar" style="width:100%;background:rgb(173, 93, 36)" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+  
+</div>
+
+
+
+
+<?php
+  
+  $dp="SELECT P_Bill,Order_Date from track_order inner join perm_cart on track_order.POID=perm_cart.POID inner join pharm_orders on perm_cart.POID=pharm_orders.POID inner join temp_cart on perm_cart.TC=temp_cart.TC inner join pharm_drugs on temp_cart.PHD=pharm_drugs.PHD inner join drugs on pharm_drugs.DID=drugs.DID inner join pharmacists on pharm_drugs.PharmID=pharmacists.PharmID inner join customer on pharm_orders.PatientID=customer.PatientID where pharm_drugs.PharmID=$id and Progress!='Pending' group by track_order.POID ";
+  $dpq=mysqli_query($conn,$dp);
+  
+
+  
+  while($dr=mysqli_fetch_array($dpq)) { 
+  
+    $mon[] = date_format(date_create($dr['Order_Date']),"M d, Y") ;
+
+      $sales[] = $dr['P_Bill'];
+    
+  }
+
+
+
+?>
+<div style="width:70%;height:40%;text-align:center">
+            <h2 class="page-header" >Analytics Sales Report </h2>
+            <div>
+            <canvas  id="chartjs_line"></canvas> 
+        </div> 
+
                 <!-- end of table -->
 </div>
 
@@ -472,5 +509,41 @@ function nec(){
     $('#example').DataTable();
 } );</script>
 </body>
-
+<script src="//code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <script type="text/javascript">
+      var ctx = document.getElementById("chartjs_line").getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels:<?php echo json_encode($mon); ?>,
+                        datasets: [{
+                            backgroundColor: [
+                               "#5969ff",
+                                "#ff407b",
+                                "#25d5f2",
+                                "#ffc750",
+                                "#2ec551",
+                                "#7040fa",
+                                "#ff004e"
+                            ],
+                            data:<?php echo json_encode($sales); ?>,
+                        }]
+                    },
+                    options: {
+                           legend: {
+                        display: true,
+                        position: 'bottom',
+ 
+                        labels: {
+                            fontColor: '#71748d',
+                            fontFamily: 'Circular Std Book',
+                            fontSize: 14,
+                        }
+                    },
+ 
+ 
+                }
+                });
+    </script>
 </html>

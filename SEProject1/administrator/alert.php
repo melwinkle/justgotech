@@ -1,5 +1,5 @@
 <?php
-require_once("/xampp/htdocs/justgotech-main/SEProject1/database/connection.php");
+require_once("../database/connection.php");
 
 if(!isset($_SESSION['adminick'])){
     if(isset($_POST['submit'])){

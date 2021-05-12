@@ -83,7 +83,7 @@
 <!-- Default form login -->
 </div>
 <div>
-<img style="width:40%;margin-left: 750px;margin-top: -600px"src="../../images/delivery-man.png" alt=""></div>
+<img style="width:40%;margin-left: 750px;margin-top: -300px"src="../../images/delivery-man.png" alt=""></div>
   
 </body>
 </html>

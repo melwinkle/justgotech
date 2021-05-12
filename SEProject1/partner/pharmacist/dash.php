@@ -154,7 +154,7 @@ $final_fe=$finales['P_Bill'];
         <div class='card  mb-4 shadow-sm '  style='background:white;height:135px;width:1150px;border-radius:2px;color:#cccccc'>
             <span style="width:90px;margin-left:20px;margin-top:15px;color:white;background:rgb(163, 83, 36);">
               <h1 style="margin-left:20px;margin-top:4px"><?php echo $dat;?></h1>
-              <h4 style="margin-left: 22px"><?php echo $dat;?></h4>
+              <h4 style="margin-left: 22px"><?php echo $date;?></h4>
             </span>
 
           <span style="margin-left:150px;margin-top:-99px;color:black">

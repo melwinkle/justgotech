@@ -174,8 +174,8 @@
      if(isset($_POST['add'])){
         $dn=$_POST['dn'];
         $dt = $_POST['dt'];
-        $desc=$_POST['desc'];
-        $que=$_POST['quer'];
+       // $desc=$_POST['desc'];
+      //  $que=$_POST['quer'];
         $md=$_POST['md'];
         $ed=$_POST['ed'];
         $pri=$_POST['price'];
