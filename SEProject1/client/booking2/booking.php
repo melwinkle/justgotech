@@ -105,8 +105,8 @@ if(!isset($_SESSION['username'])){
 								     
 									<div class="form-group">
 										<span class="form-label">Patient</span>
-											<select class="form-control"  name="patient" id="patient" required>
-												<option>Select</option>
+											<select style = "height: 40px" class="form-control"  name="patient" id="patient" required>
+												<option >Select</option>
 
 												<?php 
 													$sql="SELECT COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'booking' AND COLUMN_NAME = 'Person' ";
@@ -134,7 +134,7 @@ if(!isset($_SESSION['username'])){
 						<div class="col-sm-6">
 							<div class="form-group">
 								<span class="form-label">Doctor</span>
-								<select class="form-control" name="doctor" id="doctor" required>
+								<select style = "height: 40px" class="form-control" name="doctor" id="doctor" required>
 									<option>Select</option>
 										
 									<!-- printing Doctor's values from the database -->
@@ -161,7 +161,7 @@ if(!isset($_SESSION['username'])){
 
 							<div class="form-group">
 								<span class="form-label">Health Insurance</span>
-								<select class="form-control" name="healthIn" id="healthIn" required>
+								<select style = "height: 40px" class="form-control" name="healthIn" id="healthIn" required>
 					           
 							   <?php 
                                     $sql="SELECT COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'booking' AND COLUMN_NAME = 'Insurance' ";
@@ -228,7 +228,7 @@ if(!isset($_SESSION['username'])){
 								  <div class="col-sm-5">
 									<div class="form-group">
                                      <span class="form-label">Department</span>
-										<select class="form-control" name="departm" id="departm" required>
+										<select style = "height: 40px" class="form-control" name="departm" id="departm" required>
 											<option>select</option>
 											<?php 
 												$sql="SELECT COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'booking' AND COLUMN_NAME = 'Department' ";
