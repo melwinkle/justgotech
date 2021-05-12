@@ -57,7 +57,7 @@
             </a>
           </div>
           <div class="u-custom-menu u-nav-container">
-            <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="./index.html" style="padding: 10px 20px;">Home</a>
+            <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="./index.php" style="padding: 10px 20px;">Home</a>
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="./SEProject1/client/landingpage/Services.html" style="padding: 10px 20px;">Services</a>
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="./SEProject1/partner/delivery/dlog.php" style="padding: 10px 20px;">Delivery</a>
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="./SEProject1/partner/pharmacist/pharm_log.php" style="padding: 10px 20px;">Pharmacy</a>
@@ -235,7 +235,7 @@ chronic diseases to when the patient is fully fit with no side effects</p>
     
     
     <footer class="u-align-center-md u-align-center-sm u-align-center-xs u-clearfix u-footer u-grey-80" id="sec-e359"><div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
-        <a href="./index.html" class="u-image u-logo u-image-1" data-image-width="574" data-image-height="435">
+        <a href="./index.php" class="u-image u-logo u-image-1" data-image-width="574" data-image-height="435">
           <img src="./SEProject1/images/justgotech.png" class="u-logo-image u-logo-image-1" data-image-width="80">
         </a>
         <div class="u-align-left u-social-icons u-spacing-10 u-social-icons-1">
