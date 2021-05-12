@@ -87,7 +87,7 @@ createConfirmationmbox();
   <img style="width:50%;margin-left: 20%;background:rgb(23, 79, 182);" src="../../images/justgotech.png" alt="justgotech">
   <a href="../account/accountinfo.php">Account Info</a>
   <a href="../tracker/tracker.php">Tracker</a>
-  <a href="../../screening/cov.php">Virtual Screening</a>
+  <a href="../screening/cov.php">Virtual Screening</a>
   <a href="../booking2/bookmain.php">Consultation</a>
   <a href="../pharmacy/pharmacy_main.php">Pharmacy</a>
 

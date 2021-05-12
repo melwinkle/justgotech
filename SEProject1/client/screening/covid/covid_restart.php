@@ -81,13 +81,10 @@ $pro=array_sum($score);
 }
 
 $PatientID=$row['PatientID'];
-$conquery="SELECT ConID from contact where Contact='$con'";
-$conresult=mysqli_query($conn,$conquery);
-$conrow=mysqli_fetch_assoc($conresult);
-$conr=$conrow['ConID'];
 
 
-$query="INSERT INTO diseases(age_bracket,symptom,testing,disease_id,PatientID,Region,precon,ConID,Time,Status,Person) VALUES ('$age','$sym','$test', '$disease', $PatientID, '$reg', '$pre', $conr, '$time','$status','$person')";
+
+$query="INSERT INTO diseases(age_bracket,symptom,testing,disease_id,PatientID,Region,precon,ConID,Time,Status,Person) VALUES ('$age','$sym','$test', '$disease', $PatientID, '$reg', '$pre', '$con', '$time','$status','$person')";
 $result=mysqli_query($conn,$query);
 if($result){
   $rid=mysqli_insert_id($conn);

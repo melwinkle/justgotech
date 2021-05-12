@@ -47,7 +47,7 @@ $probability=$_GET['prob'];
   rel="stylesheet"
 />
 <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
-<link rel="stylesheet" href="covid.css">
+<link rel="stylesheet" href="../covid.css">
 
 <body >
 <div id="mySidenav" class="sidenav">
@@ -66,7 +66,7 @@ $probability=$_GET['prob'];
 <div class="navb"id="main">
   <span style="font-size:30px;cursor:pointer" onclick="openNav()"><img style="width:10%" src="/justgotech/SEProject1/images/justgo.png" alt="justgotech"> </span>
   
-  <span style="font-size:20px;cursor:pointer; float:right; margin-right: -32%" onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:10%" src="/justgotech/SEProject1/images/stethoscope.png" alt="profile"> </span>
+  <span style="font-size:20px;cursor:pointer; float:right; margin-right: -22%" onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:10%" src="/justgotech/SEProject1/images/stethoscope.png" alt="profile"> </span>
 
 </div>
 
@@ -77,7 +77,7 @@ $probability=$_GET['prob'];
   
    
    </h5>
-   <div class="card-body" >
+   <div class="card-body" style="height:1200px" >
  
      <h2 class="card-title">
      Your Responses
@@ -100,14 +100,14 @@ $probability=$_GET['prob'];
   
    </div>
 
-</div>
+
 
 
 
    
      <?php 
      if($probability<11){
-      echo "<div class='covidin' style='float:left;background:green;>
+      echo "<div class='covidin' style='margin-top:-700px;margin-left:900px;;background:green;>
    
       <h5 class='card-header'>
       
@@ -123,7 +123,7 @@ $probability=$_GET['prob'];
      
      }
      else if ($probability>=11 & $probability <=40){
-      echo "<div class='covidin' style='float:left;background:#ffcc00'>
+      echo "<div class='covidin' style='margin-top:-700px;margin-left:900px;;background:#ffcc00'>
    
       <h5 class='card-header'>
       
@@ -141,7 +141,7 @@ $probability=$_GET['prob'];
      }
      else if ($probability>=41 & $probability <=60){
       echo "
-      <div class='covidin' style='float:left;background:orange'>
+      <div class='covidin' style='margin-top:-700px;margin-left:900px;width:500px;background:orange'>
    
    <h5 class='card-header'>
    
@@ -160,7 +160,7 @@ $probability=$_GET['prob'];
 
      else {
       echo "
-      <div class='covidin' style='float:left;background:brown'>
+      <div class='covidin' style='margin-top:-700px;margin-left:900px;;background:brown'>
    
    <h5 class='card-header'>
    

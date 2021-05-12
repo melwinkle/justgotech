@@ -54,7 +54,7 @@
                     success: function(result){
                         $replay = '<div class="bot-inbox inbox" style="width:auto"><div class="icon"><i class="fas fa-user"></i></div><div class="msg-header"><p>'+ result +'</p></div></div>';
                         if(($value=="TT")||($value=="tt")){
-                            $replay = '<div class="bot-inbox inbox"><div class="icon"><i class="fas fa-user"></i></div><div class="msg-header"><p>'+ result +'</p></div></div></br><div><a href="../screening/covid.php"><button style="color:#007bff;background:white;width:170px;height:40px;font-size:15px;margin-left:80px">TAKE TEST</button></a></div>';
+                            $replay = '<div class="bot-inbox inbox"><div class="icon"><i class="fas fa-user"></i></div><div class="msg-header"><p>'+ result +'</p></div></div></br><div><a href="../screening/cov.php"><button style="color:#007bff;background:white;width:170px;height:40px;font-size:15px;margin-left:80px">TAKE TEST</button></a></div>';
                 }
                         if($value=="VR"){
                             $replay = '<div class="bot-inbox inbox"><div class="icon"><i class="fas fa-user"></i></div><div class="msg-header"><p>'+ result +'</p></div></div></br><div><a href="../screening/results.php"><button style="color:#007bff;background:white;width:170px;height:40px;font-size:15px">VIEW MORE</button></a></div>';

@@ -17,7 +17,7 @@ $result=mysqli_query($conn,$query);
 $row=mysqli_fetch_assoc($result);
 
 $patient=$row['PatientID'];
-$quey="SELECT * from diseases inner join contact on diseases.ConID= contact.ConID where PatientID=$patient";
+$quey="SELECT * from diseases  where PatientID=$patient";
 $resut=mysqli_query($conn,$quey);
 
 
@@ -46,7 +46,7 @@ $resut=mysqli_query($conn,$quey);
   <img style="width:50%;margin-left: 20%;background:rgb(23, 79, 182);" src="../../images/justgotech.png" alt="justgotech">
   <a href="../account/accountinfo.php">Account Info</a>
   <a href="../tracker/tracker.php">Tracker</a>
-  <a href="../../screening/cov.php">Virtual Screening</a>
+  <a href="../screening/cov.php">Virtual Screening</a>
   <a href="../booking2/bookmain.php">Consultation</a>
   <a href="../pharmacy/pharmacy_main.php">Pharmacy</a>
 
@@ -58,11 +58,11 @@ $resut=mysqli_query($conn,$quey);
 <div class="navb"id="main">
   <span style="font-size:30px;cursor:pointer" onclick="openNav()"><img style="width:10%" src="../../images/justgo.png" alt="justgotech"> </span>
   
-  <span style="font-size:20px;cursor:pointer; float:right; margin-right: -32%" onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:10%" src="../../images/stethoscope.png" alt="profile"> </span>
+  <span style="font-size:20px;cursor:pointer; float:right; margin-right: -22%" onclick="openP()"><?php echo $row['firstname']." " .$row['lastname'];?><img style="width:10%" src="../../images/stethoscope.png" alt="profile"> </span>
 
 </div>
 <div id="table" class="table-editable" style="margin-left:17%;width:1100px;margin-top:2%;background:white">
-            <table class="table table-bordered table-responsive-md ">
+            <table  id="example"class="table table-bordered table-responsive-md ">
             <thead>
                 <tr>
                 
@@ -80,9 +80,11 @@ $resut=mysqli_query($conn,$quey);
             </thead>
             <tbody>
        <?php
-       if(mysqli_num_rows($resut)){
+       if(mysqli_num_rows($resut)>0){
        while($rw=mysqli_fetch_assoc($resut)){
-        $con=$rw['ConID'];
+    
+
+        
         $exp=$rw['Exposure'];
 
         if($rw['Status']=="Exposed"||$rw['Exposure']=='Yes'){
@@ -114,7 +116,7 @@ $resut=mysqli_query($conn,$quey);
      <td><?php echo $rw['precon'];?></td>
      <td><?php echo $rw['Status']?></td>
      <td><?php echo$rw['Time'];?></td>
-     <td><?php echo $rw['Contact'];?></td>
+     <td><?php echo $rw['ConID'];?></td>
      <td><?php echo $rw['Exposure'];?></td>
      </tr>
      
