@@ -2,5 +2,5 @@
 session_start();
 unset($_SESSION["username"]);
 
-header("Location:../Regforms/login.html");
+header("Location:../Regforms/login.php");
 ?>

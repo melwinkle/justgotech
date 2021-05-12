@@ -14,7 +14,7 @@
 		$success = <<<html
 			<script>
 				alert('Account Created Successfully');
-				location.href = './SEProject1/client/Regforms/Login.html';
+				location.href = './SEProject1/client/Regforms/Login.php';
 			</script>
 		html;
 	

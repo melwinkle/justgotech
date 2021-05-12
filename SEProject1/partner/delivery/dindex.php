@@ -27,12 +27,12 @@
     <script src="sweetalert2.all.min.js"></script>
 <body style="background-image: linear-gradient(to bottom right, skyblue, pink);">
 
-<div><img style="width:8%" src="../../images/justgotech.png" alt="justgo"></div>
-
+<div><a href="../../../index.php"><img style="width:8%" src="../../images/justgotech.png" alt="justgo"></a></div>
 
 <div style="margin-left:120px;margin-top:15px;color:white;font-size: 50pt">
+
 <img style="width:350px;margin-left:45px" src="../../images/justgo.png" alt="justgo">
-<h1>DELIVERY SERVICE</h1>
+<h1 style="margin-left: 66px;">DELIVERY SERVICE</h1>
 
 
 </div>
@@ -83,7 +83,7 @@
 <!-- Default form login -->
 </div>
 <div>
-<img style="width:40%;margin-left: 850px;margin-top: -400px"src="../../images/delivery-man.png" alt=""></div>
+<img style="width:40%;margin-left: 750px;margin-top: -600px"src="../../images/delivery-man.png" alt=""></div>
   
 </body>
 </html>

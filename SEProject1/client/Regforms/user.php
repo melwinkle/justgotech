@@ -15,7 +15,7 @@ require_once("../../database/connection.php");
             header("Location: ../tracker/tracker.php");
         }
         else{
-            header("Location: ../Regforms/login.html?details=false");
+            header("Location: ../Regforms/login.php?details=false");
         }
     }
 ?>

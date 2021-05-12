@@ -88,23 +88,14 @@ echo date('d-M');
 </div>
 
 <div class="main"style="margin-left:20%;margin-top:2%">
+
 <div class="row">
     <div class="col-sm-4">    
-      
-            <div class='card  mb-4 shadow-sm '  style='background-image: linear-gradient(to bottom right,#3498db, #3488db);height:320px;width:600px;border-radius:8px;color:white'>
-            <h4 style="float:left;margin-top:50px;"><img src="https://img.icons8.com/ios/50/ffffff/us-dollar--v1.png"/>Total Balance</h4>
-                 <h1 style="margin-top:40px;color:white;text-align:center">GHC <?php echo $balance;?></h1>
-                   
- 
-             
-
-            </div>
-
+      <div class='card  mb-4 shadow-sm '  style='background-image: linear-gradient(to bottom right,#3498db, #3488db);height:320px;width:600px;border-radius:8px;color:white'>
+      <h4 style="float:left;margin-top:50px;"><img src="https://img.icons8.com/ios/50/ffffff/us-dollar--v1.png"/>Total Balance</h4>
+      <h1 style="margin-top:40px;color:white;text-align:center">GHC <?php echo $balance;?></h1>
     </div>
-
-
-
-
+    </div>
 <div class="col-sm-4">    
 
     <div class='card  mb-4 shadow-sm '  style='margin-left:70%;background-image: linear-gradient(to bottom right,#3488db, #3490db);height:150px;width:78%;border-radius:8px;color:white'>
@@ -114,14 +105,13 @@ echo date('d-M');
 
             </div>
     </div>
+    
+    
     <div class="col-sm-4">    
-
-    <div class='card  mb-4 shadow-sm '  style='margin-left:-36%;background-image: linear-gradient(to bottom right,#3488db, #3478db);height:150px;width:78%;border-radius:8px;color:white;margin-top:45%'>
-    <h4 style="margin-top:5%;;text-align:center"><img src="https://img.icons8.com/ios/40/ffffff/us-dollar--v1.png"/>Monthly Total</h4>
-            <h2 style="margin-top:10px;color:white;text-align:center">GHC <?php echo $balan;?></h2>
-                    
-
-            </div>
+        <div class='card  mb-4 shadow-sm '  style='margin-left:-36%;background-image: linear-gradient(to bottom right,#3488db, #3478db);height:150px;width:78%;border-radius:8px;color:white;margin-top:45%'>
+        <h4 style="margin-top:5%;;text-align:center"><img src="https://img.icons8.com/ios/40/ffffff/us-dollar--v1.png"/>Monthly Total</h4>
+        <h2 style="margin-top:10px;color:white;text-align:center">GHC <?php echo $balan;?></h2>     
+      </div>
     </div>
     
 </div>
