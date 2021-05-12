@@ -5,7 +5,7 @@ require_once("../../database/connection.php");
 session_start();
 
 if(!isset($_SESSION['username'])){
-	echo "<script>location.href = 'viewbooking.php'</script>";
+	echo "<script>location.href = '../account/logout.php'</script>";
 }
 
 	$username=$_SESSION['username'];
