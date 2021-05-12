@@ -301,7 +301,7 @@ if($finales=mysqli_fetch_assoc($finale)){
                                   id="from"
                                   placeholder="Origin"
                                   class="form-control"
-                                  value="<?php echo $final_ph." ".$final_pl; ?>"
+                                  value="<?php echo $final_ph.",".$final_pl.",Ghana"; ?>"
                                 />
                               </div>
                             </div>
@@ -316,7 +316,7 @@ if($finales=mysqli_fetch_assoc($finale)){
                                   id="to"
                                   placeholder="Destination"
                                   class="form-control"
-                                  value="<?php echo $final_lo; ?>"
+                                  value="<?php echo $final_lo.",Ghana"; ?>"
                                 />
                               </div>
                             </div>
