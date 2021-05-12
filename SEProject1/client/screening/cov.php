@@ -47,7 +47,7 @@ $resultss=mysqli_query($conn,$query2);
   <img style="width:50%;margin-left: 20%;background:rgb(23, 79, 182);" src="../../../images/justgotech.png" alt="justgotech">
   <a href="../../account/accountinfo.php">Account Info</a>
   <a href="../../tracker/tracker.php">Tracker</a>
-  <a href="../../screening/covid/cov.php">Virtual Screening</a>
+  <a href="../../screening/cov.php">Virtual Screening</a>
 <a href="../booking2/bookmain.php">Consultation</a>
 <a href="../../pharmacy/pharmacy_main.php">Pharmacy</a>
 
@@ -97,6 +97,19 @@ function closeNav() {
   document.getElementById("mySidenav").style.width = "0";
   document.getElementById("main").style.marginLeft= "0";
 }
+
+function mainP() {
+  window.location.href="../covid/covid.php"
+}
+
+function purP() {
+  window.location.href="../malaria/covid.php"
+}
+
+function presP() {
+  window.location.href="../results.php"
+}
+
 </script>
 </body>
 <footer>
