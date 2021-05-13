@@ -26,7 +26,7 @@ $resut=mysqli_query($conn,$quey);
 ?>
 <html>
 <head>
-<title>COVID-19</title>
+<title>SCREENING</title>
 </head>
 <link
   href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.2.0/mdb.min.css"

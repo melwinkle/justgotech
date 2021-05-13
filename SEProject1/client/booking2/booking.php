@@ -76,7 +76,7 @@ if(!isset($_SESSION['username'])){
        $nt=$num['NID'];
        $mes=$num['NMessage'];
        $da=$num['NTime'];
-       echo "<a href='../pharmacy/ph_suc.php?not&id=$nt&mprev=../pharmacy/ph_records.php'>$mes $da</a>";
+       echo "<a href='../pharmacy/ph_suc.php?not&id=$nt&mprev=../booking2/booking.php'>$mes $da</a>";
      }
     }else{
       echo "<a >No Unread Notifications</a>";

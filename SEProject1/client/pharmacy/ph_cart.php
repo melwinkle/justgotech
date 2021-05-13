@@ -59,7 +59,7 @@ function  createConfirmationmbox() {
 ?>  
 <html>
 <head>
-<title>COVID-19</title>
+<title>PHARMACY</title>
 <?php  
 createConfirmationmbox();  
 ?> 

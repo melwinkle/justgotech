@@ -81,7 +81,7 @@ $patient=$row['PatientID'];
        $nt=$num['NID'];
        $mes=$num['NMessage'];
        $da=$num['NTime'];
-       echo "<a href='../pharmacy/ph_suc.php?not&id=$nt&mprev=../pharmacy/ph_records.php'>$mes $da</a>";
+       echo "<a href='../pharmacy/ph_suc.php?not&id=$nt&mprev=../booking2/viewbooking.php'>$mes $da</a>";
      }
     }else{
       echo "<a >No Unread Notifications</a>";
