@@ -59,9 +59,9 @@
           <div class="u-custom-menu u-nav-container">
             <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="./index.php" style="padding: 10px 20px;">Home</a>
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="./SEProject1/client/landingpage/Services.html" style="padding: 10px 20px;">Services</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="./SEProject1/partner/delivery/dlog.php" style="padding: 10px 20px;">Delivery</a>
+<!-- </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="./SEProject1/partner/delivery/dlog.php" style="padding: 10px 20px;">Delivery</a>
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="./SEProject1/partner/pharmacist/pharm_log.php" style="padding: 10px 20px;">Pharmacy</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="./SEProject1/partner/doctor/doc_log.php" style="padding: 10px 20px;">Doctor</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="./SEProject1/partner/doctor/doc_log.php" style="padding: 10px 20px;">Doctor</a> -->
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="./SEProject1/client/Regforms/Login.php" style="padding: 10px 20px;">Log in</a>
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="./SEProject1/client/Regforms/signup.php" style="padding: 10px 20px;">Create Account</a>
 </li></ul>
